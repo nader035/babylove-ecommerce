@@ -1,138 +1,124 @@
-<header
-  class="sticky top-0 z-50 w-full bg-brand-primary text-brand-surface shadow-premium backdrop-blur-md bg-opacity-95 transition-all duration-300 border-b border-white/5"
->
-  <div class="container mx-auto px-6 h-20 flex items-center justify-between">
-    <div class="flex items-center gap-3 group cursor-pointer" routerLink="/">
+<header class="sticky top-0 z-50 w-full border-b border-white/30 bg-white/70 text-brand-primary shadow-sm backdrop-blur-xl transition-all duration-300">
+  <div class="container mx-auto flex h-20 items-center justify-between px-6">
+    <div class="group flex cursor-pointer items-center gap-3" routerLink="/">
       <img
         src="assets/images/babyLoveLogo.svg"
-        class="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform duration-500 group-hover:rotate-[-5deg] group-hover:scale-105"
+        class="colored-bear-icon h-10 w-10 object-contain transition-transform duration-500 group-hover:scale-105 md:h-12 md:w-12"
         alt="BabyLove Logo"
       />
-      <div class="flex flex-col justify-center translate-y-0.5">
-        <span
-          class="text-lg md:text-2xl font-black text-white uppercase tracking-wider leading-none transition-all duration-300 group-hover:tracking-[0.1em]"
-        >
+      <div class="flex translate-y-0.5 flex-col justify-center">
+        <span class="text-lg font-black uppercase leading-none tracking-wide transition-all duration-300 group-hover:tracking-widest md:text-2xl">
           BABYLOVE
         </span>
-        <span
-          class="text-[5px] md:text-[7px] text-brand-surface/80 uppercase tracking-[0.35em] mt-1 font-bold"
-        >
-          From Germany To Your Hand
-        </span>
+        <span class="mt-1 hidden text-[7px] font-semibold uppercase tracking-[0.25em] text-brand-primary/60 md:block">{{ 'brand.slogan' | transloco }}</span>
       </div>
     </div>
 
-    <nav class="hidden lg:flex items-center gap-8 xl:gap-10">
-      @for (item of ['home', 'shop', 'categories', 'blog', 'about']; track item) {
+    <nav class="hidden items-center gap-8 lg:flex xl:gap-10">
+      @for (item of navItems; track item) {
         <a
-          [routerLink]="item === 'home' ? '/' : '/' + item"
-          routerLinkActive="text-white font-black"
+          [routerLink]="item === 'home' ? '/' : item === 'shop' ? '/shop' : '/' + item"
+          routerLinkActive="text-brand-primary font-semibold"
           [routerLinkActiveOptions]="{ exact: item === 'home' }"
-          class="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-surface/70 hover:text-white transition-all relative group/link"
+          class="group/link relative text-sm font-medium text-brand-primary/70 transition-all hover:text-brand-primary"
         >
           {{ 'nav.' + item | transloco }}
-          <span
-            class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-brand-surface group-hover/link:w-full transition-all duration-300"
-          ></span>
+          <span class="absolute -bottom-2 inset-s-0 h-[2px] w-0 bg-brand-primary transition-all duration-300 group-hover/link:w-full"></span>
         </a>
       }
     </nav>
 
-    <div class="flex items-center gap-3 md:gap-4">
+    <div class="flex items-center gap-2 md:gap-3">
       <button
         (click)="toggleLanguage()"
-        class="hidden md:block text-[9px] font-black tracking-[0.2em] border border-white/20 px-4 py-2 rounded-full hover:bg-white hover:text-brand-primary transition-all uppercase"
+        class="hidden rounded-full border border-brand-primary/15 px-4 py-2 text-xs font-semibold uppercase tracking-wide transition-all hover:border-brand-primary/40 hover:bg-white md:block"
       >
         {{ langLabel() }}
       </button>
 
-      <div class="h-6 w-[1px] bg-white/10 hidden md:block mx-1"></div>
-
       <div class="flex items-center gap-1 md:gap-2">
         <button
-          class="w-10 h-10 text-brand-surface hover:text-white transition-colors flex items-center justify-center hover:scale-110"
+          (click)="toggleSearch()"
+          class="flex h-10 w-10 items-center justify-center rounded-full text-brand-primary/70 transition hover:bg-white hover:text-brand-primary"
         >
           <fa-icon [icon]="icons.search"></fa-icon>
         </button>
 
         <button
           routerLink="/wishlist"
-          class="relative w-10 h-10 text-brand-surface hover:text-white transition-colors flex items-center justify-center hover:scale-110"
+          class="relative flex h-10 w-10 items-center justify-center rounded-full text-brand-primary/70 transition hover:bg-white hover:text-brand-primary"
         >
           <fa-icon [icon]="icons.wishlist"></fa-icon>
-          <span
-            class="absolute top-2 right-2 w-1.5 h-1.5 bg-red-400 rounded-full animate-pulse"
-          ></span>
+          @if (wishlistStore.count() > 0) {
+            <span class="absolute -inset-e-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-primary px-1 text-[10px] font-bold text-white">
+              {{ wishlistStore.count() }}
+            </span>
+          }
         </button>
 
         <button
           routerLink="/cart"
-          class="group flex items-center gap-2 bg-white text-brand-primary px-4 py-2 rounded-full hover:bg-brand-surface transition-all shadow-lg active:scale-95 mx-1"
+          class="group mx-1 hidden items-center gap-2 rounded-full bg-brand-primary px-4 py-2 text-white transition-all hover:opacity-90 active:scale-95 sm:flex"
         >
-          <fa-icon
-            [icon]="icons.cart"
-            class="text-sm transition-transform group-hover:-rotate-6"
-          ></fa-icon>
-          <span class="text-[11px] font-black">0</span>
+          <fa-icon [icon]="icons.cart" class="text-sm transition-transform group-hover:-rotate-6"></fa-icon>
+          <span class="text-xs font-semibold">{{ cartStore.totalItems() }}</span>
         </button>
-
-        <div class="h-6 w-[1px] bg-white/10 mx-1"></div>
 
       @if (auth.isAuthenticated()) {
           <div class="relative">
-            <button 
-              (click)="isProfileMenuOpen = !isProfileMenuOpen" 
-              class="flex items-center gap-3 pl-1 group focus:outline-none"
+            <button
+              (click)="isProfileMenuOpen = !isProfileMenuOpen"
+              class="group flex items-center gap-3 ps-1 focus:outline-none"
             >
               <div class="relative">
                 <img
                   [src]="auth.user()?.image || 'assets/images/default-avatar.png'"
-                  class="w-9 h-9 rounded-full object-cover border-2 border-white/20 group-hover:border-white transition-all shadow-sm"
+                  class="h-9 w-9 rounded-full border-2 border-brand-primary/20 object-cover transition-all group-hover:border-brand-primary/50"
                   alt="User Profile"
                 />
-                <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 border-2 border-brand-primary rounded-full"></span>
+                <span class="absolute bottom-0 inset-e-0 h-2.5 w-2.5 rounded-full border-2 border-white bg-green-400"></span>
               </div>
               <div class="hidden xl:flex flex-col items-start leading-none text-left dir-ltr">
                 <div class="flex items-center gap-1">
-                  <span class="text-[10px] text-white font-bold uppercase tracking-wider">
+                  <span class="text-[10px] font-semibold uppercase tracking-wider text-brand-primary">
                     {{ auth.userFullName() }}
                   </span>
-                  <fa-icon [icon]="icons.chevronDown" class="text-[8px] text-white/50 group-hover:text-white transition-colors"></fa-icon>
+                  <fa-icon [icon]="icons.chevronDown" class="text-[8px] text-brand-primary/50 transition-colors group-hover:text-brand-primary"></fa-icon>
                 </div>
-                <span class="text-[8px] text-brand-surface/70 uppercase tracking-widest mt-0.5">Premium</span>
+                <span class="mt-0.5 text-[8px] uppercase tracking-widest text-brand-primary/50">{{ 'header.premium' | transloco }}</span>
               </div>
             </button>
 
             @if (isProfileMenuOpen) {
               <div class="fixed inset-0 z-40" (click)="isProfileMenuOpen = false"></div>
 
-              <div class="absolute right-0 mt-4 w-56 bg-white rounded-2xl shadow-premium border border-brand-surface/20 py-2 z-50 animate-fade-in origin-top-right overflow-hidden dir-ltr">
-                
+              <div class="absolute inset-e-0 z-50 mt-4 w-56 origin-top-right overflow-hidden rounded-2xl border border-brand-surface/20 bg-white py-2 shadow-premium animate-fade-in dir-ltr">
+
                 <div class="px-4 py-3 border-b border-brand-bg-light mb-1">
-                  <p class="text-[10px] text-brand-muted uppercase tracking-widest font-bold">Signed in as</p>
+                  <p class="text-[10px] text-brand-muted uppercase tracking-widest font-bold">{{ 'header.signedInAs' | transloco }}</p>
                   <p class="text-xs text-brand-primary font-black truncate">{{ auth.user()?.email || 'user@example.com' }}</p>
                 </div>
 
                 <a routerLink="/profile" (click)="isProfileMenuOpen = false" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-brand-primary hover:bg-brand-bg-light hover:text-brand-accent transition-colors">
-                  <fa-icon [icon]="icons.user" class="w-4"></fa-icon> 
-                  My Profile
+                  <fa-icon [icon]="icons.user" class="w-4"></fa-icon>
+                  {{ 'header.myProfile' | transloco }}
                 </a>
-                
+
                 <a routerLink="/orders" (click)="isProfileMenuOpen = false" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-brand-primary hover:bg-brand-bg-light hover:text-brand-accent transition-colors">
-                  <fa-icon [icon]="icons.box" class="w-4"></fa-icon> 
-                  My Orders
+                  <fa-icon [icon]="icons.box" class="w-4"></fa-icon>
+                  {{ 'header.myOrders' | transloco }}
                 </a>
 
                 <a routerLink="/settings" (click)="isProfileMenuOpen = false" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-brand-primary hover:bg-brand-bg-light hover:text-brand-accent transition-colors">
-                  <fa-icon [icon]="icons.settings" class="w-4"></fa-icon> 
-                  Settings
+                  <fa-icon [icon]="icons.settings" class="w-4"></fa-icon>
+                  {{ 'header.settings' | transloco }}
                 </a>
 
-                <div class="h-[1px] w-full bg-brand-bg-light my-1"></div>
+                <div class="my-1 h-px w-full bg-brand-bg-light"></div>
 
                 <button (click)="logout()" class="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-black text-red-500 hover:bg-red-50 transition-colors">
-                  <fa-icon [icon]="icons.logout" class="w-4"></fa-icon> 
-                  Logout
+                  <fa-icon [icon]="icons.logout" class="w-4"></fa-icon>
+                  {{ 'header.logout' | transloco }}
                 </button>
               </div>
             }
@@ -140,16 +126,80 @@
         } @else {
           <button
             routerLink="/auth"
-            class="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white hover:text-brand-surface transition-colors group px-2"
+            class="group flex items-center gap-2 px-2 text-xs font-semibold uppercase tracking-wide text-brand-primary transition-colors hover:text-brand-primary/70"
           >
-            <fa-icon
-              [icon]="icons.user"
-              class="text-lg opacity-70 group-hover:opacity-100 transition-opacity"
-            ></fa-icon>
+            <fa-icon [icon]="icons.user" class="text-lg opacity-70 transition-opacity group-hover:opacity-100"></fa-icon>
             <span class="hidden sm:inline">{{ 'nav.join-us' | transloco }}</span>
           </button>
         }
+        <button class="flex h-10 w-10 items-center justify-center rounded-full text-brand-primary/70 transition hover:bg-white lg:hidden" (click)="toggleMobileMenu()">
+          <fa-icon [icon]="isMobileMenuOpen() ? icons.close : icons.menu"></fa-icon>
+        </button>
       </div>
     </div>
   </div>
+
+  <!-- ═══ SEARCH DROPDOWN ═══ -->
+  @if (isSearchOpen()) {
+    <div class="border-t border-brand-primary/10 bg-white/95 backdrop-blur-xl">
+      <div class="container mx-auto px-6 py-4">
+        <div class="relative">
+          <fa-icon [icon]="icons.search" class="absolute inset-s-4 top-1/2 -translate-y-1/2 text-brand-primary/40"></fa-icon>
+          <input
+            #searchInput
+            [value]="searchQuery()"
+            (input)="onSearchInput($any($event.target).value)"
+            (keydown.enter)="searchAll()"
+            [placeholder]="'common.search' | transloco"
+            class="w-full rounded-2xl border border-brand-primary/15 bg-brand-bg-light py-3.5 ps-11 pe-12 text-sm text-brand-primary outline-none transition-all focus:border-brand-accent focus:ring-2 focus:ring-brand-accent/15"
+            autofocus
+          />
+          <button class="absolute inset-e-3 top-1/2 -translate-y-1/2 flex h-7 w-7 items-center justify-center rounded-full text-brand-primary/50 transition hover:bg-brand-primary/10" (click)="toggleSearch()">
+            <fa-icon [icon]="icons.close" class="text-xs"></fa-icon>
+          </button>
+        </div>
+
+        <!-- Search Results Dropdown -->
+        @if (searchResults().length > 0) {
+          <div class="mt-3 divide-y divide-brand-primary/8 rounded-2xl border border-brand-primary/10 bg-white shadow-premium overflow-hidden">
+            @for (product of searchResults(); track product.id) {
+              <button
+                (click)="goToProduct(product.id)"
+                class="flex w-full items-center gap-4 px-4 py-3 text-left transition hover:bg-brand-bg-light"
+              >
+                <img [src]="product.image" [alt]="product.title" class="h-12 w-12 rounded-xl object-cover" />
+                <div class="flex-1 min-w-0">
+                  <h4 class="text-sm font-semibold text-brand-primary truncate">{{ product.title }}</h4>
+                  <p class="text-xs text-brand-primary/50">{{ product.categoryTitle }} · {{ product.price | currency: 'EGP' : '£' : '1.2-2' }}</p>
+                </div>
+                <fa-icon [icon]="icons.search" class="text-xs text-brand-primary/30"></fa-icon>
+              </button>
+            }
+            <button (click)="searchAll()" class="w-full px-4 py-3 text-center text-xs font-semibold text-brand-accent transition hover:bg-brand-bg-light">
+              {{ 'search.viewAll' | transloco }} "{{ searchQuery() }}" →
+            </button>
+          </div>
+        }
+
+        @if (searchQuery().length >= 2 && searchResults().length === 0) {
+          <div class="mt-3 rounded-2xl border border-brand-primary/10 bg-white p-6 text-center shadow-premium">
+            <p class="text-sm text-brand-primary/50">{{ 'common.noResults' | transloco }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  @if (isMobileMenuOpen()) {
+    <div class="border-t border-brand-primary/10 bg-white/95 px-6 py-4 backdrop-blur-xl lg:hidden">
+      <nav class="flex flex-col gap-2">
+        @for (item of navItems; track item) {
+          <a [routerLink]="item === 'home' ? '/' : item === 'shop' ? '/shop' : '/' + item" (click)="closeMobileMenu()" class="rounded-xl px-3 py-2 text-sm font-medium text-brand-primary/80 transition-colors hover:bg-brand-bg-light hover:text-brand-primary">
+            {{ 'nav.' + item | transloco }}
+          </a>
+        }
+      </nav>
+      <button (click)="toggleLanguage()" class="mt-4 w-full rounded-xl border border-brand-primary/15 px-3 py-2 text-sm font-medium text-brand-primary">{{ langLabel() }}</button>
+    </div>
+  }
 </header>

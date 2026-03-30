@@ -2,15 +2,15 @@
   <div class="flex flex-col gap-6 animate-fade-in max-w-md mx-auto py-4">
     <div class="text-center space-y-2">
       <h1 class="text-xl font-bold tracking-tight text-brand-primary leading-tight lowercase first-letter:uppercase">
-        {{ t('auth.createAccount') }}
+        {{ t('auth.signup_title') }}
       </h1>
-      <p class="text-xs text-brand-muted">{{ t('auth.joinDesc') }}</p>
+      <p class="text-xs text-brand-muted">{{ t('auth.signup_subtitle') }}</p>
     </div>
 
     <form [formRoot]="registerForm" class="flex flex-col gap-4">
       <div class="flex gap-2 w-full">
         <mat-form-field appearance="outline" class="w-full custom-field">
-          <mat-label>{{ t('auth.firstName') }}</mat-label>
+          <mat-label>{{ t('auth.firstName_label') }}</mat-label>
           <input matInput type="text" placeholder="Nader" [formField]="registerForm.firstName" />
 
           @if (registerForm.firstName().touched() && registerForm.firstName().errors().length) {
@@ -24,7 +24,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="w-full custom-field">
-          <mat-label>{{ t('auth.lastName') }}</mat-label>
+          <mat-label>{{ t('auth.lastName_label') }}</mat-label>
           <input matInput type="text" placeholder="Mohamed" [formField]="registerForm.lastName" />
 
           @if (registerForm.lastName().touched() && registerForm.lastName().errors().length) {
@@ -39,7 +39,7 @@
       </div>
 
       <mat-form-field appearance="outline" class="w-full custom-field">
-        <mat-label>{{ t('auth.username') }}</mat-label>
+        <mat-label>{{ t('auth.username_label') }}</mat-label>
         <input
           matInput
           type="text"
@@ -81,7 +81,7 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="w-full custom-field">
-        <mat-label>{{ t('auth.password') }}</mat-label>
+        <mat-label>{{ t('auth.password_label') }}</mat-label>
         <input
           matInput
           type="password"
@@ -112,7 +112,7 @@
             <span class="animate-pulse">{{ t('auth.creatingAccount') }}</span>
           </div>
         } @else {
-          {{ t('auth.register') }}
+          {{ t('auth.signup_btn') }}
         }
       </button>
     </form>

@@ -24,6 +24,7 @@
   "private": true,
   "packageManager": "npm@11.6.3",
   "dependencies": {
+    "@angular/animations": "^21.2.6",
     "@angular/cdk": "^21.2.4",
     "@angular/common": "^21.1.0",
     "@angular/compiler": "^21.1.0",
@@ -35,6 +36,7 @@
     "@fortawesome/angular-fontawesome": "^4.0.0",
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
     "@fortawesome/free-brands-svg-icons": "^7.2.0",
+    "@fortawesome/free-regular-svg-icons": "^7.2.0",
     "@fortawesome/free-solid-svg-icons": "^7.2.0",
     "@jsverse/transloco": "^8.2.1",
     "@ngrx/operators": "^21.1.0",

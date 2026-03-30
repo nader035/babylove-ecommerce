@@ -1,21 +1,20 @@
 <a
-  [routerLink]="['/products']"
+  [routerLink]="['/shop']"
   [queryParams]="{ category: category().slug }"
-  class="group relative block w-full h-full overflow-hidden rounded-[2rem] bg-brand-surface shadow-sm"
+  class="card-premium group relative block h-full w-full overflow-hidden"
 >
   <img
     [src]="category().image"
     [alt]="category().name"
-    class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+    class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+    loading="lazy"
   />
 
-  <div
-    class="absolute inset-0 bg-black/5 group-hover:bg-black/20 transition-colors duration-500"
-  ></div>
+  <div class="absolute inset-0 bg-linear-to-t from-brand-primary/55 via-brand-primary/10 to-transparent transition-colors duration-500 group-hover:from-brand-primary/70"></div>
 
-  <div class="absolute bottom-6 left-6">
-    <div class="bg-white px-6 py-2.5 rounded-full shadow-lg">
-      <span class="text-brand-primary text-[13px] font-bold tracking-tight">
+  <div class="absolute bottom-5 inset-s-5">
+    <div class="rounded-full bg-white/95 px-5 py-2 shadow-md backdrop-blur">
+      <span class="text-sm font-semibold tracking-tight text-brand-primary">
         {{ category().name }}
       </span>
     </div>

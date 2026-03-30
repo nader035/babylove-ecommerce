@@ -1,0 +1,103 @@
+<main class="min-h-screen bg-brand-bg-light py-10">
+  <div class="container mx-auto max-w-2xl px-6">
+    <header class="mb-10">
+      <span class="section-kicker">{{ 'header.settings' | transloco }}</span>
+      <h1 class="section-title mt-3">{{ 'header.settings' | transloco }}</h1>
+    </header>
+
+    <div class="space-y-4">
+
+      <!-- Language -->
+      <section class="card-premium p-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-accent/10">
+            <fa-icon [icon]="icons.globe" class="text-brand-accent"></fa-icon>
+          </div>
+          <div>
+            <h2 class="text-sm font-semibold text-brand-primary">{{ 'settings.language' | transloco }}</h2>
+            <p class="text-xs text-brand-primary/50">{{ 'settings.languageDesc' | transloco }}</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <button
+            (click)="setLanguage('en')"
+            class="rounded-xl border-2 px-4 py-3 text-sm font-semibold transition"
+            [class.border-brand-accent]="currentLang() === 'en'"
+            [class.bg-brand-accent/5]="currentLang() === 'en'"
+            [class.text-brand-accent]="currentLang() === 'en'"
+            [class.border-brand-primary/10]="currentLang() !== 'en'"
+            [class.text-brand-primary/60]="currentLang() !== 'en'"
+          >
+            🇬🇧 English
+          </button>
+          <button
+            (click)="setLanguage('ar')"
+            class="rounded-xl border-2 px-4 py-3 text-sm font-semibold transition"
+            [class.border-brand-accent]="currentLang() === 'ar'"
+            [class.bg-brand-accent/5]="currentLang() === 'ar'"
+            [class.text-brand-accent]="currentLang() === 'ar'"
+            [class.border-brand-primary/10]="currentLang() !== 'ar'"
+            [class.text-brand-primary/60]="currentLang() !== 'ar'"
+          >
+            🇸🇦 العربية
+          </button>
+        </div>
+      </section>
+
+      <!-- Notifications -->
+      <section class="card-premium p-6">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50">
+              <fa-icon [icon]="icons.bell" class="text-amber-500"></fa-icon>
+            </div>
+            <div>
+              <h2 class="text-sm font-semibold text-brand-primary">{{ 'settings.notifications' | transloco }}</h2>
+              <p class="text-xs text-brand-primary/50">{{ 'settings.notificationsDesc' | transloco }}</p>
+            </div>
+          </div>
+          <button
+            (click)="toggleNotifications()"
+            class="relative h-7 w-12 rounded-full transition-colors duration-300"
+            [class.bg-brand-accent]="notificationsEnabled()"
+            [class.bg-brand-primary/20]="!notificationsEnabled()"
+          >
+            <span
+              class="absolute top-0.5 h-6 w-6 rounded-full bg-white shadow transition-all duration-300"
+              [class.inset-s-0.5]="!notificationsEnabled()"
+              [class.inset-s-5]="notificationsEnabled()"
+            ></span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Privacy -->
+      <section class="card-premium p-6">
+        <div class="flex items-center gap-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-green-50">
+            <fa-icon [icon]="icons.shield" class="text-green-500"></fa-icon>
+          </div>
+          <div class="flex-1">
+            <h2 class="text-sm font-semibold text-brand-primary">{{ 'settings.privacy' | transloco }}</h2>
+            <p class="text-xs text-brand-primary/50">{{ 'settings.privacyDesc' | transloco }}</p>
+          </div>
+          <fa-icon [icon]="icons.chevron" class="text-xs text-brand-primary/30"></fa-icon>
+        </div>
+      </section>
+
+      <!-- App Info -->
+      <section class="card-premium p-6">
+        <div class="flex items-center gap-3">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-bg-light">
+            <fa-icon [icon]="icons.palette" class="text-brand-primary/50"></fa-icon>
+          </div>
+          <div class="flex-1">
+            <h2 class="text-sm font-semibold text-brand-primary">{{ 'settings.appInfo' | transloco }}</h2>
+            <p class="text-xs text-brand-primary/50">{{ 'settings.version' | transloco }} 1.0.0</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>

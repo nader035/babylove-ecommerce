@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { Category } from '../../../../../core/constants/mock-data';
+import { CategoryCardModel } from '../../../../../core/services/category.service';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -10,5 +10,5 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryCard {
-  category = input.required<Category>();
+  category = input.required<CategoryCardModel>();
 }

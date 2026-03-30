@@ -4,9 +4,9 @@
       <h1
         class="text-xl font-bold tracking-tight text-brand-primary leading-tight lowercase first-letter:uppercase"
       >
-        {{ t('auth.welcomeBack') }}
+        {{ t('auth.login_title') }}
       </h1>
-      <p class="text-xs text-brand-muted">{{ t('auth.enterPasswordDesc') }}</p>
+      <p class="text-xs text-brand-muted">{{ t('auth.login_subtitle') }}</p>
     </div>
 
     <form [formRoot]="loginForm" class="flex flex-col gap-4">
@@ -34,7 +34,7 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="w-full custom-field">
-        <mat-label>{{ t('auth.password') }}</mat-label>
+        <mat-label>{{ t('auth.password_label') }}</mat-label>
         <input
           matInput
           type="password"
@@ -66,10 +66,10 @@
             <div
               class="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"
             ></div>
-            <span class="animate-pulse">{{ t('auth.signingIn') }}</span>
+            <span class="animate-pulse">{{ t('auth.signing_in') }}</span>
           </div>
         } @else {
-          {{ t('auth.login') }}
+          {{ t('auth.login_btn') }}
         }
       </button>
     </form>

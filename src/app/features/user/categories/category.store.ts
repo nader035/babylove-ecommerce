@@ -1,15 +1,17 @@
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { computed, inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { catchError, filter, of, pipe, switchMap, tap } from 'rxjs';
-import { CategoryService } from '../../../core/services/category.service';
-import { Category } from '../../../core/constants/mock-data';
+import { pipe, switchMap, tap } from 'rxjs';
+import { CategoryCardModel, CategoryService } from '../../../core/services/category.service';
 import { tapResponse } from '@ngrx/operators';
 export type CategoryState = {
-  categories: Category[];
+  categories: CategoryCardModel[];
   isLoading: boolean;
   error: string | null;
   searchQuery: string;
+  activeType: 'all' | 'essentials' | 'fashion' | 'gear';
+  sortBy: 'featured' | 'az' | 'za';
+  quickViewCategory: CategoryCardModel | null;
 };
 
 export const categoryStore = signalStore(
@@ -21,29 +23,45 @@ export const categoryStore = signalStore(
     searchQuery: '',
     isLoading: false,
     error: null,
+    activeType: 'all',
+    sortBy: 'featured',
+    quickViewCategory: null,
   } as CategoryState),
-  withComputed(({ categories, searchQuery }) => ({
+  withComputed(({ categories, searchQuery, activeType, sortBy }) => ({
     categoryCount: computed(() => categories().length),
     filteredCategories: computed(() => {
-      const query = searchQuery().toLowerCase();
-      return categories().filter((cat) => cat.name.toLowerCase().includes(query));
+      const query = searchQuery().trim().toLowerCase();
+      const byType = categories().filter((cat) => {
+        if (activeType() === 'all') {
+          return true;
+        }
+        if (activeType() === 'fashion') {
+          return ['women', 'men', 'girl', 'boy'].includes(cat.slug);
+        }
+        if (activeType() === 'essentials') {
+          return ['baby', 'plus-size'].includes(cat.slug);
+        }
+        return ['baby', 'boy'].includes(cat.slug);
+      });
+      const searched = byType.filter((cat) => cat.name.toLowerCase().includes(query));
+
+      if (sortBy() === 'az') {
+        return [...searched].sort((a, b) => a.name.localeCompare(b.name));
+      }
+      if (sortBy() === 'za') {
+        return [...searched].sort((a, b) => b.name.localeCompare(a.name));
+      }
+      return searched;
     }),
   })),
   withMethods((categoryStore, categoryService = inject(CategoryService)) => ({
     loadCategories: rxMethod<void>(
       pipe(
-        tap(() => {
-          console.log('1. Load Started'); // هل دي بتظهر بعد الريفرش؟
-          patchState(categoryStore, { isLoading: true, error: null });
-        }),
+        tap(() => patchState(categoryStore, { isLoading: true, error: null })),
         switchMap(() =>
           categoryService.getCategories().pipe(
-            tap((res) => console.log('2. Data Received:', res)), // هل الداتا وصلت؟
             tapResponse({
-              next: (categories) => {
-                console.log('3. Patching State');
-                patchState(categoryStore, { categories: categories, isLoading: false });
-              },
+              next: (categories) => patchState(categoryStore, { categories: categories, isLoading: false }),
               error: (error: Error) =>
                 patchState(categoryStore, { error: error.message, isLoading: false }),
             }),
@@ -52,5 +70,11 @@ export const categoryStore = signalStore(
       ),
     ),
     updateSearchQuery: (query: string) => patchState(categoryStore, { searchQuery: query }),
+    updateActiveType: (type: CategoryState['activeType']) => patchState(categoryStore, { activeType: type }),
+    updateSortBy: (sort: CategoryState['sortBy']) => patchState(categoryStore, { sortBy: sort }),
+    openQuickView: (category: CategoryCardModel) =>
+      patchState(categoryStore, { quickViewCategory: category }),
+    closeQuickView: () => patchState(categoryStore, { quickViewCategory: null }),
+    clearFilters: () => patchState(categoryStore, { activeType: 'all', sortBy: 'featured', searchQuery: '' }),
   })),
 );

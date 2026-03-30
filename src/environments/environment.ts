@@ -1,4 +1,7 @@
 export const environment = {
+  apiBase: 'http://localhost:3000',
   authApi: 'http://localhost:3000/users',
-  productsApi: 'https://api.escuelajs.co/api/v1/products',
+  categoriesApi: 'http://localhost:3000/categories',
+  productsApi: 'http://localhost:3000/products',
+  ordersApi: 'http://localhost:3000/orders',
 };

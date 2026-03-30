@@ -1,0 +1,318 @@
+<main class="min-h-screen bg-white py-10">
+  <div class="container mx-auto max-w-6xl px-6">
+
+    <!-- Breadcrumbs -->
+    <nav class="mb-8 flex items-center gap-2 text-xs font-medium text-brand-primary/50">
+      <a routerLink="/" class="transition hover:text-brand-primary">{{ 'nav.home' | transloco }}</a>
+      <fa-icon [icon]="icons.chevronRight" class="text-[8px]"></fa-icon>
+      <a routerLink="/shop" class="transition hover:text-brand-primary">{{ 'nav.shop' | transloco }}</a>
+      @if (product(); as p) {
+        <fa-icon [icon]="icons.chevronRight" class="text-[8px]"></fa-icon>
+        <span class="text-brand-primary">{{ p.title }}</span>
+      }
+    </nav>
+
+    <!-- Loading -->
+    @if (isLoading()) {
+      <div class="grid gap-10 lg:grid-cols-2">
+        <app-skeleton variant="custom" width="100%" height="600px" radius="1.5rem"></app-skeleton>
+        <div class="space-y-4">
+          <app-skeleton variant="text" width="40%" height="0.75rem"></app-skeleton>
+          <app-skeleton variant="text" width="80%" height="2rem"></app-skeleton>
+          <app-skeleton variant="text" width="60%" height="1rem"></app-skeleton>
+          <app-skeleton variant="text" width="30%" height="2rem"></app-skeleton>
+          <app-skeleton variant="button"></app-skeleton>
+        </div>
+      </div>
+    } @else if (product(); as p) {
+      <!-- Main Product -->
+      <section class="grid gap-10 lg:grid-cols-2">
+
+        <!-- Gallery -->
+        <div class="space-y-4">
+          <div class="aspect-[3/4] overflow-hidden rounded-2xl bg-brand-bg-light">
+            <img
+              [src]="currentImage()"
+              [alt]="p.title"
+              class="h-full w-full object-cover transition-all duration-500"
+              loading="eager"
+            />
+          </div>
+          @if (allImages().length > 1) {
+            <div class="flex gap-3 overflow-x-auto pb-2">
+              @for (img of allImages(); track img; let i = $index) {
+                <button
+                  (click)="selectImage(i)"
+                  class="h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border-2 transition-all"
+                  [class.border-brand-primary]="selectedImageIndex() === i"
+                  [class.border-transparent]="selectedImageIndex() !== i"
+                  [class.opacity-50]="selectedImageIndex() !== i"
+                >
+                  <img [src]="img" [alt]="p.title" class="h-full w-full object-cover" />
+                </button>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Info -->
+        <div class="flex flex-col gap-6">
+          <!-- Category & Title -->
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-primary/40">{{ p.category?.title || 'Premium' }}</span>
+            <h1 class="mt-2 text-2xl font-bold text-brand-primary lg:text-3xl">{{ p.title }}</h1>
+            <p class="mt-3 text-sm leading-relaxed text-brand-primary/65">{{ p.shortDescription }}</p>
+          </div>
+
+          <!-- Rating -->
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-0.5 text-amber-400">
+              @for (star of getStars(avgRating()); track $index) {
+                @if (star === 'full') {
+                  <fa-icon [icon]="icons.star" class="text-sm"></fa-icon>
+                } @else if (star === 'half') {
+                  <fa-icon [icon]="icons.starHalf" class="text-sm"></fa-icon>
+                } @else {
+                  <fa-icon [icon]="icons.starEmpty" class="text-sm text-brand-primary/20"></fa-icon>
+                }
+              }
+            </div>
+            <span class="text-sm font-medium text-brand-primary/70">{{ avgRating() | number: '1.1-1' }}</span>
+            <span class="text-xs text-brand-primary/50">({{ p.reviews?.length || 0 }} {{ 'product.reviews' | transloco }})</span>
+          </div>
+
+          <!-- Price -->
+          <div class="flex items-baseline gap-3">
+            <span class="text-2xl font-bold text-brand-primary">{{ currentPrice() | currency: 'EGP' : '£' : '1.2-2' }}</span>
+          </div>
+
+          <!-- Size Selector -->
+          @if (availableSizes().length > 1) {
+            <div>
+              <div class="mb-3 flex items-center justify-between">
+                <h3 class="text-xs font-bold uppercase tracking-widest text-brand-primary/50">{{ 'product.size' | transloco }}</h3>
+                <button (click)="showSizeGuide.set(true)" class="flex items-center gap-1 text-xs font-semibold text-brand-accent transition hover:text-brand-primary">
+                  <fa-icon [icon]="icons.ruler" class="text-[10px]"></fa-icon>
+                  {{ 'product.sizeGuide' | transloco }}
+                </button>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                @for (size of availableSizes(); track size) {
+                  <button
+                    (click)="selectSize(size)"
+                    class="min-w-[48px] rounded-lg border-2 px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-all"
+                    [class.bg-brand-primary]="selectedSize() === size"
+                    [class.text-white]="selectedSize() === size"
+                    [class.border-brand-primary]="selectedSize() === size"
+                    [class.bg-white]="selectedSize() !== size"
+                    [class.text-brand-primary]="selectedSize() !== size"
+                    [class.border-brand-primary/15]="selectedSize() !== size"
+                    [class.hover:border-brand-primary/40]="selectedSize() !== size"
+                  >
+                    {{ size }}
+                  </button>
+                }
+              </div>
+            </div>
+          }
+
+          <!-- Color Selector -->
+          @if (availableColors().length > 1) {
+            <div>
+              <h3 class="mb-3 text-xs font-bold uppercase tracking-widest text-brand-primary/50">
+                {{ 'product.color' | transloco }}: <span class="normal-case font-semibold text-brand-primary">{{ selectedColor() }}</span>
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                @for (color of availableColors(); track color) {
+                  <button
+                    (click)="selectColor(color)"
+                    class="rounded-full border-2 px-5 py-2 text-xs font-semibold transition-all"
+                    [class.bg-brand-primary]="selectedColor() === color"
+                    [class.text-white]="selectedColor() === color"
+                    [class.border-brand-primary]="selectedColor() === color"
+                    [class.bg-white]="selectedColor() !== color"
+                    [class.text-brand-primary/70]="selectedColor() !== color"
+                    [class.border-brand-primary/15]="selectedColor() !== color"
+                  >
+                    {{ color }}
+                  </button>
+                }
+              </div>
+            </div>
+          }
+
+          <!-- Quantity -->
+          <div>
+            <h3 class="mb-3 text-xs font-bold uppercase tracking-widest text-brand-primary/50">
+              {{ 'product.quantity' | transloco }}
+            </h3>
+            <div class="inline-flex items-center rounded-lg border border-brand-primary/12 bg-brand-bg-light">
+              <button (click)="decrementQty()" class="flex h-11 w-11 items-center justify-center text-brand-primary/60 transition hover:text-brand-primary">
+                <fa-icon [icon]="icons.minus" class="text-xs"></fa-icon>
+              </button>
+              <span class="w-12 text-center text-sm font-bold text-brand-primary">{{ quantity() }}</span>
+              <button (click)="incrementQty()" class="flex h-11 w-11 items-center justify-center text-brand-primary/60 transition hover:text-brand-primary">
+                <fa-icon [icon]="icons.plus" class="text-xs"></fa-icon>
+              </button>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <button
+              (click)="addToCart()"
+              class="flex-1 rounded-full bg-brand-primary py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-white transition hover:bg-brand-primary-light active:scale-[0.98]"
+              [class.cart-bounce]="addedToCart()"
+            >
+              @if (addedToCart()) {
+                <span class="flex items-center justify-center gap-2">
+                  <span>✓</span> Added!
+                </span>
+              } @else {
+                {{ 'product.addToCart' | transloco }} — {{ currentPrice() * quantity() | currency: 'EGP' : '£' : '1.2-2' }}
+              }
+            </button>
+            <button
+              (click)="toggleWishlist()"
+              class="flex h-12 w-12 items-center justify-center rounded-full border border-brand-primary/15 transition-all hover:border-brand-primary/40"
+              [attr.aria-label]="'nav.wishlist' | transloco"
+            >
+              <fa-icon
+                [icon]="isInWishlist() ? icons.heartFilled : icons.heartEmpty"
+                class="text-lg transition-colors"
+                [class.text-red-500]="isInWishlist()"
+                [class.text-brand-primary/50]="!isInWishlist()"
+              ></fa-icon>
+            </button>
+          </div>
+
+          <!-- Trust Strip -->
+          <div class="grid grid-cols-3 gap-3 border-t border-brand-primary/8 pt-6">
+            <div class="flex flex-col items-center gap-2 text-center">
+              <fa-icon [icon]="icons.truck" class="text-base text-brand-accent"></fa-icon>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-brand-primary/50">{{ 'home.features.freeShipping' | transloco }}</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 text-center">
+              <fa-icon [icon]="icons.shield" class="text-base text-brand-accent"></fa-icon>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-brand-primary/50">{{ 'home.features.secureCheckout' | transloco }}</span>
+            </div>
+            <div class="flex flex-col items-center gap-2 text-center">
+              <fa-icon [icon]="icons.returnIcon" class="text-base text-brand-accent"></fa-icon>
+              <span class="text-[10px] font-bold uppercase tracking-widest text-brand-primary/50">{{ 'home.features.easyReturns' | transloco }}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tabs -->
+      <section class="mt-16">
+        <div class="mb-8 flex gap-1 border-b border-brand-primary/8">
+          <button
+            (click)="activeTab.set('description')"
+            class="border-b-2 px-6 py-3 text-xs font-bold uppercase tracking-widest transition-colors"
+            [class.border-brand-primary]="activeTab() === 'description'"
+            [class.text-brand-primary]="activeTab() === 'description'"
+            [class.border-transparent]="activeTab() !== 'description'"
+            [class.text-brand-primary/40]="activeTab() !== 'description'"
+          >
+            {{ 'product.description' | transloco }}
+          </button>
+          <button
+            (click)="activeTab.set('reviews')"
+            class="border-b-2 px-6 py-3 text-xs font-bold uppercase tracking-widest transition-colors"
+            [class.border-brand-primary]="activeTab() === 'reviews'"
+            [class.text-brand-primary]="activeTab() === 'reviews'"
+            [class.border-transparent]="activeTab() !== 'reviews'"
+            [class.text-brand-primary/40]="activeTab() !== 'reviews'"
+          >
+            {{ 'product.reviews' | transloco }} ({{ p.reviews?.length || 0 }})
+          </button>
+        </div>
+
+        @if (activeTab() === 'description') {
+          <div class="max-w-3xl">
+            <p class="text-sm leading-loose text-brand-primary/75">{{ p.longDescription }}</p>
+          </div>
+        } @else {
+          <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            @if (p.reviews?.length) {
+              @for (review of p.reviews; track review.id) {
+                <article class="rounded-2xl border border-brand-primary/8 p-6">
+                  <div class="flex items-center gap-0.5 text-amber-400">
+                    @for (star of getStars(review.rate); track $index) {
+                      @if (star === 'full') {
+                        <fa-icon [icon]="icons.star" class="text-xs"></fa-icon>
+                      } @else {
+                        <fa-icon [icon]="icons.starEmpty" class="text-xs text-brand-primary/20"></fa-icon>
+                      }
+                    }
+                  </div>
+                  <p class="mt-3 text-sm leading-relaxed text-brand-primary/75">{{ review.text }}</p>
+                  <p class="mt-3 text-xs font-semibold text-brand-primary/40">{{ review.createdAt | date: 'mediumDate' }}</p>
+                </article>
+              }
+            } @else {
+              <div class="col-span-full py-12 text-center">
+                <p class="text-brand-primary/50">{{ 'common.noResults' | transloco }}</p>
+              </div>
+            }
+          </div>
+        }
+      </section>
+
+      <!-- Related Products -->
+      @if (relatedProducts().length) {
+        <section class="mt-16">
+          <h2 class="mb-8 text-xl font-bold text-brand-primary">{{ 'product.relatedProducts' | transloco }}</h2>
+          <div class="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
+            @for (related of relatedProducts(); track related.id) {
+              <a [routerLink]="['/product', related.id]" class="group">
+                <div class="aspect-[3/4] overflow-hidden rounded-2xl bg-brand-bg-light">
+                  <img [src]="related.image" [alt]="related.title" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
+                </div>
+                <div class="mt-3">
+                  <h3 class="line-clamp-1 text-sm font-semibold text-brand-primary group-hover:text-brand-accent transition-colors">{{ related.title }}</h3>
+                  <p class="mt-1 text-sm font-bold text-brand-primary">{{ related.price | currency: 'EGP' : '£' : '1.2-2' }}</p>
+                </div>
+              </a>
+            }
+          </div>
+        </section>
+      }
+    }
+  </div>
+
+  <!-- Size Guide Modal -->
+  @if (showSizeGuide()) {
+    <div class="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm" (click)="showSizeGuide.set(false)">
+      <div class="relative mx-4 w-full max-w-lg rounded-2xl bg-white p-8 shadow-premium" (click)="$event.stopPropagation()">
+        <button (click)="showSizeGuide.set(false)" class="absolute inset-e-4 top-4 flex h-8 w-8 items-center justify-center rounded-full text-brand-primary/50 transition hover:bg-brand-bg-light hover:text-brand-primary">
+          <fa-icon [icon]="icons.close"></fa-icon>
+        </button>
+        <h2 class="text-lg font-bold text-brand-primary">{{ 'product.sizeGuideTitle' | transloco }}</h2>
+        <p class="mt-1 text-xs text-brand-primary/50">{{ 'product.measurement' | transloco }} (cm)</p>
+
+        <table class="mt-6 w-full text-left text-sm">
+          <thead>
+            <tr class="border-b border-brand-primary/10">
+              <th class="pb-3 font-bold text-brand-primary">{{ 'product.size' | transloco }}</th>
+              <th class="pb-3 font-bold text-brand-primary">{{ 'product.chest' | transloco }}</th>
+              <th class="pb-3 font-bold text-brand-primary">{{ 'product.waist' | transloco }}</th>
+              <th class="pb-3 font-bold text-brand-primary">{{ 'product.hip' | transloco }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of sizeGuideData; track row.size) {
+              <tr class="border-b border-brand-primary/5">
+                <td class="py-3 font-bold text-brand-primary">{{ row.size }}</td>
+                <td class="py-3 text-brand-primary/70">{{ row.chest }}</td>
+                <td class="py-3 text-brand-primary/70">{{ row.waist }}</td>
+                <td class="py-3 text-brand-primary/70">{{ row.hip }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  }
+</main>

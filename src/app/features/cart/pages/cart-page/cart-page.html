@@ -1,0 +1,170 @@
+<main class="min-h-screen bg-brand-bg-light/30 py-12">
+  <div class="container mx-auto max-w-6xl px-6">
+    <header class="mb-12">
+      <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-primary/40">
+        <a routerLink="/" class="hover:text-brand-primary transition-colors">{{ 'nav.home' | transloco }}</a>
+        <span>/</span>
+        <span class="text-brand-primary/80">{{ 'cart.title' | transloco }}</span>
+      </div>
+      <h1 class="mt-4 text-3xl font-bold text-brand-primary lg:text-4xl">{{ 'cart.title' | transloco }}</h1>
+    </header>
+
+    @if (!cartStore.items().length) {
+      <div class="flex flex-col items-center justify-center rounded-3xl border border-brand-primary/8 bg-white py-24 text-center shadow-sm">
+        <div class="flex h-20 w-20 items-center justify-center rounded-full bg-brand-bg-light">
+          <fa-icon [icon]="icons.bag" class="text-3xl text-brand-primary/20"></fa-icon>
+        </div>
+        <h2 class="mt-8 text-xl font-bold text-brand-primary">{{ 'cart.empty' | transloco }}</h2>
+        <p class="mt-2 text-sm text-brand-primary/45">{{ 'cart.emptyDesc' | transloco }}</p>
+        <a routerLink="/shop" class="mt-10 inline-block rounded-full bg-brand-primary px-12 py-4 text-xs font-bold uppercase tracking-[0.2em] text-white transition hover:bg-brand-primary-light active:scale-95 shadow-xl shadow-brand-primary/10">
+          {{ 'cart.continueShopping' | transloco }}
+        </a>
+      </div>
+    } @else {
+      <div class="grid gap-12 lg:grid-cols-12">
+        <!-- Items Column -->
+        <div class="lg:col-span-8">
+          <div class="space-y-6">
+            <!-- Table Headers (Desktop) -->
+            <div class="hidden border-b border-brand-primary/10 pb-4 md:grid md:grid-cols-[100px,1fr,140px,120px,40px] md:gap-6 md:items-center">
+              <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-primary/30">{{ 'product.details' | transloco }}</span>
+              <span></span>
+              <span class="text-center text-[10px] font-bold uppercase tracking-[0.2em] text-brand-primary/30">{{ 'product.quantity' | transloco }}</span>
+              <span class="text-end text-[10px] font-bold uppercase tracking-[0.2em] text-brand-primary/30">{{ 'cart.lineTotal' | transloco }}</span>
+              <span></span>
+            </div>
+
+            @for (line of cartStore.items(); track line.id) {
+              <article class="group relative grid items-center gap-6 rounded-2xl border border-brand-primary/8 bg-white p-5 transition-all hover:border-brand-primary/20 hover:shadow-md md:grid-cols-[100px,1fr,140px,120px,40px]">
+                <!-- Image -->
+                <a [routerLink]="['/product', line.product.id]" class="relative block aspect-[3/4] overflow-hidden rounded-xl bg-brand-bg-light">
+                  <img [src]="line.product.image" [alt]="line.product.title" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                </a>
+
+                <!-- Info -->
+                <div class="flex flex-col">
+                  <a [routerLink]="['/product', line.product.id]" class="text-sm font-bold text-brand-primary hover:text-brand-accent transition-colors leading-snug">
+                    {{ line.product.title }}
+                  </a>
+                  <p class="mt-1 text-xs font-medium text-brand-primary/40">
+                    {{ line.product.price | currency: 'EGP' : '£' : '1.2-2' }} <span class="text-[10px] uppercase tracking-wider opacity-60 ml-1">{{ 'cart.perItem' | transloco }}</span>
+                  </p>
+                  <!-- SKU info placeholder if needed -->
+                  <div class="mt-3 flex gap-2">
+                    <span class="rounded bg-brand-bg-light px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-brand-primary/50">Standard Fit</span>
+                  </div>
+                </div>
+
+                <!-- Quantity -->
+                <div class="flex items-center justify-center">
+                  <div class="inline-flex items-center rounded-lg border border-brand-primary/10 bg-brand-bg-light/50 p-1">
+                    <button 
+                      class="flex h-8 w-8 items-center justify-center rounded-md text-brand-primary/40 transition hover:bg-white hover:text-brand-primary hover:shadow-sm" 
+                      (click)="cartStore.updateQuantity(line.product.id, line.quantity - 1)"
+                      [disabled]="line.quantity <= 1"
+                    >
+                      <fa-icon [icon]="icons.minus" class="text-[9px]"></fa-icon>
+                    </button>
+                    <span class="w-10 text-center text-xs font-bold text-brand-primary">{{ line.quantity }}</span>
+                    <button 
+                      class="flex h-8 w-8 items-center justify-center rounded-md text-brand-primary/40 transition hover:bg-white hover:text-brand-primary hover:shadow-sm" 
+                      (click)="cartStore.updateQuantity(line.product.id, line.quantity + 1)"
+                    >
+                      <fa-icon [icon]="icons.plus" class="text-[9px]"></fa-icon>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Line Total -->
+                <div class="text-end">
+                  <span class="text-sm font-bold text-brand-primary">{{ line.product.price * line.quantity | currency: 'EGP' : '£' : '1.2-2' }}</span>
+                </div>
+
+                <!-- Remove -->
+                <div class="flex justify-end">
+                  <button class="flex h-9 w-9 items-center justify-center rounded-full text-brand-primary/20 transition hover:bg-red-50 hover:text-red-500" (click)="removeItem(line.product.id, line.product.title)">
+                    <fa-icon [icon]="icons.trash" class="text-xs"></fa-icon>
+                  </button>
+                </div>
+              </article>
+            }
+          </div>
+
+          <div class="mt-10 flex flex-wrap items-center justify-between gap-4">
+            <a routerLink="/shop" class="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-primary/50 hover:text-brand-primary transition-colors">
+              <span class="transition-transform group-hover:-translate-x-1">←</span>
+              {{ 'cart.continueShopping' | transloco }}
+            </a>
+            <button class="text-xs font-bold uppercase tracking-widest text-brand-primary/30 hover:text-red-500 transition-colors" (click)="cartStore.clearCart()">
+              Clear Bag
+            </button>
+          </div>
+        </div>
+
+        <!-- Summary Sidebar -->
+        <aside class="lg:col-span-4">
+          <div class="sticky top-28 space-y-6">
+            <div class="rounded-3xl border border-brand-primary/10 bg-white p-8 shadow-sm">
+              <h3 class="text-lg font-bold text-brand-primary">{{ 'checkout.orderSummary' | transloco }}</h3>
+              
+              <div class="mt-8 space-y-4">
+                <div class="flex justify-between text-xs font-medium text-brand-primary/50">
+                  <span>{{ 'cart.subtotal' | transloco }} ({{ cartStore.totalItems() }} {{ 'checkout.items' | transloco }})</span>
+                  <span class="text-brand-primary font-bold">{{ cartStore.subtotal() | currency: 'EGP' : '£' : '1.2-2' }}</span>
+                </div>
+                <div class="flex justify-between text-xs font-medium text-brand-primary/50">
+                  <span>{{ 'cart.shipping' | transloco }}</span>
+                  <span class="text-brand-primary font-bold font-mono">
+                    @if (cartStore.shipping() === 0) {
+                      FREE
+                    } @else {
+                      {{ cartStore.shipping() | currency: 'EGP' : '£' : '1.2-2' }}
+                    }
+                  </span>
+                </div>
+                
+                <!-- Coupon Code -->
+                <div class="pt-2">
+                  <label class="text-[10px] font-bold uppercase tracking-widest text-brand-primary/30">{{ 'cart.applyCoupon' | transloco }}</label>
+                  <div class="mt-2 flex gap-2">
+                    <input type="text" [placeholder]="'cart.couponPlaceholder' | transloco" class="flex-1 rounded-xl border border-brand-primary/10 bg-brand-bg-light/30 px-4 py-2.5 text-xs outline-none focus:border-brand-primary/30 transition-colors" />
+                    <button class="rounded-xl border border-brand-primary px-4 py-2.5 text-[10px] font-bold uppercase tracking-widest transition hover:bg-brand-primary hover:text-white">Apply</button>
+                  </div>
+                </div>
+
+                <div class="border-t border-brand-primary/10 pt-6">
+                  <div class="flex justify-between items-end">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-primary">{{ 'cart.total' | transloco }}</span>
+                    <span class="text-2xl font-bold text-brand-primary">{{ cartStore.total() | currency: 'EGP' : '£' : '1.2-2' }}</span>
+                  </div>
+                  <p class="mt-1 text-end text-[10px] text-brand-primary/30">Tax included where applicable</p>
+                </div>
+              </div>
+
+              <a routerLink="/checkout" class="mt-8 block w-full rounded-full bg-brand-primary py-4 text-center text-xs font-bold uppercase tracking-[0.2em] text-white transition hover:bg-brand-primary-light active:scale-[0.98] shadow-xl shadow-brand-primary/15">
+                {{ 'cart.checkout' | transloco }}
+              </a>
+
+              <div class="mt-8 grid grid-cols-4 gap-4 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" class="h-4 w-auto mx-auto" alt="Visa" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" class="h-4 w-auto mx-auto" alt="Mastercard" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" class="h-4 w-auto mx-auto" alt="Paypal" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_Pay_logo.svg" class="h-4 w-auto mx-auto" alt="Apple Pay" />
+              </div>
+            </div>
+
+            <div class="rounded-2xl border border-brand-accent/20 bg-brand-accent/5 p-5">
+              <div class="flex gap-3">
+                <fa-icon [icon]="icons.bag" class="text-brand-accent text-sm"></fa-icon>
+                <div>
+                  <h4 class="text-[10px] font-bold uppercase tracking-widest text-brand-accent">Complimentary Gift Wrapping</h4>
+                  <p class="mt-1 text-[10px] leading-relaxed text-brand-accent/70">All orders are delivered in our signature sustainable packaging. Select gift options at the next step.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    }
+  </div>
+</main>

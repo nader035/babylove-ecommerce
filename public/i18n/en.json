@@ -1,7 +1,7 @@
 {
   "brand": {
     "name": "BABYLOVE",
-    "slogan": "From Germany to your hand"
+    "slogan": "Curated for Excellence"
   },
   "common": {
     "loading": "Loading...",
@@ -11,154 +11,224 @@
     "edit": "Edit",
     "delete": "Delete",
     "submit": "Submit",
-    "search": "Search for products...",
+    "search": "Search collections...",
     "noResults": "No results found.",
-    "viewAll": "View All",
-    "currency": "USD"
+    "viewAll": "View All"
   },
   "nav": {
     "home": "Home",
     "shop": "Shop",
-    "categories": "Categories",
-    "about": "About Us",
-    "join-us": "Join Us",
-    "blog": "Blog",
-    "profile": "Profile",
-    "orders": "My Orders",
+    "categories": "Collections",
+    "blog": "Journal",
+    "about us": "About",
     "wishlist": "Wishlist",
-    "logout": "Logout"
+    "join-us": "Sign In"
+  },
+  "header": {
+    "premium": "Member",
+    "myProfile": "My Profile",
+    "myOrders": "My Orders",
+    "settings": "Settings",
+    "signedInAs": "Signed in as",
+    "logout": "Sign Out"
+  },
+  "auth": {
+    "login_title": "Welcome Back",
+    "login_subtitle": "Sign in to your account",
+    "signup_title": "Create Account",
+    "signup_subtitle": "Join the community",
+    "email_label": "Email",
+    "password_label": "Password",
+    "firstName_label": "First Name",
+    "lastName_label": "Last Name",
+    "username_label": "Username",
+    "gender_label": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "login_btn": "Sign In",
+    "signup_btn": "Create Account",
+    "no_account": "Don't have an account?",
+    "have_account": "Already have an account?",
+    "or": "or continue with",
+    "google": "Google",
+    "apple": "Apple",
+    "signing_in": "Signing in...",
+    "creatingAccount": "Creating account...",
+    "checking": "Checking...",
+    "forgotPassword": "Forgot Password?",
+    "forgot_password_title": "Recover Account",
+    "forgot_password_desc": "Enter your email address and we'll send you a link to reset your password.",
+    "sending_link": "Sending Link...",
+    "send_reset_link": "Send Reset Link",
+    "reset_link_sent": "Reset link sent to your email",
+    "email_check_title": "Identify Yourself",
+    "email_check_subtitle": "Enter your email to continue your journey.",
+    "continue_btn": "Continue",
+    "termsText": "By creating an account, you agree to our",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "and": "and"
+  },
+  "validation": {
+    "required": "This field is required",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Please enter a valid email",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Password must be at least 6 characters",
+    "passwordStrongMinLength": "Password must be at least 8 characters",
+    "passwordPattern": "Password must contain letters and numbers",
+    "usernameRequired": "Username is required",
+    "usernameMinLength": "Username must be at least 3 characters",
+    "usernamePattern": "Username can only contain letters and numbers",
+    "minChars": "Minimum {min} characters"
   },
   "home": {
     "hero": {
-      "badge": "Autumn Collection 2026",
+      "badge": "New Season — Spring/Summer 2026",
       "title_part1": "The Art of",
-      "title_part2": "Modernity",
-      "description": "Exceptional designs crafted to reflect your identity. Where minimalist aesthetics meet ultimate comfort and quality.",
+      "title_part2": "Modern Dressing",
+      "description": "Curated collections of premium apparel designed for those who value craftsmanship, sustainable fabrics, and timeless silhouettes.",
       "cta_shop": "Shop Now",
       "cta_lookbook": "View Lookbook"
     },
-    "lookbook": {
-      "title": "Explore the Look",
-      "item1_name": "Premium Cotton Shirt",
-      "view_details": "View Details"
-    },
     "arrivals": {
       "title": "New Arrivals",
+      "subtitle": "Discover the latest additions to our curated wardrobe — designed to transcend seasons.",
       "view_all": "View All",
-      "tag_premium": "Exclusive"
+      "tag_premium": "Premium",
+      "tag_new": "New"
+    },
+    "collections": {
+      "kicker": "Curated Wardrobe",
+      "title": "Featured Collections",
+      "quick_shop": "Explore →"
+    },
+    "features": {
+      "freeShipping": "Complimentary Shipping",
+      "freeShippingDesc": "Free worldwide delivery on all orders over 150EGP.",
+      "support247": "Concierge Support",
+      "support247Desc": "Personal styling assistance available around the clock.",
+      "easyReturns": "Effortless Returns",
+      "easyReturnsDesc": "30-day no-questions-asked return and exchange policy.",
+      "secureCheckout": "Secure Checkout",
+      "secureCheckoutDesc": "Bank-level encryption on every transaction."
     },
     "statement": {
       "badge": "Our Philosophy",
-      "text": "We believe that simplicity is the ultimate sophistication, and that your wardrobe is a silent expression of who you truly are."
+      "text": "We believe in fewer, better things — garments designed to be worn, cherished, and passed on."
     },
-    "features": {
-      "freeShipping": "Free Shipping",
-      "freeShippingDesc": "Step into the realm of style with our unbeatable trendsetters.",
-      "support247": "24/7 Support",
-      "support247Desc": "Round-the-clock assistance for a seamless shopping experience.",
-      "easyReturns": "Easy Returns",
-      "easyReturnsDesc": "Hassle-free returns because your satisfaction is our priority.",
-      "secureCheckout": "Secure Checkout",
-      "secureCheckoutDesc": "Experience safe and encrypted payments every time."
+    "testimonials": {
+      "kicker": "What People Say",
+      "title": "Voices of Our Community",
+      "subtitle": "Real perspectives from those who trust our craft.",
+      "items": [
+        {
+          "quote": "The quality of the fabric and the attention to detail is immediately obvious. These are clothes built to last.",
+          "author": "James W.",
+          "role": "Architect & Creative Director"
+        },
+        {
+          "quote": "I've replaced half my wardrobe with their essentials. The cashmere sweater is the finest I've owned at any price.",
+          "author": "Amira K.",
+          "role": "Editorial Stylist"
+        },
+        {
+          "quote": "Minimal, intentional, and beautifully made. Exactly the kind of brand the fashion world needs more of.",
+          "author": "Daniel R.",
+          "role": "Design Consultant"
+        }
+      ]
+    },
+    "social": {
+      "kicker": "On the Grid",
+      "title": "Style in Motion"
     }
-  },
-  "auth": {
-    "title": "Enter your email to join or sign in.",
-    "subtitle": "Step into the world of BABY premium fashion.",
-    "welcomeBack": "Welcome back",
-    "enterPasswordDesc": "Enter your password to access your BabyLove account",
-    "createAccount": "Create an account",
-    "joinDesc": "Join BabyLove and enjoy a premium experience",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "username": "Username",
-    "email_label": "Email Address",
-    "password": "Password",
-    "confirmPassword": "Confirm Password",
-    "continue": "Continue",
-    "checking": "Checking...",
-    "signingIn": "Signing In...",
-    "creatingAccount": "Creating Account...",
-    "login": "Sign In",
-    "register": "Sign Up",
-    "or": "OR",
-    "google": "Continue with Google",
-    "apple": "Continue with Apple",
-    "terms_prefix": "By continuing, you agree to BABY's",
-    "termsText": "By continuing, you agree to our",
-    "terms_link": "Terms of Use",
-    "termsOfService": "Terms of Service",
-    "and": "and",
-    "privacy_link": "Privacy Policy",
-    "privacyPolicy": "Privacy Policy",
-    "forgotPassword": "Forgot Password?",
-    "dontHaveAccount": "Don't have an account?",
-    "alreadyHaveAccount": "Already have an account?"
-  },
-  "validation": {
-    "required": "Required",
-    "minChars": "Min {{min}} chars",
-    "emailRequired": "Email is required",
-    "emailInvalid": "Enter a valid email",
-    "usernameRequired": "Username is required",
-    "usernameMinLength": "Must be at least 3 chars",
-    "usernamePattern": "Letters, numbers, and underscores only",
-    "passwordRequired": "Password is required",
-    "passwordMinLength": "Must be at least 6 chars",
-    "passwordStrongMinLength": "Must be at least 8 chars",
-    "passwordPattern": "Needs uppercase, lowercase & a number"
   },
   "product": {
-    "addToCart": "Add to Cart",
-    "buyNow": "Buy Now",
-    "outOfStock": "Out of Stock",
+    "details": "Product",
     "description": "Description",
-    "details": "Product Details",
     "reviews": "Reviews",
+    "addToCart": "Add to Bag",
     "relatedProducts": "You May Also Like",
-    "writeReview": "Write a Review",
     "size": "Size",
     "color": "Color",
-    "quantity": "Quantity"
-  },
-  "filters": {
-    "title": "Filters",
-    "priceRange": "Price Range",
-    "sortBy": "Sort By",
-    "clearAll": "Clear All",
-    "sortOptions": {
-      "newest": "Newest Arrivals",
-      "priceLowHigh": "Price: Low to High",
-      "priceHighLow": "Price: High to Low",
-      "popular": "Most Popular"
-    }
+    "quantity": "Quantity",
+    "material": "Material",
+    "fit": "Fit",
+    "sizeGuide": "Size Guide",
+    "sizeGuideTitle": "Find Your Perfect Fit",
+    "measurement": "Measurement",
+    "chest": "Chest",
+    "waist": "Waist",
+    "hip": "Hip",
+    "length": "Length"
   },
   "cart": {
-    "title": "Shopping Cart",
-    "empty": "Your cart is empty.",
+    "title": "Shopping Bag",
+    "empty": "Your bag is empty",
+    "emptyDesc": "Explore our collections and discover something extraordinary.",
     "continueShopping": "Continue Shopping",
     "subtotal": "Subtotal",
     "shipping": "Shipping",
     "total": "Total",
     "checkout": "Proceed to Checkout",
-    "applyCoupon": "Apply Coupon",
-    "couponPlaceholder": "Enter coupon code"
+    "applyCoupon": "Apply Code",
+    "couponPlaceholder": "Enter promo code",
+    "lineTotal": "Total",
+    "perItem": "each"
+  },
+  "wishlist": {
+    "empty": "Your wishlist is empty",
+    "emptyDesc": "Save your favorite pieces here to revisit later.",
+    "moveToCart": "Move to Bag"
   },
   "checkout": {
     "title": "Checkout",
-    "shippingAddress": "Shipping Address",
-    "paymentMethod": "Payment Method",
+    "shippingAddress": "Shipping",
+    "paymentMethod": "Payment",
+    "reviewOrder": "Review",
     "placeOrder": "Place Order",
+    "placingOrder": "Placing Order...",
     "orderSuccess": "Your order has been placed successfully!",
-    "orderNumber": "Order Number"
+    "orderSuccessDesc": "We'll send you a confirmation email with your order details and tracking information.",
+    "orderNumber": "Order",
+    "orderSummary": "Order Summary",
+    "orderItems": "Order Items",
+    "items": "items",
+    "fullName": "Full Name",
+    "phone": "Phone Number",
+    "address": "Address",
+    "city": "City",
+    "continuePayment": "Continue to Payment",
+    "back": "Back",
+    "creditCard": "Credit Card",
+    "cashOnDelivery": "Cash on Delivery",
+    "cardNumber": "Card Number",
+    "expiryDate": "Expiry Date",
+    "cvv": "CVV",
+    "reviewOrderInfo": "Review your order before placing.",
+    "shippingTo": "Shipping to",
+    "paymentInfo": "Payment",
+    "placeOrderBtn": "Confirm & Pay",
+    "backToShopping": "Back to Shopping"
   },
   "profile": {
     "personalInfo": "Personal Information",
+    "fullName": "Full Name",
+    "phone": "Phone Number",
     "addresses": "Saved Addresses",
     "addNewAddress": "Add New Address",
     "orderHistory": "Order History",
     "status": "Status",
-    "date": "Date"
+    "date": "Date",
+    "quickLinks": "Quick Actions",
+    "trackOrders": "Track your recent orders",
+    "savedItems": "saved items"
+  },
+  "orders": {
+    "empty": "No orders yet",
+    "emptyDesc": "When you place an order, it will appear here.",
+    "tracking": "Tracking Code"
   },
   "footer": {
     "description": "Elevating your everyday style with premium essentials. Crafted for those who value quality and minimalist design.",
@@ -180,17 +250,86 @@
     "newsletter_desc": "Subscribe for early access to new drops and exclusive offers.",
     "newsletter_placeholder": "Email Address",
     "newsletter_btn": "Subscribe",
-    "copyright": "© 2026 BABY Premium Store. All rights reserved."
+    "copyright": "© 2026 BABYLOVE Premium Store. All rights reserved."
   },
   "categories": {
     "badge": "Curated Collections",
-    "title": "Shop by Category",
-    "subtitle": "Discover our carefully selected collections designed for comfort, style, and every stage of your little one's growth.",
+    "title": "Shop by Collection",
+    "subtitle": "Explore our carefully curated collections — from timeless essentials to statement pieces for the modern wardrobe.",
     "items": {
-      "newborn": "Newborn",
-      "toddler_boys": "Toddler Boys",
-      "toddler_girls": "Toddler Girls",
+      "newborn": "New Arrivals",
+      "toddler_boys": "Menswear",
+      "toddler_girls": "Womenswear",
       "accessories": "Accessories"
     }
+  },
+  "shop": {
+    "hero": {
+      "kicker": "Premium Collection",
+      "title": "The Modern Wardrobe",
+      "subtitle": "Explore curated collections with smart filters, quick view, and a seamless premium shopping experience."
+    },
+    "filters": {
+      "searchPlaceholder": "Search by name, material, or style...",
+      "typeLabel": "Department",
+      "types": {
+        "all": "All",
+        "essentials": "Essentials",
+        "fashion": "Fashion",
+        "gear": "Accessories"
+      },
+      "sort": {
+        "featured": "Featured",
+        "az": "Name: A-Z",
+        "za": "Name: Z-A",
+        "priceAsc": "Price: Low to High",
+        "priceDesc": "Price: High to Low",
+        "rating": "Top Rated"
+      }
+    },
+    "results": "results",
+    "quickView": "Quick View",
+    "quickViewDescription": "A premium curated collection designed for those who value craftsmanship, quality materials, and timeless style."
+  },
+  "blog": {
+    "title": "The Journal",
+    "subtitle": "Style guides, seasonal edits, and stories of craftsmanship from our editorial team."
+  },
+  "about": {
+    "kicker": "Our Story",
+    "title": "About BABYLOVE",
+    "subtitle": "Redefining modern fashion through craftsmanship, sustainable fabrics, and timeless silhouettes.",
+    "storyKicker": "How It Started",
+    "storyTitle": "Built on Craft",
+    "storyText1": "BABYLOVE was founded with a clear conviction: that modern fashion should be intentional, sustainable, and built to last. Every garment is designed with the finest materials — Italian wools, Japanese denims, and Mongolian cashmere — and constructed with techniques that honor traditional craftsmanship.",
+    "storyText2": "What began as a small atelier in Germany has grown into a global destination for those who refuse to compromise on quality. Our collections are deliberately small, seasonally relevant, and designed to work together as a curated wardrobe.",
+    "valuesTitle": "What We Stand For",
+    "values": {
+      "quality": "Uncompromising Craft",
+      "qualityDesc": "Every stitch, every fabric, every finish is selected to meet the highest standards of modern tailoring.",
+      "sustainability": "Responsible Fashion",
+      "sustainabilityDesc": "Sustainable materials, ethical production, and thoughtful packaging — because great style shouldn't cost the earth.",
+      "community": "Global Perspective",
+      "communityDesc": "A worldwide community of discerning individuals who share our vision of intentional, elevated living.",
+      "trust": "Built on Trust",
+      "trustDesc": "Transparent pricing, honest craftsmanship, and a 100% satisfaction guarantee on every piece."
+    },
+    "teamKicker": "The Team",
+    "teamTitle": "Meet the People Behind the Brand",
+    "ctaTitle": "Discover Your Wardrobe",
+    "ctaDesc": "Explore our curated collections and find pieces that define your personal style."
+  },
+  "settings": {
+    "language": "Language",
+    "languageDesc": "Choose your preferred language",
+    "notifications": "Push Notifications",
+    "notificationsDesc": "Receive updates about orders and offers",
+    "privacy": "Privacy & Security",
+    "privacyDesc": "Manage your data and privacy preferences",
+    "appInfo": "App Information",
+    "version": "Version"
+  },
+  "search": {
+    "viewAll": "View all results for"
   }
 }

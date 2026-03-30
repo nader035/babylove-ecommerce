@@ -3,9 +3,9 @@
     <h1
       class="text-xl font-bold tracking-tight text-brand-primary leading-tight lowercase first-letter:uppercase"
     >
-      {{ t('auth.title') }}
+      {{ t('auth.email_check_title') }}
     </h1>
-    <p class="text-xs text-brand-muted">{{ t('auth.subtitle') }}</p>
+    <p class="text-xs text-brand-muted">{{ t('auth.email_check_subtitle') }}</p>
   </div>
 
   <form class="flex flex-col gap-2">
@@ -16,7 +16,7 @@
         type="email"
         name="email"
         [(ngModel)]="email"
-        placeholder="baby@example.com"
+        placeholder="fashion@example.com"
         #emailInput="ngModel"
         required
         email
@@ -24,7 +24,7 @@
       />
       @if (emailInput.invalid && emailInput.touched) {
         <mat-error class="text-[10px] font-bold uppercase tracking-tighter">
-          Please enter a valid email
+          {{ t('validation.emailInvalid') }}
         </mat-error>
       }
     </mat-form-field>
@@ -43,7 +43,7 @@
           <span class="animate-pulse">{{ t('auth.checking') }}</span>
         </div>
       } @else {
-        {{ t('auth.continue') }}
+        {{ t('auth.continue_btn') }}
       }
     </button>
   </form>
@@ -79,10 +79,10 @@
   <p
     class="text-[9px] text-center text-brand-muted px-8 leading-relaxed uppercase tracking-widest opacity-70 mt-2"
   >
-    {{ t('auth.terms_prefix') }}
-    <a href="#" class="underline font-bold hover:text-brand-primary">{{ t('auth.terms_link') }}</a>
+    {{ t('auth.termsText') }}
+    <a href="#" class="underline font-bold hover:text-brand-primary">{{ t('auth.termsOfService') }}</a>
     {{ t('auth.and') }}
-    <a href="#" class="underline font-bold hover:text-brand-primary">{{ t('auth.privacy_link') }}</a
+    <a href="#" class="underline font-bold hover:text-brand-primary">{{ t('auth.privacyPolicy') }}</a
     >.
   </p>
 </div>
