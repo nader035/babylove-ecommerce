@@ -1,0 +1,127 @@
+<ng-container *transloco="let t">
+  <div class="flex flex-col gap-6 animate-fade-in max-w-md mx-auto py-4">
+    <div class="text-center space-y-2">
+      <h1 class="text-xl font-bold tracking-tight text-brand-primary leading-tight lowercase first-letter:uppercase">
+        {{ t('auth.createAccount') }}
+      </h1>
+      <p class="text-xs text-brand-muted">{{ t('auth.joinDesc') }}</p>
+    </div>
+
+    <form [formRoot]="registerForm" class="flex flex-col gap-4">
+      <div class="flex gap-2 w-full">
+        <mat-form-field appearance="outline" class="w-full custom-field">
+          <mat-label>{{ t('auth.firstName') }}</mat-label>
+          <input matInput type="text" placeholder="Nader" [formField]="registerForm.firstName" />
+
+          @if (registerForm.firstName().touched() && registerForm.firstName().errors().length) {
+            <mat-error class="text-[9px] font-bold uppercase tracking-tighter">
+              @for (error of registerForm.firstName().errors(); track error) {
+                @if (error.kind === 'required') { {{ t('validation.required') }} } 
+                @else if (error.kind === 'minLength') { {{ t('validation.minChars', { min: 2 }) }} }
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full custom-field">
+          <mat-label>{{ t('auth.lastName') }}</mat-label>
+          <input matInput type="text" placeholder="Mohamed" [formField]="registerForm.lastName" />
+
+          @if (registerForm.lastName().touched() && registerForm.lastName().errors().length) {
+            <mat-error class="text-[9px] font-bold uppercase tracking-tighter">
+              @for (error of registerForm.lastName().errors(); track error) {
+                @if (error.kind === 'required') { {{ t('validation.required') }} } 
+                @else if (error.kind === 'minLength') { {{ t('validation.minChars', { min: 2 }) }} }
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="w-full custom-field">
+        <mat-label>{{ t('auth.username') }}</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="nader0305"
+          [formField]="registerForm.username"
+          class="dir-ltr"
+        />
+
+        @if (registerForm.username().touched() && registerForm.username().errors().length) {
+          <mat-error class="text-[10px] font-bold uppercase tracking-tighter">
+            @for (error of registerForm.username().errors(); track error) {
+              @if (error.kind === 'required') { {{ t('validation.usernameRequired') }} } 
+              @else if (error.kind === 'minLength') { {{ t('validation.usernameMinLength') }} } 
+              @else if (error.kind === 'pattern') { {{ t('validation.usernamePattern') }} }
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full custom-field">
+        <mat-label>{{ t('auth.email_label') }}</mat-label>
+        <input
+          matInput
+          type="email"
+          placeholder="baby@example.com"
+          [formField]="registerForm.email"
+          class="dir-ltr"
+          #emailInput
+        />
+
+        @if (registerForm.email().touched() && registerForm.email().errors().length) {
+          <mat-error class="text-[10px] font-bold uppercase tracking-tighter">
+            @for (error of registerForm.email().errors(); track error) {
+              @if (error.kind === 'required') { {{ t('validation.emailRequired') }} } 
+              @else if (error.kind === 'email') { {{ t('validation.emailInvalid') }} }
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full custom-field">
+        <mat-label>{{ t('auth.password') }}</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="••••••••"
+          [formField]="registerForm.password"
+          class="dir-ltr"
+        />
+
+        @if (registerForm.password().touched() && registerForm.password().errors().length) {
+          <mat-error class="text-[10px] font-bold uppercase tracking-tighter">
+            @for (error of registerForm.password().errors(); track error) {
+              @if (error.kind === 'required') { {{ t('validation.passwordRequired') }} } 
+              @else if (error.kind === 'minLength') { {{ t('validation.passwordStrongMinLength') }} } 
+              @else if (error.kind === 'pattern') { {{ t('validation.passwordPattern') }} }
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <button
+        type="submit"
+        class="w-full py-4 mt-2 rounded-full bg-brand-primary text-white font-black text-xs uppercase tracking-[0.2em] transition-all duration-300 hover:bg-brand-primary-light active:scale-[0.98] shadow-lg shadow-brand-primary/20 disabled:opacity-50 disabled:grayscale"
+        [disabled]="authStore.isLoading() || !registerForm().valid()"
+      >
+        @if (authStore.isLoading()) {
+          <div class="flex items-center justify-center gap-3">
+            <div class="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+            <span class="animate-pulse">{{ t('auth.creatingAccount') }}</span>
+          </div>
+        } @else {
+          {{ t('auth.register') }}
+        }
+      </button>
+    </form>
+
+    <p class="text-[9px] text-center text-brand-muted px-8 leading-relaxed uppercase tracking-widest opacity-70 mt-2">
+      {{ t('auth.termsText') }}
+      <a href="#" class="underline font-bold hover:text-brand-primary">{{ t('auth.termsOfService') }}</a>
+      {{ t('auth.and') }}
+      <a href="#" class="underline font-bold hover:text-brand-primary">{{ t('auth.privacyPolicy') }}</a>.
+    </p>
+  </div>
+</ng-container>

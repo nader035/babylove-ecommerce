@@ -1,3 +1,115 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss';
+@import 'aos/dist/aos.css';
 
-@import "tailwindcss";
+@theme {
+  /* Colors - Babylove Purple Palette */
+  /* بنينا الألوان على درجة العميل #6e4388 */
+
+  --color-brand-primary: #3d214f; /* أغمق درجة - لون أساسي للنصوص والأزرار (عشان الـ Contrast) */
+  --color-brand-primary-light: #583370; /* درجة متوسطة للـ hover */
+  --color-brand-accent: #6e4388; /* لون العميل الأصلي - للعلامات واللمسات الجمالية */
+  --color-brand-muted: #957fa6; /* رمادي بنفسجي للنصوص الفرعية والـ Placeholders */
+  --color-brand-surface: #d2c8d8; /* بنفسجي فاتح جداً للحدود (Borders) */
+  --color-brand-bg-light: #f8f6fa; /* خلفية بيضاء مائلة بلمسة بنفسجية دافئة جداً */
+
+  /* Radius */
+  --radius-ecommerce-card: 24px;
+  --radius-ecommerce-button: 14px;
+
+  /* Shadows - تم تحديث لون الظل ليأخذ من البنفسجي الغامق (3d214f) */
+  --shadow-premium: 0 20px 25px -5px rgba(61, 33, 79, 0.1), 0 10px 10px -5px rgba(61, 33, 79, 0.04);
+
+  /* Fonts - Optimized order */
+  --font-sans: 'Inter', 'Cairo', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* --- Global Base Styles --- */
+@layer base {
+  body {
+    @apply bg-brand-bg-light text-brand-primary font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* تصحيح الخط العربي والاتجاهات */
+  [dir='rtl'] {
+    font-family: 'Cairo', sans-serif;
+
+    /* في Tailwind v4 نستخدم CSS العادي للقيم المعقدة لتجنب أخطاء الـ Apply */
+    .tracking-widest,
+    .tracking-\[0\.2em\],
+    .tracking-\[0\.3em\],
+    .tracking-\[0\.4em\],
+    .tracking-\[0\.5em\],
+    .tracking-\[0\.6em\],
+    .tracking-\[0\.8em\] {
+      letter-spacing: 0 !important;
+    }
+
+    .text-\[10px\],
+    .text-\[11px\],
+    .text-xs {
+      font-size: 13px !important;
+      line-height: 1.25rem;
+    }
+
+    .lg\:pl-10 {
+      padding-left: 0;
+      padding-right: 2.5rem;
+    }
+  }
+}
+
+/* --- Utilities & Custom Classes --- */
+@layer utilities {
+  .text-shadow-premium {
+    text-shadow: 0 2px 4px rgba(61, 33, 79, 0.1);
+  }
+
+  .social-btn {
+    @apply w-full py-4 rounded-full border border-brand-surface/30 bg-white 
+           flex items-center justify-center gap-4 transition-all duration-300 
+           hover:bg-brand-bg-light hover:border-brand-primary/20 active:scale-[0.98]
+           text-[11px] font-black uppercase tracking-widest text-brand-primary;
+  }
+}
+
+/* --- Custom Scrollbar --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-brand-bg-light);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-accent); /* شريط السكرول بلون العميل */
+  border-radius: 10px;
+  border: 2px solid var(--color-brand-bg-light);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-primary);
+}
+
+/* --- AOS Overrides --- */
+[data-aos] {
+  pointer-events: none;
+}
+.aos-animate {
+  pointer-events: auto;
+}
+.colored-bear-icon {
+  /* 1. تحديد مسار الصورة */
+  -webkit-mask-image: url('/assets/images/babyLoveLogo.svg');
+  mask-image: url('/assets/images/babyLoveLogo.svg');
+
+  /* 2. ضبط إعدادات القناع ليناسب حجم العنصر */
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  /* 3. **هنا السحر!** اللون ده هو اللي هيتصبغ بيه أي جزء مرئي من الـ SVG */
+  /* يمكنك تغيير هذا اللون لأي لون تريده (مثلاً بنفسجي البراند) */
+  background-color: var(--color-brand-primary);
+}

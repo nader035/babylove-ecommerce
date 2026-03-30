@@ -1,0 +1,26 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "nader0305",
+      "email": "nader@example.com",
+      "password": "123456",
+
+      "firstName": "Nader",
+      "lastName": "Mohamed",
+      "gender": "Male",
+      "image": "https://randomuser.me/api/portraits/men/1.jpg"
+    },
+    {
+      "id": 736,
+      "username": "nader0305",
+      "email": "nader@na.n",
+      "password": "123456",
+      "firstName": "Nader",
+      "lastName": "Mohamed",
+      "image": "https://robohash.org/nader0305"
+    }
+  ],
+  "products": [],
+  "orders": []
+}

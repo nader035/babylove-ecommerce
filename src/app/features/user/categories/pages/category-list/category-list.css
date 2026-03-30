@@ -1,0 +1,33 @@
+/* category-list.css */
+
+/* تخصيص شكل الـ Navigation Buttons */
+swiper-container {
+  --swiper-navigation-color: var(--brand-primary);
+  --swiper-navigation-size: 20px;
+  --swiper-scrollbar-bg-color: rgba(110, 67, 136, 0.05);
+  --swiper-scrollbar-drag-bg-color: var(--brand-accent);
+  --swiper-scrollbar-bottom: 0px;
+}
+
+/* تخفيف الـ Scrollbar عشان يبان شيك */
+swiper-container::part(scrollbar) {
+  height: 2px;
+  width: 50%;
+  left: 25%;
+}
+
+/* جعل الأزرار تظهر فقط عند التحويم (Hover) */
+swiper-container::part(button-prev),
+swiper-container::part(button-next) {
+  background: white;
+  padding: 25px;
+  border-radius: 50%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+swiper-container:hover::part(button-prev),
+swiper-container:hover::part(button-next) {
+  opacity: 1;
+}

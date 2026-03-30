@@ -1,0 +1,196 @@
+{
+  "brand": {
+    "name": "BABYLOVE",
+    "slogan": "From Germany to your hand"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong. Please try again later.",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "submit": "Submit",
+    "search": "Search for products...",
+    "noResults": "No results found.",
+    "viewAll": "View All",
+    "currency": "USD"
+  },
+  "nav": {
+    "home": "Home",
+    "shop": "Shop",
+    "categories": "Categories",
+    "about": "About Us",
+    "join-us": "Join Us",
+    "blog": "Blog",
+    "profile": "Profile",
+    "orders": "My Orders",
+    "wishlist": "Wishlist",
+    "logout": "Logout"
+  },
+  "home": {
+    "hero": {
+      "badge": "Autumn Collection 2026",
+      "title_part1": "The Art of",
+      "title_part2": "Modernity",
+      "description": "Exceptional designs crafted to reflect your identity. Where minimalist aesthetics meet ultimate comfort and quality.",
+      "cta_shop": "Shop Now",
+      "cta_lookbook": "View Lookbook"
+    },
+    "lookbook": {
+      "title": "Explore the Look",
+      "item1_name": "Premium Cotton Shirt",
+      "view_details": "View Details"
+    },
+    "arrivals": {
+      "title": "New Arrivals",
+      "view_all": "View All",
+      "tag_premium": "Exclusive"
+    },
+    "statement": {
+      "badge": "Our Philosophy",
+      "text": "We believe that simplicity is the ultimate sophistication, and that your wardrobe is a silent expression of who you truly are."
+    },
+    "features": {
+      "freeShipping": "Free Shipping",
+      "freeShippingDesc": "Step into the realm of style with our unbeatable trendsetters.",
+      "support247": "24/7 Support",
+      "support247Desc": "Round-the-clock assistance for a seamless shopping experience.",
+      "easyReturns": "Easy Returns",
+      "easyReturnsDesc": "Hassle-free returns because your satisfaction is our priority.",
+      "secureCheckout": "Secure Checkout",
+      "secureCheckoutDesc": "Experience safe and encrypted payments every time."
+    }
+  },
+  "auth": {
+    "title": "Enter your email to join or sign in.",
+    "subtitle": "Step into the world of BABY premium fashion.",
+    "welcomeBack": "Welcome back",
+    "enterPasswordDesc": "Enter your password to access your BabyLove account",
+    "createAccount": "Create an account",
+    "joinDesc": "Join BabyLove and enjoy a premium experience",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "username": "Username",
+    "email_label": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "continue": "Continue",
+    "checking": "Checking...",
+    "signingIn": "Signing In...",
+    "creatingAccount": "Creating Account...",
+    "login": "Sign In",
+    "register": "Sign Up",
+    "or": "OR",
+    "google": "Continue with Google",
+    "apple": "Continue with Apple",
+    "terms_prefix": "By continuing, you agree to BABY's",
+    "termsText": "By continuing, you agree to our",
+    "terms_link": "Terms of Use",
+    "termsOfService": "Terms of Service",
+    "and": "and",
+    "privacy_link": "Privacy Policy",
+    "privacyPolicy": "Privacy Policy",
+    "forgotPassword": "Forgot Password?",
+    "dontHaveAccount": "Don't have an account?",
+    "alreadyHaveAccount": "Already have an account?"
+  },
+  "validation": {
+    "required": "Required",
+    "minChars": "Min {{min}} chars",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Enter a valid email",
+    "usernameRequired": "Username is required",
+    "usernameMinLength": "Must be at least 3 chars",
+    "usernamePattern": "Letters, numbers, and underscores only",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Must be at least 6 chars",
+    "passwordStrongMinLength": "Must be at least 8 chars",
+    "passwordPattern": "Needs uppercase, lowercase & a number"
+  },
+  "product": {
+    "addToCart": "Add to Cart",
+    "buyNow": "Buy Now",
+    "outOfStock": "Out of Stock",
+    "description": "Description",
+    "details": "Product Details",
+    "reviews": "Reviews",
+    "relatedProducts": "You May Also Like",
+    "writeReview": "Write a Review",
+    "size": "Size",
+    "color": "Color",
+    "quantity": "Quantity"
+  },
+  "filters": {
+    "title": "Filters",
+    "priceRange": "Price Range",
+    "sortBy": "Sort By",
+    "clearAll": "Clear All",
+    "sortOptions": {
+      "newest": "Newest Arrivals",
+      "priceLowHigh": "Price: Low to High",
+      "priceHighLow": "Price: High to Low",
+      "popular": "Most Popular"
+    }
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty.",
+    "continueShopping": "Continue Shopping",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "total": "Total",
+    "checkout": "Proceed to Checkout",
+    "applyCoupon": "Apply Coupon",
+    "couponPlaceholder": "Enter coupon code"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "shippingAddress": "Shipping Address",
+    "paymentMethod": "Payment Method",
+    "placeOrder": "Place Order",
+    "orderSuccess": "Your order has been placed successfully!",
+    "orderNumber": "Order Number"
+  },
+  "profile": {
+    "personalInfo": "Personal Information",
+    "addresses": "Saved Addresses",
+    "addNewAddress": "Add New Address",
+    "orderHistory": "Order History",
+    "status": "Status",
+    "date": "Date"
+  },
+  "footer": {
+    "description": "Elevating your everyday style with premium essentials. Crafted for those who value quality and minimalist design.",
+    "help_title": "Help & Support",
+    "help_links": {
+      "shipping": "Shipping Info",
+      "returns": "Returns & Exchanges",
+      "contact": "Contact Us",
+      "privacy": "Privacy Policy"
+    },
+    "collections_title": "Collections",
+    "collections_links": {
+      "new": "New Arrivals",
+      "best": "Best Sellers",
+      "men": "Menswear",
+      "acc": "Accessories"
+    },
+    "newsletter_title": "Join the Club",
+    "newsletter_desc": "Subscribe for early access to new drops and exclusive offers.",
+    "newsletter_placeholder": "Email Address",
+    "newsletter_btn": "Subscribe",
+    "copyright": "© 2026 BABY Premium Store. All rights reserved."
+  },
+  "categories": {
+    "badge": "Curated Collections",
+    "title": "Shop by Category",
+    "subtitle": "Discover our carefully selected collections designed for comfort, style, and every stage of your little one's growth.",
+    "items": {
+      "newborn": "Newborn",
+      "toddler_boys": "Toddler Boys",
+      "toddler_girls": "Toddler Girls",
+      "accessories": "Accessories"
+    }
+  }
+}

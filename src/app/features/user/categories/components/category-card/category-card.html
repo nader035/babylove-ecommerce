@@ -1,0 +1,23 @@
+<a
+  [routerLink]="['/products']"
+  [queryParams]="{ category: category().slug }"
+  class="group relative block w-full h-full overflow-hidden rounded-[2rem] bg-brand-surface shadow-sm"
+>
+  <img
+    [src]="category().image"
+    [alt]="category().name"
+    class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+  />
+
+  <div
+    class="absolute inset-0 bg-black/5 group-hover:bg-black/20 transition-colors duration-500"
+  ></div>
+
+  <div class="absolute bottom-6 left-6">
+    <div class="bg-white px-6 py-2.5 rounded-full shadow-lg">
+      <span class="text-brand-primary text-[13px] font-bold tracking-tight">
+        {{ category().name }}
+      </span>
+    </div>
+  </div>
+</a>

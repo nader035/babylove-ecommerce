@@ -1,0 +1,71 @@
+<main class="min-h-screen bg-brand-bg-light pt-12 pb-24 overflow-hidden">
+  <div class="container mx-auto px-6">
+    <header class="max-w-4xl mx-auto text-center mb-16" data-aos="fade-up">
+      <span
+        class="inline-block text-brand-accent text-[10px] font-bold tracking-[0.8em] uppercase mb-4"
+      >
+        {{ 'categories.badge' | transloco }}
+      </span>
+      <h1
+        class="text-brand-primary text-4xl md:text-6xl font-extralight tracking-[0.1em] uppercase mb-6 leading-tight"
+      >
+        {{ 'categories.title' | transloco }}
+      </h1>
+      <div class="w-16 h-[1px] bg-brand-accent mx-auto mb-8 opacity-40"></div>
+      <p
+        class="text-brand-muted text-[11px] md:text-xs tracking-[0.2em] uppercase max-w-xl mx-auto leading-relaxed"
+      >
+        {{ 'categories.subtitle' | transloco }}
+      </p>
+    </header>
+
+    <div class="max-w-md mx-auto mb-20 px-4" data-aos="fade-up" data-aos-delay="200">
+      <div class="relative group">
+        <input
+          type="text"
+          [placeholder]="'common.search' | transloco"
+          (input)="onSearch($event)"
+          class="w-full bg-transparent border-b border-brand-primary/10 py-4 px-2 text-brand-primary text-[11px] uppercase tracking-[0.3em] outline-none focus:border-brand-accent transition-all duration-500"
+        />
+        <div
+          class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1px] bg-brand-accent w-0 group-focus-within:w-full transition-all duration-700 ease-in-out"
+        ></div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:h-[850px] auto-rows-fr">
+      @if (!categoryStore.isLoading()) {
+        @for (item of categoryStore.filteredCategories(); track item.id) {
+          <div
+            data-aos="fade-up"
+            [attr.data-aos-delay]="$index * 100"
+            class="relative"
+            [class]="{
+              'lg:row-span-2': item.slug === 'girl' || item.slug === 'plus-size',
+              'h-[350px] lg:h-auto': true,
+            }"
+          >
+            <app-category-card [category]="item" class="block h-full w-full" />
+          </div>
+        }
+      }
+
+      @if (categoryStore.isLoading()) {
+        @for (i of [1, 2, 3, 4, 5, 6]; track i) {
+          <div
+            class="bg-brand-surface animate-pulse rounded-[2.5rem] h-[350px] lg:h-auto"
+            [class.lg:row-span-2]="i === 3 || i === 6"
+          ></div>
+        }
+      }
+    </div>
+
+    @if (!categoryStore.isLoading() && categoryStore.filteredCategories().length === 0) {
+      <div class="text-center py-32" data-aos="fade">
+        <p class="text-brand-muted text-[10px] uppercase tracking-[0.5em]">
+          {{ 'common.noResults' | transloco }}
+        </p>
+      </div>
+    }
+  </div>
+</main>

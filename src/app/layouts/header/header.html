@@ -1,0 +1,155 @@
+<header
+  class="sticky top-0 z-50 w-full bg-brand-primary text-brand-surface shadow-premium backdrop-blur-md bg-opacity-95 transition-all duration-300 border-b border-white/5"
+>
+  <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+    <div class="flex items-center gap-3 group cursor-pointer" routerLink="/">
+      <img
+        src="assets/images/babyLoveLogo.svg"
+        class="w-10 h-10 md:w-12 md:h-12 object-contain transition-transform duration-500 group-hover:rotate-[-5deg] group-hover:scale-105"
+        alt="BabyLove Logo"
+      />
+      <div class="flex flex-col justify-center translate-y-0.5">
+        <span
+          class="text-lg md:text-2xl font-black text-white uppercase tracking-wider leading-none transition-all duration-300 group-hover:tracking-[0.1em]"
+        >
+          BABYLOVE
+        </span>
+        <span
+          class="text-[5px] md:text-[7px] text-brand-surface/80 uppercase tracking-[0.35em] mt-1 font-bold"
+        >
+          From Germany To Your Hand
+        </span>
+      </div>
+    </div>
+
+    <nav class="hidden lg:flex items-center gap-8 xl:gap-10">
+      @for (item of ['home', 'shop', 'categories', 'blog', 'about']; track item) {
+        <a
+          [routerLink]="item === 'home' ? '/' : '/' + item"
+          routerLinkActive="text-white font-black"
+          [routerLinkActiveOptions]="{ exact: item === 'home' }"
+          class="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-surface/70 hover:text-white transition-all relative group/link"
+        >
+          {{ 'nav.' + item | transloco }}
+          <span
+            class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-brand-surface group-hover/link:w-full transition-all duration-300"
+          ></span>
+        </a>
+      }
+    </nav>
+
+    <div class="flex items-center gap-3 md:gap-4">
+      <button
+        (click)="toggleLanguage()"
+        class="hidden md:block text-[9px] font-black tracking-[0.2em] border border-white/20 px-4 py-2 rounded-full hover:bg-white hover:text-brand-primary transition-all uppercase"
+      >
+        {{ langLabel() }}
+      </button>
+
+      <div class="h-6 w-[1px] bg-white/10 hidden md:block mx-1"></div>
+
+      <div class="flex items-center gap-1 md:gap-2">
+        <button
+          class="w-10 h-10 text-brand-surface hover:text-white transition-colors flex items-center justify-center hover:scale-110"
+        >
+          <fa-icon [icon]="icons.search"></fa-icon>
+        </button>
+
+        <button
+          routerLink="/wishlist"
+          class="relative w-10 h-10 text-brand-surface hover:text-white transition-colors flex items-center justify-center hover:scale-110"
+        >
+          <fa-icon [icon]="icons.wishlist"></fa-icon>
+          <span
+            class="absolute top-2 right-2 w-1.5 h-1.5 bg-red-400 rounded-full animate-pulse"
+          ></span>
+        </button>
+
+        <button
+          routerLink="/cart"
+          class="group flex items-center gap-2 bg-white text-brand-primary px-4 py-2 rounded-full hover:bg-brand-surface transition-all shadow-lg active:scale-95 mx-1"
+        >
+          <fa-icon
+            [icon]="icons.cart"
+            class="text-sm transition-transform group-hover:-rotate-6"
+          ></fa-icon>
+          <span class="text-[11px] font-black">0</span>
+        </button>
+
+        <div class="h-6 w-[1px] bg-white/10 mx-1"></div>
+
+      @if (auth.isAuthenticated()) {
+          <div class="relative">
+            <button 
+              (click)="isProfileMenuOpen = !isProfileMenuOpen" 
+              class="flex items-center gap-3 pl-1 group focus:outline-none"
+            >
+              <div class="relative">
+                <img
+                  [src]="auth.user()?.image || 'assets/images/default-avatar.png'"
+                  class="w-9 h-9 rounded-full object-cover border-2 border-white/20 group-hover:border-white transition-all shadow-sm"
+                  alt="User Profile"
+                />
+                <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-400 border-2 border-brand-primary rounded-full"></span>
+              </div>
+              <div class="hidden xl:flex flex-col items-start leading-none text-left dir-ltr">
+                <div class="flex items-center gap-1">
+                  <span class="text-[10px] text-white font-bold uppercase tracking-wider">
+                    {{ auth.userFullName() }}
+                  </span>
+                  <fa-icon [icon]="icons.chevronDown" class="text-[8px] text-white/50 group-hover:text-white transition-colors"></fa-icon>
+                </div>
+                <span class="text-[8px] text-brand-surface/70 uppercase tracking-widest mt-0.5">Premium</span>
+              </div>
+            </button>
+
+            @if (isProfileMenuOpen) {
+              <div class="fixed inset-0 z-40" (click)="isProfileMenuOpen = false"></div>
+
+              <div class="absolute right-0 mt-4 w-56 bg-white rounded-2xl shadow-premium border border-brand-surface/20 py-2 z-50 animate-fade-in origin-top-right overflow-hidden dir-ltr">
+                
+                <div class="px-4 py-3 border-b border-brand-bg-light mb-1">
+                  <p class="text-[10px] text-brand-muted uppercase tracking-widest font-bold">Signed in as</p>
+                  <p class="text-xs text-brand-primary font-black truncate">{{ auth.user()?.email || 'user@example.com' }}</p>
+                </div>
+
+                <a routerLink="/profile" (click)="isProfileMenuOpen = false" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-brand-primary hover:bg-brand-bg-light hover:text-brand-accent transition-colors">
+                  <fa-icon [icon]="icons.user" class="w-4"></fa-icon> 
+                  My Profile
+                </a>
+                
+                <a routerLink="/orders" (click)="isProfileMenuOpen = false" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-brand-primary hover:bg-brand-bg-light hover:text-brand-accent transition-colors">
+                  <fa-icon [icon]="icons.box" class="w-4"></fa-icon> 
+                  My Orders
+                </a>
+
+                <a routerLink="/settings" (click)="isProfileMenuOpen = false" class="flex items-center gap-3 px-4 py-2.5 text-xs font-bold text-brand-primary hover:bg-brand-bg-light hover:text-brand-accent transition-colors">
+                  <fa-icon [icon]="icons.settings" class="w-4"></fa-icon> 
+                  Settings
+                </a>
+
+                <div class="h-[1px] w-full bg-brand-bg-light my-1"></div>
+
+                <button (click)="logout()" class="w-full flex items-center gap-3 px-4 py-2.5 text-xs font-black text-red-500 hover:bg-red-50 transition-colors">
+                  <fa-icon [icon]="icons.logout" class="w-4"></fa-icon> 
+                  Logout
+                </button>
+              </div>
+            }
+          </div>
+        } @else {
+          <button
+            routerLink="/auth"
+            class="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-white hover:text-brand-surface transition-colors group px-2"
+          >
+            <fa-icon
+              [icon]="icons.user"
+              class="text-lg opacity-70 group-hover:opacity-100 transition-opacity"
+            ></fa-icon>
+            <span class="hidden sm:inline">{{ 'nav.join-us' | transloco }}</span>
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+</header>

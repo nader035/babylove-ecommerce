@@ -1,0 +1,94 @@
+<ng-container *transloco="let t">
+  <div class="flex flex-col gap-4 animate-fade-in max-w-md mx-auto py-4">
+    <div class="text-center space-y-2">
+      <h1
+        class="text-xl font-bold tracking-tight text-brand-primary leading-tight lowercase first-letter:uppercase"
+      >
+        {{ t('auth.welcomeBack') }}
+      </h1>
+      <p class="text-xs text-brand-muted">{{ t('auth.enterPasswordDesc') }}</p>
+    </div>
+
+    <form [formRoot]="loginForm" class="flex flex-col gap-4">
+      <mat-form-field appearance="outline" class="w-full custom-field">
+        <mat-label>{{ t('auth.email_label') }}</mat-label>
+        <input
+          matInput
+          type="email"
+          placeholder="baby@example.com"
+          [formField]="loginForm.email"
+          class="dir-ltr"
+        />
+
+        @if (loginForm.email().touched() && loginForm.email().errors().length) {
+          <mat-error class="text-[10px] font-bold uppercase tracking-tighter">
+            @for (error of loginForm.email().errors(); track error) {
+              @if (error.kind === 'required') {
+                {{ t('validation.emailRequired') }}
+              } @else if (error.kind === 'email') {
+                {{ t('validation.emailInvalid') }}
+              }
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-full custom-field">
+        <mat-label>{{ t('auth.password') }}</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="••••••••"
+          [formField]="loginForm.password"
+          class="dir-ltr"
+        />
+
+        @if (loginForm.password().touched() && loginForm.password().errors().length) {
+          <mat-error class="text-[10px] font-bold uppercase tracking-tighter">
+            @for (error of loginForm.password().errors(); track error) {
+              @if (error.kind === 'required') {
+                {{ t('validation.passwordRequired') }}
+              } @else if (error.kind === 'minLength') {
+                {{ t('validation.passwordMinLength') }}
+              }
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <button
+        type="submit"
+        class="w-full py-4 mt-2 rounded-full bg-brand-primary text-white font-black text-xs uppercase tracking-[0.2em] transition-all duration-300 hover:bg-brand-primary-light active:scale-[0.98] shadow-lg shadow-brand-primary/20 disabled:opacity-50 disabled:grayscale"
+        [disabled]="authStore.isLoading() || !loginForm().valid()"
+      >
+        @if (authStore.isLoading()) {
+          <div class="flex items-center justify-center gap-3">
+            <div
+              class="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"
+            ></div>
+            <span class="animate-pulse">{{ t('auth.signingIn') }}</span>
+          </div>
+        } @else {
+          {{ t('auth.login') }}
+        }
+      </button>
+    </form>
+
+    @if (authStore.error()) {
+      <p
+        class="text-[10px] text-red-500 font-bold text-center uppercase tracking-widest bg-red-50 py-2 rounded-lg"
+      >
+        {{ authStore.error() }}
+      </p>
+    }
+
+    <div class="text-center">
+      <a
+        routerLink="/auth/forgot-password"
+        class="text-[10px] text-brand-muted font-bold uppercase tracking-widest hover:text-brand-accent transition-colors"
+      >
+        {{ t('auth.forgotPassword') }}
+      </a>
+    </div>
+  </div>
+</ng-container>

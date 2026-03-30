@@ -1,0 +1,196 @@
+{
+  "brand": {
+    "name": "بيبي لاف (BABYLOVE)",
+    "slogan": "من ألمانيا إلى يديك"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ ما. يرجى المحاولة مرة أخرى لاحقاً.",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "submit": "تأكيد",
+    "search": "ابحث عن المنتجات...",
+    "noResults": "لم يتم العثور على نتائج.",
+    "viewAll": "عرض الكل",
+    "currency": "دولار"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "shop": "المتجر",
+    "categories": "التصنيفات",
+    "about": "عن المتجر",
+    "join-us": "انضم إلينا",
+    "blog": "المدونة",
+    "profile": "حسابي",
+    "orders": "طلباتي",
+    "wishlist": "المفضلة",
+    "logout": "تسجيل الخروج"
+  },
+  "home": {
+    "hero": {
+      "badge": "مجموعة خريف 2026",
+      "title_part1": "فن الأناقة",
+      "title_part2": "العصرية",
+      "description": "تصاميم استثنائية صُممت لتعكس شخصيتك. حيث تلتقي بساطة التصميم مع أقصى درجات الراحة والجودة.",
+      "cta_shop": "تسوق الآن",
+      "cta_lookbook": "كتالوج الصور"
+    },
+    "lookbook": {
+      "title": "استكشف المظهر",
+      "item1_name": "قميص قطني بريميوم",
+      "view_details": "عرض التفاصيل"
+    },
+    "arrivals": {
+      "title": "أحدث الواصلين",
+      "view_all": "عرض الكل",
+      "tag_premium": "حصري"
+    },
+    "statement": {
+      "badge": "فلسفتنا",
+      "text": "نؤمن بأن البساطة هي قمة الرقي، وأن ملابسك هي تعبير صامت عن هويتك الخاصة."
+    },
+    "features": {
+      "freeShipping": "شحن مجاني",
+      "freeShippingDesc": "انطلق في عالم الأناقة مع شحن مجاني وسريع لجميع طلباتك.",
+      "support247": "دعم على مدار الساعة",
+      "support247Desc": "فريقنا متواجد دائماً لضمان تجربة تسوق سلسة ومريحة.",
+      "easyReturns": "استرجاع مرن",
+      "easyReturnsDesc": "سياسة استرجاع خالية من المتاعب لأن رضاك هو غايتنا.",
+      "secureCheckout": "دفع آمن",
+      "secureCheckoutDesc": "تمتع بتجربة دفع مشفرة وآمنة تماماً في كل مرة."
+    }
+  },
+  "auth": {
+    "title": "أدخل بريدك الإلكتروني للانضمام أو تسجيل الدخول",
+    "subtitle": "خطوة واحدة تفصلك عن عالم BABY للأزياء الفاخرة.",
+    "welcomeBack": "مرحباً بعودتك",
+    "enterPasswordDesc": "أدخل كلمة المرور للوصول إلى حساب بيبي لاف الخاص بك",
+    "createAccount": "إنشاء حساب",
+    "joinDesc": "انضم إلى بيبي لاف واستمتع بتجربة تسوق فاخرة",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "username": "اسم المستخدم",
+    "email_label": "عنوان البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "continue": "استمرار",
+    "checking": "جاري التحقق...",
+    "signingIn": "جاري تسجيل الدخول...",
+    "creatingAccount": "جاري إنشاء الحساب...",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء الحساب",
+    "or": "أو",
+    "google": "الاستمرار باستخدام جوجل",
+    "apple": "الاستمرار باستخدام أبل",
+    "terms_prefix": "من خلال الاستمرار، أنت توافق على",
+    "termsText": "من خلال الاستمرار، أنت توافق على",
+    "terms_link": "شروط الاستخدام",
+    "termsOfService": "شروط الخدمة",
+    "and": "و",
+    "privacy_link": "سياسة الخصوصية",
+    "privacyPolicy": "سياسة الخصوصية",
+    "forgotPassword": "هل نسيت كلمة المرور؟",
+    "dontHaveAccount": "ليس لديك حساب؟",
+    "alreadyHaveAccount": "لديك حساب بالفعل؟"
+  },
+  "validation": {
+    "required": "مطلوب",
+    "minChars": "يجب ألا يقل عن {{min}} أحرف",
+    "emailRequired": "البريد الإلكتروني مطلوب",
+    "emailInvalid": "أدخل بريد إلكتروني صحيح",
+    "usernameRequired": "اسم المستخدم مطلوب",
+    "usernameMinLength": "يجب ألا يقل عن 3 أحرف",
+    "usernamePattern": "يسمح فقط بالحروف والأرقام والشرطة السفلية",
+    "passwordRequired": "كلمة المرور مطلوبة",
+    "passwordMinLength": "يجب ألا تقل عن 6 أحرف",
+    "passwordStrongMinLength": "يجب ألا تقل عن 8 أحرف",
+    "passwordPattern": "يجب أن تحتوي على حرف كبير وصغير ورقم"
+  },
+  "product": {
+    "addToCart": "أضف إلى السلة",
+    "buyNow": "اشترِ الآن",
+    "outOfStock": "نفدت الكمية",
+    "description": "الوصف",
+    "details": "تفاصيل المنتج",
+    "reviews": "التقييمات",
+    "relatedProducts": "قد يعجبك أيضاً",
+    "writeReview": "أضف تقييمك",
+    "size": "المقاس",
+    "color": "اللون",
+    "quantity": "الكمية"
+  },
+  "filters": {
+    "title": "الفلاتر",
+    "priceRange": "نطاق السعر",
+    "sortBy": "ترتيب حسب",
+    "clearAll": "مسح الكل",
+    "sortOptions": {
+      "newest": "الأحدث",
+      "priceLowHigh": "السعر: من الأقل للأعلى",
+      "priceHighLow": "السعر: من الأعلى للأقل",
+      "popular": "الأكثر شهرة"
+    }
+  },
+  "cart": {
+    "title": "عربة التسوق",
+    "empty": "عربة التسوق فارغة.",
+    "continueShopping": "متابعة التسوق",
+    "subtotal": "المجموع الفرعي",
+    "shipping": "الشحن",
+    "total": "الإجمالي",
+    "checkout": "إتمام الطلب",
+    "applyCoupon": "تطبيق الكوبون",
+    "couponPlaceholder": "أدخل كود الخصم"
+  },
+  "checkout": {
+    "title": "إتمام الطلب",
+    "shippingAddress": "عنوان الشحن",
+    "paymentMethod": "طريقة الدفع",
+    "placeOrder": "تأكيد الطلب",
+    "orderSuccess": "تم تسجيل طلبك بنجاح!",
+    "orderNumber": "رقم الطلب"
+  },
+  "profile": {
+    "personalInfo": "المعلومات الشخصية",
+    "addresses": "العناوين المحفوظة",
+    "addNewAddress": "إضافة عنوان جديد",
+    "orderHistory": "سجل الطلبات",
+    "status": "الحالة",
+    "date": "التاريخ"
+  },
+  "footer": {
+    "description": "نحن نرتقي بأسلوبك اليومي من خلال أساسيات فاخرة. صُممت خصيصاً لأولئك الذين يقدرون الجودة والتصميم البسيط.",
+    "help_title": "المساعدة والدعم",
+    "help_links": {
+      "shipping": "معلومات الشحن",
+      "returns": "الاستبدال والاسترجاع",
+      "contact": "اتصل بنا",
+      "privacy": "سياسة الخصوصية"
+    },
+    "collections_title": "المجموعات",
+    "collections_links": {
+      "new": "أحدث الواصلين",
+      "best": "الأكثر مبيعاً",
+      "men": "ملابس رجالية",
+      "acc": "إكسسوارات"
+    },
+    "newsletter_title": "انضم إلى النادي",
+    "newsletter_desc": "اشترك للحصول على وصول مبكر للمجموعات الجديدة والعروض الحصرية.",
+    "newsletter_placeholder": "البريد الإلكتروني",
+    "newsletter_btn": "اشترك الآن",
+    "copyright": "© 2026 متجر بيبي بريميوم. جميع الحقوق محفوظة."
+  },
+  "categories": {
+    "badge": "تشكيلات مختارة",
+    "title": "تسوق حسب الفئة",
+    "subtitle": "اكتشف تشكيلاتنا المختارة بعناية، والمصممة خصيصاً لتمنح طفلك الراحة والأناقة في كل مرحلة من مراحل نموه.",
+    "items": {
+      "newborn": "حديثي الولادة",
+      "toddler_boys": "أولاد (سنة - 3 سنوات)",
+      "toddler_girls": "بنات (سنة - 3 سنوات)",
+      "accessories": "إكسسوارات"
+    }
+  }
+}

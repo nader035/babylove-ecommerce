@@ -1,0 +1,156 @@
+@use '@angular/material' as mat;
+
+/* --- 1. تعريف الـ Custom Palettes --- */
+$baby-primary-palette: (
+  0: #000000,
+  10: #0d1f23,
+  // اللون الأساسي للبراند
+  20: #132e35,
+  25: #1a3d46,
+  30: #2d4a53,
+  35: #3a5b66,
+  40: #476d7a,
+  50: #628f9e,
+  60: #7eb3c4,
+  70: #9cd7eb,
+  80: #b9edff,
+  90: #def8ff,
+  95: #effcff,
+  98: #f7fdff,
+  99: #fbfcff,
+  100: #ffffff,
+);
+
+/* --- 2. تطبيق الثيم العام (Material 3) --- */
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: $baby-primary-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: (
+        family: var(--font-sans),
+      ),
+      density: -1,
+    )
+  );
+}
+
+/* --- Angular Material Minimal Pill Style --- */
+/* --- Angular Material Pill Style (Final Alignment Fix) --- */
+.custom-field {
+  @apply w-full;
+
+  /* 1. تظبيط الـ Wrapper والارتفاع */
+  & .mat-mdc-text-field-wrapper {
+    background-color: white !important;
+    border-radius: 9999px !important;
+    height: 60px !important; // الارتفاع اللي إنت عايزه
+    padding: 0 24px !important;
+    display: flex !important;
+    align-items: center !important; // سنترة المحتوى رأسياً
+    transition: background-color 300ms ease !important;
+  }
+
+  /* 2. سنترة الـ Input نفسه وإلغاء أي Margin افتراضي */
+  & .mat-mdc-form-field-flex {
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+    width: 100% !important;
+  }
+
+  & input.mat-mdc-input-element {
+    margin: 0 !important; // شيل أي مارجن بيزق النص لتحت
+    padding: 0 !important;
+    align-self: center !important;
+  }
+
+  /* 3. إخفاء الخط السفلي (الريبل) تماماً */
+  & .mdc-line-ripple,
+  & .mdc-line-ripple--active {
+    display: none !important;
+  }
+
+  /* 4. تظبيط الـ Outline (البوردر) */
+  & .mdc-notched-outline {
+    top: 0 !important;
+    &__leading {
+      border-radius: 9999px 0 0 9999px !important;
+      width: 28px !important;
+      border-color: rgba(175, 179, 183, 0.3) !important;
+    }
+    &__trailing {
+      border-radius: 0 9999px 9999px 0 !important;
+      border-color: rgba(175, 179, 183, 0.3) !important;
+    }
+    &__notch {
+      border-color: rgba(175, 179, 183, 0.3) !important;
+    }
+  }
+
+  /* 5. حالة الـ Focus */
+  &.mat-focused {
+    .mat-mdc-text-field-wrapper {
+      background-color: var(--color-brand-bg-light) !important;
+    }
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: var(--color-brand-primary) !important;
+      border-width: 1.5px !important;
+    }
+  }
+
+  /* 6. الـ RTL Support للسنترة */
+  [dir='rtl'] & {
+    & .mdc-notched-outline__leading {
+      border-radius: 0 9999px 9999px 0 !important;
+    }
+    & .mdc-notched-outline__trailing {
+      border-radius: 9999px 0 0 9999px !important;
+    }
+    input.mat-mdc-input-element {
+      text-align: right !important;
+    }
+    .mdc-floating-label {
+      right: 24px !important;
+      left: auto !important;
+      transform-origin: right center !important;
+    }
+  }
+}
+
+/* إخفاء المساحة الفارغة تحت الحقل (اختياري لو مش عايز مكان للـ Hint) */
+.custom-field .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+.custom-field.mat-form-field-invalid .mat-mdc-form-field-subscript-wrapper {
+  display: block; // يظهر فقط في حالة الخطأ
+}
+.custom-field ::placeholder {
+  color: var(--color-brand-muted) !important;
+}
+.custom-field .mdc-floating-label {
+  color: var(--color-brand-muted) !important;
+}
+/* --- تلوين البوردر والـ Label في حالة وجود Error --- */
+.custom-field.mat-form-field-invalid {
+  /* 1. تلوين البوردر الدائري باللون الأحمر (زي text-red-500) */
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__notch,
+  .mdc-notched-outline__trailing {
+    border-color: #ef4444 !important;
+    border-width: 1.5px !important; /* بنعرضه سنة صغيرة عشان يلفت الانتباه */
+  }
+
+  /* 2. تلوين الأيقونة اللي على الشمال (Prefix) بالأحمر */
+  .mat-mdc-form-field-icon-prefix .mat-icon {
+    color: #ef4444 !important;
+    opacity: 1 !important;
+  }
+
+
+}
