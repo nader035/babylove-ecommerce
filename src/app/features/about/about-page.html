@@ -55,7 +55,7 @@
         <span class="section-kicker">{{ 'about.teamKicker' | transloco }}</span>
         <h2 class="section-title mt-3">{{ 'about.teamTitle' | transloco }}</h2>
       </div>
-      <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
+      <div class="flex justify-center  gap-6">
         @for (member of team; track member.name) {
           <div class="text-center">
             <div class="mx-auto h-28 w-28 overflow-hidden rounded-full border-4 border-brand-bg-light">
