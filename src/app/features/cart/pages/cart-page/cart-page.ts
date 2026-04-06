@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTrashAlt, faMinus, faPlus, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import { CartStore } from '../../../../core/stores/cart.store';
 import { NotificationService } from '../../../../core/services/notification.service';
+import { PreferencesStore } from '../../../../core/stores/preferences.store';
 
 @Component({
   selector: 'app-cart-page',
@@ -16,6 +17,7 @@ import { NotificationService } from '../../../../core/services/notification.serv
 })
 export class CartPage {
   cartStore = inject(CartStore);
+  activeLang = inject(PreferencesStore).language;
   private notificationService = inject(NotificationService);
 
   icons = {

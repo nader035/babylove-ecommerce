@@ -1,54 +1,53 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  CUSTOM_ELEMENTS_SCHEMA,
-  computed,
-  inject,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, computed, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { categoryStore } from '../../category.store';
-import { CategoryCard } from '../../components/category-card/category-card';
-import { RouterLink } from '@angular/router';
-import { register } from 'swiper/element/bundle';
+import { PreferencesStore } from '../../../../../core/stores/preferences.store';
 
-register();
 @Component({
   selector: 'app-category-list',
-  imports: [TranslocoModule, CategoryCard, RouterLink],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  standalone: true,
+  imports: [CommonModule, TranslocoModule, RouterLink],
   templateUrl: './category-list.html',
   styleUrl: './category-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryList implements OnInit {
   categoryStore = inject(categoryStore);
-  filterOptions: Array<{ value: 'all' | 'essentials' | 'fashion' | 'gear'; label: string }> = [
-    { value: 'all', label: 'shop.filters.types.all' },
-    { value: 'essentials', label: 'shop.filters.types.essentials' },
-    { value: 'fashion', label: 'shop.filters.types.fashion' },
-    { value: 'gear', label: 'shop.filters.types.gear' },
+  activeLang = inject(PreferencesStore).language;
+
+  filterOptions: { label: string; value: 'all' | 'fashion' | 'essentials' | 'gear' }[] = [
+    { label: 'common.all', value: 'all' },
+    { label: 'shop.filters.types.fashion', value: 'fashion' },
+    { label: 'shop.filters.types.essentials', value: 'essentials' },
+    { label: 'shop.filters.types.gear', value: 'gear' },
   ];
-  sortOptions: Array<{ value: 'featured' | 'az' | 'za'; label: string }> = [
-    { value: 'featured', label: 'shop.filters.sort.featured' },
-    { value: 'az', label: 'shop.filters.sort.az' },
-    { value: 'za', label: 'shop.filters.sort.za' },
+
+  sortOptions = [
+    { label: 'shop.filters.sort.featured', value: 'featured' },
+    { label: 'shop.filters.sort.az', value: 'az' },
+    { label: 'shop.filters.sort.za', value: 'za' },
   ];
-  hasNoResults = computed(
-    () => !this.categoryStore.isLoading() && this.categoryStore.filteredCategories().length === 0,
-  );
 
   ngOnInit(): void {
     this.categoryStore.loadCategories();
   }
 
-  onSearch(event: Event) {
+  onSearch(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.categoryStore.updateSearchQuery(input.value);
   }
 
-  onSortChange(event: Event) {
-    const value = (event.target as HTMLSelectElement).value as 'featured' | 'az' | 'za';
-    this.categoryStore.updateSortBy(value);
+  onSortChange(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    this.categoryStore.updateSortBy(select.value as any);
   }
+
+  hasNoResults = computed(() => {
+    return (
+      !this.categoryStore.isLoading() &&
+      this.categoryStore.filteredCategories().length === 0
+    );
+  });
 }

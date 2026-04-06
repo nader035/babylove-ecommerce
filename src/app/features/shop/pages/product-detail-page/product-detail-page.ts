@@ -23,11 +23,13 @@ import { CartStore } from '../../../../core/stores/cart.store';
 import { WishlistStore } from '../../../../core/stores/wishlist.store';
 import { NotificationService } from '../../../../core/services/notification.service';
 import { SkeletonLoader } from '../../../../shared/components/skeleton-loader/skeleton-loader';
+import { PreferencesStore } from '../../../../core/stores/preferences.store';
+import { ProductCard } from '../../../../shared/components/product-card/product-card';
 
 @Component({
   selector: 'app-product-detail-page',
   standalone: true,
-  imports: [CommonModule, TranslocoModule, RouterLink, FontAwesomeModule, SkeletonLoader],
+  imports: [CommonModule, TranslocoModule, RouterLink, FontAwesomeModule, SkeletonLoader, ProductCard],
   templateUrl: './product-detail-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -35,6 +37,7 @@ export class ProductDetailPage implements OnInit {
   private route = inject(ActivatedRoute);
   private productService = inject(ProductService);
   private notificationService = inject(NotificationService);
+  private preferencesStore = inject(PreferencesStore);
   cartStore = inject(CartStore);
   wishlistStore = inject(WishlistStore);
 
@@ -47,6 +50,8 @@ export class ProductDetailPage implements OnInit {
   addedToCart = signal(false);
   activeTab = signal<'description' | 'reviews'>('description');
   showSizeGuide = signal(false);
+
+  activeLang = computed(() => this.preferencesStore.language());
 
   icons = {
     star: faStar,
@@ -109,15 +114,22 @@ export class ProductDetailPage implements OnInit {
     if (!p) return null;
     return {
       id: p.id,
-      title: p.title,
       slug: p.slug,
       image: p.thumbnail || 'assets/images/hero-model.jpg',
       categorySlug: p.category?.slug ?? 'all',
-      categoryTitle: p.category?.title ?? 'Premium',
+      categoryTitle: p.category?.[this.activeLang()]?.title ?? 'Premium',
       price: this.currentPrice(),
       rating: Number(this.avgRating().toFixed(1)),
       reviewCount: p.reviews?.length ?? 0,
-      shortDescription: p.shortDescription,
+      type: p.type,
+      en: {
+        title: p.en.title,
+        shortDescription: p.en.shortDescription,
+      },
+      ar: {
+        title: p.ar.title,
+        shortDescription: p.ar.shortDescription,
+      }
     };
   });
 
@@ -147,9 +159,9 @@ export class ProductDetailPage implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
-      const id = Number(params.get('id'));
-      if (id) {
-        this._loadProduct(id);
+      const slug = params.get('slug');
+      if (slug) {
+        this._loadProductBySlug(slug);
       }
     });
   }
@@ -205,7 +217,9 @@ export class ProductDetailPage implements OnInit {
       this.cartStore.addToCart(card);
     }
     this.addedToCart.set(true);
-    this.notificationService.success(`${card.title} added to bag!`);
+    const lang = this.activeLang();
+    const title = card[lang]?.title;
+    this.notificationService.success(`${title} added to bag!`);
     setTimeout(() => this.addedToCart.set(false), 1800);
   }
 
@@ -214,7 +228,9 @@ export class ProductDetailPage implements OnInit {
     if (!card) return;
     this.wishlistStore.toggle(card);
     const action = this.isInWishlist() ? 'removed from' : 'added to';
-    this.notificationService.info(`${card.title} ${action} wishlist`);
+    const lang = this.activeLang();
+    const title = card[lang]?.title;
+    this.notificationService.info(`${title} ${action} wishlist`);
   }
 
   getStars(rating: number): ('full' | 'half' | 'empty')[] {
@@ -227,9 +243,9 @@ export class ProductDetailPage implements OnInit {
     return stars;
   }
 
-  private _loadProduct(id: number) {
+  private _loadProductBySlug(slug: string) {
     this.isLoading.set(true);
-    this.productService.getProductById(id).subscribe({
+    this.productService.getProductBySlug(slug).subscribe({
       next: (product) => {
         this.product.set(product);
         if (product.skus?.length) {

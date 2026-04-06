@@ -7,205 +7,323 @@
   </div>
 
   <!-- ════════════════════ HERO — CENTERED ════════════════════ -->
-  <section class="relative isolate">
-    <div class="relative mx-auto aspect-[16/7] max-h-[520px] w-full overflow-hidden">
+  <section class="relative isolate overflow-hidden">
+    <div class="relative mx-auto aspect-[4/5] md:aspect-[21/9] min-h-[500px] w-full overflow-hidden">
       <img
         src="assets/images/hero-model.jpg"
-        class="h-full w-full object-cover"
-        alt="BABYLOVE Collection"
+        class="h-full w-full object-cover grayscale-[0.2] brightness-75 transition-transform duration-[10s] hover:scale-105"
+        alt="PREMIUM FASHION Collection"
       />
-      <div class="absolute inset-0 bg-brand-primary/55"></div>
+      <!-- Glass Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-brand-primary/80 via-brand-primary/20 to-transparent"></div>
+      
       <div class="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-        <h1 class="text-3xl font-bold leading-tight text-white sm:text-4xl md:text-6xl" data-aos="fade-up">
+        <span class="mb-4 text-[10px] font-bold uppercase tracking-[0.4em] text-white/60" data-aos="fade-down" data-aos-delay="100">
+          {{ 'home.hero.badge' | transloco }}
+        </span>
+        <h1 class="max-w-4xl text-4xl font-black leading-[1.1] text-white sm:text-6xl md:text-8xl" data-aos="reveal-text">
           {{ 'home.hero.title_part1' | transloco }}
-          <span class="block">{{ 'home.hero.title_part2' | transloco }}</span>
+          <span class="block  font-serif font-light opacity-90">{{ 'home.hero.title_part2' | transloco }}</span>
         </h1>
-        <p class="mt-4 max-w-xl text-sm text-white/80 md:text-base" data-aos="fade-up" data-aos-delay="80">
+        <p class="mt-8 max-w-xl text-sm leading-relaxed text-white/70 md:text-lg" data-aos="fade-up" data-aos-delay="200">
           {{ 'home.hero.description' | transloco }}
         </p>
-        <a
-          routerLink="/shop"
-          class="mt-8 inline-block rounded-full bg-brand-primary px-10 py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-white shadow-lg transition hover:bg-brand-primary-light"
-          data-aos="fade-up"
-          data-aos-delay="160"
-        >
-          {{ 'home.hero.cta_shop' | transloco }}
-        </a>
+        <div class="mt-12 flex flex-col gap-4 sm:flex-row" data-aos="fade-up" data-aos-delay="300">
+          <a
+            routerLink="/shop"
+            class="btn-premium group flex items-center gap-3 px-12 py-5"
+          >
+            <span>{{ 'home.hero.cta_shop' | transloco }}</span>
+            <fa-icon [icon]="icons.arrow" class="transition-transform group-hover:translate-x-1"></fa-icon>
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ════════════════════ NEW ARRIVALS ════════════════════ -->
-  <section class="py-16 md:py-24">
-    <div class="container mx-auto px-6">
-      <!-- Centered heading -->
-      <div class="mb-12 text-center" data-aos="fade-up">
-        <h2 class="text-2xl font-bold text-brand-primary md:text-3xl">{{ 'home.arrivals.title' | transloco }}</h2>
-        <p class="mx-auto mt-3 max-w-lg text-sm text-brand-primary/60">{{ 'home.hero.description' | transloco }}</p>
+  <!-- ═══════════════ SHOP THE LOOK — INTERACTIVE ═══════════════ -->
+  <section class="relative bg-white py-12">
+    <div class="container mx-auto px-6 md:px-12">
+      <div class="mb-16 grid items-end gap-8 md:grid-cols-2">
+        <div data-aos="fade-right">
+          <span class="section-kicker">{{ 'home.look.kicker' | transloco }}</span>
+          <h2 class="section-title mt-2">{{ 'home.look.title' | transloco }}</h2>
+          <p class="mt-4 max-w-lg text-brand-primary/60">
+            {{ 'home.look.description' | transloco }}
+          </p>
+        </div>
+        <div class="flex justify-end" data-aos="fade-left">
+          <a routerLink="/shop" class="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-accent">
+            <span>{{ 'common.viewCollection' | transloco }}</span>
+            <fa-icon [icon]="icons.arrow" class="transition-transform group-hover:translate-x-1"></fa-icon>
+          </a>
+        </div>
       </div>
 
-      <!-- Product Grid — 4 col × 2 rows -->
-      <div class="grid grid-cols-2 gap-x-5 gap-y-8 md:grid-cols-4">
-        @for (product of featuredProducts(); track product.id; let i = $index) {
-          <a [routerLink]="['/product', product.id]" class="group block" data-aos="fade-up" [attr.data-aos-delay]="i * 50">
-            <div class="relative aspect-[3/4] overflow-hidden rounded-2xl bg-brand-bg-light">
-              <img
-                [src]="product.image"
-                [alt]="product.title"
-                class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                loading="lazy"
-              />
+      <!-- INTERACTIVE IMAGE CONTAINER -->
+      <div class="group relative mx-auto max-w-2xl rounded-[3rem] " data-aos="zoom-in-up">
+        <img 
+          src="assets/images/interactive-models.svg" 
+          alt="Premium Lookbook" 
+          class="w-full object-cover "
+        />
+
+        <!-- HOTSPOTS -->
+        @for (dot of hotspots; track $index) {
+          <div 
+            class="absolute h-5 w-5 cursor-pointer group/dot flex justify-center items-center"
+            [style.top.%]="dot.top"
+            [style.left.%]="dot.left"
+            [routerLink]="['/shop']"
+            [queryParams]="{ type: dot.type }"
+            (mouseenter)="hoveredHotspot.set($index)"
+            (mouseleave)="hoveredHotspot.set(null)"
+          >
+            <!-- Pulse Effect -->
+            <div class="absolute inset-0 animate-ping rounded-full bg-brand-primary/20"></div>
+            <!-- Main Dot -->
+            <div class="relative flex h-full w-full items-center justify-center rounded-full border-2 border-white bg-brand-primary/90 shadow-md transition-transform group-hover/dot:scale-110">
+              <div class="h-1.5 w-1.5 rounded-full bg-white"></div>
             </div>
-            <div class="mt-3">
-              <h3 class="line-clamp-1 text-sm font-semibold text-brand-primary group-hover:text-brand-accent transition-colors">{{ product.title }}</h3>
-              <div class="mt-1 flex items-baseline gap-2">
-                <span class="text-sm font-bold text-brand-primary">{{ product.price | currency: 'EGP' : '£' : '1.2-2' }}</span>
-                @if (product.oldPrice) {
-                  <span class="text-xs text-brand-primary/40 line-through">{{ product.oldPrice | currency: 'EGP' : '£' : '1.2-2' }}</span>
-                }
-              </div>
+
+            <!-- Tooltip -->
+            <div 
+              class="pointer-events-none absolute bottom-full left-1/2 mb-3 -translate-x-1/2 whitespace-nowrap rounded-md bg-brand-primary/95 px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest text-white backdrop-blur-sm transition-all duration-300"
+              [class.opacity-100.translate-y-0]="hoveredHotspot() === $index"
+              [class.opacity-0.translate-y-2]="hoveredHotspot() !== $index"
+            >
+              {{ dot.label | transloco }}
+              <!-- Tooltip Tail -->
+              <div class="absolute top-full left-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-brand-primary/95"></div>
             </div>
-          </a>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ NEW ARRIVALS ═══════════════ -->
+  <section class="py-24">
+    <div class="container mx-auto px-6 md:px-12">
+      <div class="mb-12 flex flex-col items-center text-center" data-aos="fade-up">
+        <span class="section-kicker">{{ 'home.arrivals.tag_new' | transloco }}</span>
+        <h2 class="section-title mt-2">{{ 'home.arrivals.title' | transloco }}</h2>
+        <p class="mt-4 max-w-lg text-sm text-brand-primary/60">{{ 'home.arrivals.subtitle' | transloco }}</p>
+      </div>
+
+      <div class="grid grid-cols-2 gap-x-5 gap-y-12 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 max-w-[1400px] mx-auto">
+        @if (featuredProducts().length) {
+          @for (product of featuredProducts(); track product.id; let i = $index) {
+            <div data-aos="fade-up" [attr.data-aos-delay]="i * 50">
+              <app-product-card [product]="product"></app-product-card>
+            </div>
+          }
+        } @else {
+          @for (i of [1,2,3,4,5]; track $index) {
+            <div class="animate-pulse bg-brand-primary/5 rounded-[2rem] aspect-[3/4]"></div>
+          }
         }
       </div>
 
-      <!-- Buy All CTA -->
-      <div class="mt-12 text-center" data-aos="fade-up">
-        <a routerLink="/shop" class="inline-block rounded-full bg-brand-primary px-10 py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-white transition hover:bg-brand-primary-light">
+      <div class="mt-16 text-center" data-aos="fade-up">
+        <a routerLink="/shop" class="btn-premium px-12 py-4">
           {{ 'home.arrivals.view_all' | transloco }}
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ════════════════════ PROMO BANNER — SPLIT 50/50 ════════════════════ -->
-  <section class="bg-brand-bg-light" data-aos="fade-up">
-    <div class="mx-auto grid md:grid-cols-2">
-      <!-- Left image -->
-      <div class="aspect-[4/3] overflow-hidden md:aspect-auto">
-        <img
-          src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&auto=format&fit=crop"
-          alt="BABYLOVE Editorial"
-          class="h-full w-full object-cover"
-          loading="lazy"
-        />
+  <!-- ═══════════════ BRAND STATEMENT — MINIMAL ═══════════════ -->
+  <section class="py-24 bg-brand-surface border-y border-brand-primary/5">
+    <div class="container mx-auto px-6 md:px-12 max-w-5xl text-center" data-aos="fade-up">
+      <span class="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-accent mb-6 block">{{ 'home.statement.badge' | transloco }}</span>
+      <h2 class="text-2xl md:text-5xl font-serif italic text-brand-primary leading-tight">
+        "{{ 'home.statement.text' | transloco }}"
+      </h2>
+    </div>
+  </section>
+
+  <!-- ═══════════════ FEATURED COLLECTIONS — SENIOR BENTO ═══════════════ -->
+  <section class="py-24">
+    <div class="container mx-auto px-6 md:px-12">
+      <div class="mb-16 flex flex-col md:flex-row items-end justify-between gap-8">
+        <div data-aos="fade-right">
+          <span class="section-kicker">{{ 'categories.badge' | transloco }}</span>
+          <h2 class="section-title mt-2">{{ 'home.collections.title' | transloco }}</h2>
+        </div>
+        <div data-aos="fade-left">
+          <a routerLink="/categories" class="btn-premium px-8 py-3 text-[10px]">
+            {{ 'common.viewAll' | transloco }}
+          </a>
+        </div>
       </div>
-      <!-- Right content -->
-      <div class="flex flex-col items-start justify-center px-8 py-12 md:px-16 md:py-20">
-        <span class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-primary/50">{{ 'home.collections.kicker' | transloco }}</span>
-        <h2 class="mt-4 text-2xl font-bold leading-tight text-brand-primary md:text-4xl">
-          {{ 'home.collections.title' | transloco }}
-        </h2>
-        <p class="mt-4 text-sm leading-relaxed text-brand-primary/60">{{ 'home.statement.text' | transloco }}</p>
-        <a
-          routerLink="/shop"
-          class="mt-8 inline-block rounded-full border-2 border-brand-primary px-8 py-3 text-xs font-bold uppercase tracking-[0.15em] text-brand-primary transition hover:bg-brand-primary hover:text-white"
-        >
-          {{ 'home.hero.cta_shop' | transloco }}
-        </a>
+
+      <!-- Mosaic Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-6 min-h-[600px] md:h-[750px]">
+        @if (categoriesList().length) {
+          @for (cat of categoriesList().slice(0, 5); track cat.id; let i = $index) {
+            @if (cat[activeLang()]) {
+              <a 
+                [routerLink]="['/shop']" 
+                [queryParams]="{ category: cat.slug }"
+                data-aos="zoom-in" 
+                [attr.data-aos-delay]="i * 100"
+                class="group relative overflow-hidden rounded-[2.5rem] bg-brand-surface"
+                [class.col-span-2.row-span-2]="i === 0"
+                [class.col-span-1.row-span-1]="i !== 0"
+              >
+                <img 
+                  [src]="cat.icon" 
+                  (error)="$any($event.target).src = 'assets/images/hero-model.jpg'"
+                  class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:rotate-1"
+                  [alt]="cat[activeLang()]?.['title']"
+                />
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-primary/80 via-transparent to-transparent opacity-60 transition-opacity group-hover:opacity-80"></div>
+                
+                <div class="absolute inset-x-0 bottom-0 p-8 transform transition-transform duration-500 group-hover:-translate-y-2">
+                  <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-accent/90">{{ cat[activeLang()]?.['types']?.[0] || 'Premium' }}</span>
+                  <h3 class="mt-2 text-2xl font-bold text-white md:text-3xl lg:text-4xl leading-tight">
+                    {{ cat[activeLang()]?.['title'] }}
+                  </h3>
+                  <div class="mt-6 flex items-center gap-3 overflow-hidden">
+                    <div class="h-[1px] w-0 bg-brand-accent transition-all duration-500 group-hover:w-12"></div>
+                    <span class="text-[10px] font-black uppercase tracking-widest text-white opacity-0 transition-all duration-500 group-hover:opacity-100">
+                      {{ 'home.collections.quick_shop' | transloco }}
+                    </span>
+                  </div>
+                </div>
+              </a>
+            }
+          }
+        } @else {
+          <div class="animate-pulse bg-brand-primary/5 rounded-[2.5rem] col-span-2 row-span-2"></div>
+          @for (i of [1,2,3,4]; track $index) {
+            <div class="animate-pulse bg-brand-primary/5 rounded-[2.5rem] col-span-1 row-span-1"></div>
+          }
+        }
       </div>
     </div>
   </section>
 
-  <!-- ════════════════════ FEATURED COLLECTIONS — BENTO GRID ════════════════════ -->
-  <section class="py-16 md:py-24">
-    <div class="container mx-auto px-6">
-      <div class="mb-12 text-center" data-aos="fade-up">
-        <h2 class="text-2xl font-bold text-brand-primary md:text-3xl">{{ 'categories.title' | transloco }}</h2>
-        <p class="mx-auto mt-3 max-w-lg text-sm text-brand-primary/60">{{ 'categories.subtitle' | transloco }}</p>
-      </div>
+  <!-- ═══════════════ TESTIMONIALS — PREMIUM CAROUSEL ═══════════════ -->
+  <section class="py-16 overflow-hidden bg-brand-primary text-white">
+    <div class="container mx-auto px-6 md:px-12 max-w-4xl">
+      <div class="flex flex-col items-center text-center">
+        <fa-icon [icon]="icons.star" class="text-brand-accent text-xl mb-4"></fa-icon>
+        
+        <div class="relative h-[250px] md:h-[200px] w-full">
+          @for (test of testimonials(); track $index) {
+            @if (test[activeLang()]) {
+              <div 
+                class="absolute inset-0 flex flex-col items-center transition-all duration-700 ease-in-out"
+                [class.opacity-100.translate-y-0]="activeTestimonial() === $index"
+                [class.opacity-0.translate-y-4]="activeTestimonial() !== $index"
+              >
+                <p class="text-xl md:text-3xl font-serif leading-relaxed text-white/90">
+                  "{{ test[activeLang()]?.['quote'] }}"
+                </p>
+                <div class="mt-10 flex flex-col items-center">
+                  <span class="text-xs font-bold uppercase tracking-[0.3em] text-brand-accent">{{ test[activeLang()]?.['author'] }}</span>
+                  <span class="text-[10px] uppercase tracking-widest text-white/40 mt-1">{{ test[activeLang()]?.['role'] }}</span>
+                </div>
+              </div>
+            }
+          }
+        </div>
 
-      <!-- Bento Grid -->
-      <div class="grid grid-cols-2 gap-4 md:grid-cols-3 md:grid-rows-2 md:gap-5" data-aos="fade-up" data-aos-delay="80">
-        <!-- Large left -->
-        <a routerLink="/shop" class="group relative col-span-1 row-span-2 overflow-hidden rounded-2xl">
-          <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop" alt="New Arrivals" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-          <div class="absolute inset-x-0 bottom-0 p-5">
-            <h3 class="text-lg font-bold text-white">{{ 'categories.items.newborn' | transloco }}</h3>
-            <span class="mt-1 inline-block text-xs text-white/70">{{ 'home.collections.quick_shop' | transloco }} →</span>
-          </div>
-        </a>
-
-        <!-- Top center -->
-        <a routerLink="/shop" class="group relative overflow-hidden rounded-2xl">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop" alt="Menswear" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-          <div class="absolute inset-x-0 bottom-0 p-5">
-            <h3 class="text-base font-bold text-white">{{ 'categories.items.toddler_boys' | transloco }}</h3>
-          </div>
-        </a>
-
-        <!-- Top right -->
-        <a routerLink="/shop" class="group relative overflow-hidden rounded-2xl">
-          <img src="https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=800&auto=format&fit=crop" alt="Womenswear" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-          <div class="absolute inset-x-0 bottom-0 p-5">
-            <h3 class="text-base font-bold text-white">{{ 'categories.items.toddler_girls' | transloco }}</h3>
-          </div>
-        </a>
-
-        <!-- Bottom center -->
-        <a routerLink="/shop" class="group relative overflow-hidden rounded-2xl">
-          <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&auto=format&fit=crop" alt="Essentials" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-          <div class="absolute inset-x-0 bottom-0 p-5">
-            <h3 class="text-base font-bold text-white">{{ 'categories.items.accessories' | transloco }}</h3>
-          </div>
-        </a>
-
-        <!-- Bottom right -->
-        <a routerLink="/shop" class="group relative overflow-hidden rounded-2xl">
-          <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&auto=format&fit=crop" alt="Accessories" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-          <div class="absolute inset-x-0 bottom-0 p-5">
-            <h3 class="text-base font-bold text-white">{{ 'home.features.easyReturns' | transloco }}</h3>
-          </div>
-        </a>
+        <div class="mt-12 flex gap-4">
+          @for (test of testimonials(); track $index) {
+            <button 
+              (click)="setTestimonial($index)"
+              class="h-1 transition-all duration-500 rounded-full"
+              [class.w-12.bg-brand-accent]="activeTestimonial() === $index"
+              [class.w-4.bg-white/20]="activeTestimonial() !== $index"
+            ></button>
+          }
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ════════════════════ NEWSLETTER ════════════════════ -->
-  <section class="bg-brand-primary" data-aos="fade-up">
-    <div class="container mx-auto px-6 py-16 text-center md:py-20">
-      <h2 class="text-xl font-bold text-white md:text-2xl">{{ 'footer.newsletter_title' | transloco }}</h2>
-      <p class="mx-auto mt-3 max-w-md text-sm text-white/65">{{ 'footer.newsletter_desc' | transloco }}</p>
-      <div class="mx-auto mt-8 flex max-w-md gap-3">
-        <input
-          type="email"
-          [placeholder]="'footer.newsletter_placeholder' | transloco"
-          class="flex-1 rounded-full bg-white/10 px-5 py-3 text-sm text-white placeholder-white/40 outline-none ring-1 ring-white/20 backdrop-blur-sm transition focus:ring-white/50"
-        />
-        <button class="rounded-full bg-white px-6 py-3 text-xs font-bold uppercase tracking-[0.1em] text-brand-primary transition hover:bg-brand-bg-light">
-          {{ 'footer.newsletter_btn' | transloco }}
-        </button>
+  <!-- ═══════════════ EDITORIAL JOURNAL — BLOG ═══════════════ -->
+  <section class="py-24 bg-brand-bg-light">
+    <div class="container mx-auto px-6 md:px-12">
+      <div class="mb-16 flex flex-col items-center text-center" data-aos="fade-up">
+        <span class="section-kicker">{{ 'blog.title' | transloco }}</span>
+        <h2 class="section-title mt-2">{{ 'home.social.title' | transloco }}</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-10">
+        @for (blog of recentBlogs(); track blog.id; let i = $index) {
+          @if (blog[activeLang()]) {
+            <article class="group cursor-pointer" data-aos="fade-up" [attr.data-aos-delay]="i * 100" [routerLink]="['/blog', blog.slug]">
+              <div class="aspect-[4/3] overflow-hidden rounded-[2rem] bg-white">
+                <img [src]="blog.image" class="h-full w-full object-cover grayscale-[0.2] transition-transform duration-700 group-hover:scale-105 group-hover:grayscale-0" [alt]="blog[activeLang()]?.['title']" />
+              </div>
+              <div class="mt-8 space-y-3">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-brand-accent">{{ blog.category }}</span>
+                <h3 class="text-xl font-bold text-brand-primary leading-tight group-hover:text-brand-accent transition-colors">
+                  {{ blog[activeLang()]?.['title'] }}
+                </h3>
+                <p class="text-sm text-brand-primary/60 line-clamp-2 leading-relaxed">
+                  {{ blog[activeLang()]?.['excerpt'] }}
+                </p>
+                <div class="pt-4">
+                  <span class="text-[10px] font-black uppercase tracking-widest text-brand-primary group-hover:underline underline-offset-4">
+                    {{ 'blog.readMore' | transloco }}
+                  </span>
+                </div>
+              </div>
+            </article>
+          }
+        }
       </div>
     </div>
   </section>
 
-  <!-- ════════════════════ TRUST BAR ════════════════════ -->
-  <section class="border-t border-brand-primary/8">
-    <div class="container mx-auto grid grid-cols-2 divide-x divide-brand-primary/8 md:grid-cols-4">
-      <div class="flex flex-col items-center gap-2 px-4 py-8 text-center" data-aos="fade-up">
-        <fa-icon [icon]="icons.truck" class="text-xl text-brand-accent"></fa-icon>
-        <h3 class="text-xs font-bold uppercase tracking-widest text-brand-primary">{{ 'home.features.freeShipping' | transloco }}</h3>
-        <p class="text-[11px] text-brand-primary/50 leading-relaxed">{{ 'home.features.freeShippingDesc' | transloco }}</p>
+  <!-- ═══════════════ TRUST BAR ═══════════════ -->
+  <section class="border-t border-brand-primary/5 bg-white">
+    <div class="container mx-auto grid grid-cols-2 divide-x divide-brand-primary/5 md:grid-cols-4">
+      <div class="flex flex-col items-center gap-2 px-4 py-12 text-center" data-aos="fade-up">
+        <fa-icon [icon]="icons.truck" class="text-2xl text-brand-accent mb-2"></fa-icon>
+        <h3 class="text-[10px] font-black uppercase tracking-widest text-brand-primary">{{ 'home.features.freeShipping' | transloco }}</h3>
+        <p class="text-[10px] text-brand-primary/50 leading-relaxed max-w-[180px]">{{ 'home.features.freeShippingDesc' | transloco }}</p>
       </div>
-      <div class="flex flex-col items-center gap-2 px-4 py-8 text-center" data-aos="fade-up" data-aos-delay="60">
-        <fa-icon [icon]="icons.headset" class="text-xl text-brand-accent"></fa-icon>
-        <h3 class="text-xs font-bold uppercase tracking-widest text-brand-primary">{{ 'home.features.support247' | transloco }}</h3>
-        <p class="text-[11px] text-brand-primary/50 leading-relaxed">{{ 'home.features.support247Desc' | transloco }}</p>
+      <div class="flex flex-col items-center gap-2 px-4 py-12 text-center" data-aos="fade-up" data-aos-delay="60">
+        <fa-icon [icon]="icons.headset" class="text-2xl text-brand-accent mb-2"></fa-icon>
+        <h3 class="text-[10px] font-black uppercase tracking-widest text-brand-primary">{{ 'home.features.support247' | transloco }}</h3>
+        <p class="text-[10px] text-brand-primary/50 leading-relaxed max-w-[180px]">{{ 'home.features.support247Desc' | transloco }}</p>
       </div>
-      <div class="flex flex-col items-center gap-2 px-4 py-8 text-center" data-aos="fade-up" data-aos-delay="120">
-        <fa-icon [icon]="icons.returnIcon" class="text-xl text-brand-accent"></fa-icon>
-        <h3 class="text-xs font-bold uppercase tracking-widest text-brand-primary">{{ 'home.features.easyReturns' | transloco }}</h3>
-        <p class="text-[11px] text-brand-primary/50 leading-relaxed">{{ 'home.features.easyReturnsDesc' | transloco }}</p>
+      <div class="flex flex-col items-center gap-2 px-4 py-12 text-center" data-aos="fade-up" data-aos-delay="120">
+        <fa-icon [icon]="icons.returnIcon" class="text-2xl text-brand-accent mb-2"></fa-icon>
+        <h3 class="text-[10px] font-black uppercase tracking-widest text-brand-primary">{{ 'home.features.easyReturns' | transloco }}</h3>
+        <p class="text-[10px] text-brand-primary/50 leading-relaxed max-w-[180px]">{{ 'home.features.easyReturnsDesc' | transloco }}</p>
       </div>
-      <div class="flex flex-col items-center gap-2 px-4 py-8 text-center" data-aos="fade-up" data-aos-delay="180">
-        <fa-icon [icon]="icons.shield" class="text-xl text-brand-accent"></fa-icon>
-        <h3 class="text-xs font-bold uppercase tracking-widest text-brand-primary">{{ 'home.features.secureCheckout' | transloco }}</h3>
-        <p class="text-[11px] text-brand-primary/50 leading-relaxed">{{ 'home.features.secureCheckoutDesc' | transloco }}</p>
+      <div class="flex flex-col items-center gap-2 px-4 py-12 text-center" data-aos="fade-up" data-aos-delay="180">
+        <fa-icon [icon]="icons.shield" class="text-2xl text-brand-accent mb-2"></fa-icon>
+        <h3 class="text-[10px] font-black uppercase tracking-widest text-brand-primary">{{ 'home.features.secureCheckout' | transloco }}</h3>
+        <p class="text-[10px] text-brand-primary/50 leading-relaxed max-w-[180px]">{{ 'home.features.secureCheckoutDesc' | transloco }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ NEWSLETTER ═══════════════ -->
+  <section class="py-24 bg-brand-surface">
+    <div class="container mx-auto px-6 md:px-12 max-w-2xl text-center">
+      <div data-aos="zoom-in">
+        <h2 class="text-2xl font-bold text-brand-primary md:text-3xl">{{ 'footer.newsletter_title' | transloco }}</h2>
+        <p class="mt-4 text-sm text-brand-primary/60">{{ 'footer.newsletter_desc' | transloco }}</p>
+        <div class="mt-10 flex flex-col md:flex-row gap-3">
+          <input
+            type="email"
+            [placeholder]="'footer.newsletter_placeholder' | transloco"
+            class="flex-1 rounded-full border border-brand-primary/10 bg-white px-8 py-4 text-sm text-brand-primary outline-none focus:border-brand-accent transition-all"
+          />
+          <button class="rounded-full bg-brand-primary px-10 py-4 text-xs font-black uppercase tracking-widest text-white transition hover:bg-brand-primary-light">
+            {{ 'footer.newsletter_btn' | transloco }}
+          </button>
+        </div>
       </div>
     </div>
   </section>

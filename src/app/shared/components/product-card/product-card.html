@@ -1,0 +1,75 @@
+<article class="group h-full flex flex-col items-center text-center">
+  <!-- Image Area -->
+  <div class="relative w-full aspect-[3/4] overflow-hidden rounded-2xl bg-white transition-all duration-500 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)]">
+    
+    <!-- Product Image -->
+    <a [routerLink]="['/product', product.slug]" class="block h-full w-full">
+      <img
+        [src]="product.image"
+        [alt]="product[activeLang]?.['title']"
+        class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+        loading="lazy"
+      />
+    </a>
+
+    <!-- Overlay Actions (Center) -->
+    <div class="absolute inset-0 flex items-center justify-center gap-3 bg-black/0 opacity-0 transition-all duration-300 group-hover:bg-black/5 group-hover:opacity-100">
+      <!-- Quick View -->
+      <button
+        (click)="quickView($event)"
+        class="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-primary shadow-xl transition-all duration-300 hover:bg-brand-primary hover:text-white hover:scale-110"
+        [title]="'shop.quickView' | transloco"
+      >
+        <fa-icon [icon]="icons.eye" class="text-sm"></fa-icon>
+      </button>
+
+      <!-- Wishlist -->
+      <button
+        (click)="toggleWishlist($event)"
+        class="flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-xl transition-all duration-300 hover:scale-110"
+        [class.text-red-500]="wishlistStore.ids().has(product.id)"
+        [class.text-brand-primary]="!wishlistStore.ids().has(product.id)"
+        [title]="'nav.wishlist' | transloco"
+      >
+        <fa-icon [icon]="wishlistStore.ids().has(product.id) ? icons.heartSolid : icons.heartRegular" class="text-sm"></fa-icon>
+      </button>
+    </div>
+
+    <!-- Bottom Add to Cart Bar -->
+    <button
+      (click)="addToCart($event)"
+      class="absolute inset-x-0 bottom-0 flex transform items-center justify-center gap-2 bg-[#999999] py-3.5 text-[10px] font-black uppercase tracking-[0.2em] text-white opacity-0 transition-all duration-500 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 hover:bg-brand-primary"
+    >
+      <fa-icon [icon]="icons.bag" class="text-xs"></fa-icon>
+      <span>{{ 'product.addToCart' | transloco }}</span>
+    </button>
+  </div>
+
+  <!-- Content Area -->
+  <div class="mt-5 w-full space-y-0.5 px-2 pb-2">
+    <!-- Category (Subtle) -->
+    <p class="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-primary/30">
+      {{ product.categoryTitle }}
+    </p>
+
+    <!-- Title -->
+    <h3 class="line-clamp-1 text-[13px] font-bold text-brand-primary transition-colors group-hover:text-brand-accent">
+      <a [routerLink]="['/product', product.slug]">{{ product[activeLang]?.['title'] }}</a>
+    </h3>
+
+    <!-- Prices -->
+    <div class="flex items-center justify-center gap-3">
+      <!-- Original Price (Strike) -->
+      @if (product.oldPrice) {
+        <span class="text-[11px] font-medium text-brand-primary/40 line-through decoration-brand-primary/20">
+          {{ product.oldPrice | currency: 'EGP' : '£' : '1.2-2' }}
+        </span>
+      }
+
+      <!-- Current Price -->
+      <span class="text-[13px] font-black text-red-500">
+        {{ product.price | currency: 'EGP' : '£' : '1.2-2' }}
+      </span>
+    </div>
+  </div>
+</article>

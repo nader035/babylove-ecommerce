@@ -4,6 +4,9 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { CategoryCardModel, CategoryService } from '../../../core/services/category.service';
 import { tapResponse } from '@ngrx/operators';
+import { TranslocoService } from '@jsverse/transloco';
+import { toSignal } from '@angular/core/rxjs-interop';
+
 export type CategoryState = {
   categories: CategoryCardModel[];
   isLoading: boolean;
@@ -27,33 +30,46 @@ export const categoryStore = signalStore(
     sortBy: 'featured',
     quickViewCategory: null,
   } as CategoryState),
-  withComputed(({ categories, searchQuery, activeType, sortBy }) => ({
-    categoryCount: computed(() => categories().length),
-    filteredCategories: computed(() => {
-      const query = searchQuery().trim().toLowerCase();
-      const byType = categories().filter((cat) => {
-        if (activeType() === 'all') {
-          return true;
-        }
-        if (activeType() === 'fashion') {
-          return ['women', 'men', 'girl', 'boy'].includes(cat.slug);
-        }
-        if (activeType() === 'essentials') {
-          return ['baby', 'plus-size'].includes(cat.slug);
-        }
-        return ['baby', 'boy'].includes(cat.slug);
-      });
-      const searched = byType.filter((cat) => cat.name.toLowerCase().includes(query));
+  withComputed(({ categories, searchQuery, activeType, sortBy }, transloco = inject(TranslocoService)) => {
+    const activeLang = toSignal(transloco.langChanges$, { initialValue: transloco.getActiveLang() });
 
-      if (sortBy() === 'az') {
-        return [...searched].sort((a, b) => a.name.localeCompare(b.name));
-      }
-      if (sortBy() === 'za') {
-        return [...searched].sort((a, b) => b.name.localeCompare(a.name));
-      }
-      return searched;
-    }),
-  })),
+    return {
+      categoryCount: computed(() => categories().length),
+      filteredCategories: computed(() => {
+        const query = searchQuery().trim().toLowerCase();
+        const lang = activeLang();
+        
+        const byType = categories().filter((cat) => {
+          if (activeType() === 'all') return true;
+          if (activeType() === 'fashion') return ['menswear', 'womenswear'].includes(cat.slug);
+          if (activeType() === 'essentials') return ['essentials', 'new-arrivals'].includes(cat.slug);
+          if (activeType() === 'gear') return ['accessories'].includes(cat.slug);
+          return true;
+        });
+
+        const searched = byType.filter((cat) => {
+          const content = cat[lang];
+          return content ? content.title.toLowerCase().includes(query) : false;
+        });
+
+        if (sortBy() === 'az') {
+          return [...searched].sort((a, b) => {
+            const titleA = a[lang]?.title || '';
+            const titleB = b[lang]?.title || '';
+            return titleA.localeCompare(titleB);
+          });
+        }
+        if (sortBy() === 'za') {
+          return [...searched].sort((a, b) => {
+            const titleA = a[lang]?.title || '';
+            const titleB = b[lang]?.title || '';
+            return titleB.localeCompare(titleA);
+          });
+        }
+        return searched;
+      }),
+    };
+  }),
   withMethods((categoryStore, categoryService = inject(CategoryService)) => ({
     loadCategories: rxMethod<void>(
       pipe(

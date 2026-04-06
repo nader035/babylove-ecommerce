@@ -4,7 +4,7 @@ import { authGuard } from '../../core/guards/auth.guard';
 export const userRoutes: Routes = [
   {
     path: '',
-    loadComponent: () => import('../home/home').then((m) => m.Home),
+    loadComponent: () => import('../home/home').then((m) => m.HomeComponent),
   },
   {
     path: 'categories',
@@ -16,7 +16,7 @@ export const userRoutes: Routes = [
     loadComponent: () => import('../shop/pages/shop-page/shop-page').then((m) => m.ShopPage),
   },
   {
-    path: 'product/:id',
+    path: 'product/:slug',
     loadComponent: () =>
       import('../shop/pages/product-detail-page/product-detail-page').then(
         (m) => m.ProductDetailPage,
@@ -51,8 +51,11 @@ export const userRoutes: Routes = [
   },
   {
     path: 'blog',
-    loadComponent: () =>
-      import('../blog/blog-page').then((m) => m.BlogPage),
+    loadComponent: () => import('../blog/blog-page').then((m) => m.BlogPage),
+  },
+  {
+    path: 'blog/:slug',
+    loadComponent: () => import('../blog/blog-detail/blog-detail').then((m) => m.BlogDetail),
   },
   {
     path: 'about us',

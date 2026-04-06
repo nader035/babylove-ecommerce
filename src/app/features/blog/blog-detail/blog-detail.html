@@ -1,0 +1,146 @@
+<main class="relative min-h-screen bg-white">
+  <!-- Reading Progress Bar -->
+  <div class="fixed top-0 left-0 z-[60] h-1.5 w-full bg-brand-bg-light">
+    <div 
+      class="h-full bg-brand-accent transition-all duration-300"
+      [style.width.%]="readingProgress()"
+    ></div>
+  </div>
+
+  <div class="container mx-auto max-w-5xl px-6 py-20">
+    <!-- Navigation & Meta -->
+    <div class="mb-16 flex flex-col items-center text-center">
+      <a routerLink="/blog" class="group mb-12 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-brand-primary/40 transition-colors hover:text-brand-accent">
+        <fa-icon [icon]="icons.back" class="transition-transform group-hover:-translate-x-1"></fa-icon>
+        {{ 'common.back' | transloco }}
+      </a>
+
+      @if (isLoading()) {
+        <div class="animate-pulse space-y-4">
+          <div class="h-4 w-24 mx-auto rounded-full bg-brand-primary/5"></div>
+          <div class="h-12 w-3/4 mx-auto rounded-xl bg-brand-primary/5"></div>
+          <div class="h-4 w-48 mx-auto rounded-full bg-brand-primary/5"></div>
+        </div>
+      } @else if (blog(); as post) {
+        @let lang = activeLang();
+        @let content = lang === 'ar' ? post.ar : post.en;
+
+        <span class="mb-6 inline-block rounded-full bg-brand-accent/10 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-brand-accent">
+          {{ post['category'] }}
+        </span>
+
+        <h1 class="mx-auto max-w-4xl text-4xl font-black leading-tight text-brand-primary md:text-6xl lg:text-7xl tracking-tighter">
+          {{ content.title }}
+        </h1>
+
+        <div class="mt-12 flex items-center justify-center gap-8 text-sm font-bold text-brand-primary/40">
+          <div class="flex items-center gap-3">
+            <div class="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-brand-bg-light ring-offset-2">
+              <img [src]="post.authorImage" [alt]="post.author" class="h-full w-full object-cover">
+            </div>
+            <span class="text-brand-primary">{{ post.author }}</span>
+          </div>
+          <span class="h-1 w-1 rounded-full bg-brand-primary/20"></span>
+          <span class="flex items-center gap-2">
+            <fa-icon [icon]="icons.calendar" class="opacity-50"></fa-icon>
+            {{ post['date'] }}
+          </span>
+          <span class="h-1 w-1 rounded-full bg-brand-primary/20"></span>
+          <span class="flex items-center gap-2">
+            <fa-icon [icon]="icons.clock" class="opacity-50"></fa-icon>
+            {{ post['readingTime'] }}
+          </span>
+        </div>
+      }
+    </div>
+
+    <!-- Hero Image -->
+    @if (blog(); as post) {
+      @let content = activeLang() === 'ar' ? post.ar : post.en;
+      <div 
+        class="relative mb-24 overflow-hidden rounded-[2.5rem] shadow-2xl shadow-brand-primary/10"
+        data-aos="zoom-out"
+        data-aos-duration="1500"
+      >
+        <img [src]="post.image" [alt]="content.title" class="aspect-[16/9] w-full object-cover md:aspect-[21/9]">
+        <div class="absolute inset-0 bg-gradient-to-t from-brand-primary/20 to-transparent"></div>
+      </div>
+
+      <!-- Article Content with Sticky Sharing -->
+      <div class="relative grid grid-cols-1 gap-16 lg:grid-cols-12">
+        <!-- Sticky Sidebar (Modern Desktop) -->
+        <aside class="hidden lg:col-span-1 lg:block">
+          <div class="sticky top-32 flex flex-col items-center gap-6">
+            <span class="text-[10px] font-black uppercase tracking-widest text-brand-primary/20 [writing-mode:vertical-lr] rotate-180">
+              {{ 'common.share' | transloco }}
+            </span>
+            <div class="h-12 w-px bg-brand-primary/10"></div>
+            <button class="share-btn group">
+              <fa-icon [icon]="icons.share" class="transition-transform group-hover:scale-125 text-brand-primary/40 group-hover:text-brand-accent"></fa-icon>
+            </button>
+          </div>
+        </aside>
+
+        <!-- Main Body -->
+        <div class="lg:col-span-10 lg:col-start-2">
+          <article 
+            class="prose prose-brand-primary prose-lg md:prose-xl max-w-none text-brand-primary/80" 
+            [dir]="activeLang() === 'ar' ? 'rtl' : 'ltr'"
+            [innerHTML]="content.content"
+          ></article>
+
+          <!-- Related Products Section: Shop the Story -->
+          @if (relatedProducts().length > 0) {
+            <section class="mt-32 space-y-12">
+              <div class="flex items-end justify-between border-b border-brand-primary/5 pb-12">
+                <div>
+                  <span class="section-kicker">{{ 'blog.shopStory.kicker' | transloco }}</span>
+                  <h2 class="mt-4 text-4xl font-black text-brand-primary tracking-tight">
+                    {{ 'blog.shopStory.title' | transloco }}
+                  </h2>
+                </div>
+                <a routerLink="/shop" class="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-accent transition-all">
+                  {{ 'common.viewAll' | transloco }}
+                  <span class="h-px w-8 bg-brand-accent transition-all group-hover:w-12"></span>
+                </a>
+              </div>
+              
+              <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
+                @for (product of relatedProducts(); track product.id) {
+                  <app-product-card 
+                    [product]="product"
+                    data-aos="fade-up"
+                    [attr.data-aos-delay]="$index * 100"
+                  ></app-product-card>
+                }
+              </div>
+            </section>
+          }
+
+          <!-- Footer Navigation -->
+          <footer class="mt-32 flex flex-col items-center justify-between gap-10 border-t border-brand-primary/5 pt-16 md:flex-row">
+            <div class="text-center md:text-left">
+              <h4 class="text-xs font-black uppercase tracking-[0.3em] text-brand-primary/30 mb-2">More Content</h4>
+              <p class="text-lg font-bold text-brand-primary">Continue exploring our journal</p>
+            </div>
+            
+            <button 
+              routerLink="/blog"
+              class="group btn-premium min-w-[240px] gap-4"
+            >
+              {{ 'blog.readNext' | transloco }}
+              <fa-icon [icon]="icons.back" class="rotate-180 transition-transform group-hover:translate-x-2"></fa-icon>
+            </button>
+          </footer>
+        </div>
+      </div>
+    } @else if (!isLoading()) {
+      <div class="flex flex-col items-center py-32 text-center">
+        <h2 class="text-4xl font-black text-brand-primary tracking-tight mb-8">{{ 'common.notFound' | transloco }}</h2>
+        <a routerLink="/blog" class="btn-premium">{{ 'common.back' | transloco }}</a>
+      </div>
+    }
+  </div>
+</main>
+
+

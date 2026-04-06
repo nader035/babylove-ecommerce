@@ -100,7 +100,8 @@ export class Header {
         this.searchResults.set(
           products.filter(
             (p) =>
-              p.title.toLowerCase().includes(q) ||
+              p.en.title.toLowerCase().includes(q) ||
+              p.ar.title.toLowerCase().includes(q) ||
               p.categoryTitle?.toLowerCase().includes(q)
           ).slice(0, 5)
         );
@@ -110,11 +111,11 @@ export class Header {
     }
   }
 
-  goToProduct(productId: number) {
+  goToProduct(slug: string) {
     this.isSearchOpen.set(false);
     this.searchQuery.set('');
     this.searchResults.set([]);
-    this.router.navigate(['/product', productId]);
+    this.router.navigate(['/product', slug]);
   }
 
   searchAll() {

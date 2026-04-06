@@ -1,114 +1,227 @@
-<main class="min-h-screen bg-brand-bg-light py-10">
-  <div class="container mx-auto px-6">
-    <header class="mb-10 text-center">
-      <span class="section-kicker">{{ 'shop.hero.kicker' | transloco }}</span>
-      <h1 class="section-title mt-3">{{ 'shop.hero.title' | transloco }}</h1>
-      <p class="mx-auto mt-4 max-w-2xl text-brand-primary/70">{{ 'shop.hero.subtitle' | transloco }}</p>
-    </header>
+<main class="min-h-screen bg-[#FDFDFD] py-16">
+  <div class="container mx-auto px-6 max-w-7xl">
+    
+    <!-- HEADER SECTION -->
+    <header class="mb-16">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <div class="space-y-4">
+          <nav class="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-brand-primary/40 font-bold">
+            <a routerLink="/" class="hover:text-brand-primary transition-colors">Home</a>
+            <span class="h-px w-4 bg-brand-primary/20"></span>
+            <a routerLink="/shop" 
+               (click)="shopStore.clearFilters()"
+               class="hover:text-brand-primary transition-colors"
+               [class.text-brand-primary]="shopStore.activeCategory() === 'all'"
+            >Shop</a>
+            
+            @if (shopStore.activeCategoryModel(); as model) {
+              <span class="h-px w-4 bg-brand-primary/20"></span>
+              <span class="text-brand-primary">{{ model[activeLang()]?.['title'] }}</span>
+            }
+          </nav>
+          
+          <h1 class="text-4xl md:text-5xl font-black text-brand-primary leading-tight">
+            @if (shopStore.activeCategoryModel(); as model) {
+               {{ model[activeLang()]?.['title'] }}
+            } @else {
+               {{ 'shop.hero.title' | transloco }}
+            }
+          </h1>
+          <p class="max-w-xl text-sm leading-relaxed text-brand-primary/60 font-medium">
+            {{ 'shop.hero.subtitle' | transloco }}
+          </p>
+        </div>
 
-    <section class="grid gap-8 lg:grid-cols-12">
-      <aside class="card-premium h-fit p-6 lg:sticky lg:top-28 lg:col-span-3">
-        <h2 class="text-base font-semibold text-brand-primary">{{ 'filters.title' | transloco }}</h2>
-        <input
-          [value]="shopStore.searchQuery()"
-          (input)="shopStore.setSearchQuery($any($event.target).value)"
-          [placeholder]="'shop.filters.searchPlaceholder' | transloco"
-          class="mt-5 w-full rounded-2xl border border-brand-primary/15 bg-white px-4 py-3 text-sm text-brand-primary outline-none transition-all focus:border-brand-primary/45"
-        />
-        <div class="mt-6 flex flex-wrap gap-2">
-          @for (category of shopStore.categories(); track category) {
-            <button
-              class="rounded-full px-4 py-2 text-xs font-medium transition"
-              [class.bg-brand-primary]="shopStore.activeCategory() === category"
-              [class.text-white]="shopStore.activeCategory() === category"
-              [class.bg-brand-primary/10]="shopStore.activeCategory() !== category"
-              [class.text-brand-primary]="shopStore.activeCategory() !== category"
-              (click)="shopStore.setCategory(category)"
+        <!-- SEARCH & SORT COMPACT -->
+        <div class="flex flex-wrap items-center gap-4 bg-white/50 backdrop-blur-md p-2 rounded-2xl border border-brand-primary/5 shadow-sm">
+          <div class="relative group">
+            <input
+              [value]="shopStore.searchQuery()"
+              (input)="shopStore.setSearchQuery($any($event.target).value)"
+              [placeholder]="'shop.filters.searchPlaceholder' | transloco"
+              class="w-full md:w-64 bg-transparent pl-10 pr-4 py-2.5 text-xs font-bold text-brand-primary outline-none placeholder:text-brand-primary/30"
+            />
+            <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-primary/30 transition-colors group-focus-within:text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </div>
+          <div class="h-6 w-px bg-brand-primary/10"></div>
+          <select
+            class="bg-transparent pr-8 py-2 text-[10px] font-black uppercase tracking-widest text-brand-primary outline-none cursor-pointer appearance-none"
+            [value]="shopStore.sortBy()"
+            (change)="shopStore.setSortBy($any($event.target).value)"
+          >
+            <option value="featured">{{ 'shop.filters.sort.featured' | transloco }}</option>
+            <option value="priceAsc">{{ 'shop.filters.sort.priceAsc' | transloco }}</option>
+            <option value="priceDesc">{{ 'shop.filters.sort.priceDesc' | transloco }}</option>
+            <option value="rating">{{ 'shop.filters.sort.rating' | transloco }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- HORIZONTAL CATEGORY NAV -->
+      <div class="mt-20 border-b border-brand-primary/5 pb-8 overflow-x-auto no-scrollbar">
+        <div class="flex gap-12 items-center min-w-max px-4">
+          <button 
+            (click)="shopStore.setCategory('all')"
+            class="group flex flex-col items-center gap-4 transition-all"
+            [class.opacity-100]="shopStore.activeCategory() === 'all'"
+            [class.opacity-40]="shopStore.activeCategory() !== 'all'"
+          >
+            <div class="w-16 h-16 rounded-full overflow-hidden border-2 transition-all p-1" [class.border-brand-primary]="shopStore.activeCategory() === 'all'" [class.border-transparent]="shopStore.activeCategory() !== 'all'">
+              <div class="w-full h-full rounded-full bg-brand-primary/5 flex items-center justify-center text-[10px] font-black uppercase tracking-tighter text-brand-primary/40 group-hover:bg-brand-primary/10">All</div>
+            </div>
+            <span class="text-[10px] font-black uppercase tracking-[0.2em]">{{ 'shop.filters.all' | transloco }}</span>
+          </button>
+
+          @for (cat of shopStore.categoryModels(); track cat.id) {
+            <button 
+              (click)="shopStore.setCategory(cat.slug)"
+              class="group flex flex-col items-center gap-4 transition-all"
+              [class.opacity-100]="shopStore.activeCategory() === cat.slug"
+              [class.opacity-40]="shopStore.activeCategory() !== cat.slug"
             >
-              {{ category === 'all' ? ('shop.filters.types.all' | transloco) : category }}
+              <div class="w-16 h-16 rounded-full overflow-hidden border-2 transition-all p-1" [class.border-brand-primary]="shopStore.activeCategory() === cat.slug" [class.border-transparent]="shopStore.activeCategory() !== cat.slug">
+                <img [src]="cat.icon" class="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+              </div>
+              <span class="text-[10px] font-black uppercase tracking-[0.2em]">{{ cat[activeLang()]?.['title'] }}</span>
             </button>
           }
         </div>
+      </div>
+    </header>
 
-        <select
-          class="mt-6 w-full rounded-2xl border border-brand-primary/15 bg-white px-4 py-3 text-sm text-brand-primary outline-none"
-          [value]="shopStore.sortBy()"
-          (change)="shopStore.setSortBy($any($event.target).value)"
-        >
-          <option value="featured">{{ 'shop.filters.sort.featured' | transloco }}</option>
-          <option value="priceAsc">{{ 'shop.filters.sort.priceAsc' | transloco }}</option>
-          <option value="priceDesc">{{ 'shop.filters.sort.priceDesc' | transloco }}</option>
-          <option value="rating">{{ 'shop.filters.sort.rating' | transloco }}</option>
-        </select>
+    <div class="flex flex-col lg:flex-row gap-16">
+      
+      <!-- SIDEBAR FILTERS -->
+      <aside class="w-full lg:w-64 space-y-12 flex-shrink-0">
+        
+        <!-- BY TYPE FILTER -->
+        <div class="space-y-6">
+          <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary/30">
+            @if (shopStore.activeCategoryModel(); as model) {
+               {{ model[activeLang()]?.['title'] }}
+            } @else {
+               {{ 'shop.filters.collections' | transloco }}
+            }
+          </h3>
+          <ul class="space-y-4">
+            @for (type of shopStore.availableTypes(); track type) {
+              <li>
+                <button 
+                  (click)="shopStore.setType(type)"
+                  class="group flex items-center gap-3 transition-all"
+                  [class.text-brand-primary]="shopStore.activeType() === type"
+                  [class.text-brand-primary/40]="shopStore.activeType() !== type"
+                >
+                  <span class="h-1.5 w-1.5 rounded-full transition-all group-hover:scale-150 shadow-[0_0_8px_rgba(0,0,0,0.05)]" 
+                        [class.bg-brand-primary.w-4]="shopStore.activeType() === type"
+                        [class.bg-brand-primary/20]="shopStore.activeType() !== type"></span>
+                  <span class="text-[11px] font-bold uppercase tracking-[0.1em] transition-colors group-hover:text-brand-primary">
+                    {{ type === 'all' ? ('shop.filters.everything' | transloco) : type }}
+                  </span>
+                </button>
+              </li>
+            }
+          </ul>
+        </div>
 
-        <button (click)="shopStore.clearFilters()" class="mt-6 w-full rounded-2xl border border-brand-primary/20 px-4 py-3 text-sm font-semibold text-brand-primary hover:bg-brand-bg-light">
-          {{ 'filters.clearAll' | transloco }}
-        </button>
+        <!-- CLEAR FILTERS -->
+        @if (shopStore.activeCategory() !== 'all' || shopStore.activeType() !== 'all' || shopStore.searchQuery() !== '') {
+          <button 
+            (click)="shopStore.clearFilters()"
+            class="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-red-500 hover:text-red-600 transition-colors pt-4 border-t border-brand-primary/5 w-full"
+          >
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+            {{ 'shop.filters.clear' | transloco }}
+          </button>
+        }
       </aside>
 
-      <div class="lg:col-span-9">
-        <div class="mb-4 flex items-center justify-between">
-          <p class="text-sm text-brand-primary/70">{{ shopStore.filteredProducts().length }} {{ 'shop.results' | transloco }}</p>
-          <a routerLink="/checkout" class="btn-premium text-sm">{{ 'cart.checkout' | transloco }}</a>
-        </div>
-
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-          @if (shopStore.isLoading()) {
-            @for (skeleton of [1,2,3,4,5,6]; track skeleton) {
-              <div class="h-[380px] animate-pulse rounded-3xl bg-brand-surface"></div>
+      <!-- PRODUCTS GRID -->
+      <div class="flex-grow">
+        @if (shopStore.isLoading()) {
+          <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-12">
+            @for (i of [1,2,3,4,5,6,7,8]; track i) {
+              <div class="space-y-4 animate-pulse">
+                <div class="aspect-[3/4] bg-brand-primary/5 rounded-2xl"></div>
+                <div class="h-3 w-1/2 bg-brand-primary/10 rounded-full mx-auto"></div>
+                <div class="h-4 w-3/4 bg-brand-primary/5 rounded-full mx-auto"></div>
+              </div>
             }
+          </div>
+        } @else {
+          @if (shopStore.filteredProducts().length === 0) {
+            <div class="h-96 flex flex-col items-center justify-center text-center space-y-6 opacity-30">
+              <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+              <div class="space-y-2">
+                 <p class="text-sm font-black uppercase tracking-widest text-brand-primary">{{ 'shop.filters.noResults' | transloco }}</p>
+                 <button (click)="shopStore.clearFilters()" class="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-accent underline underline-offset-4">{{ 'shop.filters.reset' | transloco }}</button>
+              </div>
+            </div>
           } @else {
-            @for (product of shopStore.filteredProducts(); track product.id) {
-              <article class="card-premium group overflow-hidden">
-                <a [routerLink]="['/product', product.id]" class="block relative aspect-4/5 overflow-hidden">
-                  <img [src]="product.image" [alt]="product.title" class="h-full w-full object-cover transition duration-700 group-hover:scale-110" loading="lazy" />
-                  <button (click)="wishlistStore.toggle(product); $event.preventDefault(); $event.stopPropagation()" class="absolute inset-e-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-brand-primary">
-                    {{ 'nav.wishlist' | transloco }}
-                  </button>
-                  <button (click)="shopStore.openQuickView(product); $event.preventDefault(); $event.stopPropagation()" class="absolute inset-x-3 bottom-3 rounded-full bg-white/92 px-4 py-2 text-xs font-semibold text-brand-primary opacity-0 transition group-hover:opacity-100">
-                    {{ 'shop.quickView' | transloco }}
-                  </button>
-                </a>
-                <div class="p-5">
-                  <p class="text-xs uppercase tracking-wide text-brand-primary/50">{{ product.categoryTitle }}</p>
-                  <a [routerLink]="['/product', product.id]" class="mt-2 line-clamp-2 text-base font-semibold text-brand-primary block hover:text-brand-accent transition-colors">{{ product.title }}</a>
-                  <p class="mt-1 text-sm text-brand-primary/70">{{ product.shortDescription }}</p>
-                  <div class="mt-4 flex items-center justify-between">
-                    <div class="flex items-center gap-2">
-                      <span class="text-base font-semibold text-brand-primary">{{ product.price | currency: 'EGP' : '£' : '1.2-2' }}</span>
-                      @if (product.oldPrice) {
-                        <span class="text-xs text-brand-primary/40 line-through">{{ product.oldPrice | currency: 'EGP' : '£' : '1.2-2' }}</span>
-                      }
-                    </div>
-                    <button class="rounded-full bg-brand-primary px-4 py-2 text-xs font-semibold text-white transition-all active:scale-95" (click)="cartStore.addToCart(product)">
-                      {{ 'product.addToCart' | transloco }}
-                    </button>
-                  </div>
-                </div>
-              </article>
-            }
+             <p class="mb-8 text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary/30">
+               {{ 'shop.filters.showing' | transloco }} {{ shopStore.filteredProducts().length }} {{ 'shop.filters.results' | transloco }}
+             </p>
+            <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-12">
+              @for (product of shopStore.filteredProducts(); track product.id) {
+                <app-product-card
+                  [product]="product"
+                  (onAddToCart)="cartStore.addToCart($event)"
+                  (onQuickView)="shopStore.openQuickView($event)"
+                  data-aos="fade-up"
+                  [attr.data-aos-delay]="$index % 4 * 100"
+                ></app-product-card>
+              }
+            </div>
           }
-        </div>
+        }
       </div>
-    </section>
+    </div>
   </div>
 
+  <!-- QUICK VIEW OVERLAY -->
   @if (shopStore.quickViewProduct(); as quickView) {
-    <div class="fixed inset-0 z-60 flex items-end justify-center bg-black/45 p-4 backdrop-blur-sm md:items-center" (click)="shopStore.closeQuickView()">
-      <article class="card-premium w-full max-w-2xl overflow-hidden" (click)="$event.stopPropagation()">
-        <div class="grid md:grid-cols-2">
-          <img [src]="quickView.image" [alt]="quickView.title" class="h-72 w-full object-cover md:h-full" />
-          <div class="p-6 md:p-8">
-            <p class="section-kicker">{{ 'shop.quickView' | transloco }}</p>
-            <h3 class="mt-3 text-2xl font-semibold text-brand-primary">{{ quickView.title }}</h3>
-            <p class="mt-4 text-sm leading-relaxed text-brand-primary/70">{{ quickView.shortDescription }}</p>
-            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-              <button class="btn-premium" (click)="cartStore.addToCart(quickView)">{{ 'product.addToCart' | transloco }}</button>
-              <button class="rounded-full border border-brand-primary/20 px-5 py-3 text-sm font-semibold text-brand-primary" (click)="shopStore.closeQuickView()">{{ 'common.cancel' | transloco }}</button>
+    <div 
+      class="fixed inset-0 z-60 flex items-center justify-center p-6 bg-brand-primary/90 backdrop-blur-md"
+      (click)="shopStore.closeQuickView()"
+    >
+      <div 
+        class="bg-white w-full max-w-4xl rounded-[40px] overflow-hidden shadow-2xl flex flex-col md:flex-row relative"
+        (click)="$event.stopPropagation()"
+      >
+        <button (click)="shopStore.closeQuickView()" class="absolute top-8 right-8 z-10 w-10 h-10 rounded-full bg-white/20 backdrop-blur-xl flex items-center justify-center text-brand-primary hover:bg-white transition-all shadow-lg">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+
+        <div class="w-full md:w-1/2 aspect-square md:h-auto overflow-hidden">
+          <img [src]="quickView.image" class="w-full h-full object-cover" />
+        </div>
+        
+        <div class="w-full md:w-1/2 p-12 md:p-16 flex flex-col justify-center">
+          <span class="text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary/30 mb-6 block">{{ quickView.categoryTitle }}</span>
+          <h2 class="text-3xl md:text-4xl font-black text-brand-primary tracking-tight mb-6">{{ quickView[activeLang()]?.['title'] }}</h2>
+          <p class="text-sm leading-relaxed text-brand-primary/60 mb-10">{{ quickView[activeLang()]?.['shortDescription'] }}</p>
+          
+          <div class="flex items-center gap-4 mb-12">
+            <span class="text-3xl font-black text-brand-primary">{{ quickView.price | currency: 'EGP' : '£' : '1.2-2' }}</span>
+            <div class="flex items-center gap-1 text-orange-400">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <span class="text-xs font-black text-brand-primary/50">{{ quickView.rating }}</span>
             </div>
           </div>
+
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button
+               (click)="cartStore.addToCart(quickView)"
+               class="flex-grow bg-brand-primary text-white py-5 px-8 rounded-2xl text-xs font-black uppercase tracking-[0.2em] shadow-xl hover:bg-brand-accent transition-all transform hover:-translate-y-1 active:scale-95"
+            >
+              {{ 'product.addToCart' | transloco }}
+            </button>
+            <a [routerLink]="['/product', quickView.slug]" (click)="shopStore.closeQuickView()" class="bg-brand-primary/5 text-brand-primary py-5 px-8 rounded-2xl text-xs font-black uppercase tracking-[0.2em] hover:bg-brand-primary/10 transition-all text-center">
+              {{ 'product.viewDetails' | transloco }}
+            </a>
+          </div>
         </div>
-      </article>
+      </div>
     </div>
   }
 </main>

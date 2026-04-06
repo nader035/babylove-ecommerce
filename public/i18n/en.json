@@ -13,7 +13,17 @@
     "submit": "Submit",
     "search": "Search collections...",
     "noResults": "No results found.",
-    "viewAll": "View All"
+    "viewAll": "View All",
+    "viewCollection": "Explore Collection",
+    "all": "All",
+    "back": "Back",
+    "by": "By",
+    "share": "Share",
+    "notFound": "Content not found",
+    "close": "Close",
+    "menu": "Menu",
+    "filter": "Filter",
+    "sort": "Sort"
   },
   "nav": {
     "home": "Home",
@@ -142,6 +152,24 @@
     "social": {
       "kicker": "On the Grid",
       "title": "Style in Motion"
+    },
+    "look": {
+      "kicker": "The Editorial",
+      "title": "Shop the Look",
+      "description": "Discover how our creative team coordinates the season's most sought-after silhouettes for the modern family.",
+      "man_sweater": "Sweater",
+      "man_turtleneck": "Turtle Neck",
+      "man_trousers": "Trousers",
+      "man_sneakers": "Sneakers",
+      "woman_dress": "Dress",
+      "woman_cardigan": "Cardigan",
+      "woman_shoes": "Shoes",
+      "boy_sweater": "Sweater",
+      "boy_pants": "Pants",
+      "boy_sneakers": "Sneakers",
+      "girl_dress": "Dress",
+      "girl_leggings": "Leggings",
+      "girl_flats": "Flats"
     }
   },
   "product": {
@@ -149,6 +177,7 @@
     "description": "Description",
     "reviews": "Reviews",
     "addToCart": "Add to Bag",
+    "viewDetails": "View Details",
     "relatedProducts": "You May Also Like",
     "size": "Size",
     "color": "Color",
@@ -254,29 +283,35 @@
   },
   "categories": {
     "badge": "Curated Collections",
-    "title": "Shop by Collection",
-    "subtitle": "Explore our carefully curated collections — from timeless essentials to statement pieces for the modern wardrobe.",
+    "title_part1": "Elevated",
+    "title_part2": "Silhouettes",
+    "subtitle": "Explore our meticulously crafted collections, where each category is a testament to timeless design and modern craft.",
     "items": {
       "newborn": "New Arrivals",
       "toddler_boys": "Menswear",
       "toddler_girls": "Womenswear",
       "accessories": "Accessories"
-    }
+    },
+    "noResultsTitle": "No collections found",
+    "noResultsDesc": "We couldn't find any collections matching your criteria. Try adjusting your filters or search query.",
+    "clearFilters": "Clear All Filters",
+    "cardBadge": "Perspective",
+    "viewButton": "Browse Collection"
   },
   "shop": {
     "hero": {
-      "kicker": "Premium Collection",
-      "title": "The Modern Wardrobe",
-      "subtitle": "Explore curated collections with smart filters, quick view, and a seamless premium shopping experience."
+      "kicker": "The Seasonal Edit",
+      "title": "Modern Essentials",
+      "subtitle": "Discover a curated collection of premium garments, defined by Japanese precision and Italian elegance."
     },
     "filters": {
-      "searchPlaceholder": "Search by name, material, or style...",
-      "typeLabel": "Department",
+      "searchPlaceholder": "Search by name, fabric, or fit...",
+      "all": "Everything",
+      "collections": "Collections",
       "types": {
-        "all": "All",
-        "essentials": "Essentials",
         "fashion": "Fashion",
-        "gear": "Accessories"
+        "essentials": "Essentials",
+        "gear": "Gear"
       },
       "sort": {
         "featured": "Featured",
@@ -285,15 +320,29 @@
         "priceAsc": "Price: Low to High",
         "priceDesc": "Price: High to Low",
         "rating": "Top Rated"
-      }
+      },
+      "everything": "Everything",
+      "everythingDesc": "Browse our entire curated inventory.",
+      "clear": "Clear All Filters",
+      "noResults": "No pieces found matching your criteria",
+      "reset": "Reset Filters & Exploration",
+      "showing": "Showing",
+      "results": "Results"
     },
-    "results": "results",
     "quickView": "Quick View",
-    "quickViewDescription": "A premium curated collection designed for those who value craftsmanship, quality materials, and timeless style."
+    "quickViewDescription": "A premium curated collection designed for those who value craftsmanship, quality materials, and timeless style.",
+    "seasonal": "Seasonal Trends",
+    "lifestyle": "Lifestyle & Design"
   },
   "blog": {
-    "title": "The Journal",
-    "subtitle": "Style guides, seasonal edits, and stories of craftsmanship from our editorial team."
+    "title": "Editorial Stories",
+    "subtitle": "Discover the craftsmanship, heritage, and vision behind every piece in our collection.",
+    "readMore": "Read Full Story",
+    "readNext": "Read Next Story",
+    "shopStory": {
+      "kicker": "Shop the Story",
+      "title": "Curated Essentials"
+    }
   },
   "about": {
     "kicker": "Our Story",

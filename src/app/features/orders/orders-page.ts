@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -16,24 +16,35 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { PreferencesStore } from '../../core/stores/preferences.store';
 
-interface OrderItem {
-  id: number;
-  quantity: number;
-  priceAtPurchase: number;
-  subTotal: number;
-  productTitle: string;
-  productImage: string;
+interface LocalizedString {
+  en: string;
+  ar: string;
 }
 
-interface MockOrder {
-  id: number;
-  status: string;
-  trackingCode: string | null;
-  createdAt: string;
-  totalAmount: number;
-  itemCount: number;
+interface OrderItem {
+  productId: number;
+  skuId: number;
+  quantity: number;
+  price: number;
+  title: LocalizedString;
+  image: string;
+}
+
+interface Order {
+  id: string;
+  userId: number;
+  date: string;
+  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  total: number;
   items: OrderItem[];
+  shippingAddress: {
+    fullName: string;
+    street: string;
+    city: string;
+    country: string;
+  };
 }
 
 @Component({
@@ -45,10 +56,13 @@ interface MockOrder {
 })
 export class OrdersPage implements OnInit {
   private http = inject(HttpClient);
+  private preferencesStore = inject(PreferencesStore);
 
-  orders = signal<MockOrder[]>([]);
+  orders = signal<Order[]>([]);
   isLoading = signal(true);
-  expandedOrderId = signal<number | null>(null);
+  expandedOrderId = signal<string | null>(null);
+
+  activeLang = computed(() => this.preferencesStore.language());
 
   icons = {
     box: faBox,
@@ -63,16 +77,16 @@ export class OrdersPage implements OnInit {
   };
 
   ngOnInit() {
-    this.http.get<MockOrder[]>(environment.ordersApi).subscribe({
+    this.http.get<Order[]>(environment.ordersApi).subscribe({
       next: (orders) => {
-        this.orders.set(orders.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
+        this.orders.set(orders.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()));
         this.isLoading.set(false);
       },
       error: () => this.isLoading.set(false),
     });
   }
 
-  toggleOrder(id: number) {
+  toggleOrder(id: string) {
     this.expandedOrderId.update((current) => (current === id ? null : id));
   }
 
@@ -94,5 +108,9 @@ export class OrdersPage implements OnInit {
       case 'cancelled': return 'text-red-600 bg-red-50';
       default: return 'text-brand-primary/60 bg-brand-bg-light';
     }
+  }
+
+  getItemCount(order: Order): number {
+    return order.items.reduce((acc, item) => acc + item.quantity, 0);
   }
 }

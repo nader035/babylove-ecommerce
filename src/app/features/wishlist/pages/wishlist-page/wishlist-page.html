@@ -27,8 +27,8 @@
           <article class="group">
             <!-- Image -->
             <div class="relative aspect-[3/4] overflow-hidden rounded-2xl bg-brand-bg-light">
-              <a [routerLink]="['/product', product.id]" class="block h-full">
-                <img [src]="product.image" [alt]="product.title" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
+              <a [routerLink]="['/product', product.slug]" class="block h-full">
+                <img [src]="product.image" [alt]="product[activeLang()]?.['title']" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
               </a>
               <!-- Action buttons overlay -->
               <div class="absolute inset-x-0 bottom-0 flex gap-2 p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -51,7 +51,7 @@
 
             <!-- Info -->
             <div class="mt-3">
-              <a [routerLink]="['/product', product.id]" class="line-clamp-1 text-sm font-semibold text-brand-primary group-hover:text-brand-accent transition-colors">{{ product.title }}</a>
+              <a [routerLink]="['/product', product.slug]" class="line-clamp-1 text-sm font-semibold text-brand-primary group-hover:text-brand-accent transition-colors">{{ product[activeLang()]?.['title'] }}</a>
               <p class="mt-1 text-sm font-bold text-brand-primary">{{ product.price | currency: 'EGP' : '£' : '1.2-2' }}</p>
             </div>
           </article>

@@ -78,7 +78,7 @@
                 />
                 <span class="absolute bottom-0 inset-e-0 h-2.5 w-2.5 rounded-full border-2 border-white bg-green-400"></span>
               </div>
-              <div class="hidden xl:flex flex-col items-start leading-none text-left dir-ltr">
+              <div class="hidden xl:flex flex-col items-start leading-none text-start">
                 <div class="flex items-center gap-1">
                   <span class="text-[10px] font-semibold uppercase tracking-wider text-brand-primary">
                     {{ auth.userFullName() }}
@@ -92,7 +92,11 @@
             @if (isProfileMenuOpen) {
               <div class="fixed inset-0 z-40" (click)="isProfileMenuOpen = false"></div>
 
-              <div class="absolute inset-e-0 z-50 mt-4 w-56 origin-top-right overflow-hidden rounded-2xl border border-brand-surface/20 bg-white py-2 shadow-premium animate-fade-in dir-ltr">
+              <div 
+                class="absolute inset-e-0 z-50 mt-4 w-56 overflow-hidden rounded-2xl border border-brand-surface/20 bg-white py-2 shadow-premium animate-fade-in"
+                [class.origin-top-right]="currentLang() === 'en'"
+                [class.origin-top-left]="currentLang() === 'ar'"
+              >
 
                 <div class="px-4 py-3 border-b border-brand-bg-light mb-1">
                   <p class="text-[10px] text-brand-muted uppercase tracking-widest font-bold">{{ 'header.signedInAs' | transloco }}</p>
@@ -164,12 +168,12 @@
           <div class="mt-3 divide-y divide-brand-primary/8 rounded-2xl border border-brand-primary/10 bg-white shadow-premium overflow-hidden">
             @for (product of searchResults(); track product.id) {
               <button
-                (click)="goToProduct(product.id)"
-                class="flex w-full items-center gap-4 px-4 py-3 text-left transition hover:bg-brand-bg-light"
+                (click)="goToProduct(product.slug)"
+                class="flex w-full items-center gap-4 px-4 py-3 text-start transition hover:bg-brand-bg-light"
               >
-                <img [src]="product.image" [alt]="product.title" class="h-12 w-12 rounded-xl object-cover" />
+                <img [src]="product.image" [alt]="product[currentLang()].title" class="h-12 w-12 rounded-xl object-cover" />
                 <div class="flex-1 min-w-0">
-                  <h4 class="text-sm font-semibold text-brand-primary truncate">{{ product.title }}</h4>
+                  <h4 class="text-sm font-semibold text-brand-primary truncate">{{ product[currentLang()].title }}</h4>
                   <p class="text-xs text-brand-primary/50">{{ product.categoryTitle }} · {{ product.price | currency: 'EGP' : '£' : '1.2-2' }}</p>
                 </div>
                 <fa-icon [icon]="icons.search" class="text-xs text-brand-primary/30"></fa-icon>

@@ -1,16 +1,31 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Category } from '../models/icatalog';
 import { environment } from '../../../environments/environment';
 
-export type CategoryCardModel = {
+export interface CategoryContent {
+  title: string;
+  description: string;
+  types: string[];
+}
+
+export interface Category {
   id: number;
-  name: string;
   slug: string;
-  image: string;
-  creationAt: string;
-  updatedAt: string;
+  icon: string;
+  parentId: number | null;
+  en: CategoryContent;
+  ar: CategoryContent;
+}
+
+export type CategoryCardModel = {
+  [key: string]: any;
+  
+  id: number;
+  slug: string;
+  icon: string;
+  en: CategoryContent;
+  ar: CategoryContent;
 };
 
 @Injectable({
@@ -24,11 +39,10 @@ export class CategoryService {
       map((categories) =>
         categories.map((item) => ({
           id: item.id,
-          name: item.title,
           slug: item.slug,
-          image: item.icon,
-          creationAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
+          icon: item.icon,
+          en: item.en,
+          ar: item.ar,
         })),
       ),
     );

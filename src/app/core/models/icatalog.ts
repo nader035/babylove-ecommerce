@@ -5,15 +5,20 @@ import { User } from './iuser';
 /**
  * 🏷️ القسم (Category)
  */
-export interface Category {
-  id: number;
+export interface CategoryContent {
   title: string;
   description: string;
+  types: string[];
+}
+
+export interface Category {
+  [key: string]: any;
+  id: number;
   slug: string;
   icon: string;
   parentId?: number | null;
-  parent?: Category; // لو القسم له أب (مثال: ملابس -> أطفال)
-  children?: Category[]; // الأقسام الفرعية (Subcategories)
+  en: CategoryContent;
+  ar: CategoryContent;
 }
 
 /**
@@ -87,19 +92,26 @@ export interface Review {
   createdAt: string;
 }
 
+export interface ProductContent {
+  title: string;
+  shortDescription: string;
+  longDescription: string;
+}
+
 /**
  * 🛍️ المنتج الأساسي (Product)
  * يمثل الكيان العام (مثال: تيشيرت بولو سادة) وتحته تندرج الـ SKUs
  */
 export interface Product {
+  [key: string]: any;
   id: number;
-  title: string;
   slug: string;
-  shortDescription: string;
-  longDescription: string;
   thumbnail: string; // الصورة الرئيسية المصغرة للمنتج
   categoryId: number;
   category?: Category;
+  type: string;
+  en: ProductContent;
+  ar: ProductContent;
 
   // -- علاقات (Relations) ستأتي متداخلة من الباك إند --
   skus?: Sku[]; // كل النسخ المتاحة من المنتج (ألوان ومقاسات)

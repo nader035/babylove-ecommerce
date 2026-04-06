@@ -1,379 +1,355 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "username": "nader0305",
-      "email": "nader@example.com",
-      "password": "123456",
-      "firstName": "Nader",
-      "lastName": "Mohamed",
-      "gender": "Male",
-      "image": "assets/images/nader.jpg",
-      "phoneNumber": "+201111111111",
-      "isActive": true
-    },
-    {
-      "id": 2,
-      "username": "sara_ali",
-      "email": "sara@example.com",
-      "password": "123456",
-      "firstName": "Sara",
-      "lastName": "Ali",
-      "gender": "Female",
-      "image": "https://randomuser.me/api/portraits/women/2.jpg",
-      "phoneNumber": "+201222222222",
-      "isActive": true
-    }
-  ],
   "categories": [
     {
       "id": 1,
-      "title": "New Arrivals",
-      "description": "The latest pieces from our seasonal collections.",
       "slug": "new-arrivals",
-      "icon": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800&auto=format&fit=crop",
-      "parentId": null
+      "icon": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop",
+      "parentId": null,
+      "en": {
+        "title": "New Arrivals",
+        "description": "Premium seasonal picks.",
+        "types": ["Outerwear", "Dresses", "Essentials"]
+      },
+      "ar": {
+        "title": "وصل حديثاً",
+        "description": "مختارات موسمية فاخرة.",
+        "types": ["ملابس خارجية", "فساتين", "أساسيات"]
+      }
     },
     {
       "id": 2,
-      "title": "Menswear",
-      "description": "Refined essentials and tailored pieces for the modern man.",
       "slug": "menswear",
       "icon": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop",
-      "parentId": null
+      "parentId": null,
+      "en": {
+        "title": "Menswear",
+        "description": "Refined contemporary style.",
+        "types": ["Outerwear", "Knitwear", "Shirts", "Footwear"]
+      },
+      "ar": {
+        "title": "ملابس رجالية",
+        "description": "نمط معاصر راقٍ.",
+        "types": ["ملابس خارجية", "تريكو", "قمصان", "أحذية"]
+      }
     },
     {
       "id": 3,
-      "title": "Womenswear",
-      "description": "Contemporary silhouettes crafted with premium fabrics.",
       "slug": "womenswear",
-      "icon": "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=800&auto=format&fit=crop",
-      "parentId": null
+      "icon": "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=800&auto=format&fit=crop",
+      "parentId": null,
+      "en": {
+        "title": "Womenswear",
+        "description": "Architectural form and elegance.",
+        "types": ["Dresses", "Separates", "Bags", "Knitwear"]
+      },
+      "ar": {
+        "title": "ملابس نسائية",
+        "description": "أناقة وأشكال معمارية.",
+        "types": ["فساتين", "قطع منفصلة", "حقائب", "تريكو"]
+      }
     },
     {
       "id": 4,
-      "title": "Essentials",
-      "description": "Wardrobe staples designed to last beyond seasons.",
       "slug": "essentials",
       "icon": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&auto=format&fit=crop",
-      "parentId": null
+      "parentId": null,
+      "en": {
+        "title": "Essentials",
+        "description": "Wardrobe foundations.",
+        "types": ["Basics", "Denim", "Lounge"]
+      },
+      "ar": {
+        "title": "الأساسيات",
+        "description": "أساسيات خزانة الملابس.",
+        "types": ["أساسيات", "دينيم", "ملابس مريحة"]
+      }
     },
     {
       "id": 5,
-      "title": "Accessories",
-      "description": "Elevated finishing touches for every outfit.",
       "slug": "accessories",
       "icon": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&auto=format&fit=crop",
-      "parentId": null
+      "parentId": null,
+      "en": {
+        "title": "Accessories",
+        "description": "Elevated finishing touches.",
+        "types": ["Bags", "Jewelry", "Footwear"]
+      },
+      "ar": {
+        "title": "إكسسوارات",
+        "description": "لمسات نهائية راقية.",
+        "types": ["حقائب", "مجوهرات", "أحذية"]
+      }
     }
   ],
   "products": [
     {
       "id": 101,
-      "title": "Italian Wool Overcoat",
       "slug": "italian-wool-overcoat",
-      "shortDescription": "Double-breasted overcoat in heavyweight Italian virgin wool.",
-      "longDescription": "A commanding silhouette tailored from Loro Piana virgin wool. Features a notched lapel, double-breasted closure with horn buttons, fully lined interior in Bemberg cupro, and a back vent for ease of movement. The structured shoulders and mid-calf length create a timeless, authoritative look that transitions effortlessly from boardroom to evening.",
       "thumbnail": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=1000&auto=format&fit=crop",
       "categoryId": 1,
-      "category": { "id": 1, "title": "New Arrivals", "slug": "new-arrivals", "icon": "" },
-      "skus": [
-        { "id": 5001, "code": "S · Charcoal", "price": 389, "quantity": 12, "productId": 101, "images": [{ "id": 1, "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=1000&auto=format&fit=crop", "skuId": 5001 }], "attributes": [{ "id": 1, "attributeValue": "S", "relatedPropertyId": 1 }, { "id": 5, "attributeValue": "Charcoal", "relatedPropertyId": 2 }] },
-        { "id": 5002, "code": "M · Charcoal", "price": 389, "quantity": 18, "productId": 101, "attributes": [{ "id": 2, "attributeValue": "M", "relatedPropertyId": 1 }, { "id": 5, "attributeValue": "Charcoal", "relatedPropertyId": 2 }] },
-        { "id": 5003, "code": "L · Camel", "price": 389, "quantity": 10, "productId": 101, "images": [{ "id": 2, "image": "https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=1000&auto=format&fit=crop", "skuId": 5003 }], "attributes": [{ "id": 3, "attributeValue": "L", "relatedPropertyId": 1 }, { "id": 6, "attributeValue": "Camel", "relatedPropertyId": 2 }] },
-        { "id": 5004, "code": "XL · Camel", "price": 389, "quantity": 6, "productId": 101, "attributes": [{ "id": 4, "attributeValue": "XL", "relatedPropertyId": 1 }, { "id": 6, "attributeValue": "Camel", "relatedPropertyId": 2 }] }
-      ],
-      "reviews": [
-        { "id": 1, "rate": 5, "text": "Exceptional craftsmanship. The wool quality is extraordinary — warm without bulk. Worth every cent.", "userId": 1, "skuId": 5002, "createdAt": "2026-03-29T10:00:00.000Z" },
-        { "id": 2, "rate": 5, "text": "Exactly the investment piece I was looking for. The camel color is rich and sophisticated.", "userId": 2, "skuId": 5003, "createdAt": "2026-03-28T09:00:00.000Z" }
-      ],
-      "images": [
-        "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=1000&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=1000&auto=format&fit=crop"
-      ]
+      "categorySlug": "new-arrivals",
+      "type": "outerwear",
+      "price": 389,
+      "rating": 4.8,
+      "en": { "title": "Italian Wool Overcoat", "shortDescription": "Heavyweight Italian wool overcoat.", "longDescription": "Loro Piana virgin wool masterpiece." },
+      "ar": { "title": "معطف صوف إيطالي", "shortDescription": "معطف صوف إيطالي ثقيل.", "longDescription": "شرح مفصل للمعطف." }
     },
     {
       "id": 102,
-      "title": "Minimalist Linen Shirt",
       "slug": "minimalist-linen-shirt",
-      "shortDescription": "Relaxed-fit shirt in washed European linen.",
-      "longDescription": "Cut from premium Belgian linen with a lived-in softness from the first wear. Features a band collar, mother-of-pearl buttons, curved hem, and a relaxed silhouette that drapes beautifully. Pre-washed for zero shrinkage. The perfect warm-weather essential that only improves with age.",
       "thumbnail": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=1000&auto=format&fit=crop",
       "categoryId": 2,
-      "category": { "id": 2, "title": "Menswear", "slug": "menswear", "icon": "" },
-      "skus": [
-        { "id": 5101, "code": "S · White", "price": 129, "quantity": 24, "productId": 102 },
-        { "id": 5102, "code": "M · White", "price": 129, "quantity": 30, "productId": 102 },
-        { "id": 5103, "code": "L · Sand", "price": 129, "quantity": 20, "productId": 102 },
-        { "id": 5104, "code": "XL · Sand", "price": 129, "quantity": 14, "productId": 102 }
-      ],
-      "reviews": [
-        { "id": 3, "rate": 5, "text": "The linen is impeccable. Band collar adds a refined edge to a relaxed piece.", "userId": 1, "skuId": 5102, "createdAt": "2026-03-28T14:00:00.000Z" },
-        { "id": 4, "rate": 4, "text": "Beautiful drape and softness. Runs slightly oversized which I love.", "userId": 2, "skuId": 5103, "createdAt": "2026-03-26T08:30:00.000Z" }
-      ],
-      "images": ["https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=1000&auto=format&fit=crop"]
+      "categorySlug": "menswear",
+      "type": "shirts",
+      "price": 129,
+      "rating": 4.5,
+      "en": { "title": "Minimalist Linen Shirt", "shortDescription": "Washed European linen shirt.", "longDescription": "Premium linen staples." },
+      "ar": { "title": "قميص كتان بسيط", "shortDescription": "قميص كتان أوروبي مغسول.", "longDescription": "شرح باللغة العربية." }
     },
     {
       "id": 103,
-      "title": "Structured Wool Blazer",
       "slug": "structured-wool-blazer",
-      "shortDescription": "Single-breasted blazer in Japanese wool-blend fabric.",
-      "longDescription": "Precision-tailored from a Japanese wool-polyester blend with natural stretch. Notch lapel, two-button closure, patch pockets, and a half-canvas construction for shape that holds over time. Interior features a signature striped lining and internal media pocket. A cornerstone of the modern wardrobe.",
-      "thumbnail": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1000&auto=format&fit=crop",
+      "thumbnail": "https://images.unsplash.com/photo-1536766768598-e09213fdcf22?w=1000&auto=format&fit=crop",
       "categoryId": 2,
-      "category": { "id": 2, "title": "Menswear", "slug": "menswear", "icon": "" },
-      "skus": [
-        { "id": 5201, "code": "S · Navy", "price": 295, "quantity": 14, "productId": 103 },
-        { "id": 5202, "code": "M · Navy", "price": 295, "quantity": 20, "productId": 103 },
-        { "id": 5203, "code": "L · Black", "price": 295, "quantity": 16, "productId": 103 },
-        { "id": 5204, "code": "XL · Black", "price": 295, "quantity": 8, "productId": 103 }
-      ],
-      "reviews": [
-        { "id": 5, "rate": 5, "text": "The half-canvas construction gives this a luxury feel at an accessible price. Incredible value.", "userId": 1, "skuId": 5202, "createdAt": "2026-03-27T12:00:00.000Z" },
-        { "id": 6, "rate": 4, "text": "Sharp lines and excellent fabric. The natural stretch is a game-changer for all-day wear.", "userId": 2, "skuId": 5203, "createdAt": "2026-03-25T09:15:00.000Z" }
-      ],
-      "images": ["https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1000&auto=format&fit=crop"]
+      "categorySlug": "menswear",
+      "type": "outerwear",
+      "price": 295,
+      "rating": 4.7,
+      "en": { "title": "Structured Wool Blazer", "shortDescription": "Japanese wool-blend blazer.", "longDescription": "Precision tailoring." },
+      "ar": { "title": "سترة صوفية مهيكلة", "shortDescription": "سترة صوفية يابانية.", "longDescription": "شرح باللغة العربية." }
     },
     {
       "id": 104,
-      "title": "Selvedge Denim Jeans",
-      "slug": "selvedge-denim-jeans",
-      "shortDescription": "Slim-straight jeans in 14oz Japanese selvedge denim.",
-      "longDescription": "Woven on vintage shuttle looms in Okayama, Japan, this raw selvedge denim develops a unique patina over time. Features a slim-straight fit, hidden selvedge coin pocket, leather patch, and YKK hardware. Sanforized to minimize shrinkage. These are jeans built to tell your story.",
-      "thumbnail": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=1000&auto=format&fit=crop",
-      "categoryId": 4,
-      "category": { "id": 4, "title": "Essentials", "slug": "essentials", "icon": "" },
-      "skus": [
-        { "id": 5301, "code": "30 · Raw Indigo", "price": 189, "quantity": 22, "productId": 104 },
-        { "id": 5302, "code": "32 · Raw Indigo", "price": 189, "quantity": 28, "productId": 104 },
-        { "id": 5303, "code": "34 · Washed Black", "price": 189, "quantity": 18, "productId": 104 },
-        { "id": 5304, "code": "36 · Washed Black", "price": 189, "quantity": 12, "productId": 104 }
-      ],
-      "reviews": [
-        { "id": 7, "rate": 5, "text": "True Japanese selvedge quality. Three months in and the fading pattern is gorgeous.", "userId": 1, "skuId": 5302, "createdAt": "2026-03-25T11:00:00.000Z" },
-        { "id": 8, "rate": 5, "text": "Heavy weight denim that softens perfectly. My new everyday jeans.", "userId": 2, "skuId": 5301, "createdAt": "2026-03-22T14:20:00.000Z" }
-      ],
-      "images": ["https://images.unsplash.com/photo-1542272604-787c3835535d?w=1000&auto=format&fit=crop"]
+      "slug": "ribbed-silk-knit-dress",
+      "thumbnail": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1000&auto=format&fit=crop",
+      "categoryId": 3,
+      "categorySlug": "womenswear",
+      "type": "dresses",
+      "price": 245,
+      "rating": 4.9,
+      "en": { "title": "Ribbed Silk Knit Dress", "shortDescription": "Mulberry silk-cotton midi dress.", "longDescription": "Elegant mock neck." },
+      "ar": { "title": "فستان محبوك من الحرير المضلع", "shortDescription": "فستان ميدي من الحرير.", "longDescription": "شرح باللغة العربية." }
     },
     {
       "id": 105,
-      "title": "Draped Midi Dress",
-      "slug": "draped-midi-dress",
-      "shortDescription": "Fluid crepe midi dress with asymmetric draping.",
-      "longDescription": "An architectural piece in fluid Japanese crepe with a cowl neckline, asymmetric hem, and concealed back zip. The weighted drape creates effortless movement. Fully lined in silk. Equally striking for gallery openings and candlelit dinners.",
-      "thumbnail": "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=1000&auto=format&fit=crop",
-      "categoryId": 3,
-      "category": { "id": 3, "title": "Womenswear", "slug": "womenswear", "icon": "" },
-      "skus": [
-        { "id": 5401, "code": "XS · Black", "price": 245, "quantity": 16, "productId": 105 },
-        { "id": 5402, "code": "S · Black", "price": 245, "quantity": 22, "productId": 105 },
-        { "id": 5403, "code": "M · Burgundy", "price": 245, "quantity": 14, "productId": 105 },
-        { "id": 5404, "code": "L · Burgundy", "price": 245, "quantity": 10, "productId": 105 }
-      ],
-      "reviews": [
-        { "id": 9, "rate": 5, "text": "The drape is perfection. I've never felt more elegant. Photos don't do it justice.", "userId": 2, "skuId": 5402, "createdAt": "2026-03-24T16:00:00.000Z" },
-        { "id": 10, "rate": 5, "text": "Worth the investment. The silk lining and crepe quality are top-tier.", "userId": 1, "skuId": 5403, "createdAt": "2026-03-21T10:30:00.000Z" }
-      ],
-      "images": ["https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=1000&auto=format&fit=crop"]
+      "slug": "full-grain-leather-tote",
+      "thumbnail": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1000&auto=format&fit=crop",
+      "categoryId": 5,
+      "categorySlug": "accessories",
+      "type": "bags",
+      "price": 185,
+      "rating": 4.6,
+      "en": { "title": "Full-Grain Leather Tote", "shortDescription": "Handcrafted Italian leather tote.", "longDescription": "Spacious daily companion." },
+      "ar": { "title": "حقيبة يد من الجلد الطبيعي", "shortDescription": "حقيبة يد جلدية.", "longDescription": "شرح باللغة العربية." }
     },
     {
       "id": 106,
-      "title": "Cashmere Crew Sweater",
-      "slug": "cashmere-crew-sweater",
-      "shortDescription": "Lightweight Mongolian cashmere in a classic crew neck.",
-      "longDescription": "Knitted from Grade-A Mongolian cashmere with a fine 7-gauge knit for a luxurious hand feel without bulk. Features ribbed trims, saddle shoulder construction for a clean line, and a relaxed fit. The kind of essential that elevates everything you pair it with.",
-      "thumbnail": "https://images.unsplash.com/photo-1434389677669-e08b4cda3a66?w=1000&auto=format&fit=crop",
+      "slug": "raw-selvedge-denim",
+      "thumbnail": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=1000&auto=format&fit=crop",
       "categoryId": 4,
-      "category": { "id": 4, "title": "Essentials", "slug": "essentials", "icon": "" },
-      "skus": [
-        { "id": 5501, "code": "S · Heather Grey", "price": 215, "quantity": 18, "productId": 106 },
-        { "id": 5502, "code": "M · Heather Grey", "price": 215, "quantity": 24, "productId": 106 },
-        { "id": 5503, "code": "L · Navy", "price": 215, "quantity": 16, "productId": 106 },
-        { "id": 5504, "code": "XL · Ivory", "price": 215, "quantity": 10, "productId": 106 }
-      ],
-      "reviews": [
-        { "id": 11, "rate": 5, "text": "The softest sweater I've ever owned. Mongolian cashmere is on another level.", "userId": 2, "skuId": 5501, "createdAt": "2026-03-23T11:00:00.000Z" },
-        { "id": 12, "rate": 4, "text": "Bought three colors. The quality justifies the price completely.", "userId": 1, "skuId": 5503, "createdAt": "2026-03-19T08:00:00.000Z" }
-      ],
-      "images": ["https://images.unsplash.com/photo-1434389677669-e08b4cda3a66?w=1000&auto=format&fit=crop"]
+      "categorySlug": "essentials",
+      "type": "denim",
+      "price": 165,
+      "rating": 4.4,
+      "en": { "title": "Raw Selvedge Denim", "shortDescription": "Japanese indigo denim.", "longDescription": "Authentic selvedge." },
+      "ar": { "title": "دينيم خام بحواف منسوجة", "shortDescription": "جينز ياباني.", "longDescription": "شرح باللغة العربية." }
     },
     {
       "id": 107,
-      "title": "Leather Crossbody Bag",
-      "slug": "leather-crossbody-bag",
-      "shortDescription": "Vegetable-tanned leather crossbody with brass hardware.",
-      "longDescription": "Hand-finished from full-grain vegetable-tanned Italian leather that develops a rich patina over time. Features an adjustable strap, magnetic flap closure, internal organizer pockets, and solid brass hardware. Compact enough for essentials, refined enough for any occasion.",
-      "thumbnail": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=1000&auto=format&fit=crop",
-      "categoryId": 5,
-      "category": { "id": 5, "title": "Accessories", "slug": "accessories", "icon": "" },
-      "skus": [
-        { "id": 5601, "code": "One Size · Cognac", "price": 175, "quantity": 20, "productId": 107 },
-        { "id": 5602, "code": "One Size · Black", "price": 175, "quantity": 25, "productId": 107 }
-      ],
-      "reviews": [
-        { "id": 13, "rate": 5, "text": "The leather smell alone is worth it. Beautiful construction and aging.", "userId": 1, "skuId": 5601, "createdAt": "2026-03-22T09:00:00.000Z" }
-      ],
-      "images": ["https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=1000&auto=format&fit=crop"]
+      "slug": "cashmere-turtleneck",
+      "thumbnail": "https://images.unsplash.com/photo-1574167132714-d746e5306354?w=1000&auto=format&fit=crop",
+      "categoryId": 2,
+      "categorySlug": "menswear",
+      "type": "knitwear",
+      "price": 195,
+      "rating": 4.9,
+      "en": { "title": "Cashmere Turtleneck", "shortDescription": "100% Grade A Mongolian cashmere.", "longDescription": "Timeless luxury." },
+      "ar": { "title": "كنزة كشمير بياقة عالية", "shortDescription": "كنزة كشمير.", "longDescription": "شرح باللغة العربية." }
     },
     {
       "id": 108,
-      "title": "Tailored Chino Trousers",
-      "slug": "tailored-chino-trousers",
-      "shortDescription": "Slim-fit chinos in brushed stretch cotton twill.",
-      "longDescription": "Cut from a premium brushed cotton-elastane blend for comfort that moves with you. Features a mid-rise waist, slim tapered leg, coin pocket, and clean-finished interior seams. Pre-washed for softness and minimal shrinkage. The bridge between casual and dressed-up.",
-      "thumbnail": "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=1000&auto=format&fit=crop",
+      "slug": "leather-chelsea-boots",
+      "thumbnail": "https://images.unsplash.com/photo-1638609503417-66a9ba6f315a?w=1000&auto=format&fit=crop",
       "categoryId": 2,
-      "category": { "id": 2, "title": "Menswear", "slug": "menswear", "icon": "" },
-      "skus": [
-        { "id": 5701, "code": "30 · Stone", "price": 119, "quantity": 30, "productId": 108 },
-        { "id": 5702, "code": "32 · Stone", "price": 119, "quantity": 26, "productId": 108 },
-        { "id": 5703, "code": "34 · Olive", "price": 119, "quantity": 20, "productId": 108 },
-        { "id": 5704, "code": "36 · Navy", "price": 119, "quantity": 16, "productId": 108 }
-      ],
-      "reviews": [
-        { "id": 14, "rate": 4, "text": "Perfect fit. The brushed cotton has a luxury feel. My go-to work pants now.", "userId": 1, "skuId": 5702, "createdAt": "2026-03-20T13:00:00.000Z" },
-        { "id": 15, "rate": 5, "text": "Incredibly comfortable for all-day wear. The stretch is subtle and perfect.", "userId": 2, "skuId": 5703, "createdAt": "2026-03-18T15:45:00.000Z" }
-      ],
-      "images": ["https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=1000&auto=format&fit=crop"]
+      "categorySlug": "menswear",
+      "type": "footwear",
+      "price": 285,
+      "rating": 4.7,
+      "en": { "title": "Leather Chelsea Boots", "shortDescription": "Handcrafted Portuguese leather boots.", "longDescription": "Goodyear welted." },
+      "ar": { "title": "بوت تشيلسي جلدي", "shortDescription": "بوت تشيلسي جلدي.", "longDescription": "شرح باللغة العربية." }
     },
     {
       "id": 109,
-      "title": "Silk Blend Blouse",
-      "slug": "silk-blend-blouse",
-      "shortDescription": "Flowing blouse in a silk-viscose blend with concealed placket.",
-      "longDescription": "A refined blouse cut from a lustrous silk-viscose blend that drapes with understated elegance. Features a concealed button placket, French seams throughout, and a relaxed fit with gentle shirring at the cuffs. Equally beautiful tucked in or worn loose.",
-      "thumbnail": "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=1000&auto=format&fit=crop",
+      "slug": "architectural-silk-blouse",
+      "thumbnail": "https://images.unsplash.com/photo-1589156229687-496a31ad1d1f?w=1000&auto=format&fit=crop",
       "categoryId": 3,
-      "category": { "id": 3, "title": "Womenswear", "slug": "womenswear", "icon": "" },
-      "skus": [
-        { "id": 5801, "code": "XS · Ivory", "price": 159, "quantity": 18, "productId": 109 },
-        { "id": 5802, "code": "S · Ivory", "price": 159, "quantity": 22, "productId": 109 },
-        { "id": 5803, "code": "M · Blush", "price": 159, "quantity": 16, "productId": 109 },
-        { "id": 5804, "code": "L · Black", "price": 159, "quantity": 14, "productId": 109 }
-      ],
-      "reviews": [
-        { "id": 16, "rate": 5, "text": "The silk blend feels incredible on skin. The concealed placket is so elegant.", "userId": 2, "skuId": 5802, "createdAt": "2026-03-19T10:00:00.000Z" }
-      ],
-      "images": ["https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=1000&auto=format&fit=crop"]
+      "categorySlug": "womenswear",
+      "type": "separates",
+      "price": 175,
+      "rating": 4.8,
+      "en": { "title": "Architectural Silk Blouse", "shortDescription": "Modern silk crepe blouse.", "longDescription": "Sculptural silhouette." },
+      "ar": { "title": "بلوزة حريرية معمارية", "shortDescription": "بلوزة حريرية.", "longDescription": "شرح باللغة العربية." }
     },
     {
       "id": 110,
-      "title": "Merino Wool Scarf",
-      "slug": "merino-wool-scarf",
-      "shortDescription": "Oversized scarf in superfine Italian merino wool.",
-      "longDescription": "Woven in a heritage mill in Como, Italy, from superfine 19-micron merino wool. The generous dimensions allow for multiple styling options — from classic loop to shoulder wrap. Features hand-rolled edges and a subtle tonal herringbone pattern.",
-      "thumbnail": "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=1000&auto=format&fit=crop",
-      "categoryId": 5,
-      "category": { "id": 5, "title": "Accessories", "slug": "accessories", "icon": "" },
-      "skus": [
-        { "id": 5901, "code": "One Size · Charcoal", "price": 95, "quantity": 30, "productId": 110 },
-        { "id": 5902, "code": "One Size · Camel", "price": 95, "quantity": 25, "productId": 110 }
-      ],
-      "reviews": [
-        { "id": 17, "rate": 5, "text": "The herringbone pattern is subtle and beautiful. Incredibly warm yet light.", "userId": 1, "skuId": 5901, "createdAt": "2026-03-18T08:00:00.000Z" },
-        { "id": 18, "rate": 5, "text": "Italian merino quality is unbeatable. This scarf will last years.", "userId": 2, "skuId": 5902, "createdAt": "2026-03-15T12:00:00.000Z" }
-      ],
-      "images": ["https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=1000&auto=format&fit=crop"]
+      "slug": "minimalist-wool-trousers",
+      "thumbnail": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=1000&auto=format&fit=crop",
+      "categoryId": 3,
+      "categorySlug": "womenswear",
+      "type": "separates",
+      "price": 195,
+      "rating": 4.6,
+      "en": { "title": "Minimalist Wool Trousers", "shortDescription": "High-waisted cool wool trousers.", "longDescription": "Professional staples." },
+      "ar": { "title": "بنطال صوفي بسيط", "shortDescription": "بنطال صوفي.", "longDescription": "شرح باللغة العربية." }
     },
     {
       "id": 111,
-      "title": "Relaxed Cotton T-Shirt",
-      "slug": "relaxed-cotton-tshirt",
-      "shortDescription": "Heavyweight Supima cotton tee with a boxy cut.",
-      "longDescription": "Made from 8oz Supima cotton jersey — substantially heavier than standard tees for a premium drape and opacity. Features a boxy relaxed fit, ribbed crew neck, and double-needle hem. Garment-dyed for a rich, lived-in color that holds wash after wash.",
-      "thumbnail": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1000&auto=format&fit=crop",
-      "categoryId": 4,
-      "category": { "id": 4, "title": "Essentials", "slug": "essentials", "icon": "" },
-      "skus": [
-        { "id": 6001, "code": "S · White", "price": 59, "quantity": 40, "productId": 111 },
-        { "id": 6002, "code": "M · White", "price": 59, "quantity": 45, "productId": 111 },
-        { "id": 6003, "code": "L · Black", "price": 59, "quantity": 35, "productId": 111 },
-        { "id": 6004, "code": "XL · Sage", "price": 59, "quantity": 20, "productId": 111 }
-      ],
-      "reviews": [
-        { "id": 19, "rate": 5, "text": "The weight of this tee is perfect. Feels substantial without being stiff.", "userId": 1, "skuId": 6002, "createdAt": "2026-03-17T14:00:00.000Z" },
-        { "id": 20, "rate": 5, "text": "Bought 5 colors. Best basic tee I've ever found at this price point.", "userId": 2, "skuId": 6001, "createdAt": "2026-03-14T09:30:00.000Z" }
-      ],
-      "images": ["https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1000&auto=format&fit=crop"]
+      "slug": "canvas-leather-weekend-bag",
+      "thumbnail": "https://images.unsplash.com/photo-1547949003-9792a18a2601?w=1000&auto=format&fit=crop",
+      "categoryId": 5,
+      "categorySlug": "accessories",
+      "type": "bags",
+      "price": 215,
+      "rating": 4.7,
+      "en": { "title": "Canvas & Leather Weekend Bag", "shortDescription": "Heavy cotton canvas with leather accents.", "longDescription": "Durable travel bag." },
+      "ar": { "title": "حقيبة عطلة نهاية الأسبوع", "shortDescription": "حقيبة عطلة نهاية الأسبوع.", "longDescription": "شرح باللغة العربية." }
     },
     {
       "id": 112,
-      "title": "Oversized Trench Coat",
-      "slug": "oversized-trench-coat",
-      "shortDescription": "Modern oversized trench in water-repellent cotton gabardine.",
-      "longDescription": "Reimagining the classic trench with an oversized silhouette cut from dense cotton gabardine with DWR water-repellent finish. Features storm flap, gun patch, D-ring belt, and raglan sleeves. Horn buttons and a Bemberg cupro lining complete the luxury specification.",
-      "thumbnail": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1000&auto=format&fit=crop",
-      "categoryId": 1,
-      "category": { "id": 1, "title": "New Arrivals", "slug": "new-arrivals", "icon": "" },
-      "skus": [
-        { "id": 6101, "code": "S · Khaki", "price": 345, "quantity": 10, "productId": 112 },
-        { "id": 6102, "code": "M · Khaki", "price": 345, "quantity": 14, "productId": 112 },
-        { "id": 6103, "code": "L · Stone", "price": 345, "quantity": 8, "productId": 112 }
-      ],
-      "reviews": [
-        { "id": 21, "rate": 5, "text": "The oversized cut is perfectly proportioned. Instantly elevates any outfit.", "userId": 2, "skuId": 6102, "createdAt": "2026-03-16T11:00:00.000Z" }
-      ],
-      "images": ["https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1000&auto=format&fit=crop"]
+      "slug": "supima-cotton-lounge-set",
+      "thumbnail": "https://images.unsplash.com/photo-1516762689164-8239d562339d?w=1000&auto=format&fit=crop",
+      "categoryId": 4,
+      "categorySlug": "essentials",
+      "type": "lounge",
+      "price": 145,
+      "rating": 4.5,
+      "en": { "title": "Supima Cotton Lounge Set", "shortDescription": "Ultra-soft Supima cotton set.", "longDescription": "Elevated indoor living." },
+      "ar": { "title": "طقم ملابس مريحة قطن سوبيما", "shortDescription": "طقم ملابس مريحة.", "longDescription": "شرح باللغة العربية." }
     }
   ],
   "orders": [
     {
-      "id": 1001,
-      "status": "delivered",
-      "trackingCode": "BL-TRK-A7X29F",
-      "addressId": 1,
+      "id": "ORD-2026-001",
       "userId": 1,
-      "createdAt": "2026-03-15T08:30:00.000Z",
-      "updatedAt": "2026-03-20T14:00:00.000Z",
-      "totalAmount": 578,
-      "itemCount": 2,
-      "items": [
-        { "id": 1, "quantity": 1, "orderId": 1001, "skuId": 5002, "priceAtPurchase": 389, "subTotal": 389, "productTitle": "Italian Wool Overcoat", "productImage": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=1000&auto=format&fit=crop" },
-        { "id": 2, "quantity": 1, "orderId": 1001, "skuId": 5302, "priceAtPurchase": 189, "subTotal": 189, "productTitle": "Selvedge Denim Jeans", "productImage": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=1000&auto=format&fit=crop" }
-      ]
-    },
-    {
-      "id": 1002,
-      "status": "shipped",
-      "trackingCode": "BL-TRK-K4M81Q",
-      "addressId": 1,
-      "userId": 1,
-      "createdAt": "2026-03-25T10:15:00.000Z",
-      "updatedAt": "2026-03-27T09:00:00.000Z",
-      "totalAmount": 295,
-      "itemCount": 1,
-      "items": [
-        { "id": 3, "quantity": 1, "orderId": 1002, "skuId": 5202, "priceAtPurchase": 295, "subTotal": 295, "productTitle": "Structured Wool Blazer", "productImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1000&auto=format&fit=crop" }
-      ]
-    },
-    {
-      "id": 1003,
-      "status": "processing",
-      "trackingCode": null,
-      "addressId": 1,
-      "userId": 1,
-      "createdAt": "2026-03-28T16:45:00.000Z",
-      "updatedAt": "2026-03-28T16:45:00.000Z",
-      "totalAmount": 489,
-      "itemCount": 2,
-      "items": [
-        { "id": 4, "quantity": 1, "orderId": 1003, "skuId": 5402, "priceAtPurchase": 245, "subTotal": 245, "productTitle": "Draped Midi Dress", "productImage": "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=1000&auto=format&fit=crop" },
-        { "id": 5, "quantity": 1, "orderId": 1003, "skuId": 5502, "priceAtPurchase": 215, "subTotal": 215, "productTitle": "Cashmere Crew Sweater", "productImage": "https://images.unsplash.com/photo-1434389677669-e08b4cda3a66?w=1000&auto=format&fit=crop" }
-      ]
-    },
-    {
-      "id": 1004,
+      "date": "2026-04-05T14:30:00Z",
       "status": "pending",
-      "trackingCode": null,
-      "addressId": 1,
-      "userId": 1,
-      "createdAt": "2026-03-30T07:00:00.000Z",
-      "updatedAt": "2026-03-30T07:00:00.000Z",
-      "totalAmount": 175,
-      "itemCount": 1,
+      "total": 518,
       "items": [
-        { "id": 6, "quantity": 1, "orderId": 1004, "skuId": 5601, "priceAtPurchase": 175, "subTotal": 175, "productTitle": "Leather Crossbody Bag", "productImage": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=1000&auto=format&fit=crop" }
+        { "productId": 101, "quantity": 1, "price": 389, "title": { "en": "Italian Wool Overcoat", "ar": "معطف صوف إيطالي" }, "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=400&auto=format&fit=crop" }
       ]
+    },
+    {
+      "id": "ORD-2026-002",
+      "userId": 1,
+      "date": "2026-04-04T10:15:00Z",
+      "status": "processing",
+      "total": 295,
+      "items": [
+        { "productId": 103, "quantity": 1, "price": 295, "title": { "en": "Structured Wool Blazer", "ar": "سترة صوفية مهيكلة" }, "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop" }
+      ]
+    },
+    {
+      "id": "ORD-2026-003",
+      "userId": 1,
+      "date": "2026-04-03T16:45:00Z",
+      "status": "shipped",
+      "total": 389,
+      "items": [
+        { "productId": 101, "quantity": 1, "price": 389, "title": { "en": "Italian Wool Overcoat", "ar": "معطف صوف إيطالي" }, "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=400&auto=format&fit=crop" }
+      ]
+    },
+    {
+      "id": "ORD-2026-004",
+      "userId": 1,
+      "date": "2026-03-28T09:00:00Z",
+      "status": "delivered",
+      "total": 129,
+      "items": [
+        { "productId": 102, "quantity": 1, "price": 129, "title": { "en": "Minimalist Linen Shirt", "ar": "قميص كتان بسيط" }, "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&auto=format&fit=crop" }
+      ]
+    },
+    {
+      "id": "ORD-2026-005",
+      "userId": 1,
+      "date": "2026-03-25T11:20:00Z",
+      "status": "cancelled",
+      "total": 295,
+      "items": [
+        { "productId": 103, "quantity": 1, "price": 295, "title": { "en": "Structured Wool Blazer", "ar": "سترة صوفية مهيكلة" }, "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop" }
+      ]
+    }
+  ],
+  "blogs": [
+    {
+      "id": 1,
+      "slug": "art-of-modern-tailoring",
+      "author": "Marcus Sterling",
+      "authorImage": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
+      "date": "April 05, 2026",
+      "category": "Design",
+      "image": "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=1200&auto=format&fit=crop",
+      "readingTime": "6 min read",
+      "relatedProductIds": [101, 103, 110],
+      "en": {
+        "title": "The Art of Modern Tailoring",
+        "excerpt": "Crafting the perfect silhouette through Japanese precision and Italian heritage.",
+        "content": "<p class='lead'>Tailoring is more than just construction; it is an architectural dialogue between the body and the fabric. In this editorial, we explore the meticulous process behind our seasonal outerwear collection.</p><h3>The Material Source</h3><p>Our journey begins in the historic mills of Biella, Italy, where the world's finest virgin wool is woven. We select weights that offer structure without rigidity, allowing the garment to move with the wearer.</p><h3>Japanese Precision</h3><p>While our fabrics are Italian, our construction methodology is deeply rooted in Japanese minimalism. Every shoulder seam, every internal canvas, and every hand-finished buttonhole is considered.</p><ul><li>Double-faced wool construction for seamless warmth</li><li>Floating canvas for natural drape over time</li><li>Sustainable horn buttons sourced from ethical producers</li></ul>"
+      },
+      "ar": {
+        "title": "فن التفصيل الحديث",
+        "excerpt": "صياغة المظهر المثالي من خلال الدقة اليابانية والتراث الإيطالي.",
+        "content": "<p class='lead'>التفصيل هو أكثر من مجرد بناء؛ إنه حوار معماري بين الجسد والقماش. في هذه الافتتاحية، نستكشف العملية الدقيقة وراء مجموعة الملابس الخارجية الموسمية لدينا.</p><h3>مصدر المادة</h3><p>تبدأ رحلتنا في المصانع التاريخية في بييلا، إيطاليا، حيث يتم نسج أفضل صوف بكر في العالم. نختار الأوزان التي توفر الهيكل دون صلابة.</p><h3>الدقة اليابانية</h3><p>بينما أقمشتنا إيطالية، فإن منهجية البناء لدينا متجذرة بعمق في البساطة اليابانية. يتم النظر في كل خط كتف، وكل قطعة داخلية، وكل عروة زر مشطبة يدوياً.</p>"
+      }
+    },
+    {
+      "id": 2,
+      "slug": "minimalist-capsule-wardrobe",
+      "author": "Elena Rossi",
+      "authorImage": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
+      "date": "April 02, 2026",
+      "category": "Lifestyle",
+      "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=1200&auto=format&fit=crop",
+      "readingTime": "4 min read",
+      "relatedProductIds": [102, 106, 112],
+      "en": {
+        "title": "Building a Minimalist Capsule Wardrobe",
+        "excerpt": "Simplify your morning routine with intentionally selected essentials.",
+        "content": "<p>The concept of a capsule wardrobe is not about restriction—it's about freedom. By choosing fewer, better pieces, you create a modular system where everything works together.</p><h3>The Foundation</h3><p>Start with the pieces that touch your skin. Our Supima cotton basics and raw selvedge denim form the core of any functional wardrobe. These are the workhorses that age beautifully and never go out of style.</p><h3>Interchangeability</h3><p>A true capsule relies on a consistent color palette. We focus on earthy neutrals, deep indigos, and crisp whites to ensure that regardless of what you pull from the rack, the combination is intentional.</p>"
+      },
+      "ar": {
+        "title": "بناء خزانة ملابس بسيطة",
+        "excerpt": "بسط روتينك الصباحي مع أساسيات مختارة بعناية.",
+        "content": "<p>مفهوم خزانة الملابس المصغرة لا يتعلق بالتقييد بل بالحرية. من خلال اختيار قطع أقل وأفضل، فإنك تخلق نظاماً معيارياً حيث يعمل كل شيء معاً.</p>"
+      }
+    },
+    {
+      "id": 3,
+      "slug": "sustainable-luxury",
+      "author": "Julian Vane",
+      "authorImage": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
+      "date": "March 28, 2026",
+      "category": "Philosophy",
+      "image": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1200&auto=format&fit=crop",
+      "readingTime": "8 min read",
+      "relatedProductIds": [104, 107, 109, 105],
+      "en": {
+        "title": "Sustainable Luxury: The New Paradigm",
+        "excerpt": "Why ethical craftsmanship is the ultimate expression of refinement.",
+        "content": "<p>Luxury in the 21st century is defined by transparency. Knowing who made your clothes and the environmental impact of the fibers is as essential as the design itself.</p><h3>Mulberry Silk & Mongolian Cashmere</h3><p>We work directly with cooperatives to source our natural fibers. This direct-to-mill approach ensures fair wages for artisans and the preservation of traditional pastoral methods.</p><h3>Beyond the Garment</h3><p>Sustainability extends to our packaging and longevity. Our wool trousers and silk blouses are designed to be repaired, not replaced, fostering a circular approach to fashion.</p>"
+      },
+      "ar": {
+        "title": "الفخامة المستدامة: النموذج الجديد",
+        "excerpt": "لماذا تعتبر الحرفية الأخلاقية التعبير النهائي عن الرقي.",
+        "content": "<p>يتم تعريف الفخامة في القرن الحادي والعشرين من خلال الشفافية. معرفة من صنع ملابسك والأثر البيئي للألياف أمر ضروري تماماً مثل التصميم نفسه.</p>"
+      }
+    }
+  ],
+
+  "testimonials": [
+    {
+      "id": 1,
+      "en": { "quote": "Quality is apparent.", "author": "James W." },
+      "ar": { "quote": "جودة واضحة.", "author": "جيمس و." }
     }
   ]
 }

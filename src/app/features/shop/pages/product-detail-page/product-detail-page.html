@@ -8,7 +8,7 @@
       <a routerLink="/shop" class="transition hover:text-brand-primary">{{ 'nav.shop' | transloco }}</a>
       @if (product(); as p) {
         <fa-icon [icon]="icons.chevronRight" class="text-[8px]"></fa-icon>
-        <span class="text-brand-primary">{{ p.title }}</span>
+        <span class="text-brand-primary">{{ p[activeLang()]?.['title'] }}</span>
       }
     </nav>
 
@@ -33,7 +33,7 @@
           <div class="aspect-[3/4] overflow-hidden rounded-2xl bg-brand-bg-light">
             <img
               [src]="currentImage()"
-              [alt]="p.title"
+              [alt]="p[activeLang()]?.['title']"
               class="h-full w-full object-cover transition-all duration-500"
               loading="eager"
             />
@@ -48,7 +48,7 @@
                   [class.border-transparent]="selectedImageIndex() !== i"
                   [class.opacity-50]="selectedImageIndex() !== i"
                 >
-                  <img [src]="img" [alt]="p.title" class="h-full w-full object-cover" />
+                  <img [src]="img" [alt]="p[activeLang()]?.['title']" class="h-full w-full object-cover" />
                 </button>
               }
             </div>
@@ -59,9 +59,9 @@
         <div class="flex flex-col gap-6">
           <!-- Category & Title -->
           <div>
-            <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-primary/40">{{ p.category?.title || 'Premium' }}</span>
-            <h1 class="mt-2 text-2xl font-bold text-brand-primary lg:text-3xl">{{ p.title }}</h1>
-            <p class="mt-3 text-sm leading-relaxed text-brand-primary/65">{{ p.shortDescription }}</p>
+            <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-primary/40">{{ p.category?.[activeLang()]?.['title'] || 'Premium' }}</span>
+            <h1 class="mt-2 text-2xl font-bold text-brand-primary lg:text-3xl">{{ p[activeLang()]?.['title'] }}</h1>
+            <p class="mt-3 text-sm leading-relaxed text-brand-primary/65">{{ p[activeLang()]?.['shortDescription'] }}</p>
           </div>
 
           <!-- Rating -->
@@ -231,7 +231,7 @@
 
         @if (activeTab() === 'description') {
           <div class="max-w-3xl">
-            <p class="text-sm leading-loose text-brand-primary/75">{{ p.longDescription }}</p>
+            <p class="text-sm leading-loose text-brand-primary/75">{{ p[activeLang()]?.['longDescription'] }}</p>
           </div>
         } @else {
           <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -266,15 +266,10 @@
           <h2 class="mb-8 text-xl font-bold text-brand-primary">{{ 'product.relatedProducts' | transloco }}</h2>
           <div class="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
             @for (related of relatedProducts(); track related.id) {
-              <a [routerLink]="['/product', related.id]" class="group">
-                <div class="aspect-[3/4] overflow-hidden rounded-2xl bg-brand-bg-light">
-                  <img [src]="related.image" [alt]="related.title" class="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
-                </div>
-                <div class="mt-3">
-                  <h3 class="line-clamp-1 text-sm font-semibold text-brand-primary group-hover:text-brand-accent transition-colors">{{ related.title }}</h3>
-                  <p class="mt-1 text-sm font-bold text-brand-primary">{{ related.price | currency: 'EGP' : '£' : '1.2-2' }}</p>
-                </div>
-              </a>
+              <app-product-card
+                [product]="related"
+                (onAddToCart)="cartStore.addToCart($event)"
+              ></app-product-card>
             }
           </div>
         </section>
