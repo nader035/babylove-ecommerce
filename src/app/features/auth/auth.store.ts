@@ -106,7 +106,30 @@ export const AuthStore = signalStore(
       ),
     ),
 
-    // 4. تسجيل الخروج (LogOut)
+    // 4. تحديث الحساب (Update Profile)
+    updateProfile: rxMethod<{ id: number; data: Partial<User> }>(
+      pipe(
+        tap(() => patchState(store, { isLoading: true, error: null })),
+        switchMap(({ id, data }) =>
+          authService.updateUser(id, data).pipe(
+            tapResponse({
+              next: (updatedUser) => {
+                patchState(store, { user: updatedUser, isLoading: false });
+                localStorage.setItem('user', JSON.stringify(updatedUser));
+              },
+              error: (error: any) => {
+                patchState(store, {
+                  error: 'Failed to update profile. Please try again.',
+                  isLoading: false,
+                });
+              },
+            }),
+          ),
+        ),
+      ),
+    ),
+
+    // 5. تسجيل الخروج (LogOut)
     logOut() {
       localStorage.removeItem('token');
       localStorage.removeItem('user');

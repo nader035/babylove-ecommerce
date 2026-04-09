@@ -1,4 +1,17 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "username": "nader",
+      "firstName": "Nader",
+      "lastName": "Mohamedd",
+      "email": "nader@babylove.com",
+      "password": "password123",
+      "phoneNumber": "+20 100 123 4567",
+      "image": "assets/images/nader.jpg",
+      "gender": "male"
+    }
+  ],
   "categories": [
     {
       "id": 1,

@@ -25,66 +25,67 @@
         <!-- Items Column -->
         <div class="lg:col-span-8">
           <div class="space-y-6">
-            <!-- Table Headers (Desktop) -->
-            <div class="hidden border-b border-brand-primary/10 pb-4 md:grid md:grid-cols-[100px,1fr,140px,120px,40px] md:gap-6 md:items-center">
-              <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-primary/30">{{ 'product.details' | transloco }}</span>
-              <span></span>
-              <span class="text-center text-[10px] font-bold uppercase tracking-[0.2em] text-brand-primary/30">{{ 'product.quantity' | transloco }}</span>
-              <span class="text-end text-[10px] font-bold uppercase tracking-[0.2em] text-brand-primary/30">{{ 'cart.lineTotal' | transloco }}</span>
-              <span></span>
-            </div>
-
             @for (line of cartStore.items(); track line.id) {
-              <article class="group relative grid items-center gap-6 rounded-2xl border border-brand-primary/8 bg-white p-5 transition-all hover:border-brand-primary/20 hover:shadow-md md:grid-cols-[100px,1fr,140px,120px,40px]">
+              <article class="group relative flex flex-col gap-4 rounded-[1.25rem] border border-brand-primary/10 bg-white p-3 pr-4 shadow-sm transition-all hover:border-brand-primary/25 hover:shadow-md sm:flex-row sm:items-center sm:gap-6">
                 <!-- Image -->
-                <a [routerLink]="['/product', line.product.id]" class="relative block aspect-[3/4] overflow-hidden rounded-xl bg-brand-bg-light">
-                  <img [src]="line.product.image" [alt]="line.product[activeLang()]?.['title']" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                <a [routerLink]="['/product', line.product.id]" class="relative block h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-brand-bg-light sm:h-28 sm:w-24">
+                  <img [src]="line.product.image" [alt]="line.product[activeLang()]?.['title']" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 </a>
 
-                <!-- Info -->
-                <div class="flex flex-col">
-                  <a [routerLink]="['/product', line.product.id]" class="text-sm font-bold text-brand-primary hover:text-brand-accent transition-colors leading-snug">
-                    {{ line.product[activeLang()]?.['title'] }}
-                  </a>
-                  <p class="mt-1 text-xs font-medium text-brand-primary/40">
-                    {{ line.product.price | currency: 'EGP' : '£' : '1.2-2' }} <span class="text-[10px] uppercase tracking-wider opacity-60 ml-1">{{ 'cart.perItem' | transloco }}</span>
-                  </p>
-                  <!-- SKU info placeholder if needed -->
-                  <div class="mt-3 flex gap-2">
-                    <span class="rounded bg-brand-bg-light px-2 py-0.5 text-[9px] font-bold uppercase tracking-widest text-brand-primary/50">Standard Fit</span>
+                <!-- Content Flex Area -->
+                <div class="flex flex-1 flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <!-- Info -->
+                  <div class="flex flex-1 flex-col">
+                    <a [routerLink]="['/product', line.product.id]" class="text-sm font-bold leading-snug text-brand-primary transition-colors hover:text-brand-accent line-clamp-1">
+                      {{ line.product[activeLang()]?.['title'] }}
+                    </a>
+                    <p class="mt-1 text-xs font-semibold text-brand-primary/60">
+                      {{ line.product.price | currency: 'EGP' : '£' : '1.2-2' }}
+                    </p>
+                    <div class="mt-2.5">
+                      <span class="inline-flex items-center rounded-md bg-brand-bg-light px-2 py-1 text-[9px] font-black uppercase tracking-widest text-brand-primary/50">
+                        Standard Fit
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                <!-- Quantity -->
-                <div class="flex items-center justify-center">
-                  <div class="inline-flex items-center rounded-lg border border-brand-primary/10 bg-brand-bg-light/50 p-1">
+                  <!-- Actions & Pricing Wrap -->
+                  <div class="flex items-center justify-between gap-6 sm:w-auto">
+                    <!-- Quantity -->
+                    <div class="flex items-center">
+                      <div class="inline-flex items-center rounded-lg border border-brand-primary/10 bg-brand-bg-light/40 p-1">
+                        <button 
+                          class="flex h-7 w-7 items-center justify-center rounded-md bg-transparent text-brand-primary/50 transition-all hover:bg-white hover:text-brand-primary hover:shadow-sm active:scale-95 disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:shadow-none" 
+                          (click)="cartStore.updateQuantity(line.product.id, line.quantity - 1)"
+                          [disabled]="line.quantity <= 1"
+                        >
+                          <fa-icon [icon]="icons.minus" class="text-[10px]"></fa-icon>
+                        </button>
+                        <span class="w-8 text-center text-xs font-bold text-brand-primary">{{ line.quantity }}</span>
+                        <button 
+                          class="flex h-7 w-7 items-center justify-center rounded-md bg-transparent text-brand-primary/50 transition-all hover:bg-white hover:text-brand-primary hover:shadow-sm active:scale-95" 
+                          (click)="cartStore.updateQuantity(line.product.id, line.quantity + 1)"
+                        >
+                          <fa-icon [icon]="icons.plus" class="text-[10px]"></fa-icon>
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- Line Total -->
+                    <div class="w-24 text-end">
+                      <span class="text-[15px] font-black text-brand-primary">
+                        {{ line.product.price * line.quantity | currency: 'EGP' : '£' : '1.2-2' }}
+                      </span>
+                    </div>
+
+                    <!-- Remove -->
                     <button 
-                      class="flex h-8 w-8 items-center justify-center rounded-md text-brand-primary/40 transition hover:bg-white hover:text-brand-primary hover:shadow-sm" 
-                      (click)="cartStore.updateQuantity(line.product.id, line.quantity - 1)"
-                      [disabled]="line.quantity <= 1"
+                      class="flex h-8 w-8 items-center justify-center rounded-full text-brand-primary/30 transition-all hover:bg-red-50 hover:text-red-500 hover:shadow-sm" 
+                      (click)="removeItem(line.product.id, line.product[activeLang()]?.['title'] || '')"
                     >
-                      <fa-icon [icon]="icons.minus" class="text-[9px]"></fa-icon>
-                    </button>
-                    <span class="w-10 text-center text-xs font-bold text-brand-primary">{{ line.quantity }}</span>
-                    <button 
-                      class="flex h-8 w-8 items-center justify-center rounded-md text-brand-primary/40 transition hover:bg-white hover:text-brand-primary hover:shadow-sm" 
-                      (click)="cartStore.updateQuantity(line.product.id, line.quantity + 1)"
-                    >
-                      <fa-icon [icon]="icons.plus" class="text-[9px]"></fa-icon>
+                      <fa-icon [icon]="icons.trash" class="text-xs"></fa-icon>
                     </button>
                   </div>
-                </div>
-
-                <!-- Line Total -->
-                <div class="text-end">
-                  <span class="text-sm font-bold text-brand-primary">{{ line.product.price * line.quantity | currency: 'EGP' : '£' : '1.2-2' }}</span>
-                </div>
-
-                <!-- Remove -->
-                <div class="flex justify-end">
-                  <button class="flex h-9 w-9 items-center justify-center rounded-full text-brand-primary/20 transition hover:bg-red-50 hover:text-red-500" (click)="removeItem(line.product.id, line.product[activeLang()]?.['title'] || '')">
-                    <fa-icon [icon]="icons.trash" class="text-xs"></fa-icon>
-                  </button>
                 </div>
               </article>
             }

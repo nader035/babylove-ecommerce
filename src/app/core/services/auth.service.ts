@@ -41,4 +41,8 @@ export class AuthService {
         }),
       );
   }
+
+  updateUser(id: number, data: Partial<User>): Observable<User> {
+    return this.http.patch<User>(`${this.apiUrl}/${id}`, data).pipe(delay(500));
+  }
 }
