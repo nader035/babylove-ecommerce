@@ -74,23 +74,49 @@ export const ShopStore = signalStore(
 
         availableTypeOptions: computed(() => {
           const lang = activeLang();
-          const model = categoryModels().find((c) => c.slug === activeCategory());
+          const categories = categoryModels();
+          const model = categories.find((c) => c.slug === activeCategory());
+
+          const allOption = [{ value: 'all', label: '' }];
+
+          const localizedTypeByCanonical = new Map<string, string>();
+          for (const cat of categories) {
+            const englishTypes = cat.en?.types ?? [];
+            const localizedTypes = (lang === 'ar' ? cat.ar?.types : cat.en?.types) ?? [];
+
+            englishTypes.forEach((englishType: string, index: number) => {
+              const key = englishType.toLowerCase();
+              if (!localizedTypeByCanonical.has(key)) {
+                localizedTypeByCanonical.set(key, localizedTypes[index] ?? englishType);
+              }
+            });
+          }
 
           if (model && model[lang]?.['types']) {
-            return model[lang]['types'].map((label: string) => ({
-              value: label.toLowerCase(),
-              label,
-            }));
+            const localizedTypes = model[lang]['types'];
+            const englishTypes = model.en?.types ?? [];
+
+            return [
+              ...allOption,
+              ...localizedTypes.map((label: string, index: number) => ({
+                // Keep value canonical regardless of UI language, so filters keep working after lang switch.
+                value: (englishTypes[index] ?? label).toLowerCase(),
+                label,
+              })),
+            ];
           }
 
           // Global fallback (un-sorted unique types from current products)
           const unique = new Set(products().map((p) => p.type));
-          return Array.from(unique)
-            .filter((t) => t !== '')
-            .map((type) => ({
-              value: type.toLowerCase(),
-              label: type,
-            }));
+          return [
+            ...allOption,
+            ...Array.from(unique)
+              .filter((t) => t !== '')
+              .map((type) => ({
+                value: type.toLowerCase(),
+                label: localizedTypeByCanonical.get(type.toLowerCase()) ?? type,
+              })),
+          ];
         }),
 
         filteredProducts: computed(() => {

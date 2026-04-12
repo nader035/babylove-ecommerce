@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { AuthResponse, LoginParams, SignUpParams, User } from '../models/iuser';
+import { AuthResponse, LoginParams, SignUpParams, User, UserPreferences } from '../models/iuser';
 import { catchError, delay, map, Observable, of } from 'rxjs';
 
 type ApiAuthEnvelope = {
@@ -19,26 +19,38 @@ export class AuthService {
   private usersApi = environment.usersApi;
 
   register(userData: SignUpParams): Observable<AuthResponse> {
-    const newUser = {
+    const baseUser = {
       ...userData,
       image: 'https://robohash.org/' + userData.username,
+      preferences: {
+        language: 'en' as const,
+        currency: 'USD' as const,
+      },
+    };
+
+    const mockUser = {
+      ...baseUser,
+      // json-server v1 on this setup resolves /users/:id writes only with string IDs.
+      id: crypto.randomUUID(),
     };
 
     if (environment.useMockApi) {
-      return this.http.post<User>(this.usersApi, newUser).pipe(
+      return this.http.post<User>(this.usersApi, mockUser).pipe(
         delay(1000),
         map((user) => this.toAuthResponse({ user, accessToken: this.mockToken() })),
       );
     }
 
-    return this.http.post<ApiAuthEnvelope | AuthResponse>(`${this.authApi}/register`, newUser).pipe(
-      map((response) => this.toAuthResponse(response)),
-      catchError(() =>
-        this.http
-          .post<User>(this.usersApi, newUser)
-          .pipe(map((user) => this.toAuthResponse({ user, accessToken: this.mockToken() }))),
-      ),
-    );
+    return this.http
+      .post<ApiAuthEnvelope | AuthResponse>(`${this.authApi}/register`, baseUser)
+      .pipe(
+        map((response) => this.toAuthResponse(response)),
+        catchError(() =>
+          this.http
+            .post<User>(this.usersApi, mockUser)
+            .pipe(map((user) => this.toAuthResponse({ user, accessToken: this.mockToken() }))),
+        ),
+      );
   }
 
   checkEmailExists(email: string): Observable<boolean> {
@@ -63,6 +75,10 @@ export class AuthService {
 
   updateUser(id: number, data: Partial<User>): Observable<User> {
     return this.http.patch<User>(`${this.usersApi}/${id}`, data).pipe(delay(500));
+  }
+
+  updatePreferences(id: number, preferences: UserPreferences): Observable<User> {
+    return this.http.patch<User>(`${this.usersApi}/${id}`, { preferences }).pipe(delay(500));
   }
 
   private loginWithMockQuery(credentials: LoginParams): Observable<AuthResponse> {

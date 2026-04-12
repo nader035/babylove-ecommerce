@@ -7,7 +7,7 @@ import {
   inject,
 } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ShopStore, ShopQueryState } from '../../shop.store';
 import { CartStore } from '../../../../../../core/stores/cart.store';
@@ -26,6 +26,7 @@ import { Subscription } from 'rxjs';
 export class ShopPage implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private location = inject(Location);
   preferencesStore = inject(PreferencesStore);
   shopStore = inject(ShopStore);
   cartStore = inject(CartStore);
@@ -139,7 +140,7 @@ export class ShopPage implements OnInit, OnDestroy {
     const sort = this.shopStore.sortBy();
     const page = this.shopStore.page();
 
-    this.router.navigate([], {
+    const urlTree = this.router.createUrlTree([], {
       relativeTo: this.route,
       queryParams: {
         category: category === 'all' ? null : category,
@@ -149,7 +150,7 @@ export class ShopPage implements OnInit, OnDestroy {
         page: page > 1 ? page : null,
       },
       queryParamsHandling: '',
-      replaceUrl: true,
     });
+    this.location.replaceState(this.router.serializeUrl(urlTree));
   }
 }

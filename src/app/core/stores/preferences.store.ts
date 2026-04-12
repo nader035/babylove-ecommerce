@@ -1,5 +1,6 @@
 import { computed } from '@angular/core';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
+import { UserPreferences } from '../models/iuser';
 
 type PreferencesState = {
   language: 'en' | 'ar';
@@ -38,6 +39,20 @@ export const PreferencesStore = signalStore(
     currencyLabel: computed(() => currency()),
   })),
   withMethods((store) => ({
+    hydrateFromUser(preferences?: Partial<UserPreferences>) {
+      if (!preferences) {
+        return;
+      }
+
+      const next = {
+        language: preferences.language ?? store.language(),
+        currency: preferences.currency ?? store.currency(),
+      };
+
+      patchState(store, next);
+      writePreferences(next);
+    },
+
     setLanguage(language: 'en' | 'ar') {
       patchState(store, { language });
       writePreferences({

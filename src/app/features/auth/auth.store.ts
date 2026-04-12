@@ -2,18 +2,21 @@ import { computed, inject } from '@angular/core';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { tapResponse } from '@ngrx/operators';
-import { pipe, switchMap, tap } from 'rxjs';
-import { User, SignUpParams, LoginParams } from '../../core/models/iuser';
+import { EMPTY, pipe, switchMap, tap } from 'rxjs';
+import { User, SignUpParams, LoginParams, UserPreferences } from '../../core/models/iuser';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { AuthSessionService } from '../../core/services/auth-session.service';
+import { PreferencesStore } from '../../core/stores/preferences.store';
 
 export type AuthState = {
   user: User | null;
   tempEmail: string | null;
   token: string | null;
   isLoading: boolean;
+  isSavingPreferences: boolean;
   error: string | null;
+  preferencesError: string | null;
 };
 
 const readInitialUser = (): User | null => {
@@ -49,6 +52,7 @@ const mapResponseToUser = (response: {
   phoneNumber?: string;
   addresses?: User['addresses'];
   isActive?: boolean;
+  preferences?: UserPreferences;
 }): User => ({
   id: response.id,
   username: response.username,
@@ -61,6 +65,7 @@ const mapResponseToUser = (response: {
   phoneNumber: response.phoneNumber,
   addresses: response.addresses,
   isActive: response.isActive,
+  preferences: response.preferences,
 });
 
 export const AuthStore = signalStore(
@@ -69,7 +74,9 @@ export const AuthStore = signalStore(
     user: readInitialUser(),
     token: readInitialToken(),
     isLoading: false,
+    isSavingPreferences: false,
     error: null,
+    preferencesError: null,
     tempEmail: null,
   }),
   withComputed(({ user, token }) => ({
@@ -82,6 +89,7 @@ export const AuthStore = signalStore(
       authService = inject(AuthService),
       router = inject(Router),
       authSession = inject(AuthSessionService),
+      preferencesStore = inject(PreferencesStore),
     ) => ({
       signUp: rxMethod<SignUpParams>(
         pipe(
@@ -94,6 +102,7 @@ export const AuthStore = signalStore(
 
                   patchState(store, { user, token: response.accessToken, isLoading: false });
                   authSession.setSession(user, response.accessToken);
+                  preferencesStore.hydrateFromUser(user.preferences);
                   router.navigate(['/']);
                 },
                 error: () => {
@@ -119,6 +128,7 @@ export const AuthStore = signalStore(
 
                   patchState(store, { user, token: response.accessToken, isLoading: false });
                   authSession.setSession(user, response.accessToken);
+                  preferencesStore.hydrateFromUser(user.preferences);
                   router.navigate(['/']);
                 },
                 error: () => {
@@ -168,6 +178,7 @@ export const AuthStore = signalStore(
                   if (token) {
                     authSession.setSession(updatedUser, token);
                   }
+                  preferencesStore.hydrateFromUser(updatedUser.preferences);
                 },
                 error: () => {
                   patchState(store, {
@@ -178,6 +189,83 @@ export const AuthStore = signalStore(
               }),
             ),
           ),
+        ),
+      ),
+
+      savePreferences: rxMethod<UserPreferences>(
+        pipe(
+          tap(() => patchState(store, { isSavingPreferences: true, preferencesError: null })),
+          switchMap((partial) => {
+            const user = store.user();
+            if (!user) {
+              patchState(store, { isSavingPreferences: false });
+              return EMPTY;
+            }
+
+            return authService.updatePreferences(user.id, partial).pipe(
+              tapResponse({
+                next: (updatedUser) => {
+                  patchState(store, {
+                    user: updatedUser,
+                    isSavingPreferences: false,
+                    preferencesError: null,
+                  });
+                  const token = store.token();
+                  if (token) {
+                    authSession.setSession(updatedUser, token);
+                  }
+                  preferencesStore.hydrateFromUser(updatedUser.preferences);
+                },
+                error: () => {
+                  patchState(store, {
+                    isSavingPreferences: false,
+                    preferencesError: 'Failed to save preferences. Please try again.',
+                  });
+                },
+              }),
+            );
+          }),
+        ),
+      ),
+
+      syncPreferencesFromStore: rxMethod<void>(
+        pipe(
+          tap(() => patchState(store, { isSavingPreferences: true, preferencesError: null })),
+          switchMap(() => {
+            const user = store.user();
+            if (!user) {
+              patchState(store, { isSavingPreferences: false });
+              return EMPTY;
+            }
+
+            return authService
+              .updatePreferences(user.id, {
+                language: preferencesStore.language(),
+                currency: preferencesStore.currency(),
+              })
+              .pipe(
+                tapResponse({
+                  next: (updatedUser) => {
+                    patchState(store, {
+                      user: updatedUser,
+                      isSavingPreferences: false,
+                      preferencesError: null,
+                    });
+                    const token = store.token();
+                    if (token) {
+                      authSession.setSession(updatedUser, token);
+                    }
+                    preferencesStore.hydrateFromUser(updatedUser.preferences);
+                  },
+                  error: () => {
+                    patchState(store, {
+                      isSavingPreferences: false,
+                      preferencesError: 'Failed to save preferences. Please try again.',
+                    });
+                  },
+                }),
+              );
+          }),
         ),
       ),
 

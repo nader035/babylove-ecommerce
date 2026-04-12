@@ -1,6 +1,5 @@
 // src/app/core/models/user.model.ts
 
-
 export interface User {
   id: number;
   username: string;
@@ -10,11 +9,16 @@ export interface User {
   lastName: string;
   gender: string;
   image: string;
-  
 
   phoneNumber?: string;
-  addresses?: Address[]; 
+  addresses?: Address[];
   isActive?: boolean;
+  preferences?: UserPreferences;
+}
+
+export interface UserPreferences {
+  language: 'en' | 'ar';
+  currency: 'USD' | 'EGP';
 }
 
 export interface SignUpParams {
@@ -43,7 +47,7 @@ export interface Province {
 export interface City {
   id: number;
   name: string;
-  provinceId: number; 
+  provinceId: number;
   province?: Province;
 }
 
@@ -53,5 +57,5 @@ export interface Address {
   postCode: string;
   cityId: number;
   city?: City;
-  isDefault?: boolean; 
+  isDefault?: boolean;
 }

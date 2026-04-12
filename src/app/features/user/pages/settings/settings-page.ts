@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject, signal, PLATFORM_ID } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faGlobe,
@@ -12,6 +12,7 @@ import {
   faDollarSign,
 } from '@fortawesome/free-solid-svg-icons';
 import { PreferencesStore } from '../../../../core/stores/preferences.store';
+import { AuthStore } from '../../../auth/auth.store';
 
 @Component({
   selector: 'app-settings-page',
@@ -21,12 +22,11 @@ import { PreferencesStore } from '../../../../core/stores/preferences.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SettingsPage {
-  private transloco = inject(TranslocoService);
-  private platformId = inject(PLATFORM_ID);
   preferencesStore = inject(PreferencesStore);
+  authStore = inject(AuthStore);
 
-  currentLang = signal(this.preferencesStore.language());
-  currentCurrency = signal(this.preferencesStore.currency());
+  currentLang = this.preferencesStore.language;
+  currentCurrency = this.preferencesStore.currency;
   notificationsEnabled = signal(true);
 
   icons = {
@@ -39,12 +39,13 @@ export class SettingsPage {
   };
 
   setLanguage(lang: 'en' | 'ar') {
-    this.transloco.setActiveLang(lang);
-    this.currentLang.set(lang);
+    if (this.currentLang() === lang) {
+      return;
+    }
+
     this.preferencesStore.setLanguage(lang);
-    if (isPlatformBrowser(this.platformId)) {
-      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-      document.documentElement.lang = lang;
+    if (this.authStore.isAuthenticated()) {
+      this.authStore.syncPreferencesFromStore();
     }
   }
 
@@ -53,7 +54,13 @@ export class SettingsPage {
   }
 
   setCurrency(currency: 'USD' | 'EGP') {
-    this.currentCurrency.set(currency);
+    if (this.currentCurrency() === currency) {
+      return;
+    }
+
     this.preferencesStore.setCurrency(currency);
+    if (this.authStore.isAuthenticated()) {
+      this.authStore.syncPreferencesFromStore();
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "nader",
       "firstName": "Nader",
       "lastName": "Mohamedd",
@@ -9,7 +9,11 @@
       "password": "password123",
       "phoneNumber": "+20 100 123 4567",
       "image": "assets/images/nader.jpg",
-      "gender": "male"
+      "gender": "male",
+      "preferences": {
+        "language": "en",
+        "currency": "EGP"
+      }
     }
   ],
   "categories": [
@@ -21,12 +25,20 @@
       "en": {
         "title": "New Arrivals",
         "description": "Premium seasonal picks.",
-        "types": ["Outerwear", "Dresses", "Essentials"]
+        "types": [
+          "Outerwear",
+          "Dresses",
+          "Essentials"
+        ]
       },
       "ar": {
         "title": "وصل حديثاً",
         "description": "مختارات موسمية فاخرة.",
-        "types": ["ملابس خارجية", "فساتين", "أساسيات"]
+        "types": [
+          "ملابس خارجية",
+          "فساتين",
+          "أساسيات"
+        ]
       }
     },
     {
@@ -37,12 +49,22 @@
       "en": {
         "title": "Menswear",
         "description": "Refined contemporary style.",
-        "types": ["Outerwear", "Knitwear", "Shirts", "Footwear"]
+        "types": [
+          "Outerwear",
+          "Knitwear",
+          "Shirts",
+          "Footwear"
+        ]
       },
       "ar": {
         "title": "ملابس رجالية",
         "description": "نمط معاصر راقٍ.",
-        "types": ["ملابس خارجية", "تريكو", "قمصان", "أحذية"]
+        "types": [
+          "ملابس خارجية",
+          "تريكو",
+          "قمصان",
+          "أحذية"
+        ]
       }
     },
     {
@@ -53,12 +75,22 @@
       "en": {
         "title": "Womenswear",
         "description": "Architectural form and elegance.",
-        "types": ["Dresses", "Separates", "Bags", "Knitwear"]
+        "types": [
+          "Dresses",
+          "Separates",
+          "Bags",
+          "Knitwear"
+        ]
       },
       "ar": {
         "title": "ملابس نسائية",
         "description": "أناقة وأشكال معمارية.",
-        "types": ["فساتين", "قطع منفصلة", "حقائب", "تريكو"]
+        "types": [
+          "فساتين",
+          "قطع منفصلة",
+          "حقائب",
+          "تريكو"
+        ]
       }
     },
     {
@@ -69,12 +101,20 @@
       "en": {
         "title": "Essentials",
         "description": "Wardrobe foundations.",
-        "types": ["Basics", "Denim", "Lounge"]
+        "types": [
+          "Basics",
+          "Denim",
+          "Lounge"
+        ]
       },
       "ar": {
         "title": "الأساسيات",
         "description": "أساسيات خزانة الملابس.",
-        "types": ["أساسيات", "دينيم", "ملابس مريحة"]
+        "types": [
+          "أساسيات",
+          "دينيم",
+          "ملابس مريحة"
+        ]
       }
     },
     {
@@ -85,12 +125,20 @@
       "en": {
         "title": "Accessories",
         "description": "Elevated finishing touches.",
-        "types": ["Bags", "Jewelry", "Footwear"]
+        "types": [
+          "Bags",
+          "Jewelry",
+          "Footwear"
+        ]
       },
       "ar": {
         "title": "إكسسوارات",
         "description": "لمسات نهائية راقية.",
-        "types": ["حقائب", "مجوهرات", "أحذية"]
+        "types": [
+          "حقائب",
+          "مجوهرات",
+          "أحذية"
+        ]
       }
     }
   ],
@@ -348,7 +396,10 @@
           "productId": 101,
           "quantity": 1,
           "price": 389,
-          "title": { "en": "Italian Wool Overcoat", "ar": "معطف صوف إيطالي" },
+          "title": {
+            "en": "Italian Wool Overcoat",
+            "ar": "معطف صوف إيطالي"
+          },
           "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=400&auto=format&fit=crop"
         }
       ]
@@ -364,7 +415,10 @@
           "productId": 103,
           "quantity": 1,
           "price": 295,
-          "title": { "en": "Structured Wool Blazer", "ar": "سترة صوفية مهيكلة" },
+          "title": {
+            "en": "Structured Wool Blazer",
+            "ar": "سترة صوفية مهيكلة"
+          },
           "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop"
         }
       ]
@@ -380,7 +434,10 @@
           "productId": 101,
           "quantity": 1,
           "price": 389,
-          "title": { "en": "Italian Wool Overcoat", "ar": "معطف صوف إيطالي" },
+          "title": {
+            "en": "Italian Wool Overcoat",
+            "ar": "معطف صوف إيطالي"
+          },
           "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=400&auto=format&fit=crop"
         }
       ]
@@ -396,7 +453,10 @@
           "productId": 102,
           "quantity": 1,
           "price": 129,
-          "title": { "en": "Minimalist Linen Shirt", "ar": "قميص كتان بسيط" },
+          "title": {
+            "en": "Minimalist Linen Shirt",
+            "ar": "قميص كتان بسيط"
+          },
           "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&auto=format&fit=crop"
         }
       ]
@@ -412,7 +472,10 @@
           "productId": 103,
           "quantity": 1,
           "price": 295,
-          "title": { "en": "Structured Wool Blazer", "ar": "سترة صوفية مهيكلة" },
+          "title": {
+            "en": "Structured Wool Blazer",
+            "ar": "سترة صوفية مهيكلة"
+          },
           "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop"
         }
       ]
@@ -428,7 +491,11 @@
       "category": "Design",
       "image": "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=1200&auto=format&fit=crop",
       "readingTime": "6 min read",
-      "relatedProductIds": [101, 103, 110],
+      "relatedProductIds": [
+        101,
+        103,
+        110
+      ],
       "en": {
         "title": "The Art of Modern Tailoring",
         "excerpt": "Crafting the perfect silhouette through Japanese precision and Italian heritage.",
@@ -449,7 +516,11 @@
       "category": "Lifestyle",
       "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=1200&auto=format&fit=crop",
       "readingTime": "4 min read",
-      "relatedProductIds": [102, 106, 112],
+      "relatedProductIds": [
+        102,
+        106,
+        112
+      ],
       "en": {
         "title": "Building a Minimalist Capsule Wardrobe",
         "excerpt": "Simplify your morning routine with intentionally selected essentials.",
@@ -470,7 +541,12 @@
       "category": "Philosophy",
       "image": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1200&auto=format&fit=crop",
       "readingTime": "8 min read",
-      "relatedProductIds": [104, 107, 109, 105],
+      "relatedProductIds": [
+        104,
+        107,
+        109,
+        105
+      ],
       "en": {
         "title": "Sustainable Luxury: The New Paradigm",
         "excerpt": "Why ethical craftsmanship is the ultimate expression of refinement.",
@@ -483,12 +559,17 @@
       }
     }
   ],
-
   "testimonials": [
     {
       "id": 1,
-      "en": { "quote": "Quality is apparent.", "author": "James W." },
-      "ar": { "quote": "جودة واضحة.", "author": "جيمس و." }
+      "en": {
+        "quote": "Quality is apparent.",
+        "author": "James W."
+      },
+      "ar": {
+        "quote": "جودة واضحة.",
+        "author": "جيمس و."
+      }
     }
   ],
   "heroes": [
@@ -570,8 +651,12 @@
           "left": 10,
           "productTypeFilter": "knitwear",
           "categoryFilter": "menswear",
-          "en": { "label": "Knitwear" },
-          "ar": { "label": "تريكو" }
+          "en": {
+            "label": "Knitwear"
+          },
+          "ar": {
+            "label": "تريكو"
+          }
         },
         {
           "id": "hs-2",
@@ -579,8 +664,12 @@
           "left": 12,
           "productTypeFilter": "separates",
           "categoryFilter": "womenswear",
-          "en": { "label": "Trousers" },
-          "ar": { "label": "بنطلون" }
+          "en": {
+            "label": "Trousers"
+          },
+          "ar": {
+            "label": "بنطلون"
+          }
         },
         {
           "id": "hs-3",
@@ -588,8 +677,12 @@
           "left": 48,
           "productTypeFilter": "footwear",
           "categoryFilter": "accessories",
-          "en": { "label": "Shoes" },
-          "ar": { "label": "أحذية" }
+          "en": {
+            "label": "Shoes"
+          },
+          "ar": {
+            "label": "أحذية"
+          }
         },
         {
           "id": "hs-4",
@@ -597,8 +690,12 @@
           "left": 43,
           "productTypeFilter": "dresses",
           "categoryFilter": "womenswear",
-          "en": { "label": "Dress" },
-          "ar": { "label": "فستان" }
+          "en": {
+            "label": "Dress"
+          },
+          "ar": {
+            "label": "فستان"
+          }
         },
         {
           "id": "hs-5",
@@ -606,8 +703,12 @@
           "left": 52,
           "productTypeFilter": "shirts",
           "categoryFilter": "menswear",
-          "en": { "label": "Shirt" },
-          "ar": { "label": "قميص" }
+          "en": {
+            "label": "Shirt"
+          },
+          "ar": {
+            "label": "قميص"
+          }
         },
         {
           "id": "hs-6",
@@ -615,8 +716,12 @@
           "left": 92,
           "productTypeFilter": "lounge",
           "categoryFilter": "essentials",
-          "en": { "label": "Lounge" },
-          "ar": { "label": "ملابس مريحة" }
+          "en": {
+            "label": "Lounge"
+          },
+          "ar": {
+            "label": "ملابس مريحة"
+          }
         }
       ]
     }

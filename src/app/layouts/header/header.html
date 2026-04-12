@@ -24,15 +24,17 @@
     <nav class="hidden items-center gap-8 lg:flex xl:gap-10">
       @for (item of navItems; track item) {
         <a
+          #desktopLinkActive="routerLinkActive"
           [routerLink]="item === 'home' ? '/' : item === 'shop' ? '/shop' : '/' + item"
-          routerLinkActive="text-brand-primary font-semibold"
+          routerLinkActive="text-brand-primary font-black"
           [routerLinkActiveOptions]="{ exact: item === 'home' }"
-          class="group/link relative text-sm font-medium text-brand-primary/70 transition-all hover:text-brand-primary"
+          class="group/link relative rounded-full px-3 py-1.5 text-sm font-medium text-brand-primary/70 transition-all hover:bg-brand-bg-light/70 hover:text-brand-primary"
+          [class.bg-brand-bg-light]="desktopLinkActive.isActive"
+          [class.shadow-sm]="desktopLinkActive.isActive"
+          [class.ring-1]="desktopLinkActive.isActive"
+          [class.ring-brand-primary/10]="desktopLinkActive.isActive"
         >
           {{ 'nav.' + item | transloco }}
-          <span
-            class="absolute -bottom-2 inset-s-0 h-[2px] w-0 bg-brand-primary transition-all duration-300 group-hover/link:w-full"
-          ></span>
         </a>
       }
     </nav>
@@ -236,7 +238,7 @@
                     {{ product[currentLang()].title }}
                   </h4>
                   <p class="text-xs text-brand-primary/50">
-                    {{ product.categoryTitle }} ·
+                    {{ product.categoryTitle[currentLang()] || product.categoryTitle.en }} ·
                     {{ product.price | currency: preferencesStore.currency() : 'symbol' : '1.2-2' }}
                   </p>
                 </div>
@@ -268,9 +270,16 @@
       <nav class="flex flex-col gap-2">
         @for (item of navItems; track item) {
           <a
+            #mobileLinkActive="routerLinkActive"
             [routerLink]="item === 'home' ? '/' : item === 'shop' ? '/shop' : '/' + item"
+            routerLinkActive="bg-brand-bg-light text-brand-primary font-black"
+            [routerLinkActiveOptions]="{ exact: item === 'home' }"
             (click)="closeMobileMenu()"
             class="rounded-xl px-3 py-2 text-sm font-medium text-brand-primary/80 transition-colors hover:bg-brand-bg-light hover:text-brand-primary"
+            [class.border-s-2]="mobileLinkActive.isActive"
+            [class.border-brand-accent]="mobileLinkActive.isActive"
+            [class.ps-4]="mobileLinkActive.isActive"
+            [attr.aria-current]="mobileLinkActive.isActive ? 'page' : null"
           >
             {{ 'nav.' + item | transloco }}
           </a>

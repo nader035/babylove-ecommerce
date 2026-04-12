@@ -1,7 +1,7 @@
-import { Component, inject, signal, computed, PLATFORM_ID } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, inject, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
@@ -30,8 +30,6 @@ import { ProductService, ProductCardModel } from '../../core/services/product.se
   templateUrl: './header.html',
 })
 export class Header {
-  private transloco = inject(TranslocoService);
-  private platformId = inject(PLATFORM_ID);
   private router = inject(Router);
   private productService = inject(ProductService);
 
@@ -40,7 +38,7 @@ export class Header {
   wishlistStore = inject(WishlistStore);
   preferencesStore = inject(PreferencesStore);
 
-  currentLang = signal(this.preferencesStore.language());
+  currentLang = this.preferencesStore.language;
   isMobileMenuOpen = signal(false);
   isSearchOpen = signal(false);
   searchQuery = signal('');
@@ -66,13 +64,9 @@ export class Header {
 
   toggleLanguage() {
     const newLang = this.currentLang() === 'en' ? 'ar' : 'en';
-    this.transloco.setActiveLang(newLang);
-    this.currentLang.set(newLang);
     this.preferencesStore.setLanguage(newLang as 'en' | 'ar');
-
-    if (isPlatformBrowser(this.platformId)) {
-      document.documentElement.dir = newLang === 'ar' ? 'rtl' : 'ltr';
-      document.documentElement.lang = newLang;
+    if (this.auth.isAuthenticated()) {
+      this.auth.syncPreferencesFromStore();
     }
   }
 
@@ -103,7 +97,8 @@ export class Header {
               (p) =>
                 p.en.title.toLowerCase().includes(q) ||
                 p.ar.title.toLowerCase().includes(q) ||
-                p.categoryTitle?.toLowerCase().includes(q),
+                p.categoryTitle?.en?.toLowerCase().includes(q) ||
+                p.categoryTitle?.ar?.toLowerCase().includes(q),
             )
             .slice(0, 5),
         );

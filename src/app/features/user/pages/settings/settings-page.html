@@ -23,26 +23,38 @@
           <button
             (click)="setLanguage('en')"
             class="rounded-xl border-2 px-4 py-3 text-sm font-semibold transition"
+            [disabled]="authStore.isSavingPreferences()"
             [class.border-brand-accent]="currentLang() === 'en'"
             [class.bg-brand-accent/5]="currentLang() === 'en'"
             [class.text-brand-accent]="currentLang() === 'en'"
             [class.border-brand-primary/10]="currentLang() !== 'en'"
             [class.text-brand-primary/60]="currentLang() !== 'en'"
+            [class.opacity-70]="authStore.isSavingPreferences()"
+            [class.cursor-not-allowed]="authStore.isSavingPreferences()"
           >
             🇬🇧 English
           </button>
           <button
             (click)="setLanguage('ar')"
             class="rounded-xl border-2 px-4 py-3 text-sm font-semibold transition"
+            [disabled]="authStore.isSavingPreferences()"
             [class.border-brand-accent]="currentLang() === 'ar'"
             [class.bg-brand-accent/5]="currentLang() === 'ar'"
             [class.text-brand-accent]="currentLang() === 'ar'"
             [class.border-brand-primary/10]="currentLang() !== 'ar'"
             [class.text-brand-primary/60]="currentLang() !== 'ar'"
+            [class.opacity-70]="authStore.isSavingPreferences()"
+            [class.cursor-not-allowed]="authStore.isSavingPreferences()"
           >
             🇸🇦 العربية
           </button>
         </div>
+        @if (authStore.isSavingPreferences()) {
+          <p class="mt-3 text-xs font-semibold text-brand-primary/50">Saving preferences...</p>
+        }
+        @if (authStore.preferencesError()) {
+          <p class="mt-3 text-xs font-semibold text-red-600">{{ authStore.preferencesError() }}</p>
+        }
       </section>
 
       <!-- Currency -->
@@ -62,22 +74,28 @@
           <button
             (click)="setCurrency('USD')"
             class="rounded-xl border-2 px-4 py-3 text-sm font-semibold transition"
+            [disabled]="authStore.isSavingPreferences()"
             [class.border-brand-accent]="currentCurrency() === 'USD'"
             [class.bg-brand-accent/5]="currentCurrency() === 'USD'"
             [class.text-brand-accent]="currentCurrency() === 'USD'"
             [class.border-brand-primary/10]="currentCurrency() !== 'USD'"
             [class.text-brand-primary/60]="currentCurrency() !== 'USD'"
+            [class.opacity-70]="authStore.isSavingPreferences()"
+            [class.cursor-not-allowed]="authStore.isSavingPreferences()"
           >
             {{ 'settings.currencies.usd' | transloco }}
           </button>
           <button
             (click)="setCurrency('EGP')"
             class="rounded-xl border-2 px-4 py-3 text-sm font-semibold transition"
+            [disabled]="authStore.isSavingPreferences()"
             [class.border-brand-accent]="currentCurrency() === 'EGP'"
             [class.bg-brand-accent/5]="currentCurrency() === 'EGP'"
             [class.text-brand-accent]="currentCurrency() === 'EGP'"
             [class.border-brand-primary/10]="currentCurrency() !== 'EGP'"
             [class.text-brand-primary/60]="currentCurrency() !== 'EGP'"
+            [class.opacity-70]="authStore.isSavingPreferences()"
+            [class.cursor-not-allowed]="authStore.isSavingPreferences()"
           >
             {{ 'settings.currencies.egp' | transloco }}
           </button>

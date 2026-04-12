@@ -25,8 +25,8 @@ export class ProductCard {
 
   wishlistStore = inject(WishlistStore);
 
-  get activeLang() {
-    return this.translocoService.getActiveLang();
+  get activeLang(): 'en' | 'ar' {
+    return this.translocoService.getActiveLang() === 'ar' ? 'ar' : 'en';
   }
 
   get currencyCode() {

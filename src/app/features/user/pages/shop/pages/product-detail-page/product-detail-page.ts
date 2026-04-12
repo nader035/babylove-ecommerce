@@ -149,7 +149,10 @@ export class ProductDetailPage implements OnInit {
       slug: p.slug,
       image: p.thumbnail || 'assets/images/hero-model.jpg',
       categorySlug: p.category?.slug ?? 'all',
-      categoryTitle: p.category?.[this.activeLang()]?.title ?? 'Premium',
+      categoryTitle: {
+        en: p.category?.en?.title ?? 'Premium',
+        ar: p.category?.ar?.title ?? 'فاخر',
+      },
       price: this.currentPrice(),
       rating: Number(this.avgRating().toFixed(1)),
       reviewCount: p.reviews?.length ?? 0,

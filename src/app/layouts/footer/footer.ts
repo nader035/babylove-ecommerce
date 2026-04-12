@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faInstagram,
@@ -8,7 +8,8 @@ import {
   faCcVisa,
   faCcMastercard,
 } from '@fortawesome/free-brands-svg-icons';
-import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { TranslocoModule } from '@jsverse/transloco';
+import { PreferencesStore } from '../../core/stores/preferences.store';
 @Component({
   selector: 'app-footer',
   imports: [FontAwesomeModule, TranslocoModule],
@@ -16,8 +17,8 @@ import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
   styleUrl: './footer.css',
 })
 export class Footer {
-  private transloco = inject(TranslocoService);
-  currentLang = signal(this.transloco.getActiveLang());
+  private preferencesStore = inject(PreferencesStore);
+  currentLang = this.preferencesStore.language;
   langLabel = computed(() => (this.currentLang() === 'en' ? 'العربية' : 'English'));
   icons = {
     instagram: faInstagram,

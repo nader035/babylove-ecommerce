@@ -55,7 +55,7 @@
   <div class="mt-5 w-full space-y-0.5 px-2 pb-2">
     <!-- Category (Subtle) -->
     <p class="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-primary/30">
-      {{ product.categoryTitle }}
+      {{ product.categoryTitle[activeLang] || product.categoryTitle.en }}
     </p>
 
     <!-- Title -->

@@ -6,7 +6,7 @@ import {
   computed,
   inject,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { CategoryQueryState, categoryStore } from '../../category.store';
@@ -26,6 +26,7 @@ export class CategoryList implements OnInit, OnDestroy {
   activeLang = inject(PreferencesStore).language;
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private location = inject(Location);
   private routeSub?: Subscription;
   private searchDebounceId: ReturnType<typeof setTimeout> | null = null;
   private isApplyingRouteState = false;
@@ -127,7 +128,7 @@ export class CategoryList implements OnInit, OnDestroy {
     const q = this.categoryStore.searchQuery().trim();
     const sort = this.categoryStore.sortBy();
 
-    this.router.navigate([], {
+    const urlTree = this.router.createUrlTree([], {
       relativeTo: this.route,
       queryParams: {
         category: category === 'all' ? null : category,
@@ -135,7 +136,7 @@ export class CategoryList implements OnInit, OnDestroy {
         sort: sort === 'featured' ? null : sort,
       },
       queryParamsHandling: '',
-      replaceUrl: true,
     });
+    this.location.replaceState(this.router.serializeUrl(urlTree));
   }
 }

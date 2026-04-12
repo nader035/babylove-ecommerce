@@ -27,7 +27,7 @@ export type ProductCardModel = {
   slug: string;
   image: string;
   categorySlug: string;
-  categoryTitle: string;
+  categoryTitle: { en: string; ar: string };
   price: number;
   oldPrice?: number;
   rating: number;
@@ -134,7 +134,10 @@ export class ProductService {
       slug: product.slug,
       image,
       categorySlug: product['categorySlug'] || 'all',
-      categoryTitle: product['categoryTitle'] || 'Premium',
+      categoryTitle: {
+        en: product.category?.en?.title || product['categoryTitle'] || 'Premium',
+        ar: product.category?.ar?.title || product['categoryTitle'] || 'فاخر',
+      },
       price: minPrice,
       oldPrice: maxPrice > minPrice ? maxPrice : undefined,
       rating: Number(rating.toFixed(1)),
