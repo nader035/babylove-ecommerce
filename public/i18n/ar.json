@@ -200,7 +200,14 @@
     "applyCoupon": "تطبيق الكود",
     "couponPlaceholder": "أدخل كود الخصم",
     "lineTotal": "الإجمالي",
-    "perItem": "للقطعة"
+    "perItem": "للقطعة",
+    "standardFit": "قصة قياسية",
+    "free": "مجاني",
+    "apply": "تطبيق",
+    "taxIncludedNote": "الضريبة مشمولة حيث ينطبق ذلك",
+    "giftWrappingTitle": "تغليف هدايا مجاني",
+    "giftWrappingDesc": "يتم توصيل جميع الطلبات بتغليفنا المستدام المميز. يمكنك اختيار خيارات الهدايا في الخطوة التالية.",
+    "clearBag": "تفريغ الحقيبة"
   },
   "wishlist": {
     "empty": "قائمة المفضلة فارغة",
@@ -228,14 +235,25 @@
     "back": "رجوع",
     "creditCard": "بطاقة ائتمان",
     "cashOnDelivery": "الدفع عند الاستلام",
+    "creditCardDesc": "ادفع بأمان باستخدام بطاقة الائتمان أو الخصم",
+    "cashOnDeliveryDesc": "ادفع عند استلام طلبك",
+    "cardName": "اسم حامل البطاقة",
     "cardNumber": "رقم البطاقة",
     "expiryDate": "تاريخ الانتهاء",
+    "cardExpiry": "تاريخ الانتهاء",
     "cvv": "CVV",
     "reviewOrderInfo": "راجع طلبك قبل التأكيد.",
     "shippingTo": "الشحن إلى",
     "paymentInfo": "الدفع",
     "placeOrderBtn": "تأكيد ودفع",
-    "backToShopping": "العودة للتسوق"
+    "backToShopping": "العودة للتسوق",
+    "secureCheckout": "دفع آمن",
+    "orderPlacedToast": "تم تأكيد الطلب بنجاح",
+    "steps": {
+      "shipping": "الشحن",
+      "payment": "الدفع",
+      "review": "المراجعة"
+    }
   },
   "profile": {
     "personalInfo": "المعلومات الشخصية",
@@ -367,6 +385,12 @@
   "settings": {
     "language": "اللغة",
     "languageDesc": "اختر لغتك المفضلة",
+    "currency": "العملة",
+    "currencyDesc": "اختر العملة المفضلة",
+    "currencies": {
+      "usd": "دولار أمريكي ($)",
+      "egp": "جنيه مصري (E£)"
+    },
     "notifications": "الإشعارات",
     "notificationsDesc": "استلم تحديثات عن الطلبات والعروض",
     "privacy": "الخصوصية والأمان",

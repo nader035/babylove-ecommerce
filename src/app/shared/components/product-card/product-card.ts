@@ -6,6 +6,7 @@ import { faEye, faHeart as faHeartSolid, faShoppingBag } from '@fortawesome/free
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { ProductCardModel } from '../../../core/services/product.service';
+import { PreferencesStore } from '../../../core/stores/preferences.store';
 import { WishlistStore } from '../../../core/stores/wishlist.store';
 
 @Component({
@@ -17,6 +18,7 @@ import { WishlistStore } from '../../../core/stores/wishlist.store';
 })
 export class ProductCard {
   private translocoService = inject(TranslocoService);
+  private preferencesStore = inject(PreferencesStore);
   @Input({ required: true }) product!: ProductCardModel;
   @Output() onAddToCart = new EventEmitter<ProductCardModel>();
   @Output() onQuickView = new EventEmitter<ProductCardModel>();
@@ -25,6 +27,10 @@ export class ProductCard {
 
   get activeLang() {
     return this.translocoService.getActiveLang();
+  }
+
+  get currencyCode() {
+    return this.preferencesStore.currency();
   }
 
   icons = {

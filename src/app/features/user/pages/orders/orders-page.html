@@ -8,7 +8,7 @@
     <!-- Loading -->
     @if (isLoading()) {
       <div class="space-y-4">
-        @for (i of [1,2,3]; track i) {
+        @for (i of [1, 2, 3]; track i) {
           <div class="h-24 animate-pulse rounded-3xl bg-brand-surface/30"></div>
         }
       </div>
@@ -31,12 +31,17 @@
               class="flex w-full items-center justify-between p-5 text-left transition hover:bg-brand-bg-light/50"
             >
               <div class="flex items-center gap-4">
-                <div class="flex h-12 w-12 items-center justify-center rounded-xl" [ngClass]="getStatusColor(order.status)">
+                <div
+                  class="flex h-12 w-12 items-center justify-center rounded-xl"
+                  [ngClass]="getStatusColor(order.status)"
+                >
                   <fa-icon [icon]="getStatusIcon(order.status)" class="text-lg"></fa-icon>
                 </div>
                 <div>
                   <div class="flex items-center gap-2">
-                    <h3 class="text-sm font-semibold text-brand-primary">{{ 'checkout.orderNumber' | transloco }} #{{ order.id }}</h3>
+                    <h3 class="text-sm font-semibold text-brand-primary">
+                      {{ 'checkout.orderNumber' | transloco }} #{{ order.id }}
+                    </h3>
                     <span
                       class="rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest"
                       [ngClass]="getStatusColor(order.status)"
@@ -44,11 +49,16 @@
                       {{ order.status }}
                     </span>
                   </div>
-                  <p class="mt-0.5 text-xs text-brand-primary/50">{{ order.date | date: 'mediumDate' }} · {{ getItemCount(order) }} {{ 'checkout.items' | transloco }}</p>
+                  <p class="mt-0.5 text-xs text-brand-primary/50">
+                    {{ order.date | date: 'mediumDate' }} · {{ getItemCount(order) }}
+                    {{ 'checkout.items' | transloco }}
+                  </p>
                 </div>
               </div>
               <div class="flex items-center gap-4">
-                <span class="text-base font-bold text-brand-primary">{{ order.total | currency: 'EGP' : '£' : '1.2-2' }}</span>
+                <span class="text-base font-bold text-brand-primary">{{
+                  order.total | currency: currencyCode() : 'symbol' : '1.2-2'
+                }}</span>
                 <fa-icon
                   [icon]="icons.chevron"
                   class="text-xs text-brand-primary/30 transition-transform duration-300"
@@ -63,21 +73,42 @@
                 <!-- Order Items -->
                 <div class="space-y-3">
                   @for (item of order.items; track item.skuId) {
-                    <div class="flex items-center gap-4 rounded-xl border border-brand-primary/8 p-3">
-                      <img [src]="item.image" [alt]="item.title[activeLang()]" class="h-14 w-14 rounded-lg object-cover" loading="lazy" />
+                    <div
+                      class="flex items-center gap-4 rounded-xl border border-brand-primary/8 p-3"
+                    >
+                      <img
+                        [src]="item.image"
+                        [alt]="item.title[activeLang()]"
+                        class="h-14 w-14 rounded-lg object-cover"
+                        loading="lazy"
+                      />
                       <div class="flex-1">
-                        <h4 class="text-sm font-semibold text-brand-primary">{{ item.title[activeLang()] }}</h4>
-                        <p class="text-xs text-brand-primary/50">{{ 'product.quantity' | transloco }}: {{ item.quantity }} × {{ item.price | currency: 'EGP' : '£' : '1.2-2' }}</p>
+                        <h4 class="text-sm font-semibold text-brand-primary">
+                          {{ item.title[activeLang()] }}
+                        </h4>
+                        <p class="text-xs text-brand-primary/50">
+                          {{ 'product.quantity' | transloco }}: {{ item.quantity }} ×
+                          {{ item.price | currency: currencyCode() : 'symbol' : '1.2-2' }}
+                        </p>
                       </div>
-                      <span class="text-sm font-bold text-brand-primary">{{ item.price * item.quantity | currency: 'EGP' : '£' : '1.2-2' }}</span>
+                      <span class="text-sm font-bold text-brand-primary">{{
+                        item.price * item.quantity | currency: currencyCode() : 'symbol' : '1.2-2'
+                      }}</span>
                     </div>
                   }
                 </div>
 
                 <!-- Order Total -->
-                <div class="mt-4 flex items-center justify-between border-t border-brand-primary/8 pt-4">
-                  <span class="text-xs font-semibold uppercase tracking-widest text-brand-primary/50">{{ 'cart.total' | transloco }}</span>
-                  <span class="text-lg font-bold text-brand-primary">{{ order.total | currency: 'EGP' : '£' : '1.2-2' }}</span>
+                <div
+                  class="mt-4 flex items-center justify-between border-t border-brand-primary/8 pt-4"
+                >
+                  <span
+                    class="text-xs font-semibold uppercase tracking-widest text-brand-primary/50"
+                    >{{ 'cart.total' | transloco }}</span
+                  >
+                  <span class="text-lg font-bold text-brand-primary">{{
+                    order.total | currency: currencyCode() : 'symbol' : '1.2-2'
+                  }}</span>
                 </div>
               </div>
             }

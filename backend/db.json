@@ -104,8 +104,16 @@
       "type": "outerwear",
       "price": 389,
       "rating": 4.8,
-      "en": { "title": "Italian Wool Overcoat", "shortDescription": "Heavyweight Italian wool overcoat.", "longDescription": "Loro Piana virgin wool masterpiece." },
-      "ar": { "title": "معطف صوف إيطالي", "shortDescription": "معطف صوف إيطالي ثقيل.", "longDescription": "شرح مفصل للمعطف." }
+      "en": {
+        "title": "Italian Wool Overcoat",
+        "shortDescription": "Heavyweight Italian wool overcoat.",
+        "longDescription": "Loro Piana virgin wool masterpiece."
+      },
+      "ar": {
+        "title": "معطف صوف إيطالي",
+        "shortDescription": "معطف صوف إيطالي ثقيل.",
+        "longDescription": "شرح مفصل للمعطف."
+      }
     },
     {
       "id": 102,
@@ -116,8 +124,16 @@
       "type": "shirts",
       "price": 129,
       "rating": 4.5,
-      "en": { "title": "Minimalist Linen Shirt", "shortDescription": "Washed European linen shirt.", "longDescription": "Premium linen staples." },
-      "ar": { "title": "قميص كتان بسيط", "shortDescription": "قميص كتان أوروبي مغسول.", "longDescription": "شرح باللغة العربية." }
+      "en": {
+        "title": "Minimalist Linen Shirt",
+        "shortDescription": "Washed European linen shirt.",
+        "longDescription": "Premium linen staples."
+      },
+      "ar": {
+        "title": "قميص كتان بسيط",
+        "shortDescription": "قميص كتان أوروبي مغسول.",
+        "longDescription": "شرح باللغة العربية."
+      }
     },
     {
       "id": 103,
@@ -128,8 +144,16 @@
       "type": "outerwear",
       "price": 295,
       "rating": 4.7,
-      "en": { "title": "Structured Wool Blazer", "shortDescription": "Japanese wool-blend blazer.", "longDescription": "Precision tailoring." },
-      "ar": { "title": "سترة صوفية مهيكلة", "shortDescription": "سترة صوفية يابانية.", "longDescription": "شرح باللغة العربية." }
+      "en": {
+        "title": "Structured Wool Blazer",
+        "shortDescription": "Japanese wool-blend blazer.",
+        "longDescription": "Precision tailoring."
+      },
+      "ar": {
+        "title": "سترة صوفية مهيكلة",
+        "shortDescription": "سترة صوفية يابانية.",
+        "longDescription": "شرح باللغة العربية."
+      }
     },
     {
       "id": 104,
@@ -140,8 +164,16 @@
       "type": "dresses",
       "price": 245,
       "rating": 4.9,
-      "en": { "title": "Ribbed Silk Knit Dress", "shortDescription": "Mulberry silk-cotton midi dress.", "longDescription": "Elegant mock neck." },
-      "ar": { "title": "فستان محبوك من الحرير المضلع", "shortDescription": "فستان ميدي من الحرير.", "longDescription": "شرح باللغة العربية." }
+      "en": {
+        "title": "Ribbed Silk Knit Dress",
+        "shortDescription": "Mulberry silk-cotton midi dress.",
+        "longDescription": "Elegant mock neck."
+      },
+      "ar": {
+        "title": "فستان محبوك من الحرير المضلع",
+        "shortDescription": "فستان ميدي من الحرير.",
+        "longDescription": "شرح باللغة العربية."
+      }
     },
     {
       "id": 105,
@@ -152,8 +184,16 @@
       "type": "bags",
       "price": 185,
       "rating": 4.6,
-      "en": { "title": "Full-Grain Leather Tote", "shortDescription": "Handcrafted Italian leather tote.", "longDescription": "Spacious daily companion." },
-      "ar": { "title": "حقيبة يد من الجلد الطبيعي", "shortDescription": "حقيبة يد جلدية.", "longDescription": "شرح باللغة العربية." }
+      "en": {
+        "title": "Full-Grain Leather Tote",
+        "shortDescription": "Handcrafted Italian leather tote.",
+        "longDescription": "Spacious daily companion."
+      },
+      "ar": {
+        "title": "حقيبة يد من الجلد الطبيعي",
+        "shortDescription": "حقيبة يد جلدية.",
+        "longDescription": "شرح باللغة العربية."
+      }
     },
     {
       "id": 106,
@@ -164,8 +204,16 @@
       "type": "denim",
       "price": 165,
       "rating": 4.4,
-      "en": { "title": "Raw Selvedge Denim", "shortDescription": "Japanese indigo denim.", "longDescription": "Authentic selvedge." },
-      "ar": { "title": "دينيم خام بحواف منسوجة", "shortDescription": "جينز ياباني.", "longDescription": "شرح باللغة العربية." }
+      "en": {
+        "title": "Raw Selvedge Denim",
+        "shortDescription": "Japanese indigo denim.",
+        "longDescription": "Authentic selvedge."
+      },
+      "ar": {
+        "title": "دينيم خام بحواف منسوجة",
+        "shortDescription": "جينز ياباني.",
+        "longDescription": "شرح باللغة العربية."
+      }
     },
     {
       "id": 107,
@@ -176,8 +224,16 @@
       "type": "knitwear",
       "price": 195,
       "rating": 4.9,
-      "en": { "title": "Cashmere Turtleneck", "shortDescription": "100% Grade A Mongolian cashmere.", "longDescription": "Timeless luxury." },
-      "ar": { "title": "كنزة كشمير بياقة عالية", "shortDescription": "كنزة كشمير.", "longDescription": "شرح باللغة العربية." }
+      "en": {
+        "title": "Cashmere Turtleneck",
+        "shortDescription": "100% Grade A Mongolian cashmere.",
+        "longDescription": "Timeless luxury."
+      },
+      "ar": {
+        "title": "كنزة كشمير بياقة عالية",
+        "shortDescription": "كنزة كشمير.",
+        "longDescription": "شرح باللغة العربية."
+      }
     },
     {
       "id": 108,
@@ -188,8 +244,16 @@
       "type": "footwear",
       "price": 285,
       "rating": 4.7,
-      "en": { "title": "Leather Chelsea Boots", "shortDescription": "Handcrafted Portuguese leather boots.", "longDescription": "Goodyear welted." },
-      "ar": { "title": "بوت تشيلسي جلدي", "shortDescription": "بوت تشيلسي جلدي.", "longDescription": "شرح باللغة العربية." }
+      "en": {
+        "title": "Leather Chelsea Boots",
+        "shortDescription": "Handcrafted Portuguese leather boots.",
+        "longDescription": "Goodyear welted."
+      },
+      "ar": {
+        "title": "بوت تشيلسي جلدي",
+        "shortDescription": "بوت تشيلسي جلدي.",
+        "longDescription": "شرح باللغة العربية."
+      }
     },
     {
       "id": 109,
@@ -200,8 +264,16 @@
       "type": "separates",
       "price": 175,
       "rating": 4.8,
-      "en": { "title": "Architectural Silk Blouse", "shortDescription": "Modern silk crepe blouse.", "longDescription": "Sculptural silhouette." },
-      "ar": { "title": "بلوزة حريرية معمارية", "shortDescription": "بلوزة حريرية.", "longDescription": "شرح باللغة العربية." }
+      "en": {
+        "title": "Architectural Silk Blouse",
+        "shortDescription": "Modern silk crepe blouse.",
+        "longDescription": "Sculptural silhouette."
+      },
+      "ar": {
+        "title": "بلوزة حريرية معمارية",
+        "shortDescription": "بلوزة حريرية.",
+        "longDescription": "شرح باللغة العربية."
+      }
     },
     {
       "id": 110,
@@ -212,8 +284,16 @@
       "type": "separates",
       "price": 195,
       "rating": 4.6,
-      "en": { "title": "Minimalist Wool Trousers", "shortDescription": "High-waisted cool wool trousers.", "longDescription": "Professional staples." },
-      "ar": { "title": "بنطال صوفي بسيط", "shortDescription": "بنطال صوفي.", "longDescription": "شرح باللغة العربية." }
+      "en": {
+        "title": "Minimalist Wool Trousers",
+        "shortDescription": "High-waisted cool wool trousers.",
+        "longDescription": "Professional staples."
+      },
+      "ar": {
+        "title": "بنطال صوفي بسيط",
+        "shortDescription": "بنطال صوفي.",
+        "longDescription": "شرح باللغة العربية."
+      }
     },
     {
       "id": 111,
@@ -224,8 +304,16 @@
       "type": "bags",
       "price": 215,
       "rating": 4.7,
-      "en": { "title": "Canvas & Leather Weekend Bag", "shortDescription": "Heavy cotton canvas with leather accents.", "longDescription": "Durable travel bag." },
-      "ar": { "title": "حقيبة عطلة نهاية الأسبوع", "shortDescription": "حقيبة عطلة نهاية الأسبوع.", "longDescription": "شرح باللغة العربية." }
+      "en": {
+        "title": "Canvas & Leather Weekend Bag",
+        "shortDescription": "Heavy cotton canvas with leather accents.",
+        "longDescription": "Durable travel bag."
+      },
+      "ar": {
+        "title": "حقيبة عطلة نهاية الأسبوع",
+        "shortDescription": "حقيبة عطلة نهاية الأسبوع.",
+        "longDescription": "شرح باللغة العربية."
+      }
     },
     {
       "id": 112,
@@ -236,8 +324,16 @@
       "type": "lounge",
       "price": 145,
       "rating": 4.5,
-      "en": { "title": "Supima Cotton Lounge Set", "shortDescription": "Ultra-soft Supima cotton set.", "longDescription": "Elevated indoor living." },
-      "ar": { "title": "طقم ملابس مريحة قطن سوبيما", "shortDescription": "طقم ملابس مريحة.", "longDescription": "شرح باللغة العربية." }
+      "en": {
+        "title": "Supima Cotton Lounge Set",
+        "shortDescription": "Ultra-soft Supima cotton set.",
+        "longDescription": "Elevated indoor living."
+      },
+      "ar": {
+        "title": "طقم ملابس مريحة قطن سوبيما",
+        "shortDescription": "طقم ملابس مريحة.",
+        "longDescription": "شرح باللغة العربية."
+      }
     }
   ],
   "orders": [
@@ -248,7 +344,13 @@
       "status": "pending",
       "total": 518,
       "items": [
-        { "productId": 101, "quantity": 1, "price": 389, "title": { "en": "Italian Wool Overcoat", "ar": "معطف صوف إيطالي" }, "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=400&auto=format&fit=crop" }
+        {
+          "productId": 101,
+          "quantity": 1,
+          "price": 389,
+          "title": { "en": "Italian Wool Overcoat", "ar": "معطف صوف إيطالي" },
+          "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=400&auto=format&fit=crop"
+        }
       ]
     },
     {
@@ -258,7 +360,13 @@
       "status": "processing",
       "total": 295,
       "items": [
-        { "productId": 103, "quantity": 1, "price": 295, "title": { "en": "Structured Wool Blazer", "ar": "سترة صوفية مهيكلة" }, "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop" }
+        {
+          "productId": 103,
+          "quantity": 1,
+          "price": 295,
+          "title": { "en": "Structured Wool Blazer", "ar": "سترة صوفية مهيكلة" },
+          "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop"
+        }
       ]
     },
     {
@@ -268,7 +376,13 @@
       "status": "shipped",
       "total": 389,
       "items": [
-        { "productId": 101, "quantity": 1, "price": 389, "title": { "en": "Italian Wool Overcoat", "ar": "معطف صوف إيطالي" }, "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=400&auto=format&fit=crop" }
+        {
+          "productId": 101,
+          "quantity": 1,
+          "price": 389,
+          "title": { "en": "Italian Wool Overcoat", "ar": "معطف صوف إيطالي" },
+          "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=400&auto=format&fit=crop"
+        }
       ]
     },
     {
@@ -278,7 +392,13 @@
       "status": "delivered",
       "total": 129,
       "items": [
-        { "productId": 102, "quantity": 1, "price": 129, "title": { "en": "Minimalist Linen Shirt", "ar": "قميص كتان بسيط" }, "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&auto=format&fit=crop" }
+        {
+          "productId": 102,
+          "quantity": 1,
+          "price": 129,
+          "title": { "en": "Minimalist Linen Shirt", "ar": "قميص كتان بسيط" },
+          "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&auto=format&fit=crop"
+        }
       ]
     },
     {
@@ -288,7 +408,13 @@
       "status": "cancelled",
       "total": 295,
       "items": [
-        { "productId": 103, "quantity": 1, "price": 295, "title": { "en": "Structured Wool Blazer", "ar": "سترة صوفية مهيكلة" }, "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop" }
+        {
+          "productId": 103,
+          "quantity": 1,
+          "price": 295,
+          "title": { "en": "Structured Wool Blazer", "ar": "سترة صوفية مهيكلة" },
+          "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop"
+        }
       ]
     }
   ],
@@ -363,6 +489,136 @@
       "id": 1,
       "en": { "quote": "Quality is apparent.", "author": "James W." },
       "ar": { "quote": "جودة واضحة.", "author": "جيمس و." }
+    }
+  ],
+  "heroes": [
+    {
+      "id": 1,
+      "slug": "ss26-main",
+      "isActive": true,
+      "displayOrder": 1,
+      "imageDesktop": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1800&auto=format&fit=crop",
+      "imageMobile": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=900&auto=format&fit=crop",
+      "imageAlt": "Spring Summer 2026 premium collection",
+      "overlayOpacity": 0.4,
+      "en": {
+        "badge": "Spring / Summer 2026",
+        "titlePart1": "The Art of",
+        "titlePart2": "Modern Dressing",
+        "description": "Curated collections of premium apparel crafted for every modern family silhouette.",
+        "ctaText": "Shop The Collection",
+        "ctaLink": "/shop"
+      },
+      "ar": {
+        "badge": "ربيع / صيف 2026",
+        "titlePart1": "فن",
+        "titlePart2": "الأناقة العصرية",
+        "description": "مجموعات مختارة من الأزياء الراقية مصممة لكل إطلالة عائلية عصرية.",
+        "ctaText": "تسوق المجموعة",
+        "ctaLink": "/shop"
+      }
+    },
+    {
+      "id": 2,
+      "slug": "tailoring-edit",
+      "isActive": true,
+      "displayOrder": 2,
+      "imageDesktop": "https://images.unsplash.com/photo-1495385794356-15371f348c31?w=1800&auto=format&fit=crop",
+      "imageMobile": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900&auto=format&fit=crop",
+      "imageAlt": "Tailoring edit hero banner",
+      "overlayOpacity": 0.45,
+      "en": {
+        "badge": "Editorial Drop",
+        "titlePart1": "Tailored For",
+        "titlePart2": "Everyday Luxury",
+        "description": "From boardroom to weekend, discover pieces engineered for confidence and comfort.",
+        "ctaText": "Explore Menswear",
+        "ctaLink": "/shop?category=menswear"
+      },
+      "ar": {
+        "badge": "إصدار تحريري",
+        "titlePart1": "تفصيل",
+        "titlePart2": "لفخامة يومية",
+        "description": "من العمل إلى عطلة نهاية الأسبوع، اكتشف قطعاً مصممة للثقة والراحة.",
+        "ctaText": "اكتشف الرجالي",
+        "ctaLink": "/shop?category=menswear"
+      }
+    }
+  ],
+  "lookbooks": [
+    {
+      "id": 1,
+      "slug": "family-lookbook-ss26",
+      "isActive": true,
+      "displayOrder": 1,
+      "image": "assets/images/interactive-models.svg",
+      "imageAlt": "Interactive family lookbook",
+      "en": {
+        "kicker": "The Editorial",
+        "title": "Shop The Look",
+        "description": "Tap a hotspot to jump directly into matching product families in shop."
+      },
+      "ar": {
+        "kicker": "الافتتاحية",
+        "title": "تسوق الإطلالة",
+        "description": "اضغط على أي نقطة للانتقال مباشرة إلى المنتجات المطابقة في المتجر."
+      },
+      "hotspots": [
+        {
+          "id": "hs-1",
+          "top": 22,
+          "left": 10,
+          "productTypeFilter": "knitwear",
+          "categoryFilter": "menswear",
+          "en": { "label": "Knitwear" },
+          "ar": { "label": "تريكو" }
+        },
+        {
+          "id": "hs-2",
+          "top": 68,
+          "left": 12,
+          "productTypeFilter": "separates",
+          "categoryFilter": "womenswear",
+          "en": { "label": "Trousers" },
+          "ar": { "label": "بنطلون" }
+        },
+        {
+          "id": "hs-3",
+          "top": 92,
+          "left": 48,
+          "productTypeFilter": "footwear",
+          "categoryFilter": "accessories",
+          "en": { "label": "Shoes" },
+          "ar": { "label": "أحذية" }
+        },
+        {
+          "id": "hs-4",
+          "top": 50,
+          "left": 43,
+          "productTypeFilter": "dresses",
+          "categoryFilter": "womenswear",
+          "en": { "label": "Dress" },
+          "ar": { "label": "فستان" }
+        },
+        {
+          "id": "hs-5",
+          "top": 30,
+          "left": 52,
+          "productTypeFilter": "shirts",
+          "categoryFilter": "menswear",
+          "en": { "label": "Shirt" },
+          "ar": { "label": "قميص" }
+        },
+        {
+          "id": "hs-6",
+          "top": 81,
+          "left": 92,
+          "productTypeFilter": "lounge",
+          "categoryFilter": "essentials",
+          "en": { "label": "Lounge" },
+          "ar": { "label": "ملابس مريحة" }
+        }
+      ]
     }
   ]
 }

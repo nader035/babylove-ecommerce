@@ -204,7 +204,14 @@
     "applyCoupon": "Apply Code",
     "couponPlaceholder": "Enter promo code",
     "lineTotal": "Total",
-    "perItem": "each"
+    "perItem": "each",
+    "standardFit": "Standard Fit",
+    "free": "FREE",
+    "apply": "Apply",
+    "taxIncludedNote": "Tax included where applicable",
+    "giftWrappingTitle": "Complimentary Gift Wrapping",
+    "giftWrappingDesc": "All orders are delivered in our signature sustainable packaging. Select gift options at the next step.",
+    "clearBag": "Clear Bag"
   },
   "wishlist": {
     "empty": "Your wishlist is empty",
@@ -232,14 +239,25 @@
     "back": "Back",
     "creditCard": "Credit Card",
     "cashOnDelivery": "Cash on Delivery",
+    "creditCardDesc": "Pay securely with your credit or debit card",
+    "cashOnDeliveryDesc": "Pay when your order arrives",
+    "cardName": "Cardholder Name",
     "cardNumber": "Card Number",
     "expiryDate": "Expiry Date",
+    "cardExpiry": "Expiry Date",
     "cvv": "CVV",
     "reviewOrderInfo": "Review your order before placing.",
     "shippingTo": "Shipping to",
     "paymentInfo": "Payment",
     "placeOrderBtn": "Confirm & Pay",
-    "backToShopping": "Back to Shopping"
+    "backToShopping": "Back to Shopping",
+    "secureCheckout": "Secure Checkout",
+    "orderPlacedToast": "Order placed successfully",
+    "steps": {
+      "shipping": "Shipping",
+      "payment": "Payment",
+      "review": "Review"
+    }
   },
   "profile": {
     "personalInfo": "Personal Information",
@@ -371,6 +389,12 @@
   "settings": {
     "language": "Language",
     "languageDesc": "Choose your preferred language",
+    "currency": "Currency",
+    "currencyDesc": "Choose your preferred currency",
+    "currencies": {
+      "usd": "USD ($)",
+      "egp": "EGP (E£)"
+    },
     "notifications": "Push Notifications",
     "notificationsDesc": "Receive updates about orders and offers",
     "privacy": "Privacy & Security",

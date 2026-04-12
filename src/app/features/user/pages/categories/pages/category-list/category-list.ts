@@ -1,9 +1,17 @@
-import { ChangeDetectionStrategy, Component, OnInit, computed, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  computed,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
-import { categoryStore } from '../../category.store';
+import { CategoryQueryState, categoryStore } from '../../category.store';
 import { PreferencesStore } from '../../../../../../core/stores/preferences.store';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-category-list',
@@ -13,16 +21,23 @@ import { PreferencesStore } from '../../../../../../core/stores/preferences.stor
   styleUrl: './category-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CategoryList implements OnInit {
+export class CategoryList implements OnInit, OnDestroy {
   categoryStore = inject(categoryStore);
   activeLang = inject(PreferencesStore).language;
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private routeSub?: Subscription;
+  private searchDebounceId: ReturnType<typeof setTimeout> | null = null;
+  private isApplyingRouteState = false;
 
-  filterOptions: { label: string; value: 'all' | 'fashion' | 'essentials' | 'gear' }[] = [
-    { label: 'common.all', value: 'all' },
-    { label: 'shop.filters.types.fashion', value: 'fashion' },
-    { label: 'shop.filters.types.essentials', value: 'essentials' },
-    { label: 'shop.filters.types.gear', value: 'gear' },
-  ];
+  filterOptions = computed(() => [
+    { value: 'all', labelKey: 'common.all', label: '' },
+    ...this.categoryStore.availableCategoryFilters().map((item) => ({
+      value: item.value,
+      labelKey: '',
+      label: item.label,
+    })),
+  ]);
 
   sortOptions = [
     { label: 'shop.filters.sort.featured', value: 'featured' },
@@ -32,22 +47,95 @@ export class CategoryList implements OnInit {
 
   ngOnInit(): void {
     this.categoryStore.loadCategories();
+    this.routeSub = this.route.queryParamMap.subscribe((params) => {
+      const query: CategoryQueryState = {
+        category: params.get('category') || 'all',
+        q: params.get('q') || '',
+        sortBy: (params.get('sort') as CategoryQueryState['sortBy']) || 'featured',
+      };
+
+      this.isApplyingRouteState = true;
+      this.categoryStore.applyQueryState(query);
+      this.isApplyingRouteState = false;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.routeSub?.unsubscribe();
+    if (this.searchDebounceId) {
+      clearTimeout(this.searchDebounceId);
+    }
   }
 
   onSearch(event: Event): void {
     const input = event.target as HTMLInputElement;
-    this.categoryStore.updateSearchQuery(input.value);
+    if (this.searchDebounceId) {
+      clearTimeout(this.searchDebounceId);
+    }
+
+    this.searchDebounceId = setTimeout(() => {
+      this.categoryStore.updateSearchQuery(input.value);
+      this.syncUrlFromStore();
+    }, 220);
   }
 
   onSortChange(event: Event): void {
     const select = event.target as HTMLSelectElement;
-    this.categoryStore.updateSortBy(select.value as any);
+    this.categoryStore.updateSortBy(select.value as CategoryQueryState['sortBy']);
+    this.syncUrlFromStore();
+  }
+
+  onFilterChange(value: string): void {
+    this.categoryStore.updateActiveType(value);
+    this.syncUrlFromStore();
+  }
+
+  onClearFilters(): void {
+    this.categoryStore.clearFilters();
+    this.syncUrlFromStore();
   }
 
   hasNoResults = computed(() => {
+    return !this.categoryStore.isLoading() && this.categoryStore.filteredCategories().length === 0;
+  });
+
+  hasActiveFilters = computed(() => {
     return (
-      !this.categoryStore.isLoading() &&
-      this.categoryStore.filteredCategories().length === 0
+      this.categoryStore.activeType() !== 'all' || this.categoryStore.searchQuery().trim() !== ''
     );
   });
+
+  clearSearchFilter(): void {
+    if (this.searchDebounceId) {
+      clearTimeout(this.searchDebounceId);
+    }
+    this.categoryStore.updateSearchQuery('');
+    this.syncUrlFromStore();
+  }
+
+  clearCategoryFilter(): void {
+    this.categoryStore.updateActiveType('all');
+    this.syncUrlFromStore();
+  }
+
+  private syncUrlFromStore(): void {
+    if (this.isApplyingRouteState) {
+      return;
+    }
+
+    const category = this.categoryStore.activeType();
+    const q = this.categoryStore.searchQuery().trim();
+    const sort = this.categoryStore.sortBy();
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        category: category === 'all' ? null : category,
+        q: q ? q : null,
+        sort: sort === 'featured' ? null : sort,
+      },
+      queryParamsHandling: '',
+      replaceUrl: true,
+    });
+  }
 }

@@ -98,12 +98,14 @@ export class Header {
       this.productService.getProducts().subscribe((products) => {
         const q = value.toLowerCase();
         this.searchResults.set(
-          products.filter(
-            (p) =>
-              p.en.title.toLowerCase().includes(q) ||
-              p.ar.title.toLowerCase().includes(q) ||
-              p.categoryTitle?.toLowerCase().includes(q)
-          ).slice(0, 5)
+          products
+            .filter(
+              (p) =>
+                p.en.title.toLowerCase().includes(q) ||
+                p.ar.title.toLowerCase().includes(q) ||
+                p.categoryTitle?.toLowerCase().includes(q),
+            )
+            .slice(0, 5),
         );
       });
     } else {
@@ -119,11 +121,11 @@ export class Header {
   }
 
   searchAll() {
-    const q = this.searchQuery();
+    const q = this.searchQuery().trim();
     this.isSearchOpen.set(false);
     this.searchQuery.set('');
     this.searchResults.set([]);
-    this.router.navigate(['/shop'], { queryParams: { search: q } });
+    this.router.navigate(['/shop'], { queryParams: { q: q || null } });
   }
 
   logout() {

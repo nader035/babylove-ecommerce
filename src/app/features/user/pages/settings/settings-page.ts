@@ -9,9 +9,9 @@ import {
   faBell,
   faShieldHalved,
   faChevronRight,
+  faDollarSign,
 } from '@fortawesome/free-solid-svg-icons';
 import { PreferencesStore } from '../../../../core/stores/preferences.store';
-
 
 @Component({
   selector: 'app-settings-page',
@@ -26,9 +26,17 @@ export class SettingsPage {
   preferencesStore = inject(PreferencesStore);
 
   currentLang = signal(this.preferencesStore.language());
+  currentCurrency = signal(this.preferencesStore.currency());
   notificationsEnabled = signal(true);
 
-  icons = { globe: faGlobe, palette: faPalette, bell: faBell, shield: faShieldHalved, chevron: faChevronRight };
+  icons = {
+    globe: faGlobe,
+    palette: faPalette,
+    bell: faBell,
+    shield: faShieldHalved,
+    chevron: faChevronRight,
+    currency: faDollarSign,
+  };
 
   setLanguage(lang: 'en' | 'ar') {
     this.transloco.setActiveLang(lang);
@@ -42,5 +50,10 @@ export class SettingsPage {
 
   toggleNotifications() {
     this.notificationsEnabled.update((v) => !v);
+  }
+
+  setCurrency(currency: 'USD' | 'EGP') {
+    this.currentCurrency.set(currency);
+    this.preferencesStore.setCurrency(currency);
   }
 }

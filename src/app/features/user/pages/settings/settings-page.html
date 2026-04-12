@@ -6,7 +6,6 @@
     </header>
 
     <div class="space-y-4">
-
       <!-- Language -->
       <section class="card-premium p-6">
         <div class="flex items-center gap-3 mb-5">
@@ -14,7 +13,9 @@
             <fa-icon [icon]="icons.globe" class="text-brand-accent"></fa-icon>
           </div>
           <div>
-            <h2 class="text-sm font-semibold text-brand-primary">{{ 'settings.language' | transloco }}</h2>
+            <h2 class="text-sm font-semibold text-brand-primary">
+              {{ 'settings.language' | transloco }}
+            </h2>
             <p class="text-xs text-brand-primary/50">{{ 'settings.languageDesc' | transloco }}</p>
           </div>
         </div>
@@ -44,6 +45,45 @@
         </div>
       </section>
 
+      <!-- Currency -->
+      <section class="card-premium p-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50">
+            <fa-icon [icon]="icons.currency" class="text-emerald-600"></fa-icon>
+          </div>
+          <div>
+            <h2 class="text-sm font-semibold text-brand-primary">
+              {{ 'settings.currency' | transloco }}
+            </h2>
+            <p class="text-xs text-brand-primary/50">{{ 'settings.currencyDesc' | transloco }}</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <button
+            (click)="setCurrency('USD')"
+            class="rounded-xl border-2 px-4 py-3 text-sm font-semibold transition"
+            [class.border-brand-accent]="currentCurrency() === 'USD'"
+            [class.bg-brand-accent/5]="currentCurrency() === 'USD'"
+            [class.text-brand-accent]="currentCurrency() === 'USD'"
+            [class.border-brand-primary/10]="currentCurrency() !== 'USD'"
+            [class.text-brand-primary/60]="currentCurrency() !== 'USD'"
+          >
+            {{ 'settings.currencies.usd' | transloco }}
+          </button>
+          <button
+            (click)="setCurrency('EGP')"
+            class="rounded-xl border-2 px-4 py-3 text-sm font-semibold transition"
+            [class.border-brand-accent]="currentCurrency() === 'EGP'"
+            [class.bg-brand-accent/5]="currentCurrency() === 'EGP'"
+            [class.text-brand-accent]="currentCurrency() === 'EGP'"
+            [class.border-brand-primary/10]="currentCurrency() !== 'EGP'"
+            [class.text-brand-primary/60]="currentCurrency() !== 'EGP'"
+          >
+            {{ 'settings.currencies.egp' | transloco }}
+          </button>
+        </div>
+      </section>
+
       <!-- Notifications -->
       <section class="card-premium p-6">
         <div class="flex items-center justify-between">
@@ -52,8 +92,12 @@
               <fa-icon [icon]="icons.bell" class="text-amber-500"></fa-icon>
             </div>
             <div>
-              <h2 class="text-sm font-semibold text-brand-primary">{{ 'settings.notifications' | transloco }}</h2>
-              <p class="text-xs text-brand-primary/50">{{ 'settings.notificationsDesc' | transloco }}</p>
+              <h2 class="text-sm font-semibold text-brand-primary">
+                {{ 'settings.notifications' | transloco }}
+              </h2>
+              <p class="text-xs text-brand-primary/50">
+                {{ 'settings.notificationsDesc' | transloco }}
+              </p>
             </div>
           </div>
           <button
@@ -78,7 +122,9 @@
             <fa-icon [icon]="icons.shield" class="text-green-500"></fa-icon>
           </div>
           <div class="flex-1">
-            <h2 class="text-sm font-semibold text-brand-primary">{{ 'settings.privacy' | transloco }}</h2>
+            <h2 class="text-sm font-semibold text-brand-primary">
+              {{ 'settings.privacy' | transloco }}
+            </h2>
             <p class="text-xs text-brand-primary/50">{{ 'settings.privacyDesc' | transloco }}</p>
           </div>
           <fa-icon [icon]="icons.chevron" class="text-xs text-brand-primary/30"></fa-icon>
@@ -92,12 +138,13 @@
             <fa-icon [icon]="icons.palette" class="text-brand-primary/50"></fa-icon>
           </div>
           <div class="flex-1">
-            <h2 class="text-sm font-semibold text-brand-primary">{{ 'settings.appInfo' | transloco }}</h2>
+            <h2 class="text-sm font-semibold text-brand-primary">
+              {{ 'settings.appInfo' | transloco }}
+            </h2>
             <p class="text-xs text-brand-primary/50">{{ 'settings.version' | transloco }} 1.0.0</p>
           </div>
         </div>
       </section>
-
     </div>
   </div>
 </main>

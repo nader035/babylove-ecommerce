@@ -1,41 +1,68 @@
 <main class="min-h-screen bg-[#FDFDFD] pb-32">
-  
   <!-- HERO SECTION -->
-  <section class="relative h-[55vh] min-h-[450px] w-full overflow-hidden flex items-center justify-center text-center">
+  <section
+    class="relative h-[55vh] min-h-[450px] w-full overflow-hidden flex items-center justify-center text-center"
+  >
     <div class="absolute inset-0 bg-brand-bg-light">
-      <div class="absolute top-[-15%] left-[-15%] h-[60%] w-[60%] rounded-full bg-brand-primary/5 blur-[140px] animate-pulse"></div>
-      <div class="absolute bottom-[-15%] right-[-15%] h-[60%] w-[60%] rounded-full bg-brand-accent/5 blur-[140px] animate-pulse" style="animation-delay: 2s;"></div>
+      <div
+        class="absolute top-[-15%] left-[-15%] h-[60%] w-[60%] rounded-full bg-brand-primary/5 blur-[140px] animate-pulse"
+      ></div>
+      <div
+        class="absolute bottom-[-15%] right-[-15%] h-[60%] w-[60%] rounded-full bg-brand-accent/5 blur-[140px] animate-pulse"
+        style="animation-delay: 2s"
+      ></div>
     </div>
-    
+
     <div class="container relative z-10 mx-auto px-6">
-      <nav class="mb-8 flex justify-center items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-brand-primary/40">
-        <a routerLink="/" class="hover:text-brand-primary transition-colors">{{ 'nav.home' | transloco }}</a>
+      <nav
+        class="mb-8 flex justify-center items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-brand-primary/40"
+      >
+        <a routerLink="/" class="hover:text-brand-primary transition-colors">{{
+          'nav.home' | transloco
+        }}</a>
         <span class="h-px w-8 bg-brand-primary/20"></span>
         <span class="text-brand-primary/60">{{ 'categories.badge' | transloco }}</span>
       </nav>
-      
-      <h1 class="mx-auto max-w-5xl text-6xl md:text-8xl font-black text-brand-primary tracking-tighter leading-[0.9]">
-        {{ 'categories.title_part1' | transloco }}<br/>
-        <span class="text-brand-accent italic serif-italic">{{ 'categories.title_part2' | transloco }}</span>
+
+      <h1
+        class="mx-auto max-w-5xl text-6xl md:text-8xl font-black text-brand-primary tracking-tighter leading-[0.9]"
+      >
+        {{ 'categories.title_part1' | transloco }}<br />
+        <span class="text-brand-accent italic serif-italic">{{
+          'categories.title_part2' | transloco
+        }}</span>
       </h1>
-      
-      <p class="mx-auto mt-12 max-w-lg text-sm leading-relaxed text-brand-primary/60 font-semibold tracking-wide">
+
+      <p
+        class="mx-auto mt-12 max-w-lg text-sm leading-relaxed text-brand-primary/60 font-semibold tracking-wide"
+      >
         {{ 'categories.subtitle' | transloco }}
       </p>
     </div>
   </section>
 
   <div class="container mx-auto px-6 -mt-16 relative z-30">
-    
     <!-- MINIMAL FILTER HUD -->
     <!-- PREMIUM FILTER HUD -->
-    <div class="mx-auto flex flex-col lg:flex-row items-stretch lg:items-center gap-4 p-3 bg-white/80 backdrop-blur-3xl border border-brand-primary/10 shadow-[0_32px_64px_-16px_rgba(61,33,79,0.15)] rounded-[40px] lg:max-w-5xl" data-aos="fade-down">
-      
+    <div
+      class="mx-auto flex flex-col lg:flex-row items-stretch lg:items-center gap-4 p-3 bg-white/80 backdrop-blur-3xl border border-brand-primary/10 shadow-[0_32px_64px_-16px_rgba(61,33,79,0.15)] rounded-[40px] lg:max-w-5xl"
+      data-aos="fade-down"
+    >
       <!-- SEARCH SECTION -->
       <div class="relative flex-grow group">
         <div class="absolute inset-y-0 start-0 flex items-center ps-6 pointer-events-none">
-          <svg class="w-4 h-4 text-brand-primary/40 group-focus-within:text-brand-accent transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          <svg
+            class="w-4 h-4 text-brand-primary/40 group-focus-within:text-brand-accent transition-colors"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2.5"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
           </svg>
         </div>
         <input
@@ -48,18 +75,26 @@
       </div>
 
       <!-- TYPE FILTERS SECTION -->
-      <div class="flex items-center gap-1.5 p-1.5 bg-brand-primary/[0.03] rounded-[28px] overflow-x-auto no-scrollbar">
-        @for (option of filterOptions; track option.value) {
+      <div
+        class="flex items-center gap-1.5 p-1.5 bg-brand-primary/[0.03] rounded-[28px] overflow-x-auto no-scrollbar"
+      >
+        @for (option of filterOptions(); track option.value) {
           <button
             class="whitespace-nowrap px-7 py-3.5 text-[10px] font-black uppercase tracking-widest transition-all duration-300 rounded-[22px]"
             [class.bg-white]="categoryStore.activeType() === option.value"
             [class.text-brand-primary]="categoryStore.activeType() === option.value"
-            [class.shadow-[0_8px_20px_-4px_rgba(61,33,79,0.12)]]="categoryStore.activeType() === option.value"
+            [class.shadow-[0_8px_20px_-4px_rgba(61,33,79,0.12)]]="
+              categoryStore.activeType() === option.value
+            "
             [class.text-brand-primary/40]="categoryStore.activeType() !== option.value"
             [class.hover:text-brand-primary/70]="categoryStore.activeType() !== option.value"
-            (click)="categoryStore.updateActiveType(option.value)"
+            (click)="onFilterChange(option.value)"
           >
-            {{ option.label | transloco }}
+            @if (option.labelKey) {
+              {{ option.labelKey | transloco }}
+            } @else {
+              {{ option.label }}
+            }
           </button>
         }
       </div>
@@ -67,8 +102,18 @@
       <!-- SORT SECTION -->
       <div class="relative w-full lg:w-48 group">
         <div class="absolute inset-y-0 end-0 flex items-center pe-6 pointer-events-none">
-          <svg class="w-3.5 h-3.5 text-brand-primary/40 group-hover:text-brand-accent transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
+          <svg
+            class="w-3.5 h-3.5 text-brand-primary/40 group-hover:text-brand-accent transition-colors"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="3"
+              d="M19 9l-7 7-7-7"
+            />
           </svg>
         </div>
         <select
@@ -83,19 +128,79 @@
       </div>
     </div>
 
+    @if (categoryStore.error(); as errorMsg) {
+      <div
+        class="mx-auto mt-6 max-w-5xl rounded-2xl border border-red-200 bg-red-50/60 px-4 py-3 text-sm text-red-700"
+      >
+        <div class="flex items-center justify-between gap-3">
+          <span>{{ errorMsg }}</span>
+          <button
+            type="button"
+            (click)="categoryStore.loadCategories()"
+            class="rounded-xl border border-red-300 px-3 py-1 text-xs font-semibold text-red-700 transition hover:bg-red-100"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    }
+
+    @if (hasActiveFilters()) {
+      <div class="mx-auto mt-6 flex max-w-5xl flex-wrap items-center gap-2">
+        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-brand-primary/40"
+          >Active Filters</span
+        >
+
+        @if (categoryStore.activeType() !== 'all') {
+          <button
+            type="button"
+            (click)="clearCategoryFilter()"
+            class="rounded-full bg-brand-primary/8 px-3 py-1 text-xs font-semibold text-brand-primary transition hover:bg-brand-primary/12"
+          >
+            Category:
+            {{
+              filterOptions().find((option) => option.value === categoryStore.activeType())?.label ||
+                categoryStore.activeType()
+            }}
+            x
+          </button>
+        }
+
+        @if (categoryStore.searchQuery()) {
+          <button
+            type="button"
+            (click)="clearSearchFilter()"
+            class="rounded-full bg-brand-primary/8 px-3 py-1 text-xs font-semibold text-brand-primary transition hover:bg-brand-primary/12"
+          >
+            Search: {{ categoryStore.searchQuery() }} x
+          </button>
+        }
+
+        <button
+          type="button"
+          (click)="onClearFilters()"
+          class="rounded-full border border-brand-primary/15 px-3 py-1 text-xs font-semibold text-brand-primary/70 transition hover:border-brand-primary/30 hover:text-brand-primary"
+        >
+          Clear All
+        </button>
+      </div>
+    }
+
     <!-- REIMAGINED CATEGORIES GRID -->
     <div class="mt-28">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
         @if (!categoryStore.isLoading()) {
           @for (category of categoryStore.filteredCategories(); track category.id; let i = $index) {
-            
-            <div 
+            <div
               class="group relative h-[600px] w-full overflow-hidden rounded-[56px] bg-white transition-all duration-[1200ms] cubic-bezier-0.16 hover:-translate-y-4 hover:shadow-[0_40px_80px_rgba(0,0,0,0.12)]"
               data-aos="fade-up"
               [attr.data-aos-delay]="i * 80"
             >
-              <a [routerLink]="['/shop']" [queryParams]="{ category: category.slug }" class="block h-full w-full">
-                
+              <a
+                [routerLink]="['/shop']"
+                [queryParams]="{ category: category.slug }"
+                class="block h-full w-full"
+              >
                 <!-- Background Image with Parallax-like Zoom -->
                 <div class="absolute inset-0 overflow-hidden">
                   <img
@@ -105,40 +210,67 @@
                     loading="lazy"
                   />
                   <!-- Multi-layered Gradients -->
-                  <div class="absolute inset-0 bg-gradient-to-t from-brand-primary/95 via-brand-primary/40 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-700"></div>
+                  <div
+                    class="absolute inset-0 bg-gradient-to-t from-brand-primary/95 via-brand-primary/40 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-700"
+                  ></div>
                   <div class="absolute inset-0 bg-brand-primary/10 mix-blend-overlay"></div>
                 </div>
-                
+
                 <!-- Card Inner Content: anchored and refined -->
-                <div class="absolute inset-x-0 bottom-0 p-12 md:p-14 text-white flex flex-col justify-end">
-                  
+                <div
+                  class="absolute inset-x-0 bottom-0 p-12 md:p-14 text-white flex flex-col justify-end"
+                >
                   <!-- Tag Area -->
                   <div class="flex flex-wrap gap-2 mb-8 items-center overflow-hidden h-8">
                     @for (type of category[activeLang()]?.['types']; track type) {
-                      <span class="text-[9px] font-black uppercase tracking-[0.25em] py-2 px-4 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl translate-y-8 opacity-0 transition-all duration-700 delay-[100ms] group-hover:translate-y-0 group-hover:opacity-100">
+                      <span
+                        class="text-[9px] font-black uppercase tracking-[0.25em] py-2 px-4 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl translate-y-8 opacity-0 transition-all duration-700 delay-[100ms] group-hover:translate-y-0 group-hover:opacity-100"
+                      >
                         {{ type }}
                       </span>
                     }
                   </div>
 
-                  <span class="text-[10px] font-black uppercase tracking-[0.5em] opacity-40 mb-3 block">{{ 'categories.cardBadge' | transloco }}</span>
-                  <h2 class="text-4xl md:text-5xl font-black tracking-tight leading-none mb-6 group-hover:text-brand-accent transition-colors duration-500">
+                  <span
+                    class="text-[10px] font-black uppercase tracking-[0.5em] opacity-40 mb-3 block"
+                    >{{ 'categories.cardBadge' | transloco }}</span
+                  >
+                  <h2
+                    class="text-4xl md:text-5xl font-black tracking-tight leading-none mb-6 group-hover:text-brand-accent transition-colors duration-500"
+                  >
                     {{ category[activeLang()]?.['title'] }}
                   </h2>
-                  
-                  <p class="text-xs leading-relaxed text-white/50 mb-10 max-w-[90%] opacity-0 h-0 overflow-hidden transition-all duration-700 group-hover:h-auto group-hover:opacity-100 group-hover:mb-12 delay-[200ms]">
+
+                  <p
+                    class="text-xs leading-relaxed text-white/50 mb-10 max-w-[90%] opacity-0 h-0 overflow-hidden transition-all duration-700 group-hover:h-auto group-hover:opacity-100 group-hover:mb-12 delay-[200ms]"
+                  >
                     {{ category[activeLang()]?.['description'] }}
                   </p>
 
-                  <div class="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] text-brand-accent group/btn">
-                    <span class="h-px w-0 bg-brand-accent transition-all duration-700 group-hover:w-16"></span>
+                  <div
+                    class="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.3em] text-brand-accent group/btn"
+                  >
+                    <span
+                      class="h-px w-0 bg-brand-accent transition-all duration-700 group-hover:w-16"
+                    ></span>
                     {{ 'categories.viewButton' | transloco }}
-                    <svg class="w-4 h-4 transition-transform duration-500 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    <svg
+                      class="w-4 h-4 transition-transform duration-500 group-hover:translate-x-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="3"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
                   </div>
                 </div>
               </a>
             </div>
-
           }
         }
 
@@ -153,17 +285,33 @@
       <!-- EMPTY STATE -->
       @if (hasNoResults()) {
         <div class="mt-32 text-center" data-aos="fade-up">
-          <div class="mx-auto w-24 h-24 rounded-full bg-brand-primary/5 flex items-center justify-center mb-8">
-            <svg class="w-10 h-10 text-brand-primary/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          <div
+            class="mx-auto w-24 h-24 rounded-full bg-brand-primary/5 flex items-center justify-center mb-8"
+          >
+            <svg
+              class="w-10 h-10 text-brand-primary/20"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
             </svg>
           </div>
-          <h3 class="text-2xl font-black text-brand-primary mb-4 tracking-tight">{{ 'categories.noResultsTitle' | transloco }}</h3>
-          <p class="text-brand-primary/50 text-sm max-w-xs mx-auto mb-10 font-semibold leading-relaxed">
+          <h3 class="text-2xl font-black text-brand-primary mb-4 tracking-tight">
+            {{ 'categories.noResultsTitle' | transloco }}
+          </h3>
+          <p
+            class="text-brand-primary/50 text-sm max-w-xs mx-auto mb-10 font-semibold leading-relaxed"
+          >
             {{ 'categories.noResultsDesc' | transloco }}
           </p>
           <button
-            (click)="categoryStore.clearFilters()"
+            (click)="onClearFilters()"
             class="px-10 py-4 bg-brand-primary text-white text-[10px] font-black uppercase tracking-[0.3em] rounded-full hover:shadow-2xl hover:shadow-brand-primary/20 transition-all active:scale-95"
           >
             {{ 'categories.clearFilters' | transloco }}

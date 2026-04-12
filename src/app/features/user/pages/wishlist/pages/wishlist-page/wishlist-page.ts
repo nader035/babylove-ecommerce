@@ -10,7 +10,6 @@ import { CartStore } from '../../../../../../core/stores/cart.store';
 import { PreferencesStore } from '../../../../../../core/stores/preferences.store';
 import { WishlistStore } from '../../../../../../core/stores/wishlist.store';
 
-
 @Component({
   selector: 'app-wishlist-page',
   standalone: true,
@@ -25,6 +24,7 @@ export class WishlistPage {
   private preferencesStore = inject(PreferencesStore);
 
   activeLang = this.preferencesStore.language;
+  currencyCode = this.preferencesStore.currency;
 
   icons = {
     heart: faHeart,

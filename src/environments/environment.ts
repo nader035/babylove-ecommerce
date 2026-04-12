@@ -8,4 +8,6 @@ export const environment = {
   productsApi: 'http://localhost:3000/products',
   ordersApi: 'http://localhost:3000/orders',
   blogsApi: 'http://localhost:3000/blogs',
+  heroesApi: 'http://localhost:3000/heroes',
+  lookbooksApi: 'http://localhost:3000/lookbooks',
 };

@@ -2,17 +2,18 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
+import { TranslocoService } from '@jsverse/transloco';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { 
-  faTruck, 
-  faCreditCard, 
-  faCheckCircle, 
-  faChevronLeft, 
+import {
+  faTruck,
+  faCreditCard,
+  faCheckCircle,
+  faChevronLeft,
   faLock,
   faCircleCheck,
   faShoppingBag,
   faArrowLeft,
-  faCheck
+  faCheck,
 } from '@fortawesome/free-solid-svg-icons';
 import { NotificationService } from '../../../../../../core/services/notification.service';
 import { CartStore } from '../../../../../../core/stores/cart.store';
@@ -28,12 +29,15 @@ import { PreferencesStore } from '../../../../../../core/stores/preferences.stor
 })
 export class CheckoutPage {
   cartStore = inject(CartStore);
-  activeLang = inject(PreferencesStore).language;
+  preferencesStore = inject(PreferencesStore);
+  activeLang = this.preferencesStore.language;
+  currencyCode = this.preferencesStore.currency;
   private notificationService = inject(NotificationService);
+  private transloco = inject(TranslocoService);
   private router = inject(Router);
 
   step = signal(1);
-  isPlacing = signal(false); 
+  isPlacing = signal(false);
   orderNumber = signal('');
 
   steps = [
@@ -51,7 +55,7 @@ export class CheckoutPage {
     circleCheck: faCircleCheck,
     bag: faShoppingBag,
     arrowLeft: faArrowLeft,
-    check: faCheck
+    check: faCheck,
   };
 
   checkoutForm = signal({
@@ -78,20 +82,20 @@ export class CheckoutPage {
   });
 
   updateField(field: string, value: string) {
-    this.checkoutForm.update(f => ({ ...f, [field]: value }));
+    this.checkoutForm.update((f) => ({ ...f, [field]: value }));
   }
 
   setPaymentMethod(method: string) {
-    this.checkoutForm.update(f => ({ ...f, paymentMethod: method }));
+    this.checkoutForm.update((f) => ({ ...f, paymentMethod: method }));
   }
 
   nextStep() {
-    if (this.step() < 3) this.step.update(s => s + 1);
+    if (this.step() < 3) this.step.update((s) => s + 1);
     window.scrollTo(0, 0);
   }
 
   prevStep() {
-    if (this.step() > 1) this.step.update(s => s - 1);
+    if (this.step() > 1) this.step.update((s) => s - 1);
     window.scrollTo(0, 0);
   }
 
@@ -101,15 +105,15 @@ export class CheckoutPage {
 
   async placeOrder() {
     this.isPlacing.set(true);
-    
+
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     const num = 'ORD-' + Math.random().toString().slice(2, 10);
     this.orderNumber.set(num);
     this.step.set(4);
     this.cartStore.clearCart();
-    this.notificationService.success('Order placed successfully');
+    this.notificationService.success(this.transloco.translate('checkout.orderPlacedToast'));
     window.scrollTo(0, 0);
   }
 }

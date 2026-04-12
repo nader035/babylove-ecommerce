@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -16,7 +23,10 @@ import {
   faRulerCombined,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
-import { faStar as faStarEmpty, faHeart as faHeartEmpty } from '@fortawesome/free-regular-svg-icons';
+import {
+  faStar as faStarEmpty,
+  faHeart as faHeartEmpty,
+} from '@fortawesome/free-regular-svg-icons';
 import { Product, Sku } from '../../../../../../core/models/icatalog';
 import { NotificationService } from '../../../../../../core/services/notification.service';
 import { ProductService, ProductCardModel } from '../../../../../../core/services/product.service';
@@ -26,11 +36,17 @@ import { WishlistStore } from '../../../../../../core/stores/wishlist.store';
 import { ProductCard } from '../../../../../../shared/components/product-card/product-card';
 import { SkeletonLoader } from '../../../../../../shared/components/skeleton-loader/skeleton-loader';
 
-
 @Component({
   selector: 'app-product-detail-page',
   standalone: true,
-  imports: [CommonModule, TranslocoModule, RouterLink, FontAwesomeModule, SkeletonLoader, ProductCard],
+  imports: [
+    CommonModule,
+    TranslocoModule,
+    RouterLink,
+    FontAwesomeModule,
+    SkeletonLoader,
+    ProductCard,
+  ],
   templateUrl: './product-detail-page.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -53,6 +69,7 @@ export class ProductDetailPage implements OnInit {
   showSizeGuide = signal(false);
 
   activeLang = computed(() => this.preferencesStore.language());
+  currencyCode = computed(() => this.preferencesStore.currency());
 
   icons = {
     star: faStar,
@@ -80,7 +97,21 @@ export class ProductDetailPage implements OnInit {
 
   currentPrice = computed(() => {
     const sku = this.selectedSku();
-    return sku ? sku.price : (this.product()?.skus?.[0]?.price ?? 0);
+    if (sku) {
+      return sku.price;
+    }
+
+    const product = this.product();
+    if (!product) {
+      return 0;
+    }
+
+    const skuPrices = product.skus?.map((item) => item.price).filter((price) => price > 0) ?? [];
+    if (skuPrices.length) {
+      return Math.min(...skuPrices);
+    }
+
+    return Number(product['price'] ?? 0);
   });
 
   allImages = computed(() => {
@@ -130,7 +161,7 @@ export class ProductDetailPage implements OnInit {
       ar: {
         title: p.ar.title,
         shortDescription: p.ar.shortDescription,
-      }
+      },
     };
   });
 
@@ -138,7 +169,7 @@ export class ProductDetailPage implements OnInit {
   availableSizes = computed(() => {
     const skus = this.product()?.skus ?? [];
     const sizes = new Set<string>();
-    skus.forEach(sku => {
+    skus.forEach((sku) => {
       const parts = sku.code.split(' · ');
       if (parts[0]) sizes.add(parts[0].trim());
     });
@@ -148,7 +179,7 @@ export class ProductDetailPage implements OnInit {
   availableColors = computed(() => {
     const skus = this.product()?.skus ?? [];
     const colors = new Set<string>();
-    skus.forEach(sku => {
+    skus.forEach((sku) => {
       const parts = sku.code.split(' · ');
       if (parts[1]) colors.add(parts[1].trim());
     });
@@ -182,7 +213,7 @@ export class ProductDetailPage implements OnInit {
   selectByVariant(size: string, color: string) {
     this.selectedSize.set(size);
     this.selectedColor.set(color);
-    const match = this.product()?.skus?.find(s => {
+    const match = this.product()?.skus?.find((s) => {
       const parts = s.code.split(' · ');
       return parts[0]?.trim() === size && parts[1]?.trim() === color;
     });

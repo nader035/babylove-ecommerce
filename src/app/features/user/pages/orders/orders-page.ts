@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject, signal, computed } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+  signal,
+  computed,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
@@ -17,7 +24,6 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 import { PreferencesStore } from '../../../../core/stores/preferences.store';
-
 
 interface LocalizedString {
   en: string;
@@ -57,13 +63,14 @@ interface Order {
 })
 export class OrdersPage implements OnInit {
   private http = inject(HttpClient);
-  private preferencesStore = inject(PreferencesStore);
+  preferencesStore = inject(PreferencesStore);
 
   orders = signal<Order[]>([]);
   isLoading = signal(true);
   expandedOrderId = signal<string | null>(null);
 
   activeLang = computed(() => this.preferencesStore.language());
+  currencyCode = computed(() => this.preferencesStore.currency());
 
   icons = {
     box: faBox,
@@ -80,7 +87,9 @@ export class OrdersPage implements OnInit {
   ngOnInit() {
     this.http.get<Order[]>(environment.ordersApi).subscribe({
       next: (orders) => {
-        this.orders.set(orders.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()));
+        this.orders.set(
+          orders.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
+        );
         this.isLoading.set(false);
       },
       error: () => this.isLoading.set(false),
@@ -93,21 +102,31 @@ export class OrdersPage implements OnInit {
 
   getStatusIcon(status: string) {
     switch (status) {
-      case 'delivered': return this.icons.check;
-      case 'shipped': return this.icons.truck;
-      case 'processing': return this.icons.spinner;
-      case 'cancelled': return this.icons.cancel;
-      default: return this.icons.clock;
+      case 'delivered':
+        return this.icons.check;
+      case 'shipped':
+        return this.icons.truck;
+      case 'processing':
+        return this.icons.spinner;
+      case 'cancelled':
+        return this.icons.cancel;
+      default:
+        return this.icons.clock;
     }
   }
 
   getStatusColor(status: string): string {
     switch (status) {
-      case 'delivered': return 'text-green-600 bg-green-50';
-      case 'shipped': return 'text-blue-600 bg-blue-50';
-      case 'processing': return 'text-amber-600 bg-amber-50';
-      case 'cancelled': return 'text-red-600 bg-red-50';
-      default: return 'text-brand-primary/60 bg-brand-bg-light';
+      case 'delivered':
+        return 'text-green-600 bg-green-50';
+      case 'shipped':
+        return 'text-blue-600 bg-blue-50';
+      case 'processing':
+        return 'text-amber-600 bg-amber-50';
+      case 'cancelled':
+        return 'text-red-600 bg-red-50';
+      default:
+        return 'text-brand-primary/60 bg-brand-bg-light';
     }
   }
 

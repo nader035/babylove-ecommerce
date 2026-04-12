@@ -17,7 +17,9 @@ import { PreferencesStore } from '../../../../../../core/stores/preferences.stor
 })
 export class CartPage {
   cartStore = inject(CartStore);
-  activeLang = inject(PreferencesStore).language;
+  preferencesStore = inject(PreferencesStore);
+  activeLang = this.preferencesStore.language;
+  currencyCode = this.preferencesStore.currency;
   private notificationService = inject(NotificationService);
 
   icons = {

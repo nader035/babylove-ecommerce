@@ -1,7 +1,8 @@
 <article class="group h-full flex flex-col items-center text-center">
   <!-- Image Area -->
-  <div class="relative w-full aspect-[3/4] overflow-hidden rounded-2xl bg-white transition-all duration-500 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)]">
-    
+  <div
+    class="relative w-full aspect-[3/4] overflow-hidden rounded-2xl bg-white transition-all duration-500 group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)]"
+  >
     <!-- Product Image -->
     <a [routerLink]="['/product', product.slug]" class="block h-full w-full">
       <img
@@ -13,7 +14,9 @@
     </a>
 
     <!-- Overlay Actions (Center) -->
-    <div class="absolute inset-0 flex items-center justify-center gap-3 bg-black/0 opacity-0 transition-all duration-300 group-hover:bg-black/5 group-hover:opacity-100">
+    <div
+      class="absolute inset-0 flex items-center justify-center gap-3 bg-black/0 opacity-0 transition-all duration-300 group-hover:bg-black/5 group-hover:opacity-100"
+    >
       <!-- Quick View -->
       <button
         (click)="quickView($event)"
@@ -31,7 +34,10 @@
         [class.text-brand-primary]="!wishlistStore.ids().has(product.id)"
         [title]="'nav.wishlist' | transloco"
       >
-        <fa-icon [icon]="wishlistStore.ids().has(product.id) ? icons.heartSolid : icons.heartRegular" class="text-sm"></fa-icon>
+        <fa-icon
+          [icon]="wishlistStore.ids().has(product.id) ? icons.heartSolid : icons.heartRegular"
+          class="text-sm"
+        ></fa-icon>
       </button>
     </div>
 
@@ -53,7 +59,9 @@
     </p>
 
     <!-- Title -->
-    <h3 class="line-clamp-1 text-[13px] font-bold text-brand-primary transition-colors group-hover:text-brand-accent">
+    <h3
+      class="line-clamp-1 text-[13px] font-bold text-brand-primary transition-colors group-hover:text-brand-accent"
+    >
       <a [routerLink]="['/product', product.slug]">{{ product[activeLang]?.['title'] }}</a>
     </h3>
 
@@ -61,14 +69,16 @@
     <div class="flex items-center justify-center gap-3">
       <!-- Original Price (Strike) -->
       @if (product.oldPrice) {
-        <span class="text-[11px] font-medium text-brand-primary/40 line-through decoration-brand-primary/20">
-          {{ product.oldPrice | currency: 'EGP' : '£' : '1.2-2' }}
+        <span
+          class="text-[11px] font-medium text-brand-primary/40 line-through decoration-brand-primary/20"
+        >
+          {{ product.oldPrice | currency: currencyCode : 'symbol' : '1.2-2' }}
         </span>
       }
 
       <!-- Current Price -->
       <span class="text-[13px] font-black text-red-500">
-        {{ product.price | currency: 'EGP' : '£' : '1.2-2' }}
+        {{ product.price | currency: currencyCode : 'symbol' : '1.2-2' }}
       </span>
     </div>
   </div>
