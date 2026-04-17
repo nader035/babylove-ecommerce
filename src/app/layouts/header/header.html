@@ -56,6 +56,21 @@
         </button>
 
         <button
+          routerLink="/recently-viewed"
+          class="relative flex h-10 w-10 items-center justify-center rounded-full text-brand-primary/70 transition hover:bg-white hover:text-brand-primary"
+          [attr.aria-label]="'recentlyViewed.title' | transloco"
+        >
+          <fa-icon [icon]="icons.recent"></fa-icon>
+          @if (recentlyViewedStore.count() > 0) {
+            <span
+              class="absolute -inset-e-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-primary px-1 text-[10px] font-bold text-white"
+            >
+              {{ recentlyViewedStore.count() }}
+            </span>
+          }
+        </button>
+
+        <button
           routerLink="/wishlist"
           class="relative flex h-10 w-10 items-center justify-center rounded-full text-brand-primary/70 transition hover:bg-white hover:text-brand-primary"
         >

@@ -5,9 +5,9 @@ import { Order } from '../models/iorder';
 import { environment } from '../../../environments/environment';
 
 export interface PlaceOrderPayload {
-  userId: number;
-  addressId: number;
-  items: { skuId: number; quantity: number }[];
+  userId: number | string;
+  addressId: number | string;
+  items: { skuId: number | string; quantity: number }[];
   paymentMethod: string;
   shippingInfo: {
     fullName: string;
@@ -37,7 +37,7 @@ export class OrderService {
     return this.http.get<Order[]>(environment.ordersApi);
   }
 
-  getOrderById(id: number): Observable<Order> {
-    return this.http.get<Order>(`${environment.ordersApi}/${id}`);
+  getOrderById(id: number | string): Observable<Order> {
+    return this.http.get<Order>(`${environment.ordersApi}/${encodeURIComponent(String(id))}`);
   }
 }

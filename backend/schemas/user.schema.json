@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.babylove.local/schemas/user.schema.json",
+  "title": "User",
+  "type": "object",
+  "required": [
+    "id",
+    "username",
+    "firstName",
+    "lastName",
+    "email",
+    "gender",
+    "image",
+    "preferences",
+    "role",
+    "isActive",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "id": {
+      "oneOf": [
+        { "type": "integer", "minimum": 1 },
+        { "type": "string", "minLength": 1 }
+      ]
+    },
+    "username": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 40
+    },
+    "firstName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "lastName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "password": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 255
+    },
+    "phoneNumber": {
+      "type": "string",
+      "maxLength": 30
+    },
+    "image": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gender": {
+      "type": "string",
+      "enum": ["male", "female", "other", "prefer_not_to_say"]
+    },
+    "preferences": {
+      "$ref": "#/$defs/preferences"
+    },
+    "role": {
+      "type": "string",
+      "enum": ["customer", "admin", "editor", "support"]
+    },
+    "isActive": {
+      "type": "boolean"
+    },
+    "addresses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/address"
+      },
+      "default": []
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lastLoginAt": {
+      "oneOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }]
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "preferences": {
+      "type": "object",
+      "required": ["language", "currency"],
+      "properties": {
+        "language": {
+          "type": "string",
+          "enum": ["en", "ar"]
+        },
+        "currency": {
+          "type": "string",
+          "enum": ["USD", "EGP", "EUR", "SAR", "AED"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "address": {
+      "type": "object",
+      "required": ["id", "detail", "postCode", "cityId", "city"],
+      "properties": {
+        "id": {
+          "oneOf": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "string", "minLength": 1 }
+          ]
+        },
+        "detail": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 200
+        },
+        "postCode": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 20
+        },
+        "cityId": {
+          "oneOf": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "string", "minLength": 1 }
+          ]
+        },
+        "city": {
+          "$ref": "#/$defs/city"
+        },
+        "isDefault": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "city": {
+      "type": "object",
+      "required": ["id", "name", "provinceId", "province"],
+      "properties": {
+        "id": {
+          "oneOf": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "string", "minLength": 1 }
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "provinceId": {
+          "oneOf": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "string", "minLength": 1 }
+          ]
+        },
+        "province": {
+          "$ref": "#/$defs/province"
+        }
+      },
+      "additionalProperties": false
+    },
+    "province": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": {
+          "oneOf": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "string", "minLength": 1 }
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

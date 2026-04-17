@@ -31,20 +31,28 @@ interface LocalizedString {
 }
 
 interface OrderItem {
-  productId: number;
-  skuId: number;
+  id: string;
+  productId: number | string;
+  skuId: number | string;
   quantity: number;
   price: number;
+  lineTotal?: number;
   title: LocalizedString;
   image: string;
 }
 
 interface Order {
   id: string;
-  userId: number;
+  userId: number | string;
   date: string;
   status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
   total: number;
+  paymentStatus?: 'pending' | 'completed' | 'refunded' | 'failed';
+  currency?: 'USD' | 'EGP';
+  trackingCode?: string | null;
+  itemCount?: number;
+  createdAt?: string;
+  updatedAt?: string;
   items: OrderItem[];
   shippingAddress: {
     fullName: string;
@@ -88,7 +96,11 @@ export class OrdersPage implements OnInit {
     this.http.get<Order[]>(environment.ordersApi).subscribe({
       next: (orders) => {
         this.orders.set(
-          orders.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
+          orders.sort(
+            (a, b) =>
+              new Date(b.date ?? b.createdAt ?? 0).getTime() -
+              new Date(a.date ?? a.createdAt ?? 0).getTime(),
+          ),
         );
         this.isLoading.set(false);
       },
@@ -131,6 +143,6 @@ export class OrdersPage implements OnInit {
   }
 
   getItemCount(order: Order): number {
-    return order.items.reduce((acc, item) => acc + item.quantity, 0);
+    return order.itemCount ?? order.items.reduce((acc, item) => acc + item.quantity, 0);
   }
 }

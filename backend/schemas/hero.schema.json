@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.babylove.local/schemas/hero.schema.json",
+  "title": "Hero Slide",
+  "type": "object",
+  "required": [
+    "id",
+    "slug",
+    "isActive",
+    "displayOrder",
+    "imageDesktop",
+    "imageAlt",
+    "overlayOpacity",
+    "en",
+    "ar",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "id": {
+      "oneOf": [
+        { "type": "integer", "minimum": 1 },
+        { "type": "string", "minLength": 1 }
+      ]
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "isActive": {
+      "type": "boolean"
+    },
+    "displayOrder": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "imageDesktop": {
+      "type": "string",
+      "minLength": 1
+    },
+    "imageMobile": {
+      "type": "string",
+      "minLength": 1
+    },
+    "imageAlt": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 250
+    },
+    "overlayOpacity": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "theme": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "startsAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "endsAt": {
+      "oneOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }]
+    },
+    "en": {
+      "$ref": "#/$defs/content"
+    },
+    "ar": {
+      "$ref": "#/$defs/content"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "content": {
+      "type": "object",
+      "required": ["badge", "titlePart1", "titlePart2", "description", "ctaText", "ctaLink"],
+      "properties": {
+        "badge": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "titlePart1": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "titlePart2": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "description": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 600
+        },
+        "ctaText": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "ctaLink": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -10,7 +10,7 @@ export interface BlogContent {
 }
 
 export interface Blog {
-  id: number;
+  id: number | string;
   slug: string;
   author: string;
   authorImage: string;
@@ -18,7 +18,13 @@ export interface Blog {
   category: string;
   image: string;
   readingTime: string;
-  relatedProductIds?: number[];
+  relatedProductIds?: Array<number | string>;
+  status?: 'draft' | 'published' | 'archived';
+  isFeatured?: boolean;
+  tags?: string[];
+  publishedAt?: string;
+  createdAt?: string;
+  updatedAt?: string;
   en: BlogContent;
   ar: BlogContent;
 }
@@ -31,14 +37,16 @@ export class BlogService {
   private apiUrl = environment.blogsApi;
 
   getBlogs(): Observable<Blog[]> {
-    return this.http.get<Blog[]>(this.apiUrl);
+    return this.http.get<Blog[]>(`${this.apiUrl}?status=published`);
   }
 
-  getBlogById(id: number): Observable<Blog> {
-    return this.http.get<Blog>(`${this.apiUrl}/${id}`);
+  getBlogById(id: number | string): Observable<Blog> {
+    return this.http.get<Blog>(`${this.apiUrl}/${encodeURIComponent(String(id))}`);
   }
 
   getBlogBySlug(slug: string): Observable<Blog[]> {
-    return this.http.get<Blog[]>(`${this.apiUrl}?slug=${slug}`);
+    return this.http.get<Blog[]>(
+      `${this.apiUrl}?slug=${encodeURIComponent(slug)}&status=published`,
+    );
   }
 }

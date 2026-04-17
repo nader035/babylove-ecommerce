@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.babylove.local/schemas/sku.schema.json",
+  "title": "Product SKU",
+  "type": "object",
+  "required": [
+    "id",
+    "productId",
+    "code",
+    "skuCode",
+    "price",
+    "currency",
+    "quantity",
+    "attributes",
+    "images",
+    "isActive"
+  ],
+  "properties": {
+    "id": {
+      "oneOf": [
+        { "type": "integer", "minimum": 1 },
+        { "type": "string", "minLength": 1 }
+      ]
+    },
+    "productId": {
+      "oneOf": [
+        { "type": "integer", "minimum": 1 },
+        { "type": "string", "minLength": 1 }
+      ]
+    },
+    "code": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 120
+    },
+    "skuCode": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 64,
+      "pattern": "^[A-Z0-9_-]+$"
+    },
+    "barcode": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 32
+    },
+    "price": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "compareAtPrice": {
+      "type": "number",
+      "minimum": 0
+    },
+    "currency": {
+      "type": "string",
+      "enum": ["USD", "EGP", "EUR", "SAR", "AED"]
+    },
+    "quantity": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "isInStock": {
+      "type": "boolean",
+      "default": true
+    },
+    "lowStockThreshold": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 5
+    },
+    "attributes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/attribute"
+      }
+    },
+    "images": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/image"
+      }
+    },
+    "weightGrams": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "isActive": {
+      "type": "boolean"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "attribute": {
+      "type": "object",
+      "required": ["id", "key", "value", "attributeValue", "relatedPropertyId"],
+      "properties": {
+        "id": {
+          "oneOf": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "string", "minLength": 1 }
+          ]
+        },
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "attributeValue": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "relatedPropertyId": {
+          "oneOf": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "string", "minLength": 1 }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "image": {
+      "type": "object",
+      "required": ["id", "image", "url", "isPrimary"],
+      "properties": {
+        "id": {
+          "oneOf": [
+            { "type": "integer", "minimum": 1 },
+            { "type": "string", "minLength": 1 }
+          ]
+        },
+        "image": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "alt": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "sortOrder": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0
+        },
+        "isPrimary": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

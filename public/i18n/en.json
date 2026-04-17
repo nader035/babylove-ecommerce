@@ -218,6 +218,19 @@
     "emptyDesc": "Save your favorite pieces here to revisit later.",
     "moveToCart": "Move to Bag"
   },
+  "recentlyViewed": {
+    "kicker": "Browsing History",
+    "title": "Recently Viewed",
+    "clear": "Clear History",
+    "empty": "No recently viewed products yet",
+    "emptyDesc": "Products you open will appear here for quick access.",
+    "addToBag": "Add to Bag",
+    "lastViewed": "Last viewed",
+    "removeOne": "Remove from recently viewed",
+    "addedToBag": "{{title}} added to bag",
+    "removed": "{{title}} removed from recently viewed",
+    "cleared": "Recently viewed history cleared"
+  },
   "checkout": {
     "title": "Checkout",
     "shippingAddress": "Shipping",
@@ -326,6 +339,11 @@
       "searchPlaceholder": "Search by name, fabric, or fit...",
       "all": "Everything",
       "collections": "Collections",
+      "byCategories": "By Categories",
+      "byType": "By Product Type",
+      "price": "Price",
+      "active": "Active Filters",
+      "of": "of",
       "types": {
         "fashion": "Fashion",
         "essentials": "Essentials",
@@ -346,6 +364,14 @@
       "reset": "Reset Filters & Exploration",
       "showing": "Showing",
       "results": "Results"
+    },
+    "features": {
+      "freeShippingTitle": "Free Shipping",
+      "freeShippingDesc": "Free shipping for every order above 50 USD.",
+      "flexiblePaymentTitle": "Flexible Payment",
+      "flexiblePaymentDesc": "Multiple secure payment options.",
+      "supportTitle": "24x7 Support",
+      "supportDesc": "Our support team is online every day."
     },
     "quickView": "Quick View",
     "quickViewDescription": "A premium curated collection designed for those who value craftsmanship, quality materials, and timeless style.",

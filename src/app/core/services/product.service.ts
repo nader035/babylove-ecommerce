@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { forkJoin, map, Observable, of } from 'rxjs';
 import { Product } from '../models/icatalog';
 import { environment } from '../../../environments/environment';
 
@@ -11,6 +11,13 @@ export type ProductQueryParams = {
   sortBy?: 'featured' | 'priceAsc' | 'priceDesc' | 'rating';
   page?: number;
   pageSize?: number;
+  minPrice?: number;
+  maxPrice?: number;
+};
+
+export type PriceBounds = {
+  min: number;
+  max: number;
 };
 
 export type ProductListResponse = {
@@ -22,8 +29,7 @@ export type ProductListResponse = {
 };
 
 export type ProductCardModel = {
-  [key: string]: any;
-  id: number;
+  id: number | string;
   slug: string;
   image: string;
   categorySlug: string;
@@ -79,13 +85,67 @@ export class ProductService {
       );
   }
 
-  getProductById(id: number): Observable<Product> {
-    return this.http.get<Product[]>(`${environment.productsApi}/?id=${id}&_expand=category`).pipe(
-      map((products) => {
-        if (!products.length) throw new Error('Product not found');
-        return products[0];
+  searchProducts(term: string, limit = 5): Observable<ProductCardModel[]> {
+    const searchQuery = term.trim();
+    if (!searchQuery) {
+      return of([]);
+    }
+
+    const queryString = this._buildProductsQuery({
+      searchQuery,
+      page: 1,
+      pageSize: Math.max(1, limit),
+      sortBy: 'rating',
+    });
+
+    return this.http
+      .get<Product[]>(`${environment.productsApi}${queryString}`)
+      .pipe(map((products) => products.map((product) => this._toCard(product))));
+  }
+
+  getPriceBounds(
+    query?: Pick<ProductQueryParams, 'categorySlug' | 'type' | 'searchQuery'>,
+  ): Observable<PriceBounds> {
+    const baseQuery = {
+      categorySlug: query?.categorySlug,
+      type: query?.type,
+      searchQuery: query?.searchQuery,
+      page: 1,
+      pageSize: 1,
+    };
+
+    const minQuery = this._buildProductsQuery({ ...baseQuery, sortBy: 'priceAsc' });
+    const maxQuery = this._buildProductsQuery({ ...baseQuery, sortBy: 'priceDesc' });
+
+    return forkJoin({
+      minProduct: this.http.get<Product[]>(`${environment.productsApi}${minQuery}`),
+      maxProduct: this.http.get<Product[]>(`${environment.productsApi}${maxQuery}`),
+    }).pipe(
+      map(({ minProduct, maxProduct }) => {
+        const min = Number(minProduct[0]?.['price'] ?? 0);
+        const max = Number(maxProduct[0]?.['price'] ?? min);
+        const safeMin = Number.isFinite(min) ? min : 0;
+        const safeMax = Number.isFinite(max) ? max : safeMin;
+
+        return {
+          min: safeMin,
+          max: Math.max(safeMin, safeMax),
+        };
       }),
     );
+  }
+
+  getProductById(id: number | string): Observable<Product> {
+    return this.http
+      .get<
+        Product[]
+      >(`${environment.productsApi}/?id=${encodeURIComponent(String(id))}&_expand=category`)
+      .pipe(
+        map((products) => {
+          if (!products.length) throw new Error('Product not found');
+          return products[0];
+        }),
+      );
   }
 
   getProductBySlug(slug: string): Observable<Product> {
@@ -99,24 +159,35 @@ export class ProductService {
       );
   }
 
-  getProductCardById(id: number): Observable<ProductCardModel> {
+  getProductCardById(id: number | string): Observable<ProductCardModel> {
     return this.getProductById(id).pipe(map((p) => this._toCard(p)));
   }
 
-  getRelatedProducts(categoryId: number, excludeId: number): Observable<ProductCardModel[]> {
+  getRelatedProducts(
+    categoryId: number | string,
+    excludeId: number | string,
+  ): Observable<ProductCardModel[]> {
     return this.http
-      .get<Product[]>(`${environment.productsApi}/?categoryId=${categoryId}&_expand=category`)
+      .get<
+        Product[]
+      >(`${environment.productsApi}/?categoryId=${encodeURIComponent(String(categoryId))}&_expand=category`)
       .pipe(
         map((products) =>
-          products.filter((p) => p.id !== excludeId).map((product) => this._toCard(product)),
+          products
+            .filter((p) => String(p.id) !== String(excludeId))
+            .map((product) => this._toCard(product)),
         ),
       );
   }
 
   private _toCard(product: Product): ProductCardModel {
     const prices = product.skus?.map((sku) => sku.price) ?? [];
-    const minPrice = prices.length ? Math.min(...prices) : product['price'] || 0;
-    const maxPrice = prices.length ? Math.max(...prices) : minPrice;
+    const minPrice =
+      prices.length > 0 ? Math.min(...prices) : Number(product.minPrice ?? product['price'] ?? 0);
+    const maxPrice =
+      prices.length > 0
+        ? Math.max(...prices)
+        : Number(product.maxPrice ?? product.minPrice ?? minPrice);
 
     const rating =
       product['rating'] ||
@@ -141,15 +212,15 @@ export class ProductService {
       price: minPrice,
       oldPrice: maxPrice > minPrice ? maxPrice : undefined,
       rating: Number(rating.toFixed(1)),
-      reviewCount: product.reviews?.length ?? 0,
-      type: product.type || '',
+      reviewCount: product.reviewCount ?? product.reviews?.length ?? 0,
+      type: (product.typeKey || product.type || '').toLowerCase(),
       en: {
-        title: product.en.title,
-        shortDescription: product.en.shortDescription,
+        title: product.en?.title || '',
+        shortDescription: product.en?.shortDescription || '',
       },
       ar: {
-        title: product.ar.title,
-        shortDescription: product.ar.shortDescription,
+        title: product.ar?.title || '',
+        shortDescription: product.ar?.shortDescription || '',
       },
     };
   }
@@ -171,7 +242,17 @@ export class ProductService {
     }
 
     if (query?.type && query.type !== 'all') {
-      params.set('type', query.type.toLowerCase());
+      const typeValue = query.type.toLowerCase();
+      params.set('typeKey', typeValue);
+      params.set('type', typeValue);
+    }
+
+    if (typeof query?.minPrice === 'number' && Number.isFinite(query.minPrice)) {
+      params.set('price_gte', query.minPrice.toString());
+    }
+
+    if (typeof query?.maxPrice === 'number' && Number.isFinite(query.maxPrice)) {
+      params.set('price_lte', query.maxPrice.toString());
     }
 
     if (query?.searchQuery?.trim()) {

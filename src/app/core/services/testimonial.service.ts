@@ -10,9 +10,11 @@ export interface TestimonialContent {
 }
 
 export interface Testimonial {
-  [key: string]: any;
-  id: number;
+  id: number | string;
   rating: number;
+  isActive?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
   en: TestimonialContent;
   ar: TestimonialContent;
 }
@@ -25,6 +27,6 @@ export class TestimonialService {
   private apiUrl = `${environment.apiBase}/testimonials`;
 
   getTestimonials(): Observable<Testimonial[]> {
-    return this.http.get<Testimonial[]>(this.apiUrl);
+    return this.http.get<Testimonial[]>(`${this.apiUrl}?isActive=true`);
   }
 }

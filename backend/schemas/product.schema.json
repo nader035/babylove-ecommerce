@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.babylove.local/schemas/product.schema.json",
+  "title": "Product",
+  "type": "object",
+  "required": [
+    "id",
+    "slug",
+    "categoryId",
+    "categorySlug",
+    "type",
+    "typeKey",
+    "thumbnail",
+    "price",
+    "rating",
+    "status",
+    "currency",
+    "en",
+    "ar",
+    "skus",
+    "isPublished",
+    "isInStock",
+    "totalQuantity",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "id": {
+      "oneOf": [
+        { "type": "integer", "minimum": 1 },
+        { "type": "string", "minLength": 1 }
+      ]
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "categoryId": {
+      "oneOf": [
+        { "type": "integer", "minimum": 1 },
+        { "type": "string", "minLength": 1 }
+      ]
+    },
+    "categorySlug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "type": {
+      "description": "Legacy storefront type field kept for backward compatibility.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "typeKey": {
+      "description": "Canonical type key used for filtering, regardless of language.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "thumbnail": {
+      "type": "string",
+      "minLength": 1
+    },
+    "price": {
+      "type": "number",
+      "minimum": 0
+    },
+    "minPrice": {
+      "type": "number",
+      "minimum": 0
+    },
+    "maxPrice": {
+      "type": "number",
+      "minimum": 0
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "default": []
+    },
+    "brand": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "material": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "active", "archived"]
+    },
+    "isPublished": {
+      "type": "boolean"
+    },
+    "isInStock": {
+      "type": "boolean"
+    },
+    "totalQuantity": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "currency": {
+      "type": "string",
+      "enum": ["USD", "EGP", "EUR", "SAR", "AED"]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 50
+      },
+      "default": []
+    },
+    "rating": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 5,
+      "default": 0
+    },
+    "reviewCount": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 0
+    },
+    "en": {
+      "$ref": "#/$defs/productContent"
+    },
+    "ar": {
+      "$ref": "#/$defs/productContent"
+    },
+    "skus": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "./sku.schema.json"
+      }
+    },
+    "seo": {
+      "type": "object",
+      "required": ["title", "description", "keywords"],
+      "properties": {
+        "title": { "type": "string", "minLength": 2, "maxLength": 180 },
+        "description": { "type": "string", "minLength": 2, "maxLength": 500 },
+        "keywords": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1, "maxLength": 80 }
+        }
+      },
+      "additionalProperties": false
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "productContent": {
+      "type": "object",
+      "required": ["title", "shortDescription", "longDescription"],
+      "properties": {
+        "title": { "type": "string", "minLength": 2, "maxLength": 180 },
+        "shortDescription": { "type": "string", "minLength": 2, "maxLength": 320 },
+        "longDescription": { "type": "string", "minLength": 2, "maxLength": 6000 }
+      },
+      "additionalProperties": false
+    }
+  }
+}

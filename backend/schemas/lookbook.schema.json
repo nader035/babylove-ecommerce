@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.babylove.local/schemas/lookbook.schema.json",
+  "title": "Lookbook Module",
+  "type": "object",
+  "required": [
+    "id",
+    "slug",
+    "isActive",
+    "displayOrder",
+    "image",
+    "imageAlt",
+    "en",
+    "ar",
+    "hotspots",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "id": {
+      "oneOf": [
+        { "type": "integer", "minimum": 1 },
+        { "type": "string", "minLength": 1 }
+      ]
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "isActive": {
+      "type": "boolean"
+    },
+    "displayOrder": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "image": {
+      "type": "string",
+      "minLength": 1
+    },
+    "imageAlt": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 250
+    },
+    "en": {
+      "$ref": "#/$defs/content"
+    },
+    "ar": {
+      "$ref": "#/$defs/content"
+    },
+    "hotspots": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/hotspot"
+      },
+      "default": []
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "content": {
+      "type": "object",
+      "required": ["kicker", "title", "description"],
+      "properties": {
+        "kicker": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "description": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 600
+        }
+      },
+      "additionalProperties": false
+    },
+    "hotspot": {
+      "type": "object",
+      "required": ["id", "top", "left", "en", "ar"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "top": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "left": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "productTypeFilter": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "categoryFilter": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "en": {
+          "$ref": "#/$defs/label"
+        },
+        "ar": {
+          "$ref": "#/$defs/label"
+        }
+      },
+      "additionalProperties": false
+    },
+    "label": {
+      "type": "object",
+      "required": ["label"],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

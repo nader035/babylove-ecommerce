@@ -60,12 +60,12 @@ export const CartStore = signalStore(
       patchState(store, { items });
       writeCart(items);
     },
-    removeFromCart(productId: number) {
+    removeFromCart(productId: number | string) {
       const items = store.items().filter((item) => item.product.id !== productId);
       patchState(store, { items });
       writeCart(items);
     },
-    updateQuantity(productId: number, quantity: number) {
+    updateQuantity(productId: number | string, quantity: number) {
       const safeQuantity = Math.max(1, quantity);
       const items = store
         .items()

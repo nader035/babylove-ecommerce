@@ -1,7 +1,9 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Subject, debounceTime, distinctUntilChanged, map, of, switchMap } from 'rxjs';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
@@ -10,6 +12,7 @@ import {
   faShoppingBag,
   faSearch,
   faHeart,
+  faClock,
   faUserCircle,
   faInfinity,
   faBox,
@@ -20,6 +23,7 @@ import {
 import { AuthStore } from '../../features/auth/auth.store';
 import { CartStore } from '../../core/stores/cart.store';
 import { WishlistStore } from '../../core/stores/wishlist.store';
+import { RecentlyViewedStore } from '../../core/stores/recently-viewed.store';
 import { PreferencesStore } from '../../core/stores/preferences.store';
 import { ProductService, ProductCardModel } from '../../core/services/product.service';
 
@@ -32,10 +36,13 @@ import { ProductService, ProductCardModel } from '../../core/services/product.se
 export class Header {
   private router = inject(Router);
   private productService = inject(ProductService);
+  private destroyRef = inject(DestroyRef);
+  private searchTerms$ = new Subject<string>();
 
   auth = inject(AuthStore);
   cartStore = inject(CartStore);
   wishlistStore = inject(WishlistStore);
+  recentlyViewedStore = inject(RecentlyViewedStore);
   preferencesStore = inject(PreferencesStore);
 
   currentLang = this.preferencesStore.language;
@@ -51,6 +58,7 @@ export class Header {
     menu: faBars,
     close: faTimes,
     search: faSearch,
+    recent: faClock,
     wishlist: faHeart,
     cart: faShoppingBag,
     user: faUserCircle,
@@ -61,6 +69,20 @@ export class Header {
   };
 
   langLabel = computed(() => (this.currentLang() === 'en' ? 'العربية' : 'English'));
+
+  constructor() {
+    this.searchTerms$
+      .pipe(
+        map((value) => value.trim()),
+        debounceTime(220),
+        distinctUntilChanged(),
+        switchMap((query) =>
+          query.length >= 2 ? this.productService.searchProducts(query, 5) : of([]),
+        ),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe((results) => this.searchResults.set(results));
+  }
 
   toggleLanguage() {
     const newLang = this.currentLang() === 'en' ? 'ar' : 'en';
@@ -83,29 +105,13 @@ export class Header {
     if (!this.isSearchOpen()) {
       this.searchQuery.set('');
       this.searchResults.set([]);
+      this.searchTerms$.next('');
     }
   }
 
   onSearchInput(value: string) {
     this.searchQuery.set(value);
-    if (value.trim().length >= 2) {
-      this.productService.getProducts().subscribe((products) => {
-        const q = value.toLowerCase();
-        this.searchResults.set(
-          products
-            .filter(
-              (p) =>
-                p.en.title.toLowerCase().includes(q) ||
-                p.ar.title.toLowerCase().includes(q) ||
-                p.categoryTitle?.en?.toLowerCase().includes(q) ||
-                p.categoryTitle?.ar?.toLowerCase().includes(q),
-            )
-            .slice(0, 5),
-        );
-      });
-    } else {
-      this.searchResults.set([]);
-    }
+    this.searchTerms$.next(value);
   }
 
   goToProduct(slug: string) {

@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.babylove.local/schemas/blog.schema.json",
+  "title": "Blog Post",
+  "type": "object",
+  "required": [
+    "id",
+    "slug",
+    "author",
+    "authorImage",
+    "date",
+    "category",
+    "image",
+    "readingTime",
+    "en",
+    "ar",
+    "status",
+    "isFeatured",
+    "tags",
+    "seo",
+    "publishedAt",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "id": {
+      "oneOf": [
+        { "type": "integer", "minimum": 1 },
+        { "type": "string", "minLength": 1 }
+      ]
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "author": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 120
+    },
+    "authorImage": {
+      "type": "string",
+      "minLength": 1
+    },
+    "date": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 60
+    },
+    "category": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 80
+    },
+    "image": {
+      "type": "string",
+      "minLength": 1
+    },
+    "readingTime": {
+      "type": "string",
+      "pattern": "^[0-9]+\\s+min\\s+read$"
+    },
+    "relatedProductIds": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "type": "integer", "minimum": 1 },
+          { "type": "string", "minLength": 1 }
+        ]
+      },
+      "default": []
+    },
+    "en": {
+      "$ref": "#/$defs/content"
+    },
+    "ar": {
+      "$ref": "#/$defs/content"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "published", "archived"]
+    },
+    "isFeatured": {
+      "type": "boolean"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 60
+      },
+      "default": []
+    },
+    "seo": {
+      "$ref": "#/$defs/seo"
+    },
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "content": {
+      "type": "object",
+      "required": ["title", "excerpt", "content"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 180
+        },
+        "excerpt": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 500
+        },
+        "content": {
+          "type": "string",
+          "minLength": 2
+        }
+      },
+      "additionalProperties": false
+    },
+    "seo": {
+      "type": "object",
+      "required": ["title", "description", "keywords"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 180
+        },
+        "description": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 500
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

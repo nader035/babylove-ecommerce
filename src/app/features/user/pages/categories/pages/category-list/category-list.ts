@@ -1,17 +1,17 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-  computed,
-  inject,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CategoryQueryState, categoryStore } from '../../category.store';
 import { PreferencesStore } from '../../../../../../core/stores/preferences.store';
-import { Subscription } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, map } from 'rxjs';
+
+const CATEGORY_SORT_VALUES: CategoryQueryState['sortBy'][] = ['featured', 'az', 'za'];
+
+const isValidSortBy = (value: string | null): value is CategoryQueryState['sortBy'] => {
+  return !!value && CATEGORY_SORT_VALUES.includes(value as CategoryQueryState['sortBy']);
+};
 
 @Component({
   selector: 'app-category-list',
@@ -21,14 +21,13 @@ import { Subscription } from 'rxjs';
   styleUrl: './category-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CategoryList implements OnInit, OnDestroy {
+export class CategoryList {
   categoryStore = inject(categoryStore);
   activeLang = inject(PreferencesStore).language;
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private location = inject(Location);
-  private routeSub?: Subscription;
-  private searchDebounceId: ReturnType<typeof setTimeout> | null = null;
+  private searchInput$ = new Subject<string>();
   private isApplyingRouteState = false;
 
   filterOptions = computed(() => [
@@ -46,13 +45,27 @@ export class CategoryList implements OnInit, OnDestroy {
     { label: 'shop.filters.sort.za', value: 'za' },
   ];
 
-  ngOnInit(): void {
+  constructor() {
+    this.searchInput$
+      .pipe(
+        map((value) => value.trim()),
+        debounceTime(240),
+        distinctUntilChanged(),
+        takeUntilDestroyed(),
+      )
+      .subscribe((query) => {
+        this.categoryStore.updateSearchQuery(query);
+        this.syncUrlFromStore();
+      });
+
     this.categoryStore.loadCategories();
-    this.routeSub = this.route.queryParamMap.subscribe((params) => {
+
+    this.route.queryParamMap.pipe(takeUntilDestroyed()).subscribe((params) => {
+      const rawSort = params.get('sort');
       const query: CategoryQueryState = {
         category: params.get('category') || 'all',
         q: params.get('q') || '',
-        sortBy: (params.get('sort') as CategoryQueryState['sortBy']) || 'featured',
+        sortBy: isValidSortBy(rawSort) ? rawSort : 'featured',
       };
 
       this.isApplyingRouteState = true;
@@ -61,23 +74,9 @@ export class CategoryList implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    this.routeSub?.unsubscribe();
-    if (this.searchDebounceId) {
-      clearTimeout(this.searchDebounceId);
-    }
-  }
-
   onSearch(event: Event): void {
     const input = event.target as HTMLInputElement;
-    if (this.searchDebounceId) {
-      clearTimeout(this.searchDebounceId);
-    }
-
-    this.searchDebounceId = setTimeout(() => {
-      this.categoryStore.updateSearchQuery(input.value);
-      this.syncUrlFromStore();
-    }, 220);
+    this.searchInput$.next(input.value);
   }
 
   onSortChange(event: Event): void {
@@ -107,9 +106,6 @@ export class CategoryList implements OnInit, OnDestroy {
   });
 
   clearSearchFilter(): void {
-    if (this.searchDebounceId) {
-      clearTimeout(this.searchDebounceId);
-    }
     this.categoryStore.updateSearchQuery('');
     this.syncUrlFromStore();
   }

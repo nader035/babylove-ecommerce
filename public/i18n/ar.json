@@ -214,6 +214,19 @@
     "emptyDesc": "احفظ قطعك المفضلة هنا لزيارتها لاحقاً.",
     "moveToCart": "نقل للحقيبة"
   },
+  "recentlyViewed": {
+    "kicker": "سجل التصفح",
+    "title": "تمت مشاهدته مؤخراً",
+    "clear": "مسح السجل",
+    "empty": "لا توجد منتجات تمت مشاهدتها بعد",
+    "emptyDesc": "المنتجات التي تفتحها ستظهر هنا للوصول السريع.",
+    "addToBag": "أضف للحقيبة",
+    "lastViewed": "آخر مشاهدة",
+    "removeOne": "إزالة من المشاهَد مؤخراً",
+    "addedToBag": "تمت إضافة {{title}} إلى الحقيبة",
+    "removed": "تمت إزالة {{title}} من المشاهَد مؤخراً",
+    "cleared": "تم مسح سجل المشاهَد مؤخراً"
+  },
   "checkout": {
     "title": "إتمام الطلب",
     "shippingAddress": "الشحن",
@@ -322,6 +335,11 @@
       "searchPlaceholder": "ابحث بالاسم، الخامة، أو القصة...",
       "all": "الكل",
       "collections": "المجموعات",
+      "byCategories": "حسب الفئات",
+      "byType": "حسب نوع المنتج",
+      "price": "السعر",
+      "active": "الفلاتر النشطة",
+      "of": "من",
       "types": {
         "fashion": "الموضة",
         "essentials": "الأساسيات",
@@ -342,6 +360,14 @@
       "reset": "إعادة ضبط التصفية",
       "showing": "عرض",
       "results": "نتائج"
+    },
+    "features": {
+      "freeShippingTitle": "شحن مجاني",
+      "freeShippingDesc": "شحن مجاني لكل طلب فوق 50 دولار.",
+      "flexiblePaymentTitle": "دفع مرن",
+      "flexiblePaymentDesc": "خيارات دفع متعددة وآمنة.",
+      "supportTitle": "دعم 24x7",
+      "supportDesc": "فريق الدعم متاح يومياً."
     },
     "quickView": "عرض سريع",
     "quickViewDescription": "تشكيلة فاخرة منتقاة لمن يقدرون الحرفية والخامات الفاخرة والأسلوب الخالد.",

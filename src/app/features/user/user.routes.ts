@@ -9,11 +9,14 @@ export const userRoutes: Routes = [
   {
     path: 'categories',
     loadComponent: () =>
-      import('../user/pages/categories/pages/category-list/category-list').then((m) => m.CategoryList),
+      import('../user/pages/categories/pages/category-list/category-list').then(
+        (m) => m.CategoryList,
+      ),
   },
   {
     path: 'shop',
-    loadComponent: () => import('../user/pages/shop/pages/shop-page/shop-page').then((m) => m.ShopPage),
+    loadComponent: () =>
+      import('../user/pages/shop/pages/shop-page/shop-page').then((m) => m.ShopPage),
   },
   {
     path: 'product/:slug',
@@ -25,29 +28,39 @@ export const userRoutes: Routes = [
   {
     path: 'wishlist',
     loadComponent: () =>
-      import('../user/pages/wishlist/pages/wishlist-page/wishlist-page').then((m) => m.WishlistPage),
+      import('../user/pages/wishlist/pages/wishlist-page/wishlist-page').then(
+        (m) => m.WishlistPage,
+      ),
+  },
+  {
+    path: 'recently-viewed',
+    loadComponent: () =>
+      import('../user/pages/recently-viewed/pages/recently-viewed-page/recently-viewed-page').then(
+        (m) => m.RecentlyViewedPage,
+      ),
   },
   {
     path: 'cart',
-    loadComponent: () => import('../user/pages/cart/pages/cart-page/cart-page').then((m) => m.CartPage),
+    loadComponent: () =>
+      import('../user/pages/cart/pages/cart-page/cart-page').then((m) => m.CartPage),
   },
   {
     path: 'checkout',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('../user/pages/checkout/pages/checkout-page/checkout-page').then((m) => m.CheckoutPage),
+      import('../user/pages/checkout/pages/checkout-page/checkout-page').then(
+        (m) => m.CheckoutPage,
+      ),
   },
   {
     path: 'profile',
     canActivate: [authGuard],
-    loadComponent: () =>
-      import('../user/pages/profile/profile-page').then((m) => m.ProfilePage),
+    loadComponent: () => import('../user/pages/profile/profile-page').then((m) => m.ProfilePage),
   },
   {
     path: 'orders',
     canActivate: [authGuard],
-    loadComponent: () =>
-      import('../user/pages/orders/orders-page').then((m) => m.OrdersPage),
+    loadComponent: () => import('../user/pages/orders/orders-page').then((m) => m.OrdersPage),
   },
   {
     path: 'blog',
@@ -55,17 +68,16 @@ export const userRoutes: Routes = [
   },
   {
     path: 'blog/:slug',
-    loadComponent: () => import('../user/pages/blog/blog-detail/blog-detail').then((m) => m.BlogDetail),
+    loadComponent: () =>
+      import('../user/pages/blog/blog-detail/blog-detail').then((m) => m.BlogDetail),
   },
   {
     path: 'about us',
-    loadComponent: () =>
-      import('../user/pages/about/about-page').then((m) => m.AboutPage),
+    loadComponent: () => import('../user/pages/about/about-page').then((m) => m.AboutPage),
   },
   {
     path: 'settings',
     canActivate: [authGuard],
-    loadComponent: () =>
-      import('../user/pages/settings/settings-page').then((m) => m.SettingsPage),
+    loadComponent: () => import('../user/pages/settings/settings-page').then((m) => m.SettingsPage),
   },
 ];

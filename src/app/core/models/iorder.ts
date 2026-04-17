@@ -1,9 +1,7 @@
 // src/app/core/models/order.model.ts
 
-import { Sku } from "./icatalog";
-import { User, Address } from "./iuser";
-
-
+import { Sku } from './icatalog';
+import { User, Address } from './iuser';
 
 /**
  * 🏷️ حالات الطلب الممكنة (Order Status)
@@ -28,10 +26,10 @@ export type PaymentMethod = 'credit_card' | 'paypal' | 'cash_on_delivery' | 'app
  * مشابه للـ CartItem ولكنه ثابت لا يتغير بعد تأكيد الطلب
  */
 export interface OrderItem {
-  id: number;
+  id: number | string;
   quantity: number;
-  orderId: number;
-  skuId: number;
+  orderId: number | string;
+  skuId: number | string;
 
   // -- العلاقات (Relations) --
   sku?: Sku; // لعرض صورة المنتج واسمه وخصائصه في شاشة تفاصيل الطلب
@@ -45,11 +43,11 @@ export interface OrderItem {
  * 💳 تفاصيل عملية الدفع (Payment Detail)
  */
 export interface PaymentDetail {
-  id: number;
+  id: number | string;
   amount: number;
   status: PaymentStatus;
   paymentMethod: PaymentMethod;
-  orderId: number;
+  orderId: number | string;
   createdAt: string;
   updatedAt: string;
 }
@@ -58,11 +56,11 @@ export interface PaymentDetail {
  * 🚚 الطلب النهائي (Order)
  */
 export interface Order {
-  id: number;
+  id: number | string;
   status: OrderStatus;
   trackingCode: string | null; // كود تتبع الشحنة
-  addressId: number;
-  userId: number;
+  addressId: number | string;
+  userId: number | string;
   createdAt: string;
   updatedAt: string;
 

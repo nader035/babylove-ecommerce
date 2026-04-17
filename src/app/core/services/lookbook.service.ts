@@ -20,12 +20,14 @@ export type LookbookHotspot = {
 };
 
 export type LookbookModule = {
-  id: number;
+  id: number | string;
   slug: string;
   isActive: boolean;
   displayOrder: number;
   image: string;
   imageAlt: string;
+  createdAt?: string;
+  updatedAt?: string;
   en: LocalizedLookbookContent;
   ar: LocalizedLookbookContent;
   hotspots: LookbookHotspot[];

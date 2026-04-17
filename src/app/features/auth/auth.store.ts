@@ -41,7 +41,7 @@ const readInitialToken = (): string | null => {
 };
 
 const mapResponseToUser = (response: {
-  id: number;
+  id: number | string;
   username: string;
   email: string;
   firstName: string;
@@ -166,7 +166,7 @@ export const AuthStore = signalStore(
         ),
       ),
 
-      updateProfile: rxMethod<{ id: number; data: Partial<User> }>(
+      updateProfile: rxMethod<{ id: number | string; data: Partial<User> }>(
         pipe(
           tap(() => patchState(store, { isLoading: true, error: null })),
           switchMap(({ id, data }) =>

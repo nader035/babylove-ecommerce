@@ -3,9 +3,8 @@ import { computed, inject } from '@angular/core';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
-import { TranslocoService } from '@jsverse/transloco';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { CategoryCardModel, CategoryService } from '../../../../core/services/category.service';
+import { PreferencesStore } from '../../../../core/stores/preferences.store';
 
 export type CategoryState = {
   categories: CategoryCardModel[];
@@ -37,10 +36,11 @@ export const categoryStore = signalStore(
     quickViewCategory: null,
   } as CategoryState),
   withComputed(
-    ({ categories, searchQuery, activeType, sortBy }, transloco = inject(TranslocoService)) => {
-      const activeLang = toSignal(transloco.langChanges$, {
-        initialValue: transloco.getActiveLang(),
-      });
+    (
+      { categories, searchQuery, activeType, sortBy },
+      preferencesStore = inject(PreferencesStore),
+    ) => {
+      const activeLang = preferencesStore.language;
 
       return {
         categoryCount: computed(() => categories().length),

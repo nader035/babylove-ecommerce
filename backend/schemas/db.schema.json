@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.babylove.local/schemas/db.schema.json",
+  "title": "BabyLove Mock Database",
+  "type": "object",
+  "required": [
+    "users",
+    "categories",
+    "products",
+    "orders",
+    "blogs",
+    "testimonials",
+    "heroes",
+    "lookbooks"
+  ],
+  "properties": {
+    "users": {
+      "type": "array",
+      "items": {
+        "$ref": "./user.schema.json"
+      }
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "$ref": "./category.schema.json"
+      }
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "$ref": "./product.schema.json"
+      }
+    },
+    "orders": {
+      "type": "array",
+      "items": {
+        "$ref": "./order.schema.json"
+      }
+    },
+    "blogs": {
+      "type": "array",
+      "items": {
+        "$ref": "./blog.schema.json"
+      }
+    },
+    "testimonials": {
+      "type": "array",
+      "items": {
+        "$ref": "./testimonial.schema.json"
+      }
+    },
+    "heroes": {
+      "type": "array",
+      "items": {
+        "$ref": "./hero.schema.json"
+      }
+    },
+    "lookbooks": {
+      "type": "array",
+      "items": {
+        "$ref": "./lookbook.schema.json"
+      }
+    }
+  },
+  "additionalProperties": false
+}

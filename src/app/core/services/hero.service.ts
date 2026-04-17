@@ -13,7 +13,7 @@ export type LocalizedHeroContent = {
 };
 
 export type HeroSlide = {
-  id: number;
+  id: number | string;
   slug: string;
   isActive: boolean;
   displayOrder: number;
@@ -21,6 +21,11 @@ export type HeroSlide = {
   imageMobile?: string;
   imageAlt: string;
   overlayOpacity: number;
+  theme?: string;
+  startsAt?: string;
+  endsAt?: string | null;
+  createdAt?: string;
+  updatedAt?: string;
   en: LocalizedHeroContent;
   ar: LocalizedHeroContent;
 };

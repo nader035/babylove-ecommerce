@@ -43,7 +43,7 @@ export const WishlistStore = signalStore(
       patchState(store, { items });
       writeWishlist(items);
     },
-    remove(productId: number) {
+    remove(productId: number | string) {
       const items = store.items().filter((item) => item.id !== productId);
       patchState(store, { items });
       writeWishlist(items);

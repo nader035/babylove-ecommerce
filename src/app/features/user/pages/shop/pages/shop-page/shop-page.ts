@@ -1,39 +1,54 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnDestroy,
-  OnInit,
   computed,
+  effect,
   inject,
+  signal,
 } from '@angular/core';
 import { TranslocoModule } from '@jsverse/transloco';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ShopStore, ShopQueryState } from '../../shop.store';
 import { CartStore } from '../../../../../../core/stores/cart.store';
 import { PreferencesStore } from '../../../../../../core/stores/preferences.store';
 import { WishlistStore } from '../../../../../../core/stores/wishlist.store';
 import { ProductCard } from '../../../../../../shared/components/product-card/product-card';
-import { Subscription } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, map } from 'rxjs';
+
+const SHOP_SORT_VALUES: ShopQueryState['sortBy'][] = [
+  'featured',
+  'priceAsc',
+  'priceDesc',
+  'rating',
+];
+
+const isValidSortBy = (value: string | null): value is ShopQueryState['sortBy'] => {
+  return !!value && SHOP_SORT_VALUES.includes(value as ShopQueryState['sortBy']);
+};
 
 @Component({
   selector: 'app-shop-page',
   standalone: true,
   imports: [CommonModule, TranslocoModule, RouterLink, ProductCard],
   templateUrl: './shop-page.html',
+  styleUrl: './shop-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShopPage implements OnInit, OnDestroy {
+export class ShopPage {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private location = inject(Location);
+  private searchInput$ = new Subject<string>();
+  private priceInput$ = new Subject<{ min: number; max: number }>();
   preferencesStore = inject(PreferencesStore);
   shopStore = inject(ShopStore);
   cartStore = inject(CartStore);
   wishlistStore = inject(WishlistStore);
-  private routeSub?: Subscription;
-  private searchDebounceId: ReturnType<typeof setTimeout> | null = null;
   private isApplyingRouteState = false;
+  priceDraftMin = signal(0);
+  priceDraftMax = signal(1000);
 
   activeLang = this.preferencesStore.language;
   currencyCode = this.preferencesStore.currency;
@@ -41,30 +56,72 @@ export class ShopPage implements OnInit, OnDestroy {
   noResults = computed(
     () => !this.shopStore.isLoading() && this.shopStore.filteredProducts().length === 0,
   );
+  showingFrom = computed(() => {
+    if (this.shopStore.totalItems() === 0) {
+      return 0;
+    }
 
-  ngOnInit(): void {
+    return (this.shopStore.page() - 1) * this.shopStore.pageSize() + 1;
+  });
+  showingTo = computed(() =>
+    Math.min(this.shopStore.totalItems(), this.shopStore.page() * this.shopStore.pageSize()),
+  );
+
+  constructor() {
+    this.searchInput$
+      .pipe(
+        map((value) => value.trim()),
+        debounceTime(260),
+        distinctUntilChanged(),
+        takeUntilDestroyed(),
+      )
+      .subscribe((query) => {
+        this.shopStore.setSearchQuery(query);
+        this.syncUrlFromStore();
+      });
+
+    this.priceInput$
+      .pipe(
+        map(({ min, max }) => ({ min: Math.round(min), max: Math.round(max) })),
+        debounceTime(260),
+        distinctUntilChanged(
+          (prev, current) => prev.min === current.min && prev.max === current.max,
+        ),
+        takeUntilDestroyed(),
+      )
+      .subscribe(({ min, max }) => {
+        this.shopStore.setPriceRange(min, max);
+        this.syncUrlFromStore();
+      });
+
+    effect(
+      () => {
+        this.priceDraftMin.set(this.shopStore.effectiveMinPrice());
+        this.priceDraftMax.set(this.shopStore.effectiveMaxPrice());
+      },
+      { allowSignalWrites: true },
+    );
+
     this.shopStore.loadCategories();
-    this.routeSub = this.route.queryParamMap.subscribe((params) => {
+    this.route.queryParamMap.pipe(takeUntilDestroyed()).subscribe((params) => {
       const rawPage = Number(params.get('page') || 1);
+      const rawMin = Number(params.get('min'));
+      const rawMax = Number(params.get('max'));
+      const rawSort = params.get('sort');
       const queryState: ShopQueryState = {
         category: params.get('category') || 'all',
         type: (params.get('type') || 'all').toLowerCase(),
         searchQuery: params.get('q') || '',
-        sortBy: (params.get('sort') as ShopQueryState['sortBy']) || 'featured',
+        sortBy: isValidSortBy(rawSort) ? rawSort : 'featured',
         page: Number.isFinite(rawPage) && rawPage > 0 ? rawPage : 1,
+        minPrice: Number.isFinite(rawMin) ? rawMin : null,
+        maxPrice: Number.isFinite(rawMax) ? rawMax : null,
       };
 
       this.isApplyingRouteState = true;
       this.shopStore.applyQueryState(queryState);
       this.isApplyingRouteState = false;
     });
-  }
-
-  ngOnDestroy(): void {
-    this.routeSub?.unsubscribe();
-    if (this.searchDebounceId) {
-      clearTimeout(this.searchDebounceId);
-    }
   }
 
   onCategoryChange(slug: string): void {
@@ -83,14 +140,7 @@ export class ShopPage implements OnInit, OnDestroy {
   }
 
   onSearchChange(query: string): void {
-    if (this.searchDebounceId) {
-      clearTimeout(this.searchDebounceId);
-    }
-
-    this.searchDebounceId = setTimeout(() => {
-      this.shopStore.setSearchQuery(query);
-      this.syncUrlFromStore();
-    }, 220);
+    this.searchInput$.next(query);
   }
 
   clearCategoryFilter(): void {
@@ -102,10 +152,24 @@ export class ShopPage implements OnInit, OnDestroy {
   }
 
   clearSearchFilter(): void {
-    if (this.searchDebounceId) {
-      clearTimeout(this.searchDebounceId);
-    }
     this.shopStore.setSearchQuery('');
+    this.syncUrlFromStore();
+  }
+
+  onMinPriceInput(value: number): void {
+    const nextMin = Math.min(value, this.priceDraftMax());
+    this.priceDraftMin.set(nextMin);
+    this.priceInput$.next({ min: nextMin, max: this.priceDraftMax() });
+  }
+
+  onMaxPriceInput(value: number): void {
+    const nextMax = Math.max(value, this.priceDraftMin());
+    this.priceDraftMax.set(nextMax);
+    this.priceInput$.next({ min: this.priceDraftMin(), max: nextMax });
+  }
+
+  onClearPriceFilter(): void {
+    this.shopStore.clearPriceRange();
     this.syncUrlFromStore();
   }
 
@@ -139,6 +203,8 @@ export class ShopPage implements OnInit, OnDestroy {
     const q = this.shopStore.searchQuery().trim();
     const sort = this.shopStore.sortBy();
     const page = this.shopStore.page();
+    const min = this.shopStore.selectedMinPrice();
+    const max = this.shopStore.selectedMaxPrice();
 
     const urlTree = this.router.createUrlTree([], {
       relativeTo: this.route,
@@ -148,6 +214,8 @@ export class ShopPage implements OnInit, OnDestroy {
         q: q ? q : null,
         sort: sort === 'featured' ? null : sort,
         page: page > 1 ? page : null,
+        min: min !== null ? min : null,
+        max: max !== null ? max : null,
       },
       queryParamsHandling: '',
     });

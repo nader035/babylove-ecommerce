@@ -29,7 +29,7 @@ export class CartPage {
     bag: faShoppingBag,
   };
 
-  removeItem(productId: number, title: string) {
+  removeItem(productId: number | string, title: string) {
     this.cartStore.removeFromCart(productId);
     this.notificationService.info(`${title} removed from cart`);
   }

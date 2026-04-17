@@ -13,10 +13,10 @@ export interface CategoryContent {
 
 export interface Category {
   [key: string]: any;
-  id: number;
+  id: number | string;
   slug: string;
   icon: string;
-  parentId?: number | null;
+  parentId?: number | string | null;
   en: CategoryContent;
   ar: CategoryContent;
 }
@@ -47,9 +47,11 @@ export interface PropertyAttribute {
  * 🖼️ صور الـ SKU (صور المتغيرات)
  */
 export interface SkuImage {
-  id: number;
+  id: number | string;
   image: string; // رابط الصورة (URL)
-  skuId: number;
+  skuId: number | string;
+  url?: string;
+  isPrimary?: boolean;
 }
 
 /**
@@ -57,11 +59,15 @@ export interface SkuImage {
  * هذا يمثل "النسخة" الفعلية من المنتج (مثال: تيشيرت أحمر مقاس L)
  */
 export interface Sku {
-  id: number;
+  id: number | string;
   code: string; // الكود الفريد للمنتج في المخزن
+  skuCode?: string;
   price: number;
   quantity: number;
-  productId: number;
+  productId: number | string;
+  currency?: string;
+  isInStock?: boolean;
+  isActive?: boolean;
   images?: SkuImage[]; // صور هذه النسخة المحددة
   attributes?: PropertyAttribute[]; // الخصائص المربوطة (أحمر، L) - (مبنية من جدول sku_property)
 }
@@ -70,25 +76,25 @@ export interface Sku {
  * 💸 الخصم (Discount)
  */
 export interface Discount {
-  id: number;
+  id: number | string;
   title: string;
   discountValue: number;
   discountType: 'percentage' | 'fixed'; // نسبة مئوية أو رقم ثابت
   startDate: string; // ISO Date String
   endDate: string; // ISO Date String
-  productId: number;
+  productId: number | string;
 }
 
 /**
  * ⭐ التقييم (Review)
  */
 export interface Review {
-  id: number;
+  id: number | string;
   rate: number; // تقييم من 1 لـ 5
   text: string;
-  userId: number;
+  userId: number | string;
   user?: User; // لعرض اسم وصورة صاحب التقييم
-  skuId: number;
+  skuId: number | string;
   createdAt: string;
 }
 
@@ -104,14 +110,30 @@ export interface ProductContent {
  */
 export interface Product {
   [key: string]: any;
-  id: number;
+  id: number | string;
   slug: string;
   thumbnail: string; // الصورة الرئيسية المصغرة للمنتج
-  categoryId: number;
+  categoryId: number | string;
   category?: Category;
   type: string;
+  typeKey?: string;
   en: ProductContent;
   ar: ProductContent;
+  status?: 'draft' | 'active' | 'archived';
+  isPublished?: boolean;
+  isInStock?: boolean;
+  currency?: string;
+  reviewCount?: number;
+  brand?: string;
+  material?: string;
+  tags?: string[];
+  seo?: {
+    title?: string;
+    description?: string;
+    keywords?: string[];
+  };
+  createdAt?: string;
+  updatedAt?: string;
 
   // -- علاقات (Relations) ستأتي متداخلة من الباك إند --
   skus?: Sku[]; // كل النسخ المتاحة من المنتج (ألوان ومقاسات)

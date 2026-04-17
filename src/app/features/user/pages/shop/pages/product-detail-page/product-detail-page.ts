@@ -32,6 +32,7 @@ import { NotificationService } from '../../../../../../core/services/notificatio
 import { ProductService, ProductCardModel } from '../../../../../../core/services/product.service';
 import { CartStore } from '../../../../../../core/stores/cart.store';
 import { PreferencesStore } from '../../../../../../core/stores/preferences.store';
+import { RecentlyViewedStore } from '../../../../../../core/stores/recently-viewed.store';
 import { WishlistStore } from '../../../../../../core/stores/wishlist.store';
 import { ProductCard } from '../../../../../../shared/components/product-card/product-card';
 import { SkeletonLoader } from '../../../../../../shared/components/skeleton-loader/skeleton-loader';
@@ -55,6 +56,7 @@ export class ProductDetailPage implements OnInit {
   private productService = inject(ProductService);
   private notificationService = inject(NotificationService);
   private preferencesStore = inject(PreferencesStore);
+  private recentlyViewedStore = inject(RecentlyViewedStore);
   cartStore = inject(CartStore);
   wishlistStore = inject(WishlistStore);
 
@@ -286,6 +288,12 @@ export class ProductDetailPage implements OnInit {
         if (product.skus?.length) {
           this.selectSku(product.skus[0]);
         }
+
+        const card = this.cardModel();
+        if (card) {
+          this.recentlyViewedStore.track(card);
+        }
+
         this.isLoading.set(false);
 
         if (product.categoryId) {

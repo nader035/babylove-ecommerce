@@ -1,0 +1,98 @@
+<main class="min-h-screen bg-white py-10">
+  <div class="container mx-auto max-w-6xl px-6">
+    <header class="mb-10 flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <span class="section-kicker">{{ 'recentlyViewed.kicker' | transloco }}</span>
+        <h1 class="section-title mt-3">{{ 'recentlyViewed.title' | transloco }}</h1>
+      </div>
+
+      @if (entries().length) {
+        <div class="flex items-center gap-3">
+          <span class="text-sm text-brand-primary/50"
+            >{{ entries().length }} {{ 'checkout.items' | transloco }}</span
+          >
+          <button
+            type="button"
+            (click)="clearAll()"
+            class="rounded-full border border-brand-primary/15 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-brand-primary transition hover:border-brand-primary/30 hover:bg-brand-bg-light"
+          >
+            {{ 'recentlyViewed.clear' | transloco }}
+          </button>
+        </div>
+      }
+    </header>
+
+    @if (!entries().length) {
+      <div class="flex flex-col items-center justify-center py-20 text-center">
+        <div class="flex h-24 w-24 items-center justify-center rounded-full bg-brand-bg-light">
+          <fa-icon [icon]="icons.recently" class="text-4xl text-brand-primary/35"></fa-icon>
+        </div>
+        <h2 class="mt-6 text-xl font-bold text-brand-primary">
+          {{ 'recentlyViewed.empty' | transloco }}
+        </h2>
+        <p class="mt-2 text-sm text-brand-primary/50">
+          {{ 'recentlyViewed.emptyDesc' | transloco }}
+        </p>
+        <a
+          routerLink="/shop"
+          class="mt-8 inline-block rounded-full bg-brand-primary px-10 py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-white transition hover:bg-brand-primary-light"
+        >
+          {{ 'cart.continueShopping' | transloco }}
+        </a>
+      </div>
+    } @else {
+      <div class="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4">
+        @for (entry of entries(); track entry.product.id) {
+          <article class="group">
+            <div class="relative aspect-3/4 overflow-hidden rounded-2xl bg-brand-bg-light">
+              <a [routerLink]="['/product', entry.product.slug]" class="block h-full">
+                <img
+                  [src]="entry.product.image"
+                  [alt]="entry.product[activeLang()]?.['title']"
+                  class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </a>
+
+              <button
+                type="button"
+                (click)="remove(entry)"
+                class="absolute inset-e-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-red-400 shadow-sm backdrop-blur-sm transition hover:bg-red-50 hover:text-red-500"
+                [attr.aria-label]="'recentlyViewed.removeOne' | transloco"
+              >
+                <fa-icon [icon]="icons.remove" class="text-xs"></fa-icon>
+              </button>
+
+              <div
+                class="absolute inset-x-0 bottom-0 flex gap-2 p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              >
+                <button
+                  type="button"
+                  (click)="addToCart(entry.product)"
+                  class="flex flex-1 items-center justify-center gap-2 rounded-full bg-brand-primary py-2.5 text-[11px] font-bold uppercase tracking-wider text-white transition hover:bg-brand-primary-light"
+                >
+                  <fa-icon [icon]="icons.bag" class="text-xs"></fa-icon>
+                  {{ 'recentlyViewed.addToBag' | transloco }}
+                </button>
+              </div>
+            </div>
+
+            <div class="mt-3">
+              <a
+                [routerLink]="['/product', entry.product.slug]"
+                class="line-clamp-1 text-sm font-semibold text-brand-primary transition-colors group-hover:text-brand-accent"
+                >{{ entry.product[activeLang()]?.['title'] }}</a
+              >
+              <p class="mt-1 text-sm font-bold text-brand-primary">
+                {{ entry.product.price | currency: currencyCode() : 'symbol' : '1.2-2' }}
+              </p>
+              <p class="mt-1 text-xs text-brand-primary/45">
+                {{ 'recentlyViewed.lastViewed' | transloco }}: {{ formatViewedAt(entry.viewedAt) }}
+              </p>
+            </div>
+          </article>
+        }
+      </div>
+    }
+  </div>
+</main>

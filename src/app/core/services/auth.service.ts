@@ -73,12 +73,16 @@ export class AuthService {
       );
   }
 
-  updateUser(id: number, data: Partial<User>): Observable<User> {
-    return this.http.patch<User>(`${this.usersApi}/${id}`, data).pipe(delay(500));
+  updateUser(id: number | string, data: Partial<User>): Observable<User> {
+    return this.http
+      .patch<User>(`${this.usersApi}/${encodeURIComponent(String(id))}`, data)
+      .pipe(delay(500));
   }
 
-  updatePreferences(id: number, preferences: UserPreferences): Observable<User> {
-    return this.http.patch<User>(`${this.usersApi}/${id}`, { preferences }).pipe(delay(500));
+  updatePreferences(id: number | string, preferences: UserPreferences): Observable<User> {
+    return this.http
+      .patch<User>(`${this.usersApi}/${encodeURIComponent(String(id))}`, { preferences })
+      .pipe(delay(500));
   }
 
   private loginWithMockQuery(credentials: LoginParams): Observable<AuthResponse> {

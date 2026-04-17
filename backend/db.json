@@ -13,12 +13,35 @@
       "preferences": {
         "language": "en",
         "currency": "EGP"
-      }
+      },
+      "role": "customer",
+      "isActive": true,
+      "addresses": [
+        {
+          "id": 1,
+          "detail": "12 Nile Corniche",
+          "postCode": "11511",
+          "cityId": 1,
+          "city": {
+            "id": 1,
+            "name": "Cairo",
+            "provinceId": 1,
+            "province": {
+              "id": 1,
+              "name": "Cairo Governorate"
+            }
+          },
+          "isDefault": true
+        }
+      ],
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z",
+      "lastLoginAt": "2026-04-17T16:05:56.610Z"
     }
   ],
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "slug": "new-arrivals",
       "icon": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop",
       "parentId": null,
@@ -39,10 +62,29 @@
           "فساتين",
           "أساسيات"
         ]
-      }
+      },
+      "displayOrder": 1,
+      "isActive": true,
+      "typeKeys": [
+        "outerwear",
+        "dresses",
+        "essentials"
+      ],
+      "seo": {
+        "title": "New Arrivals",
+        "description": "Premium seasonal picks.",
+        "keywords": [
+          "new-arrivals",
+          "outerwear",
+          "dresses",
+          "essentials"
+        ]
+      },
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "slug": "menswear",
       "icon": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop",
       "parentId": null,
@@ -65,10 +107,31 @@
           "قمصان",
           "أحذية"
         ]
-      }
+      },
+      "displayOrder": 2,
+      "isActive": true,
+      "typeKeys": [
+        "outerwear",
+        "knitwear",
+        "shirts",
+        "footwear"
+      ],
+      "seo": {
+        "title": "Menswear",
+        "description": "Refined contemporary style.",
+        "keywords": [
+          "menswear",
+          "outerwear",
+          "knitwear",
+          "shirts",
+          "footwear"
+        ]
+      },
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "slug": "womenswear",
       "icon": "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=800&auto=format&fit=crop",
       "parentId": null,
@@ -91,10 +154,31 @@
           "حقائب",
           "تريكو"
         ]
-      }
+      },
+      "displayOrder": 3,
+      "isActive": true,
+      "typeKeys": [
+        "dresses",
+        "separates",
+        "bags",
+        "knitwear"
+      ],
+      "seo": {
+        "title": "Womenswear",
+        "description": "Architectural form and elegance.",
+        "keywords": [
+          "womenswear",
+          "dresses",
+          "separates",
+          "bags",
+          "knitwear"
+        ]
+      },
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 4,
+      "id": "4",
       "slug": "essentials",
       "icon": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&auto=format&fit=crop",
       "parentId": null,
@@ -115,10 +199,29 @@
           "دينيم",
           "ملابس مريحة"
         ]
-      }
+      },
+      "displayOrder": 4,
+      "isActive": true,
+      "typeKeys": [
+        "basics",
+        "denim",
+        "lounge"
+      ],
+      "seo": {
+        "title": "Essentials",
+        "description": "Wardrobe foundations.",
+        "keywords": [
+          "essentials",
+          "basics",
+          "denim",
+          "lounge"
+        ]
+      },
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 5,
+      "id": "5",
       "slug": "accessories",
       "icon": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&auto=format&fit=crop",
       "parentId": null,
@@ -139,15 +242,34 @@
           "مجوهرات",
           "أحذية"
         ]
-      }
+      },
+      "displayOrder": 5,
+      "isActive": true,
+      "typeKeys": [
+        "bags",
+        "jewelry",
+        "footwear"
+      ],
+      "seo": {
+        "title": "Accessories",
+        "description": "Elevated finishing touches.",
+        "keywords": [
+          "accessories",
+          "bags",
+          "jewelry",
+          "footwear"
+        ]
+      },
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     }
   ],
   "products": [
     {
-      "id": 101,
+      "id": "101",
       "slug": "italian-wool-overcoat",
       "thumbnail": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=1000&auto=format&fit=crop",
-      "categoryId": 1,
+      "categoryId": "1",
       "categorySlug": "new-arrivals",
       "type": "outerwear",
       "price": 389,
@@ -161,13 +283,79 @@
         "title": "معطف صوف إيطالي",
         "shortDescription": "معطف صوف إيطالي ثقيل.",
         "longDescription": "شرح مفصل للمعطف."
-      }
+      },
+      "typeKey": "outerwear",
+      "minPrice": 389,
+      "maxPrice": 389,
+      "currency": "USD",
+      "status": "active",
+      "isPublished": true,
+      "isInStock": true,
+      "totalQuantity": 24,
+      "brand": "BabyLove Atelier",
+      "material": "Heavyweight Italian wool overcoat.",
+      "tags": [
+        "new-arrivals",
+        "outerwear",
+        "premium"
+      ],
+      "reviewCount": 38,
+      "skus": [
+        {
+          "id": "sku-101-default",
+          "code": "One Size · Signature",
+          "skuCode": "BLV-101-01",
+          "price": 389,
+          "quantity": 24,
+          "images": [
+            {
+              "id": "img-101-1",
+              "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=1000&auto=format&fit=crop",
+              "url": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=1000&auto=format&fit=crop",
+              "isPrimary": true
+            }
+          ],
+          "productId": "101",
+          "currency": "USD",
+          "isInStock": true,
+          "isActive": true,
+          "attributes": [
+            {
+              "id": "attr-101-1-size",
+              "key": "size",
+              "value": "One Size",
+              "attributeValue": "One Size",
+              "relatedPropertyId": 1
+            },
+            {
+              "id": "attr-101-1-fit",
+              "key": "fit",
+              "value": "Regular",
+              "attributeValue": "Regular",
+              "relatedPropertyId": 2
+            }
+          ]
+        }
+      ],
+      "seo": {
+        "title": "Italian Wool Overcoat",
+        "description": "Heavyweight Italian wool overcoat.",
+        "keywords": [
+          "new-arrivals",
+          "outerwear",
+          "new-arrivals",
+          "outerwear",
+          "premium"
+        ]
+      },
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 102,
+      "id": "102",
       "slug": "minimalist-linen-shirt",
       "thumbnail": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=1000&auto=format&fit=crop",
-      "categoryId": 2,
+      "categoryId": "2",
       "categorySlug": "menswear",
       "type": "shirts",
       "price": 129,
@@ -181,13 +369,79 @@
         "title": "قميص كتان بسيط",
         "shortDescription": "قميص كتان أوروبي مغسول.",
         "longDescription": "شرح باللغة العربية."
-      }
+      },
+      "typeKey": "shirts",
+      "minPrice": 129,
+      "maxPrice": 129,
+      "currency": "USD",
+      "status": "active",
+      "isPublished": true,
+      "isInStock": true,
+      "totalQuantity": 24,
+      "brand": "BabyLove Atelier",
+      "material": "Washed European linen shirt.",
+      "tags": [
+        "menswear",
+        "shirts",
+        "premium"
+      ],
+      "reviewCount": 36,
+      "skus": [
+        {
+          "id": "sku-102-default",
+          "code": "One Size · Signature",
+          "skuCode": "BLV-102-01",
+          "price": 129,
+          "quantity": 24,
+          "images": [
+            {
+              "id": "img-102-1",
+              "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=1000&auto=format&fit=crop",
+              "url": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=1000&auto=format&fit=crop",
+              "isPrimary": true
+            }
+          ],
+          "productId": "102",
+          "currency": "USD",
+          "isInStock": true,
+          "isActive": true,
+          "attributes": [
+            {
+              "id": "attr-102-1-size",
+              "key": "size",
+              "value": "One Size",
+              "attributeValue": "One Size",
+              "relatedPropertyId": 1
+            },
+            {
+              "id": "attr-102-1-fit",
+              "key": "fit",
+              "value": "Regular",
+              "attributeValue": "Regular",
+              "relatedPropertyId": 2
+            }
+          ]
+        }
+      ],
+      "seo": {
+        "title": "Minimalist Linen Shirt",
+        "description": "Washed European linen shirt.",
+        "keywords": [
+          "menswear",
+          "shirts",
+          "menswear",
+          "shirts",
+          "premium"
+        ]
+      },
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 103,
+      "id": "103",
       "slug": "structured-wool-blazer",
       "thumbnail": "https://images.unsplash.com/photo-1536766768598-e09213fdcf22?w=1000&auto=format&fit=crop",
-      "categoryId": 2,
+      "categoryId": "2",
       "categorySlug": "menswear",
       "type": "outerwear",
       "price": 295,
@@ -201,13 +455,79 @@
         "title": "سترة صوفية مهيكلة",
         "shortDescription": "سترة صوفية يابانية.",
         "longDescription": "شرح باللغة العربية."
-      }
+      },
+      "typeKey": "outerwear",
+      "minPrice": 295,
+      "maxPrice": 295,
+      "currency": "USD",
+      "status": "active",
+      "isPublished": true,
+      "isInStock": true,
+      "totalQuantity": 24,
+      "brand": "BabyLove Atelier",
+      "material": "Japanese wool-blend blazer.",
+      "tags": [
+        "menswear",
+        "outerwear",
+        "premium"
+      ],
+      "reviewCount": 38,
+      "skus": [
+        {
+          "id": "sku-103-default",
+          "code": "One Size · Signature",
+          "skuCode": "BLV-103-01",
+          "price": 295,
+          "quantity": 24,
+          "images": [
+            {
+              "id": "img-103-1",
+              "image": "https://images.unsplash.com/photo-1536766768598-e09213fdcf22?w=1000&auto=format&fit=crop",
+              "url": "https://images.unsplash.com/photo-1536766768598-e09213fdcf22?w=1000&auto=format&fit=crop",
+              "isPrimary": true
+            }
+          ],
+          "productId": "103",
+          "currency": "USD",
+          "isInStock": true,
+          "isActive": true,
+          "attributes": [
+            {
+              "id": "attr-103-1-size",
+              "key": "size",
+              "value": "One Size",
+              "attributeValue": "One Size",
+              "relatedPropertyId": 1
+            },
+            {
+              "id": "attr-103-1-fit",
+              "key": "fit",
+              "value": "Regular",
+              "attributeValue": "Regular",
+              "relatedPropertyId": 2
+            }
+          ]
+        }
+      ],
+      "seo": {
+        "title": "Structured Wool Blazer",
+        "description": "Japanese wool-blend blazer.",
+        "keywords": [
+          "menswear",
+          "outerwear",
+          "menswear",
+          "outerwear",
+          "premium"
+        ]
+      },
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 104,
+      "id": "104",
       "slug": "ribbed-silk-knit-dress",
       "thumbnail": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1000&auto=format&fit=crop",
-      "categoryId": 3,
+      "categoryId": "3",
       "categorySlug": "womenswear",
       "type": "dresses",
       "price": 245,
@@ -221,13 +541,79 @@
         "title": "فستان محبوك من الحرير المضلع",
         "shortDescription": "فستان ميدي من الحرير.",
         "longDescription": "شرح باللغة العربية."
-      }
+      },
+      "typeKey": "dresses",
+      "minPrice": 245,
+      "maxPrice": 245,
+      "currency": "USD",
+      "status": "active",
+      "isPublished": true,
+      "isInStock": true,
+      "totalQuantity": 24,
+      "brand": "BabyLove Atelier",
+      "material": "Mulberry silk-cotton midi dress.",
+      "tags": [
+        "womenswear",
+        "dresses",
+        "premium"
+      ],
+      "reviewCount": 39,
+      "skus": [
+        {
+          "id": "sku-104-default",
+          "code": "One Size · Signature",
+          "skuCode": "BLV-104-01",
+          "price": 245,
+          "quantity": 24,
+          "images": [
+            {
+              "id": "img-104-1",
+              "image": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1000&auto=format&fit=crop",
+              "url": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1000&auto=format&fit=crop",
+              "isPrimary": true
+            }
+          ],
+          "productId": "104",
+          "currency": "USD",
+          "isInStock": true,
+          "isActive": true,
+          "attributes": [
+            {
+              "id": "attr-104-1-size",
+              "key": "size",
+              "value": "One Size",
+              "attributeValue": "One Size",
+              "relatedPropertyId": 1
+            },
+            {
+              "id": "attr-104-1-fit",
+              "key": "fit",
+              "value": "Regular",
+              "attributeValue": "Regular",
+              "relatedPropertyId": 2
+            }
+          ]
+        }
+      ],
+      "seo": {
+        "title": "Ribbed Silk Knit Dress",
+        "description": "Mulberry silk-cotton midi dress.",
+        "keywords": [
+          "womenswear",
+          "dresses",
+          "womenswear",
+          "dresses",
+          "premium"
+        ]
+      },
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 105,
+      "id": "105",
       "slug": "full-grain-leather-tote",
       "thumbnail": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1000&auto=format&fit=crop",
-      "categoryId": 5,
+      "categoryId": "5",
       "categorySlug": "accessories",
       "type": "bags",
       "price": 185,
@@ -241,13 +627,79 @@
         "title": "حقيبة يد من الجلد الطبيعي",
         "shortDescription": "حقيبة يد جلدية.",
         "longDescription": "شرح باللغة العربية."
-      }
+      },
+      "typeKey": "bags",
+      "minPrice": 185,
+      "maxPrice": 185,
+      "currency": "USD",
+      "status": "active",
+      "isPublished": true,
+      "isInStock": true,
+      "totalQuantity": 24,
+      "brand": "BabyLove Atelier",
+      "material": "Handcrafted Italian leather tote.",
+      "tags": [
+        "accessories",
+        "bags",
+        "premium"
+      ],
+      "reviewCount": 37,
+      "skus": [
+        {
+          "id": "sku-105-default",
+          "code": "One Size · Signature",
+          "skuCode": "BLV-105-01",
+          "price": 185,
+          "quantity": 24,
+          "images": [
+            {
+              "id": "img-105-1",
+              "image": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1000&auto=format&fit=crop",
+              "url": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1000&auto=format&fit=crop",
+              "isPrimary": true
+            }
+          ],
+          "productId": "105",
+          "currency": "USD",
+          "isInStock": true,
+          "isActive": true,
+          "attributes": [
+            {
+              "id": "attr-105-1-size",
+              "key": "size",
+              "value": "One Size",
+              "attributeValue": "One Size",
+              "relatedPropertyId": 1
+            },
+            {
+              "id": "attr-105-1-fit",
+              "key": "fit",
+              "value": "Regular",
+              "attributeValue": "Regular",
+              "relatedPropertyId": 2
+            }
+          ]
+        }
+      ],
+      "seo": {
+        "title": "Full-Grain Leather Tote",
+        "description": "Handcrafted Italian leather tote.",
+        "keywords": [
+          "accessories",
+          "bags",
+          "accessories",
+          "bags",
+          "premium"
+        ]
+      },
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 106,
+      "id": "106",
       "slug": "raw-selvedge-denim",
       "thumbnail": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=1000&auto=format&fit=crop",
-      "categoryId": 4,
+      "categoryId": "4",
       "categorySlug": "essentials",
       "type": "denim",
       "price": 165,
@@ -261,13 +713,79 @@
         "title": "دينيم خام بحواف منسوجة",
         "shortDescription": "جينز ياباني.",
         "longDescription": "شرح باللغة العربية."
-      }
+      },
+      "typeKey": "denim",
+      "minPrice": 165,
+      "maxPrice": 165,
+      "currency": "USD",
+      "status": "active",
+      "isPublished": true,
+      "isInStock": true,
+      "totalQuantity": 24,
+      "brand": "BabyLove Atelier",
+      "material": "Japanese indigo denim.",
+      "tags": [
+        "essentials",
+        "denim",
+        "premium"
+      ],
+      "reviewCount": 35,
+      "skus": [
+        {
+          "id": "sku-106-default",
+          "code": "One Size · Signature",
+          "skuCode": "BLV-106-01",
+          "price": 165,
+          "quantity": 24,
+          "images": [
+            {
+              "id": "img-106-1",
+              "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=1000&auto=format&fit=crop",
+              "url": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=1000&auto=format&fit=crop",
+              "isPrimary": true
+            }
+          ],
+          "productId": "106",
+          "currency": "USD",
+          "isInStock": true,
+          "isActive": true,
+          "attributes": [
+            {
+              "id": "attr-106-1-size",
+              "key": "size",
+              "value": "One Size",
+              "attributeValue": "One Size",
+              "relatedPropertyId": 1
+            },
+            {
+              "id": "attr-106-1-fit",
+              "key": "fit",
+              "value": "Regular",
+              "attributeValue": "Regular",
+              "relatedPropertyId": 2
+            }
+          ]
+        }
+      ],
+      "seo": {
+        "title": "Raw Selvedge Denim",
+        "description": "Japanese indigo denim.",
+        "keywords": [
+          "essentials",
+          "denim",
+          "essentials",
+          "denim",
+          "premium"
+        ]
+      },
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 107,
+      "id": "107",
       "slug": "cashmere-turtleneck",
       "thumbnail": "https://images.unsplash.com/photo-1574167132714-d746e5306354?w=1000&auto=format&fit=crop",
-      "categoryId": 2,
+      "categoryId": "2",
       "categorySlug": "menswear",
       "type": "knitwear",
       "price": 195,
@@ -281,13 +799,79 @@
         "title": "كنزة كشمير بياقة عالية",
         "shortDescription": "كنزة كشمير.",
         "longDescription": "شرح باللغة العربية."
-      }
+      },
+      "typeKey": "knitwear",
+      "minPrice": 195,
+      "maxPrice": 195,
+      "currency": "USD",
+      "status": "active",
+      "isPublished": true,
+      "isInStock": true,
+      "totalQuantity": 24,
+      "brand": "BabyLove Atelier",
+      "material": "100% Grade A Mongolian cashmere.",
+      "tags": [
+        "menswear",
+        "knitwear",
+        "premium"
+      ],
+      "reviewCount": 39,
+      "skus": [
+        {
+          "id": "sku-107-default",
+          "code": "One Size · Signature",
+          "skuCode": "BLV-107-01",
+          "price": 195,
+          "quantity": 24,
+          "images": [
+            {
+              "id": "img-107-1",
+              "image": "https://images.unsplash.com/photo-1574167132714-d746e5306354?w=1000&auto=format&fit=crop",
+              "url": "https://images.unsplash.com/photo-1574167132714-d746e5306354?w=1000&auto=format&fit=crop",
+              "isPrimary": true
+            }
+          ],
+          "productId": "107",
+          "currency": "USD",
+          "isInStock": true,
+          "isActive": true,
+          "attributes": [
+            {
+              "id": "attr-107-1-size",
+              "key": "size",
+              "value": "One Size",
+              "attributeValue": "One Size",
+              "relatedPropertyId": 1
+            },
+            {
+              "id": "attr-107-1-fit",
+              "key": "fit",
+              "value": "Regular",
+              "attributeValue": "Regular",
+              "relatedPropertyId": 2
+            }
+          ]
+        }
+      ],
+      "seo": {
+        "title": "Cashmere Turtleneck",
+        "description": "100% Grade A Mongolian cashmere.",
+        "keywords": [
+          "menswear",
+          "knitwear",
+          "menswear",
+          "knitwear",
+          "premium"
+        ]
+      },
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 108,
+      "id": "108",
       "slug": "leather-chelsea-boots",
       "thumbnail": "https://images.unsplash.com/photo-1638609503417-66a9ba6f315a?w=1000&auto=format&fit=crop",
-      "categoryId": 2,
+      "categoryId": "2",
       "categorySlug": "menswear",
       "type": "footwear",
       "price": 285,
@@ -301,13 +885,79 @@
         "title": "بوت تشيلسي جلدي",
         "shortDescription": "بوت تشيلسي جلدي.",
         "longDescription": "شرح باللغة العربية."
-      }
+      },
+      "typeKey": "footwear",
+      "minPrice": 285,
+      "maxPrice": 285,
+      "currency": "USD",
+      "status": "active",
+      "isPublished": true,
+      "isInStock": true,
+      "totalQuantity": 24,
+      "brand": "BabyLove Atelier",
+      "material": "Handcrafted Portuguese leather boots.",
+      "tags": [
+        "menswear",
+        "footwear",
+        "premium"
+      ],
+      "reviewCount": 38,
+      "skus": [
+        {
+          "id": "sku-108-default",
+          "code": "One Size · Signature",
+          "skuCode": "BLV-108-01",
+          "price": 285,
+          "quantity": 24,
+          "images": [
+            {
+              "id": "img-108-1",
+              "image": "https://images.unsplash.com/photo-1638609503417-66a9ba6f315a?w=1000&auto=format&fit=crop",
+              "url": "https://images.unsplash.com/photo-1638609503417-66a9ba6f315a?w=1000&auto=format&fit=crop",
+              "isPrimary": true
+            }
+          ],
+          "productId": "108",
+          "currency": "USD",
+          "isInStock": true,
+          "isActive": true,
+          "attributes": [
+            {
+              "id": "attr-108-1-size",
+              "key": "size",
+              "value": "One Size",
+              "attributeValue": "One Size",
+              "relatedPropertyId": 1
+            },
+            {
+              "id": "attr-108-1-fit",
+              "key": "fit",
+              "value": "Regular",
+              "attributeValue": "Regular",
+              "relatedPropertyId": 2
+            }
+          ]
+        }
+      ],
+      "seo": {
+        "title": "Leather Chelsea Boots",
+        "description": "Handcrafted Portuguese leather boots.",
+        "keywords": [
+          "menswear",
+          "footwear",
+          "menswear",
+          "footwear",
+          "premium"
+        ]
+      },
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 109,
+      "id": "109",
       "slug": "architectural-silk-blouse",
       "thumbnail": "https://images.unsplash.com/photo-1589156229687-496a31ad1d1f?w=1000&auto=format&fit=crop",
-      "categoryId": 3,
+      "categoryId": "3",
       "categorySlug": "womenswear",
       "type": "separates",
       "price": 175,
@@ -321,13 +971,79 @@
         "title": "بلوزة حريرية معمارية",
         "shortDescription": "بلوزة حريرية.",
         "longDescription": "شرح باللغة العربية."
-      }
+      },
+      "typeKey": "separates",
+      "minPrice": 175,
+      "maxPrice": 175,
+      "currency": "USD",
+      "status": "active",
+      "isPublished": true,
+      "isInStock": true,
+      "totalQuantity": 24,
+      "brand": "BabyLove Atelier",
+      "material": "Modern silk crepe blouse.",
+      "tags": [
+        "womenswear",
+        "separates",
+        "premium"
+      ],
+      "reviewCount": 38,
+      "skus": [
+        {
+          "id": "sku-109-default",
+          "code": "One Size · Signature",
+          "skuCode": "BLV-109-01",
+          "price": 175,
+          "quantity": 24,
+          "images": [
+            {
+              "id": "img-109-1",
+              "image": "https://images.unsplash.com/photo-1589156229687-496a31ad1d1f?w=1000&auto=format&fit=crop",
+              "url": "https://images.unsplash.com/photo-1589156229687-496a31ad1d1f?w=1000&auto=format&fit=crop",
+              "isPrimary": true
+            }
+          ],
+          "productId": "109",
+          "currency": "USD",
+          "isInStock": true,
+          "isActive": true,
+          "attributes": [
+            {
+              "id": "attr-109-1-size",
+              "key": "size",
+              "value": "One Size",
+              "attributeValue": "One Size",
+              "relatedPropertyId": 1
+            },
+            {
+              "id": "attr-109-1-fit",
+              "key": "fit",
+              "value": "Regular",
+              "attributeValue": "Regular",
+              "relatedPropertyId": 2
+            }
+          ]
+        }
+      ],
+      "seo": {
+        "title": "Architectural Silk Blouse",
+        "description": "Modern silk crepe blouse.",
+        "keywords": [
+          "womenswear",
+          "separates",
+          "womenswear",
+          "separates",
+          "premium"
+        ]
+      },
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 110,
+      "id": "110",
       "slug": "minimalist-wool-trousers",
       "thumbnail": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=1000&auto=format&fit=crop",
-      "categoryId": 3,
+      "categoryId": "3",
       "categorySlug": "womenswear",
       "type": "separates",
       "price": 195,
@@ -341,13 +1057,79 @@
         "title": "بنطال صوفي بسيط",
         "shortDescription": "بنطال صوفي.",
         "longDescription": "شرح باللغة العربية."
-      }
+      },
+      "typeKey": "separates",
+      "minPrice": 195,
+      "maxPrice": 195,
+      "currency": "USD",
+      "status": "active",
+      "isPublished": true,
+      "isInStock": true,
+      "totalQuantity": 24,
+      "brand": "BabyLove Atelier",
+      "material": "High-waisted cool wool trousers.",
+      "tags": [
+        "womenswear",
+        "separates",
+        "premium"
+      ],
+      "reviewCount": 37,
+      "skus": [
+        {
+          "id": "sku-110-default",
+          "code": "One Size · Signature",
+          "skuCode": "BLV-110-01",
+          "price": 195,
+          "quantity": 24,
+          "images": [
+            {
+              "id": "img-110-1",
+              "image": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=1000&auto=format&fit=crop",
+              "url": "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=1000&auto=format&fit=crop",
+              "isPrimary": true
+            }
+          ],
+          "productId": "110",
+          "currency": "USD",
+          "isInStock": true,
+          "isActive": true,
+          "attributes": [
+            {
+              "id": "attr-110-1-size",
+              "key": "size",
+              "value": "One Size",
+              "attributeValue": "One Size",
+              "relatedPropertyId": 1
+            },
+            {
+              "id": "attr-110-1-fit",
+              "key": "fit",
+              "value": "Regular",
+              "attributeValue": "Regular",
+              "relatedPropertyId": 2
+            }
+          ]
+        }
+      ],
+      "seo": {
+        "title": "Minimalist Wool Trousers",
+        "description": "High-waisted cool wool trousers.",
+        "keywords": [
+          "womenswear",
+          "separates",
+          "womenswear",
+          "separates",
+          "premium"
+        ]
+      },
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 111,
+      "id": "111",
       "slug": "canvas-leather-weekend-bag",
       "thumbnail": "https://images.unsplash.com/photo-1547949003-9792a18a2601?w=1000&auto=format&fit=crop",
-      "categoryId": 5,
+      "categoryId": "5",
       "categorySlug": "accessories",
       "type": "bags",
       "price": 215,
@@ -361,13 +1143,79 @@
         "title": "حقيبة عطلة نهاية الأسبوع",
         "shortDescription": "حقيبة عطلة نهاية الأسبوع.",
         "longDescription": "شرح باللغة العربية."
-      }
+      },
+      "typeKey": "bags",
+      "minPrice": 215,
+      "maxPrice": 215,
+      "currency": "USD",
+      "status": "active",
+      "isPublished": true,
+      "isInStock": true,
+      "totalQuantity": 24,
+      "brand": "BabyLove Atelier",
+      "material": "Heavy cotton canvas with leather accents.",
+      "tags": [
+        "accessories",
+        "bags",
+        "premium"
+      ],
+      "reviewCount": 38,
+      "skus": [
+        {
+          "id": "sku-111-default",
+          "code": "One Size · Signature",
+          "skuCode": "BLV-111-01",
+          "price": 215,
+          "quantity": 24,
+          "images": [
+            {
+              "id": "img-111-1",
+              "image": "https://images.unsplash.com/photo-1547949003-9792a18a2601?w=1000&auto=format&fit=crop",
+              "url": "https://images.unsplash.com/photo-1547949003-9792a18a2601?w=1000&auto=format&fit=crop",
+              "isPrimary": true
+            }
+          ],
+          "productId": "111",
+          "currency": "USD",
+          "isInStock": true,
+          "isActive": true,
+          "attributes": [
+            {
+              "id": "attr-111-1-size",
+              "key": "size",
+              "value": "One Size",
+              "attributeValue": "One Size",
+              "relatedPropertyId": 1
+            },
+            {
+              "id": "attr-111-1-fit",
+              "key": "fit",
+              "value": "Regular",
+              "attributeValue": "Regular",
+              "relatedPropertyId": 2
+            }
+          ]
+        }
+      ],
+      "seo": {
+        "title": "Canvas & Leather Weekend Bag",
+        "description": "Heavy cotton canvas with leather accents.",
+        "keywords": [
+          "accessories",
+          "bags",
+          "accessories",
+          "bags",
+          "premium"
+        ]
+      },
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 112,
+      "id": "112",
       "slug": "supima-cotton-lounge-set",
       "thumbnail": "https://images.unsplash.com/photo-1516762689164-8239d562339d?w=1000&auto=format&fit=crop",
-      "categoryId": 4,
+      "categoryId": "4",
       "categorySlug": "essentials",
       "type": "lounge",
       "price": 145,
@@ -381,109 +1229,255 @@
         "title": "طقم ملابس مريحة قطن سوبيما",
         "shortDescription": "طقم ملابس مريحة.",
         "longDescription": "شرح باللغة العربية."
-      }
+      },
+      "typeKey": "lounge",
+      "minPrice": 145,
+      "maxPrice": 145,
+      "currency": "USD",
+      "status": "active",
+      "isPublished": true,
+      "isInStock": true,
+      "totalQuantity": 24,
+      "brand": "BabyLove Atelier",
+      "material": "Ultra-soft Supima cotton set.",
+      "tags": [
+        "essentials",
+        "lounge",
+        "premium"
+      ],
+      "reviewCount": 36,
+      "skus": [
+        {
+          "id": "sku-112-default",
+          "code": "One Size · Signature",
+          "skuCode": "BLV-112-01",
+          "price": 145,
+          "quantity": 24,
+          "images": [
+            {
+              "id": "img-112-1",
+              "image": "https://images.unsplash.com/photo-1516762689164-8239d562339d?w=1000&auto=format&fit=crop",
+              "url": "https://images.unsplash.com/photo-1516762689164-8239d562339d?w=1000&auto=format&fit=crop",
+              "isPrimary": true
+            }
+          ],
+          "productId": "112",
+          "currency": "USD",
+          "isInStock": true,
+          "isActive": true,
+          "attributes": [
+            {
+              "id": "attr-112-1-size",
+              "key": "size",
+              "value": "One Size",
+              "attributeValue": "One Size",
+              "relatedPropertyId": 1
+            },
+            {
+              "id": "attr-112-1-fit",
+              "key": "fit",
+              "value": "Regular",
+              "attributeValue": "Regular",
+              "relatedPropertyId": 2
+            }
+          ]
+        }
+      ],
+      "seo": {
+        "title": "Supima Cotton Lounge Set",
+        "description": "Ultra-soft Supima cotton set.",
+        "keywords": [
+          "essentials",
+          "lounge",
+          "essentials",
+          "lounge",
+          "premium"
+        ]
+      },
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     }
   ],
   "orders": [
     {
       "id": "ORD-2026-001",
-      "userId": 1,
+      "userId": "1",
       "date": "2026-04-05T14:30:00Z",
       "status": "pending",
       "total": 518,
       "items": [
         {
-          "productId": 101,
+          "productId": "101",
           "quantity": 1,
           "price": 389,
           "title": {
             "en": "Italian Wool Overcoat",
             "ar": "معطف صوف إيطالي"
           },
-          "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=400&auto=format&fit=crop"
+          "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=400&auto=format&fit=crop",
+          "id": "ORD-2026-001-item-1",
+          "skuId": "sku-101-default",
+          "lineTotal": 389
         }
-      ]
+      ],
+      "createdAt": "2026-04-05T14:30:00.000Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z",
+      "currency": "USD",
+      "paymentMethod": "credit_card",
+      "paymentStatus": "completed",
+      "trackingCode": null,
+      "shippingAddress": {
+        "fullName": "Nader Mohamedd",
+        "street": "12 Nile Corniche",
+        "city": "Cairo",
+        "country": "Egypt"
+      },
+      "itemCount": 1
     },
     {
       "id": "ORD-2026-002",
-      "userId": 1,
+      "userId": "1",
       "date": "2026-04-04T10:15:00Z",
       "status": "processing",
       "total": 295,
       "items": [
         {
-          "productId": 103,
+          "productId": "103",
           "quantity": 1,
           "price": 295,
           "title": {
             "en": "Structured Wool Blazer",
             "ar": "سترة صوفية مهيكلة"
           },
-          "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop"
+          "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop",
+          "id": "ORD-2026-002-item-1",
+          "skuId": "sku-103-default",
+          "lineTotal": 295
         }
-      ]
+      ],
+      "createdAt": "2026-04-04T10:15:00.000Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z",
+      "currency": "USD",
+      "paymentMethod": "credit_card",
+      "paymentStatus": "completed",
+      "trackingCode": null,
+      "shippingAddress": {
+        "fullName": "Nader Mohamedd",
+        "street": "12 Nile Corniche",
+        "city": "Cairo",
+        "country": "Egypt"
+      },
+      "itemCount": 1
     },
     {
       "id": "ORD-2026-003",
-      "userId": 1,
+      "userId": "1",
       "date": "2026-04-03T16:45:00Z",
       "status": "shipped",
       "total": 389,
       "items": [
         {
-          "productId": 101,
+          "productId": "101",
           "quantity": 1,
           "price": 389,
           "title": {
             "en": "Italian Wool Overcoat",
             "ar": "معطف صوف إيطالي"
           },
-          "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=400&auto=format&fit=crop"
+          "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=400&auto=format&fit=crop",
+          "id": "ORD-2026-003-item-1",
+          "skuId": "sku-101-default",
+          "lineTotal": 389
         }
-      ]
+      ],
+      "createdAt": "2026-04-03T16:45:00.000Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z",
+      "currency": "USD",
+      "paymentMethod": "credit_card",
+      "paymentStatus": "completed",
+      "trackingCode": "TRK-ORD2026003",
+      "shippingAddress": {
+        "fullName": "Nader Mohamedd",
+        "street": "12 Nile Corniche",
+        "city": "Cairo",
+        "country": "Egypt"
+      },
+      "itemCount": 1
     },
     {
       "id": "ORD-2026-004",
-      "userId": 1,
+      "userId": "1",
       "date": "2026-03-28T09:00:00Z",
       "status": "delivered",
       "total": 129,
       "items": [
         {
-          "productId": 102,
+          "productId": "102",
           "quantity": 1,
           "price": 129,
           "title": {
             "en": "Minimalist Linen Shirt",
             "ar": "قميص كتان بسيط"
           },
-          "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&auto=format&fit=crop"
+          "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&auto=format&fit=crop",
+          "id": "ORD-2026-004-item-1",
+          "skuId": "sku-102-default",
+          "lineTotal": 129
         }
-      ]
+      ],
+      "createdAt": "2026-03-28T09:00:00.000Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z",
+      "currency": "USD",
+      "paymentMethod": "credit_card",
+      "paymentStatus": "completed",
+      "trackingCode": "TRK-ORD2026004",
+      "shippingAddress": {
+        "fullName": "Nader Mohamedd",
+        "street": "12 Nile Corniche",
+        "city": "Cairo",
+        "country": "Egypt"
+      },
+      "itemCount": 1
     },
     {
       "id": "ORD-2026-005",
-      "userId": 1,
+      "userId": "1",
       "date": "2026-03-25T11:20:00Z",
       "status": "cancelled",
       "total": 295,
       "items": [
         {
-          "productId": 103,
+          "productId": "103",
           "quantity": 1,
           "price": 295,
           "title": {
             "en": "Structured Wool Blazer",
             "ar": "سترة صوفية مهيكلة"
           },
-          "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop"
+          "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop",
+          "id": "ORD-2026-005-item-1",
+          "skuId": "sku-103-default",
+          "lineTotal": 295
         }
-      ]
+      ],
+      "createdAt": "2026-03-25T11:20:00.000Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z",
+      "currency": "USD",
+      "paymentMethod": "credit_card",
+      "paymentStatus": "refunded",
+      "trackingCode": null,
+      "shippingAddress": {
+        "fullName": "Nader Mohamedd",
+        "street": "12 Nile Corniche",
+        "city": "Cairo",
+        "country": "Egypt"
+      },
+      "itemCount": 1
     }
   ],
   "blogs": [
     {
-      "id": 1,
+      "id": "1",
       "slug": "art-of-modern-tailoring",
       "author": "Marcus Sterling",
       "authorImage": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
@@ -505,10 +1499,30 @@
         "title": "فن التفصيل الحديث",
         "excerpt": "صياغة المظهر المثالي من خلال الدقة اليابانية والتراث الإيطالي.",
         "content": "<p class='lead'>التفصيل هو أكثر من مجرد بناء؛ إنه حوار معماري بين الجسد والقماش. في هذه الافتتاحية، نستكشف العملية الدقيقة وراء مجموعة الملابس الخارجية الموسمية لدينا.</p><h3>مصدر المادة</h3><p>تبدأ رحلتنا في المصانع التاريخية في بييلا، إيطاليا، حيث يتم نسج أفضل صوف بكر في العالم. نختار الأوزان التي توفر الهيكل دون صلابة.</p><h3>الدقة اليابانية</h3><p>بينما أقمشتنا إيطالية، فإن منهجية البناء لدينا متجذرة بعمق في البساطة اليابانية. يتم النظر في كل خط كتف، وكل قطعة داخلية، وكل عروة زر مشطبة يدوياً.</p>"
-      }
+      },
+      "status": "published",
+      "isFeatured": true,
+      "tags": [
+        "design",
+        "art-of-modern-tailoring",
+        "editorial"
+      ],
+      "seo": {
+        "title": "The Art of Modern Tailoring",
+        "description": "Crafting the perfect silhouette through Japanese precision and Italian heritage.",
+        "keywords": [
+          "design",
+          "product-101",
+          "product-103",
+          "product-110"
+        ]
+      },
+      "publishedAt": "2026-04-04T22:00:00.000Z",
+      "createdAt": "2026-04-04T22:00:00.000Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "slug": "minimalist-capsule-wardrobe",
       "author": "Elena Rossi",
       "authorImage": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
@@ -530,10 +1544,30 @@
         "title": "بناء خزانة ملابس بسيطة",
         "excerpt": "بسط روتينك الصباحي مع أساسيات مختارة بعناية.",
         "content": "<p>مفهوم خزانة الملابس المصغرة لا يتعلق بالتقييد بل بالحرية. من خلال اختيار قطع أقل وأفضل، فإنك تخلق نظاماً معيارياً حيث يعمل كل شيء معاً.</p>"
-      }
+      },
+      "status": "published",
+      "isFeatured": false,
+      "tags": [
+        "lifestyle",
+        "minimalist-capsule-wardrobe",
+        "editorial"
+      ],
+      "seo": {
+        "title": "Building a Minimalist Capsule Wardrobe",
+        "description": "Simplify your morning routine with intentionally selected essentials.",
+        "keywords": [
+          "lifestyle",
+          "product-102",
+          "product-106",
+          "product-112"
+        ]
+      },
+      "publishedAt": "2026-04-01T22:00:00.000Z",
+      "createdAt": "2026-04-01T22:00:00.000Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "slug": "sustainable-luxury",
       "author": "Julian Vane",
       "authorImage": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
@@ -556,25 +1590,52 @@
         "title": "الفخامة المستدامة: النموذج الجديد",
         "excerpt": "لماذا تعتبر الحرفية الأخلاقية التعبير النهائي عن الرقي.",
         "content": "<p>يتم تعريف الفخامة في القرن الحادي والعشرين من خلال الشفافية. معرفة من صنع ملابسك والأثر البيئي للألياف أمر ضروري تماماً مثل التصميم نفسه.</p>"
-      }
+      },
+      "status": "published",
+      "isFeatured": false,
+      "tags": [
+        "philosophy",
+        "sustainable-luxury",
+        "editorial"
+      ],
+      "seo": {
+        "title": "Sustainable Luxury: The New Paradigm",
+        "description": "Why ethical craftsmanship is the ultimate expression of refinement.",
+        "keywords": [
+          "philosophy",
+          "product-104",
+          "product-107",
+          "product-109",
+          "product-105"
+        ]
+      },
+      "publishedAt": "2026-03-27T22:00:00.000Z",
+      "createdAt": "2026-03-27T22:00:00.000Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     }
   ],
   "testimonials": [
     {
-      "id": 1,
+      "id": "1",
       "en": {
         "quote": "Quality is apparent.",
-        "author": "James W."
+        "author": "James W.",
+        "role": "Verified Customer"
       },
       "ar": {
         "quote": "جودة واضحة.",
-        "author": "جيمس و."
-      }
+        "author": "جيمس و.",
+        "role": "عميل موثق"
+      },
+      "rating": 5,
+      "isActive": true,
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     }
   ],
   "heroes": [
     {
-      "id": 1,
+      "id": "1",
       "slug": "ss26-main",
       "isActive": true,
       "displayOrder": 1,
@@ -597,10 +1658,15 @@
         "description": "مجموعات مختارة من الأزياء الراقية مصممة لكل إطلالة عائلية عصرية.",
         "ctaText": "تسوق المجموعة",
         "ctaLink": "/shop"
-      }
+      },
+      "theme": "premium",
+      "startsAt": "2026-04-17T16:05:56.610Z",
+      "endsAt": null,
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "slug": "tailoring-edit",
       "isActive": true,
       "displayOrder": 2,
@@ -623,12 +1689,17 @@
         "description": "من العمل إلى عطلة نهاية الأسبوع، اكتشف قطعاً مصممة للثقة والراحة.",
         "ctaText": "اكتشف الرجالي",
         "ctaLink": "/shop?category=menswear"
-      }
+      },
+      "theme": "premium",
+      "startsAt": "2026-04-17T16:05:56.610Z",
+      "endsAt": null,
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     }
   ],
   "lookbooks": [
     {
-      "id": 1,
+      "id": "1",
       "slug": "family-lookbook-ss26",
       "isActive": true,
       "displayOrder": 1,
@@ -723,7 +1794,9 @@
             "label": "ملابس مريحة"
           }
         }
-      ]
+      ],
+      "createdAt": "2026-04-17T16:05:56.610Z",
+      "updatedAt": "2026-04-17T16:05:56.610Z"
     }
   ]
 }

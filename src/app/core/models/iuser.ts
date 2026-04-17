@@ -1,7 +1,7 @@
 // src/app/core/models/user.model.ts
 
 export interface User {
-  id: number;
+  id: number | string;
   username: string;
   email: string;
   password?: string;
