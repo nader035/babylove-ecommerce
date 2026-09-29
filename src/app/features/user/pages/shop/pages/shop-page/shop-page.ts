@@ -104,9 +104,12 @@ export class ShopPage {
 
     this.shopStore.loadCategories();
     this.route.queryParamMap.pipe(takeUntilDestroyed()).subscribe((params) => {
-      const rawPage = Number(params.get('page') || 1);
-      const rawMin = Number(params.get('min'));
-      const rawMax = Number(params.get('max'));
+      const pageParam = params.get('page');
+      const rawPage = pageParam ? Number(pageParam) : 1;
+      const minParam = params.get('min');
+      const maxParam = params.get('max');
+      const rawMin = minParam !== null && minParam !== '' ? Number(minParam) : null;
+      const rawMax = maxParam !== null && maxParam !== '' ? Number(maxParam) : null;
       const rawSort = params.get('sort');
       const queryState: ShopQueryState = {
         category: params.get('category') || 'all',
@@ -114,8 +117,8 @@ export class ShopPage {
         searchQuery: params.get('q') || '',
         sortBy: isValidSortBy(rawSort) ? rawSort : 'featured',
         page: Number.isFinite(rawPage) && rawPage > 0 ? rawPage : 1,
-        minPrice: Number.isFinite(rawMin) ? rawMin : null,
-        maxPrice: Number.isFinite(rawMax) ? rawMax : null,
+        minPrice: rawMin !== null && Number.isFinite(rawMin) ? rawMin : null,
+        maxPrice: rawMax !== null && Number.isFinite(rawMax) ? rawMax : null,
       };
 
       this.isApplyingRouteState = true;

@@ -24,7 +24,7 @@ export class AuthService {
       image: 'https://robohash.org/' + userData.username,
       preferences: {
         language: 'en' as const,
-        currency: 'USD' as const,
+        currency: 'EGP' as const,
       },
     };
 

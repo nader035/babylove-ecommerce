@@ -11,16 +11,16 @@ const STORAGE_KEY = 'babylove_preferences';
 
 const readPreferences = (): PreferencesState => {
   if (typeof localStorage === 'undefined') {
-    return { language: 'en', currency: 'USD' };
+    return { language: 'en', currency: 'EGP' };
   }
   try {
     return {
       language: 'en',
-      currency: 'USD',
+      currency: 'EGP',
       ...(JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}') as Partial<PreferencesState>),
     };
   } catch {
-    return { language: 'en', currency: 'USD' };
+    return { language: 'en', currency: 'EGP' };
   }
 };
 

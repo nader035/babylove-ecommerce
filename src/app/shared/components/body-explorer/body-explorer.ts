@@ -103,10 +103,10 @@ export class BodyExplorer {
     if (!zone) return;
 
     const queryParams: Record<string, string> = {};
-    if (zone.id === 'head' && zone.category) {
-      queryParams['category'] = zone.category;
-    } else if (zone.types.length > 0) {
+    if (zone.types.length > 0) {
       queryParams['type'] = zone.types[0];
+    } else if (zone.category) {
+      queryParams['category'] = zone.category;
     }
 
     this.router.navigate(['/shop'], { queryParams });

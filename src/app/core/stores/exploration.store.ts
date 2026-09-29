@@ -28,7 +28,7 @@ export const BODY_ZONES: BodyZoneConfig[] = [
     labelKey: 'home.discover.zone.torso',
     ariaLabelKey: 'home.discover.zone.torso',
     taglineKey: 'home.discover.taglines.torso',
-    types: ['knitwear', 'shirts', 'outerwear', 'basics', 'essentials'],
+    types: ['shirts', 'outerwear', 'knitwear', 'basics', 'essentials'],
     numberPrefix: '02',
   },
   {
