@@ -24,29 +24,16 @@ import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { BlogService, Blog } from '../../../../core/services/blog.service';
 import { CategoryService, CategoryCardModel } from '../../../../core/services/category.service';
 import { HeroService, HeroSlide } from '../../../../core/services/hero.service';
-import {
-  LookbookHotspot,
-  LookbookService,
-  LookbookModule,
-} from '../../../../core/services/lookbook.service';
 import { ProductService, ProductCardModel } from '../../../../core/services/product.service';
 import { TestimonialService, Testimonial } from '../../../../core/services/testimonial.service';
 import { PreferencesStore } from '../../../../core/stores/preferences.store';
 import { ProductCard } from '../../../../shared/components/product-card/product-card';
-
-type HotspotVM = {
-  id: string;
-  top: number;
-  left: number;
-  label: string;
-  type?: string;
-  category?: string;
-};
+import { BodyExplorer } from '../../../../shared/components/body-explorer/body-explorer';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, TranslocoModule, RouterLink, FontAwesomeModule, ProductCard],
+  imports: [CommonModule, TranslocoModule, RouterLink, FontAwesomeModule, ProductCard, BodyExplorer],
   templateUrl: './home.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -57,7 +44,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   private blogService = inject(BlogService);
   private testimonialService = inject(TestimonialService);
   private heroService = inject(HeroService);
-  private lookbookService = inject(LookbookService);
   private preferencesStore = inject(PreferencesStore);
   private testimonialIntervalId: ReturnType<typeof setInterval> | null = null;
   private heroIntervalId: ReturnType<typeof setInterval> | null = null;
@@ -68,9 +54,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   testimonials = signal<Testimonial[]>([]);
   heroSlides = signal<HeroSlide[]>([]);
   activeHero = signal(0);
-  lookbook = signal<LookbookModule | null>(null);
   activeTestimonial = signal(0);
-  hoveredHotspot = signal<number | null>(null);
 
   icons = {
     truck: faTruckFast,
@@ -81,45 +65,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     arrow: faArrowRight,
   };
 
-  private readonly fallbackHotspots: HotspotVM[] = [
-    { id: 'hs-fallback-1', top: 22, left: 10, label: 'Sweater', type: 'knitwear' },
-    { id: 'hs-fallback-2', top: 68, left: 12, label: 'Trousers', type: 'separates' },
-    { id: 'hs-fallback-3', top: 92, left: 48, label: 'Shoes', type: 'footwear' },
-    { id: 'hs-fallback-4', top: 30, left: 52, label: 'Knitwear', type: 'knitwear' },
-    { id: 'hs-fallback-5', top: 50, left: 43, label: 'Dresses', type: 'dresses' },
-  ];
-
   featuredProducts = computed(() => this.products().slice(0, 5));
   activeLang = this.preferencesStore.language;
   currentHero = computed(() => this.heroSlides()[this.activeHero()] ?? null);
-  lookbookImage = computed(() => this.lookbook()?.image || 'assets/images/interactive-models.svg');
-  lookbookAlt = computed(() => this.lookbook()?.imageAlt || 'Premium Lookbook');
-  lookbookCopy = computed(() => {
-    const module = this.lookbook();
-    const lang = this.activeLang();
-    if (!module) {
-      return null;
-    }
-
-    return lang === 'ar' ? module.ar : module.en;
-  });
-  hotspots = computed<HotspotVM[]>(() => {
-    const module = this.lookbook();
-    const lang = this.activeLang();
-
-    if (!module?.hotspots?.length) {
-      return this.fallbackHotspots;
-    }
-
-    return module.hotspots.map((spot: LookbookHotspot) => ({
-      id: spot.id,
-      top: spot.top,
-      left: spot.left,
-      label: lang === 'ar' ? spot.ar.label : spot.en.label,
-      type: spot.productTypeFilter,
-      category: spot.categoryFilter,
-    }));
-  });
 
   ngOnInit() {
     this.productService.getProducts().subscribe((products) => this.products.set(products));
@@ -132,7 +80,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.heroSlides.set(slides);
       this.activeHero.set(0);
     });
-    this.lookbookService.getActiveLookbook().subscribe((lookbook) => this.lookbook.set(lookbook));
 
     this.translocoService.selectTranslation().subscribe(() => {
       setTimeout(() => {

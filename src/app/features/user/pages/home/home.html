@@ -125,77 +125,21 @@
     </div>
   </section>
 
-  <!-- ═══════════════ SHOP THE LOOK — INTERACTIVE ═══════════════ -->
-  <section class="relative bg-white py-12">
-    <div class="container mx-auto px-6 md:px-12">
-      <div class="mb-16 grid items-end gap-8 md:grid-cols-2">
-        <div data-aos="fade-right">
-          @if (lookbookCopy(); as copy) {
-            <span class="section-kicker">{{ copy.kicker }}</span>
-            <h2 class="section-title mt-2">{{ copy.title }}</h2>
-            <p class="mt-4 max-w-lg text-brand-primary/60">
-              {{ copy.description }}
-            </p>
-          } @else {
-            <span class="section-kicker">{{ 'home.look.kicker' | transloco }}</span>
-            <h2 class="section-title mt-2">{{ 'home.look.title' | transloco }}</h2>
-            <p class="mt-4 max-w-lg text-brand-primary/60">
-              {{ 'home.look.description' | transloco }}
-            </p>
-          }
-        </div>
-        <div class="flex justify-end" data-aos="fade-left">
-          <a
-            routerLink="/shop"
-            class="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-accent"
-          >
-            <span>{{ 'common.viewCollection' | transloco }}</span>
-            <fa-icon
-              [icon]="icons.arrow"
-              class="transition-transform group-hover:translate-x-1"
-            ></fa-icon>
-          </a>
-        </div>
+  <!-- ═══════════════ DISCOVER BY SILHOUETTE — INTERACTIVE ═══════════════ -->
+  <section class="relative bg-white py-20 md:py-28 overflow-hidden border-b border-brand-primary/5">
+    <div class="container mx-auto px-6 md:px-12 max-w-7xl">
+      <!-- Section Editorial Header -->
+      <div class="mb-14 max-w-2xl mx-auto text-center" data-aos="fade-up">
+        <span class="section-kicker">{{ 'home.discover.kicker' | transloco }}</span>
+        <h2 class="section-title mt-2">{{ 'home.discover.title' | transloco }}</h2>
+        <p class="mt-4 text-sm leading-relaxed text-brand-primary/65 sm:text-base">
+          {{ 'home.discover.description' | transloco }}
+        </p>
       </div>
 
-      <!-- INTERACTIVE IMAGE CONTAINER -->
-      <div class="group relative mx-auto max-w-2xl rounded-[3rem]" data-aos="zoom-in-up">
-        <img [src]="lookbookImage()" [alt]="lookbookAlt()" class="w-full object-cover" />
-
-        <!-- HOTSPOTS -->
-        @for (dot of hotspots(); track dot.id; let i = $index) {
-          <div
-            class="absolute h-5 w-5 cursor-pointer group/dot flex justify-center items-center"
-            [style.top.%]="dot.top"
-            [style.left.%]="dot.left"
-            [routerLink]="['/shop']"
-            [queryParams]="{ type: dot.type, category: dot.category }"
-            (mouseenter)="hoveredHotspot.set(i)"
-            (mouseleave)="hoveredHotspot.set(null)"
-          >
-            <!-- Pulse Effect -->
-            <div class="absolute inset-0 animate-ping rounded-full bg-brand-primary/20"></div>
-            <!-- Main Dot -->
-            <div
-              class="relative flex h-full w-full items-center justify-center rounded-full border-2 border-white bg-brand-primary/90 shadow-md transition-transform group-hover/dot:scale-110"
-            >
-              <div class="h-1.5 w-1.5 rounded-full bg-white"></div>
-            </div>
-
-            <!-- Tooltip -->
-            <div
-              class="pointer-events-none absolute bottom-full left-1/2 mb-3 -translate-x-1/2 whitespace-nowrap rounded-md bg-brand-primary/95 px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest text-white backdrop-blur-sm transition-all duration-300"
-              [class.opacity-100.translate-y-0]="hoveredHotspot() === i"
-              [class.opacity-0.translate-y-2]="hoveredHotspot() !== i"
-            >
-              {{ dot.label }}
-              <!-- Tooltip Tail -->
-              <div
-                class="absolute top-full left-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-brand-primary/95"
-              ></div>
-            </div>
-          </div>
-        }
+      <!-- Interactive Body Exploration Experience -->
+      <div data-aos="zoom-in-up" data-aos-delay="100">
+        <app-body-explorer></app-body-explorer>
       </div>
     </div>
   </section>

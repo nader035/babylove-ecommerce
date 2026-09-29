@@ -7,11 +7,11 @@
       "lastName": "Mohamedd",
       "email": "nader@babylove.com",
       "password": "password123",
-      "phoneNumber": "+20 100 123 4567",
+      "phoneNumber": "+20 1022175316",
       "image": "assets/images/nader.jpg",
       "gender": "male",
       "preferences": {
-        "language": "en",
+        "language": "ar",
         "currency": "EGP"
       },
       "role": "customer",
@@ -1797,6 +1797,101 @@
       ],
       "createdAt": "2026-04-17T16:05:56.610Z",
       "updatedAt": "2026-04-17T16:05:56.610Z"
+    }
+  ],
+  "wardrobeItems": [
+    {
+      "id": "wardrobe-product-101-a43c0541-83ed-4510-ad79-0580e63b0b26",
+      "userId": "guest",
+      "type": "product",
+      "productId": "101",
+      "product": {
+        "id": "101",
+        "slug": "italian-wool-overcoat",
+        "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=1000&auto=format&fit=crop",
+        "categorySlug": "new-arrivals",
+        "categoryTitle": {
+          "en": "Premium",
+          "ar": "فاخر"
+        },
+        "price": 389,
+        "rating": 4.8,
+        "reviewCount": 38,
+        "type": "outerwear",
+        "en": {
+          "title": "Italian Wool Overcoat",
+          "shortDescription": "Heavyweight Italian wool overcoat."
+        },
+        "ar": {
+          "title": "معطف صوف إيطالي",
+          "shortDescription": "معطف صوف إيطالي ثقيل."
+        }
+      },
+      "imageUrl": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=1000&auto=format&fit=crop",
+      "title": "Italian Wool Overcoat",
+      "createdAt": "2026-07-02T14:34:59.334Z"
+    },
+    {
+      "id": "wardrobe-product-102-07aa8ef8-d42d-401a-a18b-1d588b00dc09",
+      "userId": "guest",
+      "type": "product",
+      "productId": "102",
+      "product": {
+        "id": "102",
+        "slug": "minimalist-linen-shirt",
+        "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=1000&auto=format&fit=crop",
+        "categorySlug": "menswear",
+        "categoryTitle": {
+          "en": "Premium",
+          "ar": "فاخر"
+        },
+        "price": 129,
+        "rating": 4.5,
+        "reviewCount": 36,
+        "type": "shirts",
+        "en": {
+          "title": "Minimalist Linen Shirt",
+          "shortDescription": "Washed European linen shirt."
+        },
+        "ar": {
+          "title": "قميص كتان بسيط",
+          "shortDescription": "قميص كتان أوروبي مغسول."
+        }
+      },
+      "imageUrl": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=1000&auto=format&fit=crop",
+      "title": "Minimalist Linen Shirt",
+      "createdAt": "2026-07-02T14:35:26.500Z"
+    },
+    {
+      "id": "wardrobe-product-103-1a9f7c4d-2579-462e-ba92-b3c57035ea12",
+      "userId": "guest",
+      "type": "product",
+      "productId": "103",
+      "product": {
+        "id": "103",
+        "slug": "structured-wool-blazer",
+        "image": "https://images.unsplash.com/photo-1536766768598-e09213fdcf22?w=1000&auto=format&fit=crop",
+        "categorySlug": "menswear",
+        "categoryTitle": {
+          "en": "Premium",
+          "ar": "فاخر"
+        },
+        "price": 295,
+        "rating": 4.7,
+        "reviewCount": 38,
+        "type": "outerwear",
+        "en": {
+          "title": "Structured Wool Blazer",
+          "shortDescription": "Japanese wool-blend blazer."
+        },
+        "ar": {
+          "title": "سترة صوفية مهيكلة",
+          "shortDescription": "سترة صوفية يابانية."
+        }
+      },
+      "imageUrl": "https://images.unsplash.com/photo-1536766768598-e09213fdcf22?w=1000&auto=format&fit=crop",
+      "title": "Structured Wool Blazer",
+      "createdAt": "2026-07-02T14:35:27.891Z"
     }
   ]
 }

@@ -217,6 +217,19 @@
                 [class.text-brand-primary/50]="!isInWishlist()"
               ></fa-icon>
             </button>
+            <button
+              (click)="saveToWardrobe()"
+              class="flex h-12 w-12 items-center justify-center rounded-full border border-brand-primary/15 transition-all hover:border-brand-primary/40"
+              [attr.aria-label]="'wardrobe.saveToWardrobe' | transloco"
+              [title]="'wardrobe.saveToWardrobe' | transloco"
+            >
+              <fa-icon
+                [icon]="icons.wardrobe"
+                class="text-lg transition-colors"
+                [class.text-brand-accent]="isInWardrobe()"
+                [class.text-brand-primary/50]="!isInWardrobe()"
+              ></fa-icon>
+            </button>
           </div>
 
           <!-- Trust Strip -->

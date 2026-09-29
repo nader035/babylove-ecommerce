@@ -1,5 +1,6 @@
 export const environment = {
   apiBase: 'http://localhost:3000',
+  apiUrl: 'http://localhost:3000',
   useMockApi: true,
   authApi: 'http://localhost:3000/auth',
   usersApi: 'http://localhost:3000/users',
@@ -8,5 +9,4 @@ export const environment = {
   ordersApi: 'http://localhost:3000/orders',
   blogsApi: 'http://localhost:3000/blogs',
   heroesApi: 'http://localhost:3000/heroes',
-  lookbooksApi: 'http://localhost:3000/lookbooks',
 };

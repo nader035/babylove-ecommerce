@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faStar,
@@ -22,6 +22,7 @@ import {
   faRotateLeft,
   faRulerCombined,
   faTimes,
+  faBookmark,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faStar as faStarEmpty,
@@ -33,7 +34,9 @@ import { ProductService, ProductCardModel } from '../../../../../../core/service
 import { CartStore } from '../../../../../../core/stores/cart.store';
 import { PreferencesStore } from '../../../../../../core/stores/preferences.store';
 import { RecentlyViewedStore } from '../../../../../../core/stores/recently-viewed.store';
+import { WardrobeStore } from '../../../../../../core/stores/wardrobe.store';
 import { WishlistStore } from '../../../../../../core/stores/wishlist.store';
+import { ExplorationStore } from '../../../../../../core/stores/exploration.store';
 import { ProductCard } from '../../../../../../shared/components/product-card/product-card';
 import { SkeletonLoader } from '../../../../../../shared/components/skeleton-loader/skeleton-loader';
 
@@ -55,10 +58,13 @@ export class ProductDetailPage implements OnInit {
   private route = inject(ActivatedRoute);
   private productService = inject(ProductService);
   private notificationService = inject(NotificationService);
+  private translocoService = inject(TranslocoService);
   private preferencesStore = inject(PreferencesStore);
   private recentlyViewedStore = inject(RecentlyViewedStore);
   cartStore = inject(CartStore);
   wishlistStore = inject(WishlistStore);
+  wardrobeStore = inject(WardrobeStore);
+  private explorationStore = inject(ExplorationStore);
 
   product = signal<Product | null>(null);
   relatedProducts = signal<ProductCardModel[]>([]);
@@ -87,6 +93,7 @@ export class ProductDetailPage implements OnInit {
     returnIcon: faRotateLeft,
     ruler: faRulerCombined,
     close: faTimes,
+    wardrobe: faBookmark,
   };
 
   sizeGuideData = [
@@ -141,6 +148,11 @@ export class ProductDetailPage implements OnInit {
   isInWishlist = computed(() => {
     const p = this.product();
     return p ? this.wishlistStore.ids().has(p.id) : false;
+  });
+
+  isInWardrobe = computed(() => {
+    const p = this.product();
+    return p ? this.wardrobeStore.productIds().has(String(p.id)) : false;
   });
 
   cardModel = computed((): ProductCardModel | null => {
@@ -270,6 +282,17 @@ export class ProductDetailPage implements OnInit {
     this.notificationService.info(`${title} ${action} wishlist`);
   }
 
+  saveToWardrobe() {
+    const card = this.cardModel();
+    if (!card) return;
+    this.wardrobeStore.addProduct(card);
+    const zone = this.explorationStore.getZoneForType(card.type);
+    if (zone) {
+      this.explorationStore.markExplored(zone);
+    }
+    this.notificationService.success(this.translocoService.translate('wardrobe.savedSuccessfully'));
+  }
+
   getStars(rating: number): ('full' | 'half' | 'empty')[] {
     const stars: ('full' | 'half' | 'empty')[] = [];
     for (let i = 1; i <= 5; i++) {
@@ -292,6 +315,12 @@ export class ProductDetailPage implements OnInit {
         const card = this.cardModel();
         if (card) {
           this.recentlyViewedStore.track(card);
+        }
+
+        const typeKey = product.typeKey || product.type || '';
+        const zone = this.explorationStore.getZoneForType(typeKey);
+        if (zone) {
+          this.explorationStore.markExplored(zone);
         }
 
         this.isLoading.set(false);

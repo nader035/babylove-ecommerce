@@ -85,6 +85,21 @@
         </button>
 
         <button
+          routerLink="/wardrobe"
+          class="relative flex h-10 w-10 items-center justify-center rounded-full text-brand-primary/70 transition hover:bg-white hover:text-brand-primary"
+          [attr.aria-label]="'wardrobe.title' | transloco"
+        >
+          <fa-icon [icon]="icons.wardrobe"></fa-icon>
+          @if (wardrobeStore.count() > 0) {
+            <span
+              class="absolute -inset-e-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-primary px-1 text-[10px] font-bold text-white"
+            >
+              {{ wardrobeStore.count() }}
+            </span>
+          }
+        </button>
+
+        <button
           routerLink="/cart"
           class="group mx-1 hidden items-center gap-2 rounded-full bg-brand-primary px-4 py-2 text-white transition-all hover:opacity-90 active:scale-95 sm:flex"
         >

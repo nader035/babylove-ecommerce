@@ -40,6 +40,11 @@ export const userRoutes: Routes = [
       ),
   },
   {
+    path: 'wardrobe',
+    loadComponent: () =>
+      import('../user/wardrobe/wardrobe-page.component').then((m) => m.WardrobePageComponent),
+  },
+  {
     path: 'cart',
     loadComponent: () =>
       import('../user/pages/cart/pages/cart-page/cart-page').then((m) => m.CartPage),

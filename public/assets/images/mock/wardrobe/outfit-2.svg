@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Cozy winter baby set inspiration</title>
+  <desc id="desc">A cozy placeholder moodboard for saved wardrobe inspiration.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fffaf6"/>
+      <stop offset="1" stop-color="#f0e9f4"/>
+    </linearGradient>
+    <linearGradient id="knit" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#d8c2a8"/>
+      <stop offset="1" stop-color="#b99c7f"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1200" fill="url(#bg)"/>
+  <rect x="105" y="115" width="690" height="970" rx="62" fill="#ffffff" stroke="#d2c8d8" stroke-width="3"/>
+  <circle cx="268" cy="355" r="118" fill="#f8f6fa" stroke="#d2c8d8" stroke-width="4"/>
+  <path d="M208 352c18-56 102-70 136-20 24 35 11 92-31 113-62 30-127-28-105-93Z" fill="#d8c2a8"/>
+  <path d="M492 310c54-50 164-50 218 0l38 132-83 35-20-57v352H557V420l-20 57-83-35 38-132Z" fill="url(#knit)" stroke="#3d214f" stroke-opacity=".22" stroke-width="4"/>
+  <path d="M564 487h76M564 557h76M564 627h76M564 697h76" stroke="#fffaf6" stroke-width="12" stroke-linecap="round" opacity=".55"/>
+  <rect x="198" y="682" width="225" height="108" rx="54" fill="#6e4388" opacity=".16"/>
+  <rect x="230" y="721" width="162" height="30" rx="15" fill="#3d214f" opacity=".18"/>
+  <rect x="242" y="880" width="416" height="34" rx="17" fill="#6e4388" opacity=".18"/>
+  <rect x="312" y="940" width="276" height="22" rx="11" fill="#3d214f" opacity=".18"/>
+  <text x="450" y="1018" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700" fill="#3d214f">Cozy Winter Set</text>
+</svg>

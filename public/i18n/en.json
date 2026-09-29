@@ -31,6 +31,7 @@
     "categories": "Collections",
     "blog": "Journal",
     "about us": "About",
+    "wardrobe": "Wardrobe",
     "wishlist": "Wishlist",
     "join-us": "Sign In"
   },
@@ -90,7 +91,7 @@
     "usernameRequired": "Username is required",
     "usernameMinLength": "Username must be at least 3 characters",
     "usernamePattern": "Username can only contain letters and numbers",
-    "minChars": "Minimum {min} characters"
+    "minChars": "Minimum {{min}} characters"
   },
   "home": {
     "hero": {
@@ -99,7 +100,7 @@
       "title_part2": "Modern Dressing",
       "description": "Curated collections of premium apparel designed for those who value craftsmanship, sustainable fabrics, and timeless silhouettes.",
       "cta_shop": "Shop Now",
-      "cta_lookbook": "View Lookbook"
+      "cta_explore": "Explore Silhouette"
     },
     "arrivals": {
       "title": "New Arrivals",
@@ -153,23 +154,36 @@
       "kicker": "On the Grid",
       "title": "Style in Motion"
     },
-    "look": {
-      "kicker": "The Editorial",
-      "title": "Shop the Look",
-      "description": "Discover how our creative team coordinates the season's most sought-after silhouettes for the modern family.",
-      "man_sweater": "Sweater",
-      "man_turtleneck": "Turtle Neck",
-      "man_trousers": "Trousers",
-      "man_sneakers": "Sneakers",
-      "woman_dress": "Dress",
-      "woman_cardigan": "Cardigan",
-      "woman_shoes": "Shoes",
-      "boy_sweater": "Sweater",
-      "boy_pants": "Pants",
-      "boy_sneakers": "Sneakers",
-      "girl_dress": "Dress",
-      "girl_leggings": "Leggings",
-      "girl_flats": "Flats"
+    "discover": {
+      "kicker": "Fashion Discovery",
+      "title": "Explore by Silhouette",
+      "description": "Select any area of the figure to discover curated pieces. As you browse, the silhouette subtly remembers your journey.",
+      "exploreAction": "Explore Collection",
+      "memoryBadge": "Exploration Memory",
+      "memoryCounter": "{{count}} of 5 Areas Explored",
+      "memoryAll": "Full Silhouette Explored",
+      "memoryReset": "Reset Memory",
+      "curatedHint": "Touch any area or select a category below",
+      "zone": {
+        "head": "Headwear & Jewelry",
+        "torso": "Tops & Outerwear",
+        "arms": "Bags & Accessories",
+        "legs": "Bottoms & Dresses",
+        "feet": "Footwear"
+      },
+      "focusKicker": "Atelier Focus",
+      "exploredBadge": "Explored",
+      "pillarFormTitle": "Architectural Form",
+      "pillarFormDesc": "Tailored silhouettes & timeless proportions.",
+      "pillarJourneyTitle": "Luminous Journey",
+      "pillarJourneyDesc": "Visual memory of your style exploration.",
+      "taglines": {
+        "head": "Sculpted headwear, luxury sunglasses, and minimalist jewelry accents.",
+        "torso": "Virgin wool overcoats, tailored blazers, and luxury knitwear.",
+        "arms": "Full-grain leather totes, architectural shoulder bags, and accessories.",
+        "legs": "Fluid silk dresses, raw selvedge denim, and tailored wide-leg trousers.",
+        "feet": "Artisanal leather Chelsea boots and sculptural minimalist footwear."
+      }
     }
   },
   "product": {
@@ -230,6 +244,26 @@
     "addedToBag": "{{title}} added to bag",
     "removed": "{{title}} removed from recently viewed",
     "cleared": "Recently viewed history cleared"
+  },
+  "wardrobe": {
+    "title": "Saved Wardrobe",
+    "subtitle": "Keep your favorite products and inspiration images in one beautiful place.",
+    "uploadTitle": "Upload inspiration image",
+    "uploadSubtitle": "Save a baby outfit, moodboard, or style idea.",
+    "all": "All",
+    "products": "Products",
+    "uploads": "Uploaded Images",
+    "emptyTitle": "Your wardrobe is empty",
+    "emptySubtitle": "Start by saving products or uploading an inspiration image.",
+    "save": "Save",
+    "remove": "Remove",
+    "titleLabel": "Title",
+    "noteLabel": "Note",
+    "chooseImage": "Choose image",
+    "saveToWardrobe": "Save to Wardrobe",
+    "savedSuccessfully": "Saved to wardrobe",
+    "removedSuccessfully": "Removed from wardrobe",
+    "invalidImage": "Please choose a valid image file"
   },
   "checkout": {
     "title": "Checkout",

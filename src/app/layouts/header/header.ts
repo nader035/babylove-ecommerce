@@ -13,6 +13,7 @@ import {
   faSearch,
   faHeart,
   faClock,
+  faBookmark,
   faUserCircle,
   faInfinity,
   faBox,
@@ -25,6 +26,7 @@ import { CartStore } from '../../core/stores/cart.store';
 import { WishlistStore } from '../../core/stores/wishlist.store';
 import { RecentlyViewedStore } from '../../core/stores/recently-viewed.store';
 import { PreferencesStore } from '../../core/stores/preferences.store';
+import { WardrobeStore } from '../../core/stores/wardrobe.store';
 import { ProductService, ProductCardModel } from '../../core/services/product.service';
 
 @Component({
@@ -43,6 +45,7 @@ export class Header {
   cartStore = inject(CartStore);
   wishlistStore = inject(WishlistStore);
   recentlyViewedStore = inject(RecentlyViewedStore);
+  wardrobeStore = inject(WardrobeStore);
   preferencesStore = inject(PreferencesStore);
 
   currentLang = this.preferencesStore.language;
@@ -59,6 +62,7 @@ export class Header {
     close: faTimes,
     search: faSearch,
     recent: faClock,
+    wardrobe: faBookmark,
     wishlist: faHeart,
     cart: faShoppingBag,
     user: faUserCircle,

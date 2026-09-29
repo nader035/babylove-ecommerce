@@ -9,11 +9,18 @@ import {
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faEye, faHeart as faHeartSolid, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBookmark,
+  faEye,
+  faHeart as faHeartSolid,
+  faShoppingBag,
+} from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
-import { TranslocoModule } from '@jsverse/transloco';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { NotificationService } from '../../../core/services/notification.service';
 import { ProductCardModel } from '../../../core/services/product.service';
 import { PreferencesStore } from '../../../core/stores/preferences.store';
+import { WardrobeStore } from '../../../core/stores/wardrobe.store';
 import { WishlistStore } from '../../../core/stores/wishlist.store';
 
 @Component({
@@ -26,11 +33,14 @@ import { WishlistStore } from '../../../core/stores/wishlist.store';
 })
 export class ProductCard {
   private preferencesStore = inject(PreferencesStore);
+  private notificationService = inject(NotificationService);
+  private translocoService = inject(TranslocoService);
   @Input({ required: true }) product!: ProductCardModel;
   @Output() onAddToCart = new EventEmitter<ProductCardModel>();
   @Output() onQuickView = new EventEmitter<ProductCardModel>();
 
   wishlistStore = inject(WishlistStore);
+  wardrobeStore = inject(WardrobeStore);
   activeLang = this.preferencesStore.language;
   currencyCode = this.preferencesStore.currency;
 
@@ -38,6 +48,7 @@ export class ProductCard {
     eye: faEye,
     heartSolid: faHeartSolid,
     heartRegular: faHeartRegular,
+    wardrobe: faBookmark,
     bag: faShoppingBag,
   };
 
@@ -49,6 +60,17 @@ export class ProductCard {
     event.preventDefault();
     event.stopPropagation();
     this.wishlistStore.toggle(this.product);
+  }
+
+  isInWardrobe(): boolean {
+    return this.wardrobeStore.productIds().has(String(this.product.id));
+  }
+
+  saveToWardrobe(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.wardrobeStore.addProduct(this.product);
+    this.notificationService.success(this.translocoService.translate('wardrobe.savedSuccessfully'));
   }
 
   quickView(event: Event): void {

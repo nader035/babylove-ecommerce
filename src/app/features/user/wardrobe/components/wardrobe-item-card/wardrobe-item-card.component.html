@@ -1,0 +1,63 @@
+<article
+  class="group overflow-hidden rounded-2xl border border-brand-surface/70 bg-white p-3 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-premium"
+>
+  <div class="relative aspect-3/4 overflow-hidden rounded-xl bg-brand-bg-light">
+    @if (productSlug(); as slug) {
+      <a [routerLink]="['/product', slug]" class="block h-full">
+        <img
+          [src]="imageUrl()"
+          [alt]="title()"
+          class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+          loading="lazy"
+        />
+      </a>
+    } @else {
+      <img
+        [src]="imageUrl()"
+        [alt]="title()"
+        class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+        loading="lazy"
+      />
+    }
+
+    <span
+      class="absolute start-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/90 px-3 py-1 text-[11px] font-semibold text-brand-primary shadow-sm backdrop-blur"
+    >
+      <fa-icon [icon]="isProduct() ? icons.product : icons.upload" class="text-[10px]"></fa-icon>
+      {{ (isProduct() ? 'wardrobe.products' : 'wardrobe.uploads') | transloco }}
+    </span>
+
+    <button
+      type="button"
+      (click)="onRemove()"
+      class="absolute inset-e-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-red-400 shadow-sm backdrop-blur-sm transition hover:bg-red-50 hover:text-red-500"
+      [attr.aria-label]="'wardrobe.remove' | transloco"
+    >
+      <fa-icon [icon]="icons.trash" class="text-xs"></fa-icon>
+    </button>
+  </div>
+
+  <div class="pt-4">
+    <h3 class="line-clamp-1 text-sm font-bold text-brand-primary">
+      @if (productSlug(); as slug) {
+        <a [routerLink]="['/product', slug]" class="transition group-hover:text-brand-accent">
+          {{ title() }}
+        </a>
+      } @else {
+        {{ title() || ('wardrobe.uploadTitle' | transloco) }}
+      }
+    </h3>
+
+    @if (subtitle()) {
+      <p class="mt-1 line-clamp-2 text-xs leading-5 text-brand-primary/55">
+        {{ subtitle() }}
+      </p>
+    }
+
+    @if (productPrice(); as price) {
+      <p class="mt-2 text-sm font-bold text-brand-primary">
+        {{ price | currency: currencyCode() : 'symbol' : '1.2-2' }}
+      </p>
+    }
+  </div>
+</article>
