@@ -89,7 +89,7 @@
           class="relative flex h-10 w-10 items-center justify-center rounded-full text-brand-primary/70 transition hover:bg-white hover:text-brand-primary"
           [attr.aria-label]="'wardrobe.title' | transloco"
         >
-          <fa-icon [icon]="icons.wardrobe"></fa-icon>
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6a2 2 0 1 0 -4 0c0 1.667 .67 3 2 4h0c1.33 -1 2 -2.333 2 -4z"/><path d="M12 10l-8 6h16z"/><path d="M4 16v2h16v-2"/></svg>
           @if (wardrobeStore.count() > 0) {
             <span
               class="absolute -inset-e-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-primary px-1 text-[10px] font-bold text-white"

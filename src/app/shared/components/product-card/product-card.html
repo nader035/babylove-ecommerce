@@ -48,13 +48,17 @@
       <button
         type="button"
         (click)="saveToWardrobe($event)"
-        class="flex h-9 w-9 items-center justify-center rounded-full bg-white shadow"
+        class="flex h-9 w-9 items-center justify-center rounded-full bg-white shadow transition-all hover:scale-105"
         [class.text-brand-accent]="isInWardrobe()"
         [class.text-brand-primary]="!isInWardrobe()"
         [title]="'wardrobe.saveToWardrobe' | transloco"
         [attr.aria-label]="'wardrobe.saveToWardrobe' | transloco"
       >
-        <fa-icon [icon]="icons.wardrobe" class="text-sm"></fa-icon>
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 6a2 2 0 1 0 -4 0c0 1.667 .67 3 2 4h0c1.33 -1 2 -2.333 2 -4z"/>
+          <path d="M12 10l-8 6h16z"/>
+          <path d="M4 16v2h16v-2"/>
+        </svg>
       </button>
     </div>
 

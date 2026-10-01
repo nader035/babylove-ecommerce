@@ -86,6 +86,8 @@ export class Header {
         takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((results) => this.searchResults.set(results));
+
+    this.wardrobeStore.load(this.auth.user()?.id);
   }
 
   toggleLanguage() {

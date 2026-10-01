@@ -6786,108 +6786,467 @@
   ],
   "wardrobeItems": [
     {
-      "id": "wardrobe-product-101-a43c0541-83ed-4510-ad79-0580e63b0b26",
-      "userId": "guest",
-      "type": "product",
+      "id": "w-001-g",
+      "clothingType": "outerwear",
+      "source": "product",
+      "name": "Italian Wool Overcoat",
+      "color": {
+        "name": "Charcoal Noir",
+        "hex": "#36454F"
+      },
+      "size": "L",
       "productId": "101",
-      "product": {
-        "id": "101",
+      "imageUrl": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=600&auto=format&fit=crop",
+      "productSnapshot": {
         "slug": "italian-wool-overcoat",
-        "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=1000&auto=format&fit=crop",
-        "categorySlug": "new-arrivals",
-        "categoryTitle": {
-          "en": "New Arrivals",
-          "ar": "وصل حديثاً"
-        },
         "price": 8450,
-        "oldPrice": 9800,
-        "rating": 4.9,
-        "reviewCount": 38,
-        "type": "outerwear",
+        "categorySlug": "new-arrivals",
+        "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=600&auto=format&fit=crop",
         "en": {
-          "title": "Italian Wool Overcoat",
-          "shortDescription": "Heavyweight virgin wool tailored overcoat with structured shoulders."
+          "title": "Italian Wool Overcoat"
         },
         "ar": {
-          "title": "معطف صوف إيطالي فاخر",
-          "shortDescription": "معطف من الصوف البكر الإيطالي الثقيل بتفصيل هندسي متقن وأكتاف مهيكلة."
+          "title": "معطف صوف إيطالي"
         }
+      },
+      "createdAt": "2026-04-10T14:34:59Z",
+      "userId": "guest"
+    },
+    {
+      "id": "w-003-g",
+      "clothingType": "dresses",
+      "source": "product",
+      "name": "Ribbed Silk Knit Dress",
+      "color": {
+        "name": "Burgundy Wine",
+        "hex": "#800020"
+      },
+      "size": "S",
+      "productId": "104",
+      "imageUrl": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&auto=format&fit=crop",
+      "productSnapshot": {
+        "slug": "ribbed-silk-knit-dress",
+        "price": 4600,
+        "categorySlug": "womenswear",
+        "image": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&auto=format&fit=crop",
+        "en": {
+          "title": "Ribbed Silk Knit Dress"
+        },
+        "ar": {
+          "title": "فستان حرير محبوك"
+        }
+      },
+      "createdAt": "2026-04-15T09:20:00Z",
+      "userId": "guest"
+    },
+    {
+      "id": "w-004-g",
+      "clothingType": "accessories",
+      "source": "upload",
+      "name": "Vintage Cashmere Scarf",
+      "color": {
+        "name": "Camel Warm",
+        "hex": "#C19A6B"
+      },
+      "size": "One Size",
+      "notes": "Pair with Italian wool overcoat for cold gallery visits in Zamalek.",
+      "imageUrl": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&auto=format&fit=crop",
+      "createdAt": "2026-04-16T15:10:00Z",
+      "userId": "guest"
+    },
+    {
+      "id": "w-005-g",
+      "clothingType": "footwear",
+      "source": "symbol",
+      "name": "Chelsea Leather Boots",
+      "color": {
+        "name": "Deep Obsidian",
+        "hex": "#1C1C1E"
+      },
+      "size": "42",
+      "symbol": "shoe",
+      "notes": "Everyday architectural silhouette boots.",
+      "createdAt": "2026-04-17T11:00:00Z",
+      "userId": "guest"
+    },
+    {
+      "id": "w-007-g",
+      "clothingType": "pants",
+      "source": "symbol",
+      "name": "Pleated Wool Trousers",
+      "color": {
+        "name": "Slate Grey",
+        "hex": "#708090"
+      },
+      "size": "32",
+      "symbol": "pants",
+      "notes": "High-waisted double pleated cut.",
+      "createdAt": "2026-04-18T14:10:00Z",
+      "userId": "guest"
+    },
+    {
+      "id": "w-008-g",
+      "clothingType": "knitwear",
+      "source": "product",
+      "name": "Cashmere V-Neck Sweater",
+      "color": {
+        "name": "Heather Grey",
+        "hex": "#9B9B9B"
+      },
+      "size": "M",
+      "productId": "103",
+      "imageUrl": "https://images.unsplash.com/photo-1434389677669-e08b4cda3a37?w=600&auto=format&fit=crop",
+      "productSnapshot": {
+        "slug": "cashmere-v-neck-sweater",
+        "price": 3200,
+        "categorySlug": "menswear",
+        "image": "https://images.unsplash.com/photo-1434389677669-e08b4cda3a37?w=600&auto=format&fit=crop",
+        "en": {
+          "title": "Cashmere V-Neck Sweater"
+        },
+        "ar": {
+          "title": "سويتر كشمير"
+        }
+      },
+      "createdAt": "2026-04-19T10:00:00Z",
+      "userId": "guest"
+    },
+    {
+      "id": "w-001-u1",
+      "clothingType": "outerwear",
+      "source": "product",
+      "name": "Italian Wool Overcoat",
+      "color": {
+        "name": "Charcoal Noir",
+        "hex": "#36454F"
+      },
+      "size": "L",
+      "productId": "101",
+      "imageUrl": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=600&auto=format&fit=crop",
+      "productSnapshot": {
+        "slug": "italian-wool-overcoat",
+        "price": 8450,
+        "categorySlug": "new-arrivals",
+        "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=600&auto=format&fit=crop",
+        "en": {
+          "title": "Italian Wool Overcoat"
+        },
+        "ar": {
+          "title": "معطف صوف إيطالي"
+        }
+      },
+      "createdAt": "2026-04-10T14:34:59Z",
+      "userId": "1"
+    },
+    {
+      "id": "w-002-u1",
+      "clothingType": "shirts",
+      "source": "product",
+      "name": "Minimalist Linen Shirt",
+      "color": {
+        "name": "Off White",
+        "hex": "#FAF9F6"
+      },
+      "size": "M",
+      "productId": "102",
+      "imageUrl": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&auto=format&fit=crop",
+      "productSnapshot": {
+        "slug": "minimalist-linen-shirt",
+        "price": 2450,
+        "categorySlug": "menswear",
+        "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&auto=format&fit=crop",
+        "en": {
+          "title": "Minimalist Linen Shirt"
+        },
+        "ar": {
+          "title": "قميص كتان"
+        }
+      },
+      "createdAt": "2026-04-12T14:35:26Z",
+      "userId": "1"
+    },
+    {
+      "id": "w-003-u1",
+      "clothingType": "dresses",
+      "source": "product",
+      "name": "Ribbed Silk Knit Dress",
+      "color": {
+        "name": "Burgundy Wine",
+        "hex": "#800020"
+      },
+      "size": "S",
+      "productId": "104",
+      "imageUrl": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&auto=format&fit=crop",
+      "productSnapshot": {
+        "slug": "ribbed-silk-knit-dress",
+        "price": 4600,
+        "categorySlug": "womenswear",
+        "image": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&auto=format&fit=crop",
+        "en": {
+          "title": "Ribbed Silk Knit Dress"
+        },
+        "ar": {
+          "title": "فستان حرير محبوك"
+        }
+      },
+      "createdAt": "2026-04-15T09:20:00Z",
+      "userId": "1"
+    },
+    {
+      "id": "w-004-u1",
+      "clothingType": "accessories",
+      "source": "upload",
+      "name": "Vintage Cashmere Scarf",
+      "color": {
+        "name": "Camel Warm",
+        "hex": "#C19A6B"
+      },
+      "size": "One Size",
+      "notes": "Pair with Italian wool overcoat for cold gallery visits in Zamalek.",
+      "imageUrl": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&auto=format&fit=crop",
+      "createdAt": "2026-04-16T15:10:00Z",
+      "userId": "1"
+    },
+    {
+      "id": "w-005-u1",
+      "clothingType": "footwear",
+      "source": "symbol",
+      "name": "Chelsea Leather Boots",
+      "color": {
+        "name": "Deep Obsidian",
+        "hex": "#1C1C1E"
+      },
+      "size": "42",
+      "symbol": "shoe",
+      "notes": "Everyday architectural silhouette boots.",
+      "createdAt": "2026-04-17T11:00:00Z",
+      "userId": "1"
+    },
+    {
+      "id": "w-006-u1",
+      "clothingType": "shirts",
+      "source": "symbol",
+      "name": "Tailored Oxford Button-Down",
+      "color": {
+        "name": "Cerulean Mist",
+        "hex": "#7BA05B"
+      },
+      "size": "M",
+      "symbol": "shirt",
+      "notes": "Custom tailored lightweight summer staple.",
+      "createdAt": "2026-04-18T08:30:00Z",
+      "userId": "1"
+    },
+    {
+      "id": "w-007-u1",
+      "clothingType": "pants",
+      "source": "symbol",
+      "name": "Pleated Wool Trousers",
+      "color": {
+        "name": "Slate Grey",
+        "hex": "#708090"
+      },
+      "size": "32",
+      "symbol": "pants",
+      "notes": "High-waisted double pleated cut.",
+      "createdAt": "2026-04-18T14:10:00Z",
+      "userId": "1"
+    },
+    {
+      "id": "w-008-u1",
+      "clothingType": "knitwear",
+      "source": "product",
+      "name": "Cashmere V-Neck Sweater",
+      "color": {
+        "name": "Heather Grey",
+        "hex": "#9B9B9B"
+      },
+      "size": "M",
+      "productId": "103",
+      "imageUrl": "https://images.unsplash.com/photo-1434389677669-e08b4cda3a37?w=600&auto=format&fit=crop",
+      "productSnapshot": {
+        "slug": "cashmere-v-neck-sweater",
+        "price": 3200,
+        "categorySlug": "menswear",
+        "image": "https://images.unsplash.com/photo-1434389677669-e08b4cda3a37?w=600&auto=format&fit=crop",
+        "en": {
+          "title": "Cashmere V-Neck Sweater"
+        },
+        "ar": {
+          "title": "سويتر كشمير"
+        }
+      },
+      "createdAt": "2026-04-19T10:00:00Z",
+      "userId": "1"
+    },
+    {
+      "id": "w-501d2697-ee07-4c3d-863b-a1a1ebc361e7",
+      "userId": "guest",
+      "clothingType": "shirts",
+      "source": "product",
+      "name": "Italian Wool Overcoat",
+      "color": {
+        "name": "Original",
+        "hex": "#3d214f"
       },
       "imageUrl": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=1000&auto=format&fit=crop",
-      "title": "Italian Wool Overcoat",
-      "createdAt": "2026-04-10T14:34:59.334Z"
+      "productId": "101",
+      "productSnapshot": {
+        "slug": "italian-wool-overcoat",
+        "price": 8450,
+        "categorySlug": "new-arrivals",
+        "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=1000&auto=format&fit=crop",
+        "en": {
+          "title": "Italian Wool Overcoat"
+        },
+        "ar": {
+          "title": "معطف صوف إيطالي فاخر"
+        }
+      },
+      "createdAt": "2026-10-01T07:07:54.583Z"
     },
     {
-      "id": "wardrobe-product-102-07aa8ef8-d42d-401a-a18b-1d588b00dc09",
+      "id": "w-6fc1b5aa-50b6-4cb6-ba31-70d6c6d960be",
       "userId": "guest",
-      "type": "product",
-      "productId": "102",
-      "product": {
-        "id": "102",
-        "slug": "minimalist-linen-shirt",
-        "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=1000&auto=format&fit=crop",
-        "categorySlug": "menswear",
-        "categoryTitle": {
-          "en": "Menswear",
-          "ar": "ملابس رجالية"
-        },
-        "price": 2450,
-        "rating": 4.6,
-        "reviewCount": 36,
-        "type": "shirts",
+      "clothingType": "shirts",
+      "source": "product",
+      "name": "Italian Wool Overcoat",
+      "color": {
+        "name": "Original",
+        "hex": "#3d214f"
+      },
+      "imageUrl": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=1000&auto=format&fit=crop",
+      "productId": "101",
+      "productSnapshot": {
+        "slug": "italian-wool-overcoat",
+        "price": 8450,
+        "categorySlug": "new-arrivals",
+        "image": "https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=1000&auto=format&fit=crop",
         "en": {
-          "title": "Minimalist Linen Shirt",
-          "shortDescription": "Washed European flax linen with a camp collar."
+          "title": "Italian Wool Overcoat"
         },
         "ar": {
-          "title": "قميص كتان بسيط راقي",
-          "shortDescription": "كتان أوروبي مغسول بياقة مفتوحة وأزرار من عرق اللؤلؤ الطبيعي."
+          "title": "معطف صوف إيطالي فاخر"
         }
       },
-      "imageUrl": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=1000&auto=format&fit=crop",
-      "title": "Minimalist Linen Shirt",
-      "createdAt": "2026-04-12T14:35:26.500Z"
+      "createdAt": "2026-10-01T07:08:03.575Z"
     },
     {
-      "id": "wardrobe-product-104-1a9f7c4d-2579-462e-ba92-b3c57035ea12",
-      "userId": "1",
-      "type": "product",
-      "productId": "104",
-      "product": {
-        "id": "104",
-        "slug": "ribbed-silk-knit-dress",
-        "image": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1000&auto=format&fit=crop",
-        "categorySlug": "womenswear",
-        "categoryTitle": {
-          "en": "Womenswear",
-          "ar": "ملابس نسائية"
-        },
-        "price": 4600,
-        "oldPrice": 5500,
-        "rating": 4.8,
-        "reviewCount": 24,
-        "type": "dresses",
+      "id": "w-17c2da59-51ea-4422-8e52-403ae1396197",
+      "userId": "guest",
+      "clothingType": "shirts",
+      "source": "product",
+      "name": "Full-Grain Leather Tote",
+      "color": {
+        "name": "Original",
+        "hex": "#3d214f"
+      },
+      "imageUrl": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1000&auto=format&fit=crop",
+      "productId": "105",
+      "productSnapshot": {
+        "slug": "full-grain-leather-tote",
+        "price": 6800,
+        "categorySlug": "accessories",
+        "image": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1000&auto=format&fit=crop",
         "en": {
-          "title": "Ribbed Silk Knit Dress",
-          "shortDescription": "Mulberry silk ribbed knit dress contouring the figure."
+          "title": "Full-Grain Leather Tote"
         },
         "ar": {
-          "title": "فستان حرير مضلع منسوج",
-          "shortDescription": "فستان من حرير التوت المضلع ينحت القوام بحركة انسيابية راقية."
+          "title": "حقيبة يد جلدية محببة بالكامل"
         }
       },
-      "imageUrl": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=1000&auto=format&fit=crop",
-      "title": "Ribbed Silk Knit Dress",
-      "createdAt": "2026-04-15T09:20:00.000Z"
+      "createdAt": "2026-10-01T07:08:07.439Z"
     },
     {
-      "id": "wardrobe-upload-custom-01",
-      "userId": "1",
-      "type": "upload",
-      "imageUrl": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=800&auto=format&fit=crop",
-      "title": "Vintage Cashmere Scarf",
-      "note": "Styling Note: Pair with Italian wool overcoat and boots for chilly winter gallery openings in Zamalek.",
-      "createdAt": "2026-04-16T15:10:00.000Z"
+      "id": "w-857d0eb6-07b4-4cbf-93cb-28947b417781",
+      "userId": "guest",
+      "clothingType": "shirts",
+      "source": "product",
+      "name": "Raw Selvedge Denim",
+      "color": {
+        "name": "Original",
+        "hex": "#3d214f"
+      },
+      "imageUrl": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=1000&auto=format&fit=crop",
+      "productId": "106",
+      "productSnapshot": {
+        "slug": "raw-selvedge-denim",
+        "price": 3200,
+        "categorySlug": "essentials",
+        "image": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=1000&auto=format&fit=crop",
+        "en": {
+          "title": "Raw Selvedge Denim"
+        },
+        "ar": {
+          "title": "بنطال جينز سيلفيدج ياباني خام"
+        }
+      },
+      "createdAt": "2026-10-01T07:08:43.903Z"
+    },
+    {
+      "id": "w-4d1661b1-1579-476c-a756-a1e7bb850572",
+      "userId": "guest",
+      "clothingType": "shirts",
+      "source": "symbol",
+      "name": "vc",
+      "color": {
+        "name": "Custom",
+        "hex": "#3d214f"
+      },
+      "symbol": "tie",
+      "createdAt": "2026-10-01T07:10:23.247Z"
+    },
+    {
+      "id": "w-66a37d84-e480-4d67-b3ee-84a92d4840fc",
+      "userId": "guest",
+      "clothingType": "shirts",
+      "source": "symbol",
+      "name": "xcv",
+      "color": {
+        "name": "Custom",
+        "hex": "#3d214f"
+      },
+      "symbol": "scarf",
+      "createdAt": "2026-10-01T07:10:26.775Z"
+    },
+    {
+      "id": "w-2c9f9111-fc33-45e7-8141-07fba9f14787",
+      "userId": "guest",
+      "clothingType": "shirts",
+      "source": "symbol",
+      "name": "xcvvc",
+      "color": {
+        "name": "Custom",
+        "hex": "#3d214f"
+      },
+      "symbol": "hat",
+      "createdAt": "2026-10-01T07:10:31.095Z"
+    },
+    {
+      "id": "w-77522eb9-23e3-4105-8350-c0cc6cca5a64",
+      "userId": "guest",
+      "clothingType": "shirts",
+      "source": "symbol",
+      "name": "xcvxcv",
+      "color": {
+        "name": "Custom",
+        "hex": "#3d214f"
+      },
+      "symbol": "hanger",
+      "createdAt": "2026-10-01T07:10:34.847Z"
+    },
+    {
+      "id": "w-018b19be-0b61-4081-b40b-e78e4822b705",
+      "userId": "guest",
+      "clothingType": "shirts",
+      "source": "symbol",
+      "name": "vxcvxc",
+      "color": {
+        "name": "Custom",
+        "hex": "#3d214f"
+      },
+      "symbol": "shoe",
+      "createdAt": "2026-10-01T07:10:37.999Z"
     }
   ]
 }

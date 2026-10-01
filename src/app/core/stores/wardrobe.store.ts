@@ -3,24 +3,20 @@ import { patchState, signalStore, withComputed, withMethods, withState } from '@
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { tapResponse } from '@ngrx/operators';
 import { pipe, switchMap, tap } from 'rxjs';
-import { WardrobeItem } from '../models/iwardrobe';
+import {
+  ClothingType,
+  WardrobeItem,
+  WardrobeShelf,
+  productTypeToClothingType,
+  createProductSnapshot,
+} from '../models/iwardrobe';
 import { ProductCardModel } from '../services/product.service';
-import { WardrobeService } from '../services/wardrobe.service';
-
-export type WardrobeFilter = 'all' | 'product' | 'upload';
-
-export type WardrobeUploadPayload = {
-  imageUrl: string;
-  title?: string;
-  note?: string;
-  userId?: string | number;
-};
+import { AddWardrobeItemPayload, WardrobeService } from '../services/wardrobe.service';
 
 type WardrobeState = {
   items: WardrobeItem[];
   loading: boolean;
   error: string | null;
-  selectedFilter: WardrobeFilter;
 };
 
 const sortByCreatedAt = (items: WardrobeItem[]): WardrobeItem[] =>
@@ -31,12 +27,17 @@ const upsertItem = (items: WardrobeItem[], item: WardrobeItem): WardrobeItem[] =
   const nextItems = exists
     ? items.map((current) => (current.id === item.id ? item : current))
     : [item, ...items];
-
   return sortByCreatedAt(nextItems);
 };
 
 const toErrorMessage = (error: unknown): string =>
   error instanceof Error ? error.message : 'Unable to update wardrobe. Please try again.';
+
+// Shelf display order: outerwear → shirts → knitwear → dresses → pants → denim → loungewear → footwear → bags → accessories → other
+const SHELF_ORDER: ClothingType[] = [
+  'outerwear', 'shirts', 'knitwear', 'dresses', 'pants',
+  'denim', 'loungewear', 'footwear', 'bags', 'accessories', 'other',
+];
 
 export const WardrobeStore = signalStore(
   { providedIn: 'root' },
@@ -44,27 +45,41 @@ export const WardrobeStore = signalStore(
     items: [],
     loading: false,
     error: null,
-    selectedFilter: 'all',
   }),
-  withComputed(({ items, selectedFilter }) => ({
+  withComputed(({ items }) => ({
     count: computed(() => items().length),
-    uploadedCount: computed(() => items().filter((item) => item.type === 'upload').length),
-    productCount: computed(() => items().filter((item) => item.type === 'product').length),
-    filteredItems: computed(() => {
-      const filter = selectedFilter();
-
-      if (filter === 'all') {
-        return items();
-      }
-
-      return items().filter((item) => item.type === filter);
-    }),
     isEmpty: computed(() => items().length === 0),
+
+    /** Auto-grouped shelves from items' clothingType — the core wardrobe metaphor */
+    shelves: computed((): WardrobeShelf[] => {
+      const grouped = new Map<ClothingType, WardrobeItem[]>();
+      for (const item of items()) {
+        const list = grouped.get(item.clothingType) ?? [];
+        list.push(item);
+        grouped.set(item.clothingType, list);
+      }
+      return Array.from(grouped.entries())
+        .map(([clothingType, shelfItems]) => ({
+          clothingType,
+          items: sortByCreatedAt(shelfItems),
+        }))
+        .sort((a, b) => {
+          const aIdx = SHELF_ORDER.indexOf(a.clothingType);
+          const bIdx = SHELF_ORDER.indexOf(b.clothingType);
+          return (aIdx === -1 ? 999 : aIdx) - (bIdx === -1 ? 999 : bIdx);
+        });
+    }),
+
+    shelfCount: computed(() => {
+      const types = new Set(items().map((item) => item.clothingType));
+      return types.size;
+    }),
+
     productIds: computed(
       () =>
         new Set(
           items()
-            .filter((item) => item.type === 'product' && item.productId !== undefined)
+            .filter((item) => item.source === 'product' && item.productId != null)
             .map((item) => String(item.productId)),
         ),
     ),
@@ -86,11 +101,11 @@ export const WardrobeStore = signalStore(
       ),
     );
 
-    const addProductItem = rxMethod<{ product: ProductCardModel; userId?: string | number }>(
+    const addItemRx = rxMethod<AddWardrobeItemPayload>(
       pipe(
         tap(() => patchState(store, { loading: true, error: null })),
-        switchMap(({ product, userId }) =>
-          wardrobeService.addProduct(product, userId).pipe(
+        switchMap((payload) =>
+          wardrobeService.addItem(payload).pipe(
             tapResponse({
               next: (item) =>
                 patchState(store, {
@@ -105,11 +120,11 @@ export const WardrobeStore = signalStore(
       ),
     );
 
-    const addUploadedImage = rxMethod<WardrobeUploadPayload>(
+    const addFromProductRx = rxMethod<{ product: ProductCardModel; userId?: string | number }>(
       pipe(
         tap(() => patchState(store, { loading: true, error: null })),
-        switchMap((payload) =>
-          wardrobeService.addMockUploadedImage(payload).pipe(
+        switchMap(({ product, userId }) =>
+          wardrobeService.addFromProduct(product, userId).pipe(
             tapResponse({
               next: (item) =>
                 patchState(store, {
@@ -129,43 +144,44 @@ export const WardrobeStore = signalStore(
         loadItems(userId);
       },
 
+      addItem(payload: AddWardrobeItemPayload): void {
+        addItemRx(payload);
+      },
+
       addProduct(product: ProductCardModel, userId?: string | number): void {
-        addProductItem({ product, userId });
+        addFromProductRx({ product, userId });
       },
 
-      addMockUploadedImage(payload: WardrobeUploadPayload): void {
-        addUploadedImage(payload);
+      updateItem(id: string, changes: Partial<WardrobeItem>): void {
+        // Optimistic update
+        const previousItems = store.items();
+        patchState(store, {
+          items: previousItems.map((item) =>
+            item.id === id ? { ...item, ...changes, updatedAt: new Date().toISOString() } : item,
+          ),
+          error: null,
+        });
+
+        wardrobeService.updateItem(id, changes).subscribe({
+          next: (updated) =>
+            patchState(store, { items: upsertItem(store.items(), updated) }),
+          error: (error: unknown) =>
+            patchState(store, { items: previousItems, error: toErrorMessage(error) }),
+        });
       },
 
-      remove(id: string): void {
+      removeItem(id: string): void {
+        // Optimistic remove
         const previousItems = store.items();
         patchState(store, {
           items: previousItems.filter((item) => item.id !== id),
           error: null,
         });
 
-        wardrobeService.remove(id).subscribe({
+        wardrobeService.removeItem(id).subscribe({
           error: (error: unknown) =>
             patchState(store, { items: previousItems, error: toErrorMessage(error) }),
         });
-      },
-
-      update(id: string, changes: Partial<WardrobeItem>): void {
-        patchState(store, { loading: true, error: null });
-
-        wardrobeService.update(id, changes).subscribe({
-          next: (item) =>
-            patchState(store, {
-              items: upsertItem(store.items(), item),
-              loading: false,
-            }),
-          error: (error: unknown) =>
-            patchState(store, { error: toErrorMessage(error), loading: false }),
-        });
-      },
-
-      setFilter(filter: WardrobeFilter): void {
-        patchState(store, { selectedFilter: filter });
       },
 
       clearError(): void {

@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faBookmark, faImages, faLayerGroup, faShirt } from '@fortawesome/free-solid-svg-icons';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { NotificationService } from '../../../core/services/notification.service';
-import { WardrobeFilter, WardrobeStore } from '../../../core/stores/wardrobe.store';
+import { WardrobeStore } from '../../../core/stores/wardrobe.store';
+import { ClothingType, WardrobeItem } from '../../../core/models/iwardrobe';
 import { SkeletonLoader } from '../../../shared/components/skeleton-loader/skeleton-loader';
-import { BodyExplorer } from '../../../shared/components/body-explorer/body-explorer';
-import { WardrobeItemCardComponent } from './components/wardrobe-item-card/wardrobe-item-card.component';
-import { WardrobeUploadPanelComponent } from './components/wardrobe-upload-panel/wardrobe-upload-panel.component';
+import { WardrobeShelfComponent } from './components/wardrobe-shelf/wardrobe-shelf.component';
+import { WardrobeEmptyStateComponent } from './components/wardrobe-empty-state/wardrobe-empty-state.component';
+import { WardrobeAddDialogComponent } from './components/wardrobe-add-dialog/wardrobe-add-dialog.component';
+import { WardrobeItemDetailComponent } from './components/wardrobe-item-detail/wardrobe-item-detail.component';
+import { AuthStore } from '../../auth/auth.store';
 
 @Component({
   selector: 'app-wardrobe-page',
@@ -17,12 +18,12 @@ import { WardrobeUploadPanelComponent } from './components/wardrobe-upload-panel
   imports: [
     CommonModule,
     RouterLink,
-    FontAwesomeModule,
     TranslocoModule,
     SkeletonLoader,
-    BodyExplorer,
-    WardrobeItemCardComponent,
-    WardrobeUploadPanelComponent,
+    WardrobeShelfComponent,
+    WardrobeEmptyStateComponent,
+    WardrobeAddDialogComponent,
+    WardrobeItemDetailComponent,
   ],
   templateUrl: './wardrobe-page.component.html',
   styleUrl: './wardrobe-page.component.css',
@@ -30,52 +31,52 @@ import { WardrobeUploadPanelComponent } from './components/wardrobe-upload-panel
 })
 export class WardrobePageComponent implements OnInit {
   wardrobeStore = inject(WardrobeStore);
+  authStore = inject(AuthStore);
   private notificationService = inject(NotificationService);
   private translocoService = inject(TranslocoService);
 
-  filters: WardrobeFilter[] = ['all', 'product', 'upload'];
-
-  icons = {
-    all: faLayerGroup,
-    product: faShirt,
-    upload: faImages,
-    empty: faBookmark,
-  };
+  showAddDialog = signal(false);
+  preselectedType = signal<ClothingType | null>(null);
+  selectedItem = signal<WardrobeItem | null>(null);
 
   ngOnInit(): void {
-    this.wardrobeStore.load();
+    this.wardrobeStore.load(this.authStore.user()?.id);
   }
 
-  setFilter(filter: WardrobeFilter): void {
-    this.wardrobeStore.setFilter(filter);
+  openAddDialog(clothingType?: ClothingType): void {
+    this.preselectedType.set(clothingType ?? null);
+    this.showAddDialog.set(true);
   }
 
-  remove(id: string): void {
-    this.wardrobeStore.remove(id);
-    this.notificationService.info(this.translocoService.translate('wardrobe.removedSuccessfully'));
+  closeAddDialog(): void {
+    this.showAddDialog.set(false);
+    this.preselectedType.set(null);
   }
 
-  filterLabelKey(filter: WardrobeFilter): string {
-    if (filter === 'product') {
-      return 'wardrobe.products';
-    }
-
-    if (filter === 'upload') {
-      return 'wardrobe.uploads';
-    }
-
-    return 'wardrobe.all';
+  onItemAdded(): void {
+    this.closeAddDialog();
   }
 
-  filterCount(filter: WardrobeFilter): number {
-    if (filter === 'product') {
-      return this.wardrobeStore.productCount();
-    }
+  openItemDetail(item: WardrobeItem): void {
+    this.selectedItem.set(item);
+  }
 
-    if (filter === 'upload') {
-      return this.wardrobeStore.uploadedCount();
-    }
+  closeItemDetail(): void {
+    this.selectedItem.set(null);
+  }
 
-    return this.wardrobeStore.count();
+  updateItem(event: { id: string; changes: Partial<WardrobeItem> }): void {
+    this.wardrobeStore.updateItem(event.id, event.changes);
+    this.notificationService.success(
+      this.translocoService.translate('wardrobe.updatedSuccessfully'),
+    );
+  }
+
+  removeItem(id: string): void {
+    this.wardrobeStore.removeItem(id);
+    this.selectedItem.set(null);
+    this.notificationService.info(
+      this.translocoService.translate('wardrobe.removedSuccessfully'),
+    );
   }
 }
